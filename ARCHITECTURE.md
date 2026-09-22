@@ -5,9 +5,9 @@
 ## 1. What Stokastic.com Is (Verified)
 
 - Domain: https://www.stokastic.com/ — homepage says "Accurate fantasy projections, industry-leading ownership, and powerful simulations" [verified 2026-09-22]
-- Formerly Awesemo.com — https://www.stokastic.com/who-is-awesemo-what-is-stokastic/ [verified]
-- Founder Alex Baker (Awesemo), Math WashU 2008, #1 RotoGrinders overall 2017-2021 — X bio https://x.com/AwesemoDFS and RG interview https://rotogrinders.com/articles/interview-with-alex-awesemo-baker-1964792 [verified]
-- Pricing: Core All-Access $229.95/mo, Max $349.95/mo, MVP $599.95/mo (snapshot 2026-09-22) — https://www.stokastic.com/pricing [verified, dynamic flagged]
+- Formerly Awesemo.com (now Stokastic.com) — https://www.stokastic.com/articles/dfs-strategy/how-to-win-dfs-tournaments [verified]
+- Founder Alex Baker (Awesemo), attended Washington University in St. Louis, ex-pro poker, #1 RotoGrinders overall 2017-2021 — X bio https://x.com/AwesemoDFS and RG interview https://rotogrinders.com/articles/interview-with-alex-awesemo-baker-1964792 [verified]
+- Pricing: All-Access list Core $329.95/mo, Max $449.95/mo, MVP $849.95/mo; with Stokastic-avatar discount $229.95/$349.95/$599.95 (snapshot 2026-09-22) — https://www.stokastic.com/pricing [verified, dynamic flagged]
 - Betting arm OddsShopper: Stokastic projections for player props — https://www.oddsshopper.com/articles/betting-101/stokastic-projection-system [verified]
 
 ## 2. Site Structure
@@ -30,13 +30,13 @@ Paywalled (tools.stokastic.com):
 
 Official description: "The projection system is not a rating built off last season's box scores. It runs high-level simulations, many times over, before each contest to settle on the most fine-tuned number" — https://www.oddsshopper.com/articles/betting-101/stokastic-projection-system [verified]
 
-Also: "Our mathematical, results-based models use millions of data points" — https://www.stokastic.com/join-stokastic-all-access-industry-leading-tools-data/ [verified]
+Also: the Sims "simulate every game play by play with QB-to-pass-catcher correlation baked in" and run "tens of thousands of simulated contests" — https://www.stokastic.com/articles/nfl-dfs/stokastic-vs-fantasylabs-nfl-dfs [verified]
 
 Stated inputs line-by-line:
 - Minutes first, no minutes no production, NBA volume-driven — https://www.stokastic.com/articles/nba-dfs/how-to-use-nba-dfs-projections [verified]
 - Usage multiplier = share possessions player finishes — same [verified]
 - Vegas implied totals, ballparks, pitching matchups drive chalk — https://www.stokastic.com/articles/mlb-dfs/mlb-dfs-ownership-projections [verified]
-- Per-minute fantasy rate and minutes — https://www.stokastic.com/nba/how-to-use-vegas-odds-in-dfs-player-props-betting-insights-ac11/ [verified]
+- Per-minute fantasy rate separates two equal-projection players — https://www.stokastic.com/articles/dfs-strategy/how-to-win-draftkings-dfs [verified]
 - Bottom-up from player data and simulation — https://www.oddsshopper.com/props [verified]
 - Blend with market slider — https://www.oddsshopper.com/articles/betting-101/how-to-make-your-own-nba-projections [verified]
 
@@ -63,11 +63,11 @@ Open-source: XGBoost on features [salary, projected FP, value, implied total, re
 
 ## 5. Simulation Engine (Core Differentiator)
 
-Verified uniqueness: "Game level simulation tools exist on the market currently to help users with projecting player performance. However, nowhere else do users have the ability to perform simulations on the contest level, making this tool one of a kind" — https://www.stokastic.com/stokastic-nfl-faq/ [verified]
+Verified uniqueness: "Game level simulation tools exist on the market currently to help users with projecting player performance. However, nowhere else do users have the ability to perform simulations on the contest level, helping you find the edge in real tournaments" — https://www.stokastic.com/pricing (FAQ) [verified]
 
 Verified mechanics:
 - "Instead of solving for one lineup, the Sims simulate the contest itself tens of thousands of times: every player's outcome varies sim to sim, correlations hold (a QB's big game drags his receivers up with him), and projected ownership determines how many entrants you are sharing each player with" — https://www.stokastic.com/articles/nfl-dfs/stokastic-review [verified]
-- "Once a lineup pool is created or uploaded, they are run through our proprietary simulation software. Pitting each lineup against each other in a life like DFS contest. After each run, lineups are awarded a prize payout. This process is repeated thousands of time before each lineup is assigned a simulated ROI %" — https://www.stokastic.com/join-stokastic-all-access-industry-leading-tools-data/ [verified]
+- "A DFS Sim is an advanced simulation tool that tests lineups in realistic tournament models… Import lineups through our contest generator, or by uploading a .csv file containing lineups and pit them against each other in a lifelike slate simulation" — https://www.stokastic.com/pricing (FAQ) [verified]; lineups are played "against all the others… across tens of thousands of simulated contests" with "a simulated ROI for every lineup" — https://www.stokastic.com/articles/nfl-dfs/stokastic-vs-fantasylabs-nfl-dfs [verified]
 - Optimizer vs Sims: "Most DFS tools are optimizers. You feed in projections, the optimizer solves for the highest-projected lineup under the salary cap, and you get the median answer to a question that tournaments never ask. A Milly Maker does not pay the median lineup. It pays the lineup that beats a field of hundreds of thousands once" — https://www.stokastic.com/articles/nfl-dfs/stokastic-review [verified]
 
 Open-source steps (implemented in simulation_engine.py):
@@ -103,16 +103,16 @@ Layer 1 Official League:
 - NFL.com + nflverse open — https://www.nfl.com/ [verified], https://github.com/nflverse [verified]
 
 Layer 2 Vegas:
-- Implied team total = (O/U/2) ± Spread/2 — example O/U 48.5 favorite by 4 => 26.25 vs 22.25 — https://www.stokastic.com/nba/how-to-use-vegas-odds-in-dfs-player-props-betting-insights-ac11/ [verified]
+- Implied team total = (Total/2) ± (Spread/2) — worked example: 44 total, favorite by 7 => 25.5 vs 18.5 — https://www.stokastic.com/articles/nfl-dfs/nfl-dfs-defense-strategy [verified]
 - Player props volume window — https://www.oddsshopper.com/articles/betting-101/stokastic-projection-system [verified]
-- No-vig fairOdds consensus — https://sportsgameodds.com/use-cases/dfs-data-api [verified]
+- De-vig (removing the book's margin) — https://www.oddsshopper.com/articles/betting-101/betting-nfl-props-with-projections [verified]
 
 Layer 3 Contextual:
 - Injury biggest edge: "A ruled-out starter spikes a teammate's minutes and usage" — https://www.stokastic.com/articles/nba-dfs/how-to-use-nba-dfs-projections [verified]
 - Minutes equation: 240 total per team, baseline season*0.75+last5*0.25, blowout scale spread>7 1.5% per point — https://rotogrinders.com/fantasy/lessons/accurately-predicting-minutes-nba-dfs [verified]
 
 Layer 4 DFS-specific:
-- Salary cap $50K DK, $60K FD — https://www.draftkings.com/help/how-to-play/how-to-play-draftkings-daily-fantasy-football [verified] and https://www.fanduel.com/rules [verified]
+- Salary cap $50K DK, $60K FD — https://www.draftkings.com/help/rules/1 [verified] and https://www.fanduel.com/rules [verified]
 - Cash vs GPP opposite builds — https://www.stokastic.com/articles/dfs-strategy/how-to-win-dfs-tournaments [verified]
 - Payout structure determines ROI — https://www.stokastic.com/articles/nfl-dfs/stokastic-review [verified]
 

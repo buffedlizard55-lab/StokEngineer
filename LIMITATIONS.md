@@ -11,7 +11,7 @@
 ### 2. Real-Time News Pipeline
 - **Issue:** Stokastic has live injury feed refreshed repeatedly up until lock — https://www.stokastic.com/articles/dfs-strategy/dfs-boom-bust-probability [verified]. Our open version polls NBA.com injury report + Twitter.
 - **Impact:** Latency 1-5 min vs <30 sec.
-- **Fix:** Implement WebSocket for NBA injury report, Twitter API v2 for beat writers, or use SportsGameOdds feed https://sportsgameodds.com/use-cases/dfs-data-api [verified].
+- **Fix:** Implement WebSocket for NBA injury report, Twitter API v2 for beat writers, or use a commercial news/odds feed (e.g., SportsGameOdds https://sportsgameodds.com/use-cases/dfs-data-api).
 
 ### 3. Correlation Matrix
 - **Issue:** True correlations require play-by-play joint distributions. We use heuristic 0.6 QB-WR, 0.3 WR-WR, etc. Flagged as inference.
@@ -24,7 +24,7 @@
 - **Fix:** Use MLB Stats API official, or SportsGameOdds, or pybaseball with caching.
 
 ### 5. No Paid Data
-- **Issue:** Stokastic uses millions of data points — https://www.stokastic.com/join-stokastic-all-access-industry-leading-tools-data/ [verified]. We only use free tiers.
+- **Issue:** Stokastic ships heavy, proprietary simulation + correlation machinery (sims run "tens of thousands of simulated contests" — https://www.stokastic.com/articles/nfl-dfs/stokastic-vs-fantasylabs-nfl-dfs [verified]). We only use free data tiers.
 - **Impact:** Missing Cleaning the Glass, PFF, SportsInfoSolutions advanced metrics.
 - **Fix:** For same data quality, need subscriptions to Cleaning the Glass, PFF, etc. Or use free proxies.
 
@@ -70,7 +70,7 @@ We designed system to have zero manual input: auto-fetch from official APIs. Onl
 
 ## Pull Request & Merge Plan (This Session)
 
-1. Create branch arena/01a0ca41-stokengineer (already on it)
+1. Create branch arena/01a0cb4b-stokengineer (already on it)
 2. Commit all files
 3. Push to origin
 4. Create PR via gh cli

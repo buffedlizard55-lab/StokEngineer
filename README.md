@@ -25,7 +25,7 @@ The site includes:
 - Tools parity table (how we rebuild each paywalled tool)
 - Strategies (cash vs GPP, leverage, correlation, late swap)
 - Open-source engine how-to
-- Verification log (24 lines, all verified)
+- Verification log (all verified)
 - Limitations & next work
 - Bibliography — all official links
 
@@ -39,7 +39,7 @@ To match Stokastic data quality you need 5 layers (all verified sources):
 4. **DFS-Specific** — Salary caps ($50K DK, $60K FD), contest types, payout structures
 5. **Advanced Derived** — Value = FP - Salary/1000*5, Pts/$, Boom/Bust (75th/25th, Boom% 5x salary/1000+10), Ownership%, Top Stacks, Leverage
 
-See `src/data/sources_verified.json` for 40+ verified sources, each with URL and what it verifies.
+See `src/data/sources_verified.json` for the verified-source registry, each entry with URL and what it verifies.
 
 ## 🛠️ Open-Source Engine
 
@@ -70,7 +70,7 @@ python -m src.projection_engine.simulation_engine
 
 ### Core Simulation (The Differentiator)
 
-Stokastic: "Game level sims exist, but nowhere else contest-level sims" — https://www.stokastic.com/stokastic-nfl-faq/ [verified]
+Stokastic: "Game level sims exist, but nowhere else contest-level sims" — https://www.stokastic.com/pricing [verified]
 
 Our engine:
 1. Player distributions with correlation matrix (QB-WR 0.6 etc — heuristic flagged)
@@ -82,7 +82,7 @@ Our engine:
 ## ✅ Verification — No Hallucinations
 
 - Every claim in docs has `<span class="verified">verified</span>` badge with direct link
-- `VERIFICATION.md` has 24-line log with source URLs
+- `VERIFICATION.md` has claim-by-claim log with source URLs
 - `src/data/sources_verified.json` machine-readable
 - Irregularities flagged with orange banner where inference required (e.g., exact weights proprietary, pricing dynamic, ownership private, correlation heuristic)
 
@@ -109,7 +109,7 @@ See `LIMITATIONS.md` for full list and next session work.
 ## 🔀 Pull Request & Merge
 
 This session:
-- Branch: `arena/01a0ca41-stokengineer`
+- Branch: `arena/01a0cb4b-stokengineer`
 - Create PR via `gh` and merge to `main`
 - Deploy GitHub Pages from `docs/` via `.github/workflows/pages.yml`
 
@@ -120,7 +120,8 @@ All official verified links in `docs/index.html` Section 13 and `src/data/source
 Key sources:
 - https://www.stokastic.com/ — homepage
 - https://www.stokastic.com/pricing — pricing
-- https://www.stokastic.com/who-is-awesemo-what-is-stokastic/ — founder
+- https://rotogrinders.com/articles/interview-with-alex-awesemo-baker-1964792 — founder background
+- https://x.com/AwesemoDFS — founder bio (2017-2021 #1 ranked)
 - https://www.oddsshopper.com/articles/betting-101/stokastic-projection-system — projection system
 - https://www.stokastic.com/articles/nfl-dfs/stokastic-review — contest sims review
 - https://www.stokastic.com/articles/dfs-strategy/how-to-win-dfs-tournaments — cash vs GPP, leverage
