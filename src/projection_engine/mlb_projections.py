@@ -43,7 +43,7 @@ class MLBPitcher:
 
     def projection(self) -> float:
         # Strikeouts scarce and valuable — verified DK MLB scoring: SO 2, IP 2.25, Win 4, ER -2
-        # Source: https://dknation.draftkings.com/2020/5/29/21271789/daily-fantasy-sports-mlb-dfs-beginner-definitions-glossary-scoring-wins-strikeouts-scarcity
+        # Source (official DraftKings rules): https://www.draftkings.com/help/rules/2
         k_points = self.k_rate * self.ip_projection * 2  # 2 pts per SO DK
         ip_points = self.ip_projection * 2.25
         er_penalty = (self.implied_run_total_against * 0.5) * -2

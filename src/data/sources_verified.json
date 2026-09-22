@@ -1,59 +1,62 @@
 {
-  "_comment": "All sources verified live on 2026-09-22. No hallucinations. Each entry has url and what it verifies.",
+  "_comment": "All sources re-verified live on 2026-09-22 via fetch_page/web_search. Each entry has url + what it verifies. Dead/redirected links from earlier builds were replaced or removed (see irregularities_flagged).",
   "stokastic_official": [
-    {"url": "https://www.stokastic.com/", "verifies": "Homepage, tool list, accurate projections + industry-leading ownership claim", "fetched": "2026-09-22"},
-    {"url": "https://www.stokastic.com/pricing", "verifies": "Pricing tiers Core $229.95, Max $349.95, MVP $599.95 All-Access monthly", "fetched": "2026-09-22"},
-    {"url": "https://www.stokastic.com/who-is-awesemo-what-is-stokastic/", "verifies": "Formerly Awesemo.com, founder Alex Baker math WashU 2008", "fetched": "2026-09-22"},
-    {"url": "https://www.stokastic.com/stokastic-nfl-faq/", "verifies": "Contest-level sims unique, nowhere else", "fetched": "2026-09-22"},
-    {"url": "https://www.stokastic.com/join-stokastic-all-access-industry-leading-tools-data/", "verifies": "Millions data points, proprietary sim description, payout sim", "fetched": "2026-09-22"}
+    {"url": "https://www.stokastic.com/", "verifies": "Homepage: 'Accurate fantasy projections, industry-leading ownership, and powerful simulations'; tool list (DataHub, Contest Generator, Pre-Contest Simulator, Late Swap, Single Lineup Simulator, Post-Contest Simulator) linking to tools.stokastic.com", "fetched": "2026-09-22"},
+    {"url": "https://www.stokastic.com/pricing", "verifies": "All-Access pricing (list: Core $329.95, Max $449.95, MVP $849.95; with Stokastic-avatar discount: $229.95/$349.95/$599.95); contest-level sim uniqueness claim; DFS Sim definition; avatar discount explained", "fetched": "2026-09-22"},
+    {"url": "https://www.stokastic.com/articles/nfl-dfs/stokastic-review", "verifies": "Sims simulate the contest 'tens of thousands of times', correlations hold (QB big game drags receivers), lineups ranked by simulated ROI vs real payout structure, optimizer-vs-sims framing, late swap re-rank, 2026 NFL pricing", "fetched": "2026-09-22"},
+    {"url": "https://www.stokastic.com/articles/nfl-dfs/stokastic-vs-fantasylabs-nfl-dfs", "verifies": "Sims simulate every game play-by-play with QB-to-pass-catcher correlation baked in; Contest Sims rank lineups by simulated ROI across 'tens of thousands of simulated contests'; Steve Buzzard Milly Maker $1M win workflow", "fetched": "2026-09-22"},
+    {"url": "https://www.stokastic.com/articles/nfl-dfs/nfl-dfs-defense-strategy", "verifies": "Implied team total math: total/2 + spread/2 to favorite, - spread/2 to underdog (worked example 44 total, -7 => 25.5 / 18.5)", "fetched": "2026-09-22"}
   ],
   "stokastic_strategy": [
-    {"url": "https://www.stokastic.com/articles/nfl-dfs/stokastic-review", "verifies": "Sims tens of thousands times, correlations hold QB->WR, ROI ranking, Milly Maker $1M win Steve Buzzard, Alex Baker Milly winner", "fetched": "2026-09-22"},
-    {"url": "https://www.stokastic.com/articles/dfs-strategy/how-to-win-dfs-tournaments", "verifies": "Cash vs GPP opposite builds, leverage = exposure < fair ownership, balancing projection vs ownership most important", "fetched": "2026-09-22"},
-    {"url": "https://www.stokastic.com/articles/dfs-strategy/dfs-boom-bust-probability", "verifies": "Boom/Bust definitions: ceiling 75th, floor 25th, Boom% smash, Bust% tank, stddev", "fetched": "2026-09-22"},
-    {"url": "https://www.stokastic.com/articles/nba-dfs/nba-dfs-boom-bust-strategy", "verifies": "Boom% = 5x salary/1000+10, Bust% = fail to clear value, usage with ownership", "fetched": "2026-09-22"},
-    {"url": "https://www.stokastic.com/articles/mlb-dfs/mlb-dfs-ownership-projections", "verifies": "Ownership = forecast % entries, film study on opponents, MLB chalk follows Vegas implied totals/ballpark/pitching", "fetched": "2026-09-22"},
-    {"url": "https://www.stokastic.com/articles/nba-dfs/how-to-use-nba-dfs-projections", "verifies": "Minutes first, no minutes no production, usage multiplier, value formula FP-(Salary/1000*5), pts/$ = FP/Salary*1000, DraftKings vs FanDuel scoring diff", "fetched": "2026-09-22"},
-    {"url": "https://www.stokastic.com/articles/mlb-dfs/how-to-use-mlb-dfs-data", "verifies": "DataHub columns: Name/Team/Salary/Position/Order/FP/Value/Own%, Top Stacks scores whole teams", "fetched": "2026-09-22"},
-    {"url": "https://www.stokastic.com/articles/dfs-strategy/how-to-win-draftkings-dfs", "verifies": "Late swap biggest edge NBA, top 20% projection but 30% ownership rule", "fetched": "2026-09-22"},
-    {"url": "https://www.stokastic.com/articles/dfs-strategy/stokastic-mlb-dfs-subscription-workflow", "verifies": "20-min workflow, tool list: projections, ownership, contest sims, single lineup, top stacks, late swap, post-contest", "fetched": "2026-09-22"},
-    {"url": "https://www.stokastic.com/articles/dfs-strategy/how-expected-value-works-in-dfs", "verifies": "EV = score relative to field, highest projected not highest EV", "fetched": "2026-09-22"},
-    {"url": "https://www.stokastic.com/nba/how-to-use-vegas-odds-in-dfs-player-props-betting-insights-ac11/", "verifies": "Implied team total from over/under, player props volume, line movement", "fetched": "2026-09-22"}
+    {"url": "https://www.stokastic.com/articles/dfs-strategy/how-to-win-dfs-tournaments", "verifies": "Cash vs GPP opposite builds; balance projection vs ownership; correlation is the engine; leverage off chalk; ~85% of entry fees paid out; EV link", "fetched": "2026-09-22"},
+    {"url": "https://www.stokastic.com/articles/dfs-strategy/dfs-boom-bust-probability", "verifies": "Projection is the middle of a range not a promise; ceiling 75th pct, floor 25th pct, Boom% chance to smash, Bust% chance to tank, StdDev", "fetched": "2026-09-22"},
+    {"url": "https://www.stokastic.com/articles/nba-dfs/nba-dfs-boom-bust-strategy", "verifies": "Boom defined as ~5x(salary/1000)+10 FP; Bust = failing to clear 5x(salary/1000); ceiling 75th, floor 25th; cash vs GPP opposite shapes", "fetched": "2026-09-22"},
+    {"url": "https://www.stokastic.com/articles/mlb-dfs/mlb-dfs-ownership-projections", "verifies": "Ownership = forecast of % of tournament entries rostering a player (forecast of opponents' behavior); chalk follows Vegas O/U, implied run totals, ballpark, pitching matchups; stay within 10-15 pts of max projection", "fetched": "2026-09-22"},
+    {"url": "https://www.stokastic.com/articles/nba-dfs/how-to-use-nba-dfs-projections", "verifies": "Minutes come first ('no minutes, no production'); usage = share of possessions a player finishes; Pts/$ = FP / Salary x 1000; Value = FP - (Salary/1000 x 5); same-day injury news is biggest edge; FanDuel flatter scoring", "fetched": "2026-09-22"},
+    {"url": "https://www.stokastic.com/articles/mlb-dfs/how-to-use-mlb-dfs-data", "verifies": "DataHub columns Name/Team/Salary/Position/Order/Projected FP/Value/Projected Ownership; Sims metrics (Optimal, Leverage, Ceiling, Floor, StdDev); Top Stacks scores whole teams with stack total, stack ownership, optimal%", "fetched": "2026-09-22"},
+    {"url": "https://www.stokastic.com/articles/dfs-strategy/how-to-win-draftkings-dfs", "verifies": "Late swap = one of biggest edges in NBA; NBA target top ~20% of lineups by projection but only need to beat ~30% of field on ownership", "fetched": "2026-09-22"},
+    {"url": "https://www.stokastic.com/articles/dfs-strategy/stokastic-mlb-dfs-subscription-workflow", "verifies": "20-min daily workflow; tool list (Projections, Ownership, Contest Sims, Single Lineup Sim = ROI/cash rate/win%, Top Stacks, Late Swap, Post-Contest Sims); contest archetype + percent-to-first settings", "fetched": "2026-09-22"},
+    {"url": "https://www.stokastic.com/articles/dfs-strategy/how-expected-value-works-in-dfs", "verifies": "EV = score relative to the field (not raw score); Sims rank lineups by simulated ROI and win probability; leverage only +EV at equal-ish projection", "fetched": "2026-09-22"},
+    {"url": "https://www.stokastic.com/articles/mlb-dfs/mlb-dfs-contrarian-strategy", "verifies": "Ownership projections sortable so heaviest concentrations float to top; leverage = gap between player's upside and projected ownership", "fetched": "2026-09-22"}
   ],
   "oddsshopper": [
-    {"url": "https://www.oddsshopper.com/articles/betting-101/stokastic-projection-system", "verifies": "Projection system runs high-level sims many times, fair value for props, X-Win/X-ROI/Hold, from Alex Baker #1 DFS player, free on OddsShopper", "fetched": "2026-09-22"},
-    {"url": "https://www.oddsshopper.com/props", "verifies": "Props powered by bottom-up projections, vs 15+ books, tune inputs, blend, injury-aware", "fetched": "2026-09-22"},
-    {"url": "https://www.oddsshopper.com/articles/betting-101/betting-nfl-props-with-projections", "verifies": "4-step: project, price fair odds, shop best line, size to edge", "fetched": "2026-09-22"},
-    {"url": "https://www.oddsshopper.com/articles/betting-101/how-to-make-your-own-nba-projections", "verifies": "Custom NBA: edit minutes/rates, model vs market blend slider, projection distribution not single number", "fetched": "2026-09-22"}
+    {"url": "https://www.oddsshopper.com/articles/betting-101/stokastic-projection-system", "verifies": "Projection system is not a rating built off last season's box scores; runs high-level simulations many times; X-Win / X-ROI / HOLD metrics; projections from Alex Baker, #1 DFS player", "fetched": "2026-09-22"},
+    {"url": "https://www.oddsshopper.com/props", "verifies": "Props built bottom-up from player data and simulation, priced against 15+ sportsbooks; tune inputs; blend or override; injury-aware", "fetched": "2026-09-22"},
+    {"url": "https://www.oddsshopper.com/articles/betting-101/betting-nfl-props-with-projections", "verifies": "Four-step process (project -> price fair odds -> shop best line -> size to edge) and devig math", "fetched": "2026-09-22"},
+    {"url": "https://www.oddsshopper.com/articles/betting-101/how-to-make-your-own-nba-projections", "verifies": "Custom NBA projections: edit minutes/rates, blend slider between 100% your model and model/market blend; a projection is a distribution not a single number", "fetched": "2026-09-22"}
   ],
   "official_scoring": [
-    {"url": "https://www.draftkings.com/help/how-to-play/how-to-play-draftkings-daily-fantasy-football", "verifies": "DK $50K cap, player salaries determined by performance", "fetched": "2026-09-22"},
-    {"url": "https://www.fanduel.com/rules", "verifies": "FanDuel official scoring all sports, NFL .5 PPR, 4 pts pass TD, bonuses", "fetched": "2026-09-22"},
-    {"url": "https://dknetwork.draftkings.com/2020/6/2/21277078/daily-fantasy-sports-nba-dfs-beginner-definitions-glossary-scoring-bonus-3-point-shot-assist", "verifies": "DK NBA scoring: 1 pt, 0.5 3pt bonus, 1.25 reb, 1.5 ast, 2 stl/blk, -0.5 TO, 1.5 DD, 3 TD", "fetched": "2026-09-22"},
-    {"url": "https://dknation.draftkings.com/2020/5/29/21271789/daily-fantasy-sports-mlb-dfs-beginner-definitions-glossary-scoring-wins-strikeouts-scarcity", "verifies": "DK MLB scoring: single 3, double 5, triple 8, HR 10, IP 2.25, SO 2, win 4, ER -2", "fetched": "2026-09-22"},
-    {"url": "https://dknetwork.draftkings.com/2020/7/2/21300474/daily-fantasy-sports-nhl-dfs-beginner-definitions-glossary-strategy-scoring", "verifies": "DK NHL scoring: goal 8.5, assist 5, SOG 1.5, blocked 1.3, goalie win 6, save 0.7", "fetched": "2026-09-22"},
-    {"url": "https://fantasyfootballers.org/featured/draftkings-vs-fanduel/", "verifies": "DK vs FD NFL chart: DK full PPR 1, FD half .5, fumble -1 vs -2, bonuses", "fetched": "2026-09-22"}
+    {"url": "https://www.draftkings.com/help/rules/1", "verifies": "Official DraftKings NFL Classic scoring (4 pt pass TD, full PPR, 300/100 yd +3 bonuses, fumble -1) and $50,000 salary cap", "fetched": "2026-09-22"},
+    {"url": "https://www.draftkings.com/help/rules/2", "verifies": "Official DraftKings MLB scoring (single 3, double 5, triple 8, HR 10, IP 2.25, SO 2, win 4, ER -2) and $50,000 cap", "fetched": "2026-09-22"},
+    {"url": "https://www.draftkings.com/help/rules/3", "verifies": "Official DraftKings NHL scoring (goal 8.5, assist 5, SOG 1.5, blocked shot 1.3, goalie win 6, save 0.7, GA -3.5, SO bonus 4)", "fetched": "2026-09-22"},
+    {"url": "https://www.draftkings.com/help/rules/4", "verifies": "Official DraftKings NBA scoring (pt 1, 3PM +0.5, reb 1.25, ast 1.5, stl 2, blk 2, TO -0.5, DD 1.5, TD 3) and $50,000 cap", "fetched": "2026-09-22"},
+    {"url": "https://www.fanduel.com/rules", "verifies": "Official FanDuel scoring all sports (NFL 0.5 PPR, 4 pt pass TD, 300 yd +3, fumble -2; MLB single 3/HR 12/pitcher W 6; NBA 3PM 3, reb 1.2, stl/blk 3, TO -1; NHL goal 12)", "fetched": "2026-09-22"}
   ],
   "official_league": [
-    {"url": "https://www.nba.com/stats", "verifies": "Official NBA stats API source", "fetched": "2026-09-22"},
-    {"url": "https://github.com/swar/nba_api", "verifies": "nba_api wrapper free, no key, covers everything on NBA.com", "fetched": "2026-09-22"},
-    {"url": "https://nbaanalytic.com/articles/free-basketball-data-sources-ranked.html", "verifies": "Ranking free basketball sources, nba_api #1, Basketball-Reference historical", "fetched": "2026-09-22"},
-    {"url": "https://www.mlb.com/glossary/statcast", "verifies": "Statcast state-of-art tracking, installed 2015, Hawk-Eye 2020, measurements", "fetched": "2026-09-22"},
+    {"url": "https://www.nba.com/stats", "verifies": "Official NBA stats endpoint source (wrapped by nba_api)", "fetched": "2026-09-22"},
+    {"url": "https://github.com/swar/nba_api", "verifies": "nba_api Python wrapper around stats.nba.com endpoints (free, no key; rate-limited)", "fetched": "2026-09-22"},
+    {"url": "https://nbaanalytic.com/articles/free-basketball-data-sources-ranked.html", "verifies": "Free basketball data sources ranked: nba_api #1 ('wrapper around the same stats endpoints that power NBA.com')", "fetched": "2026-09-22"},
+    {"url": "https://www.mlb.com/glossary/statcast", "verifies": "Statcast official tracking tech; installed in all 30 ballparks 2015; Hawk-Eye 2020; xwOBA and barrel definitions", "fetched": "2026-09-22"},
     {"url": "https://baseballsavant.mlb.com/", "verifies": "Baseball Savant clearinghouse for Statcast", "fetched": "2026-09-22"},
     {"url": "https://www.nfl.com/", "verifies": "Official NFL source", "fetched": "2026-09-22"},
-    {"url": "https://github.com/nflverse", "verifies": "Open NFL data nflverse", "fetched": "2026-09-22"}
+    {"url": "https://github.com/nflverse", "verifies": "Open nflverse NFL data project (play-by-play, snap counts)", "fetched": "2026-09-22"},
+    {"url": "https://rotogrinders.com/fantasy/lessons/accurately-predicting-minutes-nba-dfs", "verifies": "Minutes method: 240 total team minutes; baseline = season_avg*0.75 + last5_avg*0.25; blowout scale spread>=7 reduce 1.5% per point", "fetched": "2026-09-22"},
+    {"url": "https://draftedge.com/nba/nba-daily-projections/", "verifies": "Third-party NBA daily projections board with DK/FD salary, value, floor, ceiling, ownership columns (industry reference)", "fetched": "2026-09-22"}
   ],
   "dfs_industry": [
-    {"url": "https://rotogrinders.com/articles/interview-with-alex-awesemo-baker-1964792", "verifies": "Alex Baker #1 RG, poker SuperNova Elite, started 2011/2015", "fetched": "2026-09-22"},
-    {"url": "https://x.com/AwesemoDFS", "verifies": "Bio: 2017-2021 #1 ranked overall for daily fantasy", "fetched": "2026-09-22"},
-    {"url": "https://rotogrinders.com/fantasy/lessons/accurately-predicting-minutes-nba-dfs", "verifies": "Minutes equation: 240 total per team, baseline season*0.75+last5*0.25, blowout scale spread>7 1.5% per point", "fetched": "2026-09-22"},
-    {"url": "https://sportsgameodds.com/use-cases/dfs-data-api", "verifies": "DFS data API: fairOdds no-vig consensus, convert to implied projections, 85+ books", "fetched": "2026-09-22"},
-    {"url": "https://splashplaypodcast.com/stokastic-review/", "verifies": "Stokastic review 2026: contest sim best, ownership best, pricing increase, no free trial, CORE vs MAX", "fetched": "2026-09-22"}
+    {"url": "https://x.com/AwesemoDFS", "verifies": "Alex Baker X bio: '2017-2021 #1 ranked overall for daily fantasy. @Stokastic cofounder.'", "fetched": "2026-09-22"},
+    {"url": "https://rotogrinders.com/articles/interview-with-alex-awesemo-baker-1964792", "verifies": "Alex Baker background: Washington University in St. Louis, professional poker (SuperNova Elite, CardRunners instructor), DFS from 2011/2015", "fetched": "2026-09-22"},
+    {"url": "https://sportsgameodds.com/use-cases/dfs-data-api", "verifies": "SportsGameOdds DFS Data API page: player props & projections for DFS lineups (external commercial reference; verify on-page details)", "fetched": "2026-09-22"},
+    {"url": "https://splashplaypodcast.com/stokastic-review/", "verifies": "2026 Stokastic review: contest sim + ownership called best in DFS; 2026 price increase; no free trial; CORE vs MAX vs MVP tiers", "fetched": "2026-09-22"},
+    {"url": "https://fantasyfootballers.org/featured/draftkings-vs-fanduel/", "verifies": "DraftKings vs FanDuel chart: reception 1 vs 0.5, 300/100 yd bonuses 3 vs 0, fumble lost -1 vs -2", "fetched": "2026-09-22"}
   ],
   "irregularities_flagged": [
+    {"issue": "Pricing is dynamic AND shows avatar-discounted numbers by default", "how_flagged": "Pricing page defaults to Stokastic-avatar toggle. Corrected docs to show list ($329.95/$449.95/$849.95) vs avatar ($229.95/$349.95/$599.95). Flagged dynamic.", "resolution": "Re-check https://www.stokastic.com/pricing live (both toggles)"},
+    {"issue": "Four source URLs from earlier builds now redirect to homepage", "how_flagged": "Replaced with live equivalents: who-is-awesemo -> X bio + RotoGrinders interview; stokastic-nfl-faq -> pricing FAQ; join-stokastic-all-access -> pricing FAQ; vegas guide (/nba/how-to-use-vegas-odds...) -> nfl-dfs-defense-strategy", "resolution": "Done in this pass"},
+    {"issue": "DraftKings how-to-play + DK Network/DK Nation scoring pages moved/404", "how_flagged": "Replaced with official DraftKings rules pages (/help/rules/1-4)", "resolution": "Done in this pass"},
     {"issue": "Exact projection weights proprietary, not public", "how_flagged": "Flagged in site with orange banner, listed as inference", "resolution": "Use industry-standard weighting and document as inference"},
-    {"issue": "Pricing page dynamic, coupon-gated", "how_flagged": "Flagged in verification log, snapshot date noted 2026-09-22", "resolution": "Manual reviewer should re-check pricing page live"},
     {"issue": "Historical ownership private", "how_flagged": "Flagged in limitations section", "resolution": "Proxy with optimal% + need to purchase historical data"},
-    {"issue": "Correlation matrix not public", "how_flagged": "Flagged as heuristic 0.6 QB-WR", "resolution": "Compute from play-by-play in next session"}
+    {"issue": "Correlation matrix not public", "how_flagged": "Flagged as heuristic (0.6 QB-WR etc.)", "resolution": "Compute from play-by-play (nflverse/pbpstats) in next session"},
+    {"issue": "Contest payout curve used in the demo simulator is illustrative", "how_flagged": "Documented in simulation_engine.py gpp_payout_structure(); real DK/FD payout curves change weekly", "resolution": "Feed real payout structure at runtime"}
   ]
 }

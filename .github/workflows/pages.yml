@@ -2,7 +2,7 @@ name: Deploy GitHub Pages
 
 on:
   push:
-    branches: [ main, arena/01a0ca41-stokengineer ]
+    branches: [ main, arena/01a0cb4b-stokengineer ]
   workflow_dispatch:
 
 permissions:

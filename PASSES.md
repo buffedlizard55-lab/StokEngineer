@@ -109,4 +109,24 @@ Per task requirements: Run task through multiple passes, each building on previo
 
 **Conclusion:** Final result fully satisfies original request. Ready for next session to implement data ingestion hardening.
 
+---
+
+## Session 2 (branch `arena/01a0cb4b-stokengineer`) — 2026-09-22 Re-Verification & Correction Pass
+
+The original request requires "verify no hallucinations" and "work line by line verify everything." This session re-fetched every cited source live (fetch_page/web_search) and fixed everything that had drifted since the first build.
+
+**What re-verification found and fixed:**
+
+| # | Finding (Pass 2) | Fix |
+|---|---|---|
+| 1 | `simulation_engine.py` demo returned ~21,000% Sim ROI (PASSES.md claimed this was fixed; it was not). Root cause: field lineups were generated from a player pool the same size as the roster, so every "field" lineup was a permutation of all players and tied the user lineup. | Rewrote field generation (pool > roster), added a realistic illustrative GPP payout curve with documented rake, added a guard that raises when pool size == lineup size, replaced ad-hoc covariance with a PSD projection. Demo now returns realistic ROI. |
+| 2 | Pricing mislabeled: repo listed avatar-discounted prices ($229.95/$349.95/$599.95) as list. Live pricing page defaults to the Stokastic-avatar toggle; no-avatar list is $329.95/$449.95/$849.95. | Corrected docs (both toggles), README, ARCHITECTURE, VERIFICATION. |
+| 3 | Four source URLs now redirect to the homepage: who-is-awesemo, stokastic-nfl-faq, join-stokastic-all-access, /nba/how-to-use-vegas-odds. | Re-sourced each to a live verified page (RotoGrinders interview + X bio; pricing FAQ; stokastic-vs-fantasylabs; DST-strategy implied-total example). |
+| 4 | DK scoring links (DK Network/Nation 2020 articles) redirect/404. | Re-sourced to official `draftkings.com/help/rules/1-4`, which state identical values. |
+| 5 | "millions of data points" lived on a now-redirecting page. | Re-sourced to live copy; flagged. |
+| 6 | "Mathematics, WashU 2008" founder degree claim no longer verifiable on a live page. | Replaced with verified wording (attended WashU St. Louis; ex-pro poker). |
+| 7 | docs said "40+ sources" but registry had 38; "24-line log" phrasing worn. | Normalized language; added `tools/check_links.py` that walks all 40 unique cited URLs. |
+
+**Verification:** all 8 modules run clean; 40/40 unique cited URLs resolve (0 dead); JSON files parse; site served locally (13 sections, search, footer, 165 verified badges, 4 irregular flags).
+
 Last verified: 2026-09-22 UTC

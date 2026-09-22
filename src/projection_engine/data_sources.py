@@ -76,7 +76,7 @@ class VerifiedDataRegistry:
 # NBA: nba_api (wrapper around stats.nba.com) — verified free source per https://nbaanalytic.com/articles/free-basketball-data-sources-ranked.html
 # NFL: nflverse — verified open source
 # MLB: Baseball Savant Statcast — official per https://www.mlb.com/glossary/statcast
-# Vegas: The Odds API — official https://the-odds-api.com/ (requires key, fallback to manual)
+# Vegas: The Odds API — third-party odds aggregator https://the-odds-api.com/ (requires key, fallback to manual)
 
 class NBADataFetcher:
     """
@@ -130,28 +130,30 @@ class MLBDataFetcher:
 
 class VegasOddsFetcher:
     """
-    Implied team total = (O/U /2) ± Spread/2
-    Verified source: https://www.stokastic.com/nba/how-to-use-vegas-odds-in-dfs-player-props-betting-insights-ac11/
+    Implied team total = (Total/2) + (Spread/2) for favorite, (Total/2) - (Spread/2) for underdog.
+    Verified source (worked example: 44-point total, favorite by 7 => 25.5 vs 18.5):
+    https://www.stokastic.com/articles/nfl-dfs/nfl-dfs-defense-strategy
+    (Previously cited a stokastic.com /nba/ Vegas guide that now redirects to the homepage.)
     """
     @staticmethod
     def implied_totals(over_under: float, spread: float) -> Dict[str, float]:
         """
-        spread is from favorite perspective (negative if favorite)
-        favorite implied = O/U/2 - spread/2? Actually formula: favorite = (O/U + spread)/2? Let's verify.
-        Standard: If O/U 48.5, Team A favored by 4, then Team A 26.25, Team B 22.25
-        So: favorite = O/U/2 + spread/2, underdog = O/U/2 - spread/2
-        Source verified in Vegas guide: example 48.5 O/U, 4 pt favorite => 26.25 vs 22.25
+        spread = margin by which the favorite is favored (positive number).
+        favorite = total/2 + spread/2
+        underdog = total/2 - spread/2
+        Source verified: https://www.stokastic.com/articles/nfl-dfs/nfl-dfs-defense-strategy
+        Cross-checked: favorite+underdog == total, favorite-underdog == spread.
         """
         fav = (over_under / 2) + (abs(spread) / 2)
         dog = (over_under / 2) - (abs(spread) / 2)
-        return {"favorite": fav, "underdog": dog, "formula": "(O/U/2) ± (Spread/2)", "source": "https://www.stokastic.com/nba/how-to-use-vegas-odds-in-dfs-player-props-betting-insights-ac11/"}
+        return {"favorite": fav, "underdog": dog, "formula": "(Total/2) ± (Spread/2)", "source": "https://www.stokastic.com/articles/nfl-dfs/nfl-dfs-defense-strategy"}
 
     @staticmethod
     def no_vig_fair_odds(odds_list: List[float]) -> float:
         """
-        De-vig: convert American odds to implied prob, remove vig, convert back.
-        Verified concept: SportsGameOdds DFS API uses fairOdds no-vig consensus
-        Source: https://sportsgameodds.com/use-cases/dfs-data-api
+        De-vig: convert American odds to implied prob, normalize to remove vig.
+        Verified concept (devig / removing the vig is core to the projection workflow):
+        https://www.oddsshopper.com/articles/betting-101/betting-nfl-props-with-projections
         """
         # Simplified: average implied prob, normalize
         # Real implementation would use proper de-vigging

@@ -8,13 +8,26 @@ This file is the authoritative verification log. Every claim in docs/index.html 
 - If no direct source, flag as irregular/inference
 - All sources stored in src/data/sources_verified.json
 
+## 2026-09-22 Re-Verification Pass (this session)
+
+Every source was re-fetched live with `fetch_page`/`web_search`. Corrections applied where the site had moved/redirected since the original build:
+
+1. **Founder/rebrand claims** — `who-is-awesemo-what-is-stokastic` now redirects to the homepage. Re-sourced: rebrand to the "I started Awesemo.com (now Stokastic.com)" statement in how-to-win-dfs-tournaments; founder background to the RotoGrinders interview (WashU St. Louis, pro poker). The "Mathematics, WashU 2008" degree claim was replaced with the verified wording ("attended Washington University in St. Louis"; degree not restated on the live page).
+2. **Contest-level sim uniqueness** — old `/stokastic-nfl-faq/` redirects. Re-sourced verbatim to the pricing-page FAQ.
+3. **Sim workflow quotes** — old `/join-stokastic-all-access...` redirects. Re-sourced to pricing-page FAQ + stokastic-vs-fantasylabs (both fetched live).
+4. **Implied team total** — old `/nba/how-to-use-vegas-odds...` redirects. Re-sourced to the DST-strategy article's worked example (44 total, -7 => 25.5/18.5).
+5. **DK scoring** — old DK Network / DK Nation article links redirect/404. Re-sourced to official `draftkings.com/help/rules/1-4`, which state every number identically.
+6. **Pricing** — the pricing page defaults to the Stokastic-avatar toggle. Corrected to show list ($329.95/$449.95/$849.95) vs avatar-discounted ($229.95/$349.95/$599.95). Older builds listed the avatar prices as if list.
+7. **"millions of data points"** — lived on a now-redirecting page. Re-sourced to live copy ("tens of thousands of simulated contests" + play-by-play correlation) in stokastic-vs-fantasylabs; flagged.
+8. **Sim ROI bug** — `simulation_engine.py` demo produced ~21,000% Sim ROI because field lineups were generated from a pool the same size as the roster (every field lineup tied the user lineup). Fixed with a realistic payout curve, pool larger than roster, and a guard that raises when pool size == lineup size.
+
 ## Verified Claims (24 lines)
 
 | # | Claim | Source URL | Status |
 |---|-------|------------|--------|
 | 1 | Stokastic domain is stokastic.com | https://www.stokastic.com/ | verified |
-| 2 | Formerly Awesemo.com | https://www.stokastic.com/who-is-awesemo-what-is-stokastic/ | verified |
-| 3 | Founder Alex Baker, Math WashU 2008 | https://www.stokastic.com/who-is-awesemo-what-is-stokastic/ | verified |
+| 2 | Formerly Awesemo.com | https://www.stokastic.com/articles/dfs-strategy/how-to-win-dfs-tournaments | verified |
+| 3 | Founder Alex Baker — WashU St. Louis, ex-pro poker | https://rotogrinders.com/articles/interview-with-alex-awesemo-baker-1964792 | verified |
 | 4 | #1 ranked RotoGrinders overall 2017-2021 | https://x.com/AwesemoDFS (bio) + https://rotogrinders.com/articles/interview-with-alex-awesemo-baker-1964792 | verified |
 | 5 | Projections run high-level simulations many times | https://www.oddsshopper.com/articles/betting-101/stokastic-projection-system | verified |
 | 6 | Contest Sims simulate contest tens of thousands times, ranking by ROI | https://www.stokastic.com/articles/nfl-dfs/stokastic-review | verified |
@@ -29,17 +42,17 @@ This file is the authoritative verification log. Every claim in docs/index.html 
 | 15 | Cash vs GPP need opposite builds | https://www.stokastic.com/articles/dfs-strategy/how-to-win-dfs-tournaments | verified |
 | 16 | Late swap biggest edge in NBA | https://www.stokastic.com/articles/dfs-strategy/how-to-win-draftkings-dfs | verified |
 | 17 | Props bottom-up from player data and simulation, vs 15+ books, X-Win/X-ROI/Hold | https://www.oddsshopper.com/props + https://www.oddsshopper.com/articles/betting-101/stokastic-projection-system | verified |
-| 18 | DK NBA scoring: 1 pt, 0.5 3pt bonus, 1.25 reb, 1.5 ast, 2 stl/blk, -0.5 TO, 1.5 DD, 3 TD | https://dknetwork.draftkings.com/2020/6/2/21277078/daily-fantasy-sports-nba-dfs-beginner-definitions-glossary-scoring-bonus-3-point-shot-assist | verified |
+| 18 | DK NBA scoring: 1 pt, 0.5 3pt bonus, 1.25 reb, 1.5 ast, 2 stl/blk, -0.5 TO, 1.5 DD, 3 TD | https://www.draftkings.com/help/rules/4 | verified |
 | 19 | FD Rules page contains official scoring | https://www.fanduel.com/rules | verified |
 | 20 | MLB Statcast is official tracking tech, installed 2015, Hawk-Eye 2020 | https://www.mlb.com/glossary/statcast | verified |
 | 21 | NBA stats sources ranked: nba_api free wrapper around stats.nba.com | https://nbaanalytic.com/articles/free-basketball-data-sources-ranked.html + https://github.com/swar/nba_api | verified |
-| 22 | Pricing $229.95 Core All-Access etc (snapshot 2026-09-22) | https://www.stokastic.com/pricing | verified + dynamic flagged |
+| 22 | All-Access pricing: list $329.95/$449.95/$849.95; avatar $229.95/$349.95/$599.95 (snapshot 2026-09-22) | https://www.stokastic.com/pricing | verified + dynamic flagged |
 | 23 | Exact projection weights proprietary | No public formula found — flagged as proprietary | irregular flagged |
 | 24 | Ownership model algorithm developed over years by Alex Baker | https://www.stokastic.com/articles/dfs-strategy/how-to-win-dfs-tournaments | verified |
 
 ## Irregularities Flagged for Review
 
-1. **Pricing dynamic** — Pricing page uses coupon gating and changes. Snapshot taken 2026-09-22. Manual reviewer should re-fetch https://www.stokastic.com/pricing live. Flagged in site with orange banner.
+1. **Pricing dynamic + avatar default** — Pricing page uses coupon gating, changes seasonally, and defaults to the Stokastic-avatar discount toggle. Snapshot taken 2026-09-22 (both toggles recorded). Manual reviewer should re-fetch https://www.stokastic.com/pricing live. Flagged in site with orange banner.
 
 2. **Projection weights proprietary** — Stokastic does not publish exact weights. We use industry-standard heuristic (minutes 40%, usage 25%, matchup 20%, recent form 10%, other 5%). Flagged as inference, not leak.
 
