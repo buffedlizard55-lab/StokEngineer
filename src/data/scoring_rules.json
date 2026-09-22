@@ -1,0 +1,104 @@
+{
+  "_comment": "Official verified scoring rules from DraftKings and FanDuel. Sources in docs/index.html bibliography.",
+  "draftkings": {
+    "nfl": {
+      "pass_yard": 0.04,
+      "pass_td": 4,
+      "pass_bonus_300": 3,
+      "rush_yard": 0.1,
+      "rush_td": 6,
+      "rush_bonus_100": 3,
+      "rec": 1,
+      "rec_yard": 0.1,
+      "rec_td": 6,
+      "rec_bonus_100": 3,
+      "fumble_lost": -1,
+      "two_pt": 2,
+      "source": "https://www.fanduel.com/rules and https://fantasyfootballers.org/featured/draftkings-vs-fanduel/"
+    },
+    "nba": {
+      "point": 1,
+      "made_three_bonus": 0.5,
+      "rebound": 1.25,
+      "assist": 1.5,
+      "steal": 2,
+      "block": 2,
+      "turnover": -0.5,
+      "double_double": 1.5,
+      "triple_double": 3,
+      "source": "https://dknetwork.draftkings.com/2020/6/2/21277078/daily-fantasy-sports-nba-dfs-beginner-definitions-glossary-scoring-bonus-3-point-shot-assist"
+    },
+    "mlb": {
+      "single": 3,
+      "double": 5,
+      "triple": 8,
+      "home_run": 10,
+      "rbi": 2,
+      "run": 2,
+      "bb": 2,
+      "hbp": 2,
+      "sb": 5,
+      "ip": 2.25,
+      "strikeout": 2,
+      "win": 4,
+      "er": -2,
+      "hit_against": -0.6,
+      "bb_against": -0.6,
+      "source": "https://dknation.draftkings.com/2020/5/29/21271789/daily-fantasy-sports-mlb-dfs-beginner-definitions-glossary-scoring-wins-strikeouts-scarcity"
+    },
+    "nhl": {
+      "goal": 8.5,
+      "assist": 5,
+      "sog": 1.5,
+      "blocked_shot": 1.3,
+      "short_handed_bonus": 2,
+      "hat_trick_bonus": 3,
+      "five_plus_shots_bonus": 3,
+      "goalie_win": 6,
+      "goalie_save": 0.7,
+      "goal_against": -3.5,
+      "shutout_bonus": 4,
+      "source": "https://dknetwork.draftkings.com/2020/7/2/21300474/daily-fantasy-sports-nhl-dfs-beginner-definitions-glossary-strategy-scoring"
+    },
+    "salary_cap": 50000,
+    "source_cap": "https://www.draftkings.com/help/how-to-play/how-to-play-draftkings-daily-fantasy-football"
+  },
+  "fanduel": {
+    "nfl": {
+      "pass_yard": 0.04,
+      "pass_td": 4,
+      "pass_bonus_300": 3,
+      "rush_yard": 0.1,
+      "rush_td": 6,
+      "rush_bonus_100": 3,
+      "rec": 0.5,
+      "rec_yard": 0.1,
+      "rec_td": 6,
+      "rec_bonus_100": 3,
+      "fumble_lost": -2,
+      "source": "https://www.fanduel.com/rules"
+    },
+    "nba": {
+      "point": 1,
+      "three_pm": 3,
+      "rebound": 1.2,
+      "assist": 1.5,
+      "steal": 3,
+      "block": 3,
+      "turnover": -1,
+      "source": "https://www.dailyfantasysports101.com/nba-fanduel-vs-draftkings/ and https://www.fanduel.com/rules"
+    },
+    "salary_cap": 60000,
+    "source_cap": "https://www.fanduel.com/rules and industry comparison https://fantasyfootballers.org/featured/draftkings-vs-fanduel/"
+  },
+  "formulas": {
+    "value": "FP - (Salary/1000*5)",
+    "value_source": "https://www.stokastic.com/articles/nba-dfs/how-to-use-nba-dfs-projections",
+    "pts_per_dollar": "FP / Salary * 1000",
+    "pts_per_dollar_source": "https://www.stokastic.com/articles/nba-dfs/how-to-use-nba-dfs-projections",
+    "boom_definition": "P(FP > salary/1000*5 + 10) — top-tier for salary",
+    "boom_source": "https://www.stokastic.com/articles/nba-dfs/nba-dfs-boom-bust-strategy FAQ",
+    "implied_team_total": "(OverUnder/2) + Spread/2 for favorite, (OverUnder/2) - Spread/2 for underdog",
+    "implied_source": "https://www.stokastic.com/nba/how-to-use-vegas-odds-in-dfs-player-props-betting-insights-ac11/"
+  }
+}
