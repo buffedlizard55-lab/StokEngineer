@@ -13,14 +13,20 @@ document.addEventListener('DOMContentLoaded', ()=>{
   }, {rootMargin:'-40% 0px -50% 0px'});
   sections.forEach(s=>observer.observe(s));
 
-  // simple search
+  // simple search - searches section text content
   const search = document.getElementById('searchBox');
   if(search){
     search.addEventListener('input', ()=>{
-      const q = search.value.toLowerCase();
-      document.querySelectorAll('[data-search]').forEach(el=>{
-        const text = el.getAttribute('data-search').toLowerCase();
-        el.style.display = text.includes(q) ? '' : 'none';
+      const q = search.value.toLowerCase().trim();
+      document.querySelectorAll('section[id]').forEach(el=>{
+        const text = (el.textContent || '').toLowerCase();
+        const dataSearch = el.getAttribute('data-search') || '';
+        const combined = text + ' ' + dataSearch.toLowerCase();
+        if(!q){
+          el.style.display = '';
+        } else {
+          el.style.display = combined.includes(q) ? '' : 'none';
+        }
       })
     })
   }
