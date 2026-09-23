@@ -2,7 +2,7 @@
   "_provenance": {
     "command": "python -m src.stokengineer.cli optimize --sample sample_nfl_dk.json",
     "engine_version": "0.4.0",
-    "generated_at_utc": "2026-09-23T00:13:24+00:00",
+    "generated_at_utc": "2026-09-23T01:03:46+00:00",
     "notes": [
       "lineups built from a noisy view of the projections (sd 25%)",
       "Sample slates in src/data/samples are synthetic and labelled as such. They exist so the engine can be tested deterministically offline; they are not real salaries or real projections, and no report generated from them describes real players."
@@ -63,7 +63,7 @@
         "id": "nflverse_player_stats_asset",
         "publisher": "nflverse",
         "title": "nflverse player_stats release asset",
-        "url": "https://github.com/nflverse/nflverse-data/releases/download/player_stats/player_stats_2025.csv"
+        "url": "https://github.com/nflverse/nflverse-data/releases/download/stats_player/stats_player_week_2025.csv"
       },
       {
         "id": "nflverse_schedules_asset",

@@ -1,15 +1,15 @@
 {
  "meta": {
   "version": "0.4.0",
-  "generated_at": "2026-09-22T23:12:58+00:00",
-  "git_revision": "9404a80",
+  "generated_at": "2026-09-23T00:52:36+00:00",
+  "git_revision": "0a3ff69",
   "synthetic_reference": "Sample slates in src/data/samples are synthetic and labelled as such. They exist so the engine can be tested deterministically offline; they are not real salaries or real projections, and no report generated from them describes real players."
  },
  "status": {
   "registry_problems": [],
   "rules_problems": [],
   "tests": {
-   "passed": 86,
+   "passed": 88,
    "failed": 0,
    "skipped": 0
   }
@@ -173,7 +173,7 @@
   },
   {
    "id": "nflverse_player_stats_asset",
-   "url": "https://github.com/nflverse/nflverse-data/releases/download/player_stats/player_stats_2025.csv",
+   "url": "https://github.com/nflverse/nflverse-data/releases/download/stats_player/stats_player_week_2025.csv",
    "title": "nflverse player_stats release asset",
    "publisher": "nflverse",
    "provides": "Per-player per-week NFL stat lines (used to build the empirical game-to-game variance and covariance the models are calibrated against). Asset naming verified via the GitHub API this session (player_stats_YYYY.csv / .csv.gz / .parquet / .qs / .rds).",
@@ -3176,7 +3176,7 @@
    "provenance": {
     "command": "python -m src.stokengineer.cli optimize --sample sample_nfl_dk.json",
     "engine_version": "0.4.0",
-    "generated_at_utc": "2026-09-23T00:13:24+00:00",
+    "generated_at_utc": "2026-09-23T01:03:46+00:00",
     "notes": [
      "lineups built from a noisy view of the projections (sd 25%)",
      "Sample slates in src/data/samples are synthetic and labelled as such. They exist so the engine can be tested deterministically offline; they are not real salaries or real projections, and no report generated from them describes real players."
@@ -3237,7 +3237,7 @@
       "id": "nflverse_player_stats_asset",
       "publisher": "nflverse",
       "title": "nflverse player_stats release asset",
-      "url": "https://github.com/nflverse/nflverse-data/releases/download/player_stats/player_stats_2025.csv"
+      "url": "https://github.com/nflverse/nflverse-data/releases/download/stats_player/stats_player_week_2025.csv"
      },
      {
       "id": "nflverse_schedules_asset",
@@ -3288,7 +3288,7 @@
    "provenance": {
     "command": "python -m src.stokengineer.cli project --sample sample_mlb_dk.json",
     "engine_version": "0.4.0",
-    "generated_at_utc": "2026-09-23T00:12:54+00:00",
+    "generated_at_utc": "2026-09-23T01:03:46+00:00",
     "notes": [
      "Sample slates in src/data/samples are synthetic and labelled as such. They exist so the engine can be tested deterministically offline; they are not real salaries or real projections, and no report generated from them describes real players."
     ],
@@ -3393,17 +3393,17 @@
    "provenance": {
     "command": "python -m src.stokengineer.cli simulate --sample sample_nfl_dk.json",
     "engine_version": "0.4.0",
-    "generated_at_utc": "2026-09-23T00:12:47+00:00",
+    "generated_at_utc": "2026-09-23T01:04:11+00:00",
     "notes": [
      "lineups were built from a noisy view of the projections (sd 25%); this models the user's own projection error",
      "ownership is a simulated-field estimate (see ownership.py); it is not observed contest ownership",
      "field model: 35% of entries draft with sharp error, the rest with a looser view (see ownership.generate_field_lineups). Simulated ROI is sensitive to this assumption and to the payout structure; read it as a ranking, not a forecast.",
-     "lineup_1: simulated ROI 306% with a 35% cash rate. A cash rate near the paid fraction cannot justify that ROI unless the lineup is winning top prizes far more often than the field. Check (1) the field model, (2) whether the lineups were built on info the field lacked, (3) the payout structure.",
+     "lineup_1: simulated ROI 490% with a 37% cash rate. A cash rate near the paid fraction cannot justify that ROI unless the lineup is winning top prizes far more often than the field. Check (1) the field model, (2) whether the lineups were built on info the field lacked, (3) the payout structure.",
      "payout structure is illustrative, so ROI is a ranking aid only",
      "payout structure is ILLUSTRATIVE: supply the real contest payout (CSV) before treating any ROI here as expected money",
      "Sample slates in src/data/samples are synthetic and labelled as such. They exist so the engine can be tested deterministically offline; they are not real salaries or real projections, and no report generated from them describes real players."
     ],
-    "payload_sha256": "bad1ed2deff9ebaafce4b39b6ec6de603186f185512caac503ad46889bec5c99",
+    "payload_sha256": "a8c677f0573baf0b2ac51601ecc93150b93bfa2b09a4a11c08ea10f50ab3314c",
     "platform": "Linux-6.1.158+-x86_64-with-glibc2.36",
     "python": "3.11.2",
     "sources": [
@@ -3459,7 +3459,7 @@
       "id": "nflverse_player_stats_asset",
       "publisher": "nflverse",
       "title": "nflverse player_stats release asset",
-      "url": "https://github.com/nflverse/nflverse-data/releases/download/player_stats/player_stats_2025.csv"
+      "url": "https://github.com/nflverse/nflverse-data/releases/download/stats_player/stats_player_week_2025.csv"
      },
      {
       "id": "nflverse_schedules_asset",
@@ -3500,6 +3500,17 @@
     ]
    },
    "kind": "python -m src.stokengineer.cli simulate --sample sample_nfl_dk.json"
+  },
+  {
+   "file": "links.json",
+   "keys": [
+    "checked",
+    "dead",
+    "exempt",
+    "url_bases"
+   ],
+   "provenance": null,
+   "kind": "links"
   },
   {
    "file": "tests_summary.json",
@@ -3551,7 +3562,7 @@
   }
  ],
  "test_summary": {
-  "passed": 86,
+  "passed": 88,
   "failed": 0,
   "skipped": 0
  }

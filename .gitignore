@@ -3,3 +3,7 @@ __pycache__/
 .venv/
 *.egg-info/
 
+
+# tool outputs (CI uploads these as artifacts instead)
+reports/links.json
+reports/junit.xml

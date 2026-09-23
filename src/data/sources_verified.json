@@ -168,7 +168,7 @@
     },
     {
       "id": "nflverse_player_stats_asset",
-      "url": "https://github.com/nflverse/nflverse-data/releases/download/player_stats/player_stats_2025.csv",
+      "url": "https://github.com/nflverse/nflverse-data/releases/download/stats_player/stats_player_week_2025.csv",
       "title": "nflverse player_stats release asset",
       "publisher": "nflverse",
       "what_it_provides": "Per-player per-week NFL stat lines (used to build the empirical game-to-game variance and covariance the models are calibrated against). Asset naming verified via the GitHub API this session (player_stats_YYYY.csv / .csv.gz / .parquet / .qs / .rds).",
@@ -176,7 +176,9 @@
       "free": true,
       "key_required": false,
       "official": false,
-      "verification": "github_api"
+      "verification": "github_api",
+      "provides": "current-season weekly player stats (touchdowns, yards, receptions, attempts, targets, fantasy points) as CSV; the older `player_stats` tag only carries regular season aggregates up to 2024",
+      "notes": "Asset list verified through the GitHub releases API on 2026-09-22: the `stats_player` tag's week-2025 asset exists (the fetch redirects to it), while the `player_stats` tag publishes nothing for 2025 (only season aggregates through 2024), so the old pattern was a 404. The dead URL was caught by tools/check_links.py in CI, fixed here, and code and ledger are now asserted to agree in tests/test_ingest.py."
     },
     {
       "id": "nflverse_injuries_asset",

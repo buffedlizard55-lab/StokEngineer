@@ -7,6 +7,7 @@ Exit codes:
 Usage:  python tools/check_links.py
 """
 import json
+import os
 import re
 import ssl
 import sys
@@ -105,9 +106,42 @@ def check(url: str) -> str:
         return f"UNREACHABLE({reason[:60]})"
 
 
+def _annotate(status: str, url: str, where: str) -> None:
+    """Emit a GitHub annotation when running in Actions.
+
+    The log API is not reachable from every environment, but check-run annotations are: a broken
+    citation has to be readable by whoever is reviewing the pull request, not just by whoever has
+    the runner's log open.
+    """
+    if os.environ.get("GITHUB_ACTIONS") != "true":
+        return
+    level = "error" if status.startswith("DEAD") else "warning"
+    message = f"{status} {url} (cited in {where})".replace("%", "%25").replace("\n", "%0A")
+    print(f"::{level} title=Link check::{message}")
+
+
+def bases(urls) -> dict:
+    """URLs that are a strict prefix of another collected URL - i.e. a base, not a page.
+
+    ``NFLVERSE_RELEASE = ".../releases/download"`` is how the code builds asset URLs. Scanning
+    source text for URLs is what keeps this checker honest, but a base constant is not a citation
+    and must not be reported as a dead link.
+    """
+    found = {}
+    ordered = sorted(urls)
+    for url in ordered:
+        longer = [other for other in ordered if other != url and other.startswith(url)]
+        if longer:
+            found[url] = f"URL base for {len(longer)} other URL(s), not a page: {longer[0]}"
+    return found
+
+
 def main() -> int:
     urls = collect_urls()
-    pending = {u: w for u, w in urls.items() if u not in EXEMPT}
+    bases_found = bases(urls)
+    skip = dict(EXEMPT)
+    skip.update(bases_found)
+    pending = {u: w for u, w in urls.items() if u not in skip}
     print(f"Checking {len(pending)} unique URLs ({len(urls) - len(pending)} exempt)...\n")
     dead = []
     out = {}
@@ -116,8 +150,14 @@ def main() -> int:
         out[url] = {"status": status, "where": where}
         marker = "  " if status.startswith(("OK",)) else "! "
         print(f"{i:3d}/{len(pending)} [{status:20s}] {url}")
-        if status.startswith("DEAD") or status.startswith("UNREACHABLE"):
+        if status.startswith("DEAD"):
             dead.append((url, status, where))
+        elif not status.startswith("OK"):
+            _annotate(status, url, where)
+    if bases_found:
+        print("\nTreated as URL bases (not fetched):")
+        for url, reason in sorted(bases_found.items()):
+            print(f"  - {url}\n      {reason}")
     if EXEMPT:
         print("\nExempt (documented, not fetched):")
         for url, reason in sorted(EXEMPT.items()):
@@ -127,16 +167,33 @@ def main() -> int:
     report = Path(__file__).resolve().parent.parent / "reports" / "links.json"
     report.parent.mkdir(parents=True, exist_ok=True)
     report.write_text(
-        json.dumps({"checked": out, "exempt": EXEMPT, "dead": [u for u, _, _ in dead]}, indent=1)
+        json.dumps(
+            {
+                "checked": out,
+                "exempt": EXEMPT,
+                "url_bases": bases_found,
+                "dead": [u for u, _, _ in dead],
+            },
+            indent=1,
+        )
         + "\n"
     )
     print(f"wrote {report.relative_to(report.parent.parent)}")
     if dead:
-        print("\nProblematic (needs manual review / fix):")
+        print("\nDefinitively dead (404/410/DNS) - these must be fixed or removed:")
         for u, s, w in dead:
             print(f"  - [{s}] {u}  ({w})")
+            _annotate(s, u, w)
+        print(
+            "\nEverything else above is alive but declined this runner (bot blocking, TLS chain) or "
+            "was unreachable from this network - both are warnings by design, because a firewall "
+            "should not fail a citation check."
+        )
         return 1
-    print("No dead links. All URLs resolve or are bot-blocked-but-alive.")
+    print(
+        "No dead links. Non-OK entries above are bot-blocked-but-alive, TLS-chain warnings, or "
+        "network-unreachable from this runner."
+    )
     return 0
 
 

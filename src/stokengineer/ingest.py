@@ -437,21 +437,30 @@ def forward_test_props(
 # ---------------------------------------------------------------------------
 NFLVERSE_RELEASE = "https://github.com/nflverse/nflverse-data/releases/download"
 
+#: Verified 2026-09-22 against the release asset lists: the ``player_stats`` tag publishes season
+#: aggregates only up to 2024, while the *current* season's weekly stats are published under the
+#: ``stats_player`` tag as ``stats_player_week_<season>.csv``. Asking for a season the publisher
+#: has not released is a 404, not an empty file - so the URL pattern is asserted by a test against
+#: the source ledger, and a missing season is reported as such.
+NFLVERSE_PLAYER_STATS_TEMPLATE = NFLVERSE_RELEASE + "/stats_player/stats_player_week_{season}.csv"
+NFLVERSE_SCHEDULES_URL = NFLVERSE_RELEASE + "/schedules/games.csv"
+NFLVERSE_INJURIES_TEMPLATE = NFLVERSE_RELEASE + "/injuries/injuries_{season}.csv"
+
 
 def nflverse_player_stats(fetcher: Fetcher, season: int) -> List[Dict[str, str]]:
-    url = f"{NFLVERSE_RELEASE}/player_stats/player_stats_{season}.csv"
+    url = NFLVERSE_PLAYER_STATS_TEMPLATE.format(season=season)
     body = fetcher.get_bytes(url, source_id="nflverse_player_stats", suffix=f"-{season}.csv")
     return list(csv.DictReader(body.decode("utf-8").splitlines()))
 
 
 def nflverse_schedules(fetcher: Fetcher) -> List[Dict[str, str]]:
-    url = f"{NFLVERSE_RELEASE}/schedules/games.csv"
+    url = NFLVERSE_SCHEDULES_URL
     body = fetcher.get_bytes(url, source_id="nflverse_schedules", suffix=".csv")
     return list(csv.DictReader(body.decode("utf-8").splitlines()))
 
 
 def nflverse_injuries(fetcher: Fetcher, season: int) -> List[Dict[str, str]]:
-    url = f"{NFLVERSE_RELEASE}/injuries/injuries_{season}.csv"
+    url = NFLVERSE_INJURIES_TEMPLATE.format(season=season)
     body = fetcher.get_bytes(url, source_id="nflverse_injuries", suffix=f"-{season}.csv")
     return list(csv.DictReader(body.decode("utf-8").splitlines()))
 
@@ -459,6 +468,9 @@ def nflverse_injuries(fetcher: Fetcher, season: int) -> List[Dict[str, str]]:
 # ---------------------------------------------------------------------------
 # ESPN scoreboard (keyless, undocumented) - source id espn_scoreboard
 # ---------------------------------------------------------------------------
+#: base of every ESPN scoreboard URL this module builds (source id espn_scoreboard)
+ESPN_SCOREBOARD_BASE = "https://site.api.espn.com/apis/site/v2/sports"
+
 ESPN_SPORT_PATHS = {
     "nfl": "football/nfl",
     "nba": "basketball/nba",
@@ -471,7 +483,7 @@ def espn_scoreboard(fetcher: Fetcher, sport: str) -> Dict[str, Any]:
     path = ESPN_SPORT_PATHS.get(sport)
     if not path:
         raise ValueError(f"unsupported sport for ESPN scoreboard: {sport!r}")
-    url = f"https://site.api.espn.com/apis/site/v2/sports/{path}/scoreboard"
+    url = f"{ESPN_SCOREBOARD_BASE}/{path}/scoreboard"
     return fetcher.get_json(url, source_id=f"espn_scoreboard_{sport}", suffix=f"-{sport}.json")
 
 

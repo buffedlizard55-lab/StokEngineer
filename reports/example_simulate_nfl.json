@@ -2,17 +2,17 @@
   "_provenance": {
     "command": "python -m src.stokengineer.cli simulate --sample sample_nfl_dk.json",
     "engine_version": "0.4.0",
-    "generated_at_utc": "2026-09-23T00:12:47+00:00",
+    "generated_at_utc": "2026-09-23T01:04:11+00:00",
     "notes": [
       "lineups were built from a noisy view of the projections (sd 25%); this models the user's own projection error",
       "ownership is a simulated-field estimate (see ownership.py); it is not observed contest ownership",
       "field model: 35% of entries draft with sharp error, the rest with a looser view (see ownership.generate_field_lineups). Simulated ROI is sensitive to this assumption and to the payout structure; read it as a ranking, not a forecast.",
-      "lineup_1: simulated ROI 306% with a 35% cash rate. A cash rate near the paid fraction cannot justify that ROI unless the lineup is winning top prizes far more often than the field. Check (1) the field model, (2) whether the lineups were built on info the field lacked, (3) the payout structure.",
+      "lineup_1: simulated ROI 490% with a 37% cash rate. A cash rate near the paid fraction cannot justify that ROI unless the lineup is winning top prizes far more often than the field. Check (1) the field model, (2) whether the lineups were built on info the field lacked, (3) the payout structure.",
       "payout structure is illustrative, so ROI is a ranking aid only",
       "payout structure is ILLUSTRATIVE: supply the real contest payout (CSV) before treating any ROI here as expected money",
       "Sample slates in src/data/samples are synthetic and labelled as such. They exist so the engine can be tested deterministically offline; they are not real salaries or real projections, and no report generated from them describes real players."
     ],
-    "payload_sha256": "bad1ed2deff9ebaafce4b39b6ec6de603186f185512caac503ad46889bec5c99",
+    "payload_sha256": "a8c677f0573baf0b2ac51601ecc93150b93bfa2b09a4a11c08ea10f50ab3314c",
     "platform": "Linux-6.1.158+-x86_64-with-glibc2.36",
     "python": "3.11.2",
     "sources": [
@@ -68,7 +68,7 @@
         "id": "nflverse_player_stats_asset",
         "publisher": "nflverse",
         "title": "nflverse player_stats release asset",
-        "url": "https://github.com/nflverse/nflverse-data/releases/download/player_stats/player_stats_2025.csv"
+        "url": "https://github.com/nflverse/nflverse-data/releases/download/stats_player/stats_player_week_2025.csv"
       },
       {
         "id": "nflverse_schedules_asset",
@@ -112,12 +112,12 @@
     "contest": [
       {
         "best_rank": 1,
-        "cash_rate_pct": 34.75,
-        "expected_payout": 81.201,
+        "cash_rate_pct": 37.0,
+        "expected_payout": 117.962,
         "label": "lineup_1",
-        "mean_percentile": 52.78,
+        "mean_percentile": 56.39,
         "mean_score": 151.24,
-        "median_rank": 188.5,
+        "median_rank": 166.0,
         "method": "milp",
         "players": [
           "13",
@@ -131,30 +131,30 @@
           "73"
         ],
         "projected_score": 210.92,
-        "roi_pct": 306.01,
+        "roi_pct": 489.81,
         "salary": 49645.0,
         "slots": {
-          "DST": 6,
-          "FLEX": 1,
-          "QB": 0,
-          "RB1": 3,
-          "RB2": 2,
-          "TE": 5,
-          "WR1": 8,
-          "WR2": 7,
-          "WR3": 4
+          "DST": "nfl-dst-65",
+          "FLEX": "nfl-rb-16",
+          "QB": "nfl-qb-14",
+          "RB1": "nfl-rb-55",
+          "RB2": "nfl-rb-30",
+          "TE": "nfl-te-63",
+          "WR1": "nfl-wr-74",
+          "WR2": "nfl-wr-71",
+          "WR3": "nfl-wr-58"
         },
-        "top_1pct_rate_pct": 6.75,
-        "win_rate_pct": 2.0
+        "top_1pct_rate_pct": 8.75,
+        "win_rate_pct": 3.0
       },
       {
         "best_rank": 1,
-        "cash_rate_pct": 33.5,
-        "expected_payout": 96.704,
+        "cash_rate_pct": 37.75,
+        "expected_payout": 119.185,
         "label": "lineup_2",
-        "mean_percentile": 55.49,
+        "mean_percentile": 58.91,
         "mean_score": 153.8,
-        "median_rank": 164.0,
+        "median_rank": 150.5,
         "method": "milp",
         "players": [
           "12",
@@ -168,21 +168,21 @@
           "73"
         ],
         "projected_score": 209.66,
-        "roi_pct": 383.52,
+        "roi_pct": 495.92,
         "salary": 49524.0,
         "slots": {
-          "DST": 0,
-          "FLEX": 3,
-          "QB": 1,
-          "RB1": 4,
-          "RB2": 2,
-          "TE": 6,
-          "WR1": 8,
-          "WR2": 7,
-          "WR3": 5
+          "DST": "nfl-dst-13",
+          "FLEX": "nfl-wr-45",
+          "QB": "nfl-qb-14",
+          "RB1": "nfl-rb-55",
+          "RB2": "nfl-rb-30",
+          "TE": "nfl-te-63",
+          "WR1": "nfl-wr-74",
+          "WR2": "nfl-wr-71",
+          "WR3": "nfl-wr-58"
         },
-        "top_1pct_rate_pct": 7.25,
-        "win_rate_pct": 3.0
+        "top_1pct_rate_pct": 9.5,
+        "win_rate_pct": 3.25
       }
     ],
     "date": "2026-09-20",
@@ -206,15 +206,15 @@
         "projected": 210.922,
         "salary": 49645.0,
         "slots": {
-          "DST": 6,
-          "FLEX": 1,
-          "QB": 0,
-          "RB1": 3,
-          "RB2": 2,
-          "TE": 5,
-          "WR1": 8,
-          "WR2": 7,
-          "WR3": 4
+          "DST": "nfl-dst-65",
+          "FLEX": "nfl-rb-16",
+          "QB": "nfl-qb-14",
+          "RB1": "nfl-rb-55",
+          "RB2": "nfl-rb-30",
+          "TE": "nfl-te-63",
+          "WR1": "nfl-wr-74",
+          "WR2": "nfl-wr-71",
+          "WR3": "nfl-wr-58"
         }
       },
       {
@@ -235,15 +235,15 @@
         "projected": 209.665,
         "salary": 49524.0,
         "slots": {
-          "DST": 0,
-          "FLEX": 3,
-          "QB": 1,
-          "RB1": 4,
-          "RB2": 2,
-          "TE": 6,
-          "WR1": 8,
-          "WR2": 7,
-          "WR3": 5
+          "DST": "nfl-dst-13",
+          "FLEX": "nfl-wr-45",
+          "QB": "nfl-qb-14",
+          "RB1": "nfl-rb-55",
+          "RB2": "nfl-rb-30",
+          "TE": "nfl-te-63",
+          "WR1": "nfl-wr-74",
+          "WR2": "nfl-wr-71",
+          "WR3": "nfl-wr-58"
         }
       }
     ],
@@ -252,7 +252,7 @@
       "lineups were built from a noisy view of the projections (sd 25%); this models the user's own projection error",
       "ownership is a simulated-field estimate (see ownership.py); it is not observed contest ownership",
       "field model: 35% of entries draft with sharp error, the rest with a looser view (see ownership.generate_field_lineups). Simulated ROI is sensitive to this assumption and to the payout structure; read it as a ranking, not a forecast.",
-      "lineup_1: simulated ROI 306% with a 35% cash rate. A cash rate near the paid fraction cannot justify that ROI unless the lineup is winning top prizes far more often than the field. Check (1) the field model, (2) whether the lineups were built on info the field lacked, (3) the payout structure.",
+      "lineup_1: simulated ROI 490% with a 37% cash rate. A cash rate near the paid fraction cannot justify that ROI unless the lineup is winning top prizes far more often than the field. Check (1) the field model, (2) whether the lineups were built on info the field lacked, (3) the payout structure.",
       "payout structure is illustrative, so ROI is a ranking aid only",
       "payout structure is ILLUSTRATIVE: supply the real contest payout (CSV) before treating any ROI here as expected money"
     ],

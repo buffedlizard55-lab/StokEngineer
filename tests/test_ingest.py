@@ -6,6 +6,11 @@ from pathlib import Path
 import pytest
 
 from src.stokengineer.ingest import (
+    ESPN_SCOREBOARD_BASE,
+    MLB_BASE,
+    NFLVERSE_INJURIES_TEMPLATE,
+    NFLVERSE_PLAYER_STATS_TEMPLATE,
+    NFLVERSE_SCHEDULES_URL,
     Fetcher,
     OfflineError,
     boxscore_stat_lines,
@@ -195,3 +200,40 @@ def test_fetcher_offline_error_is_explicit(tmp_path: Path):
     with pytest.raises(OfflineError) as excinfo:
         fetcher.get_bytes("https://127.0.0.1:9/definitely-not-listening", "bad_source")
     assert "no outbound network" in str(excinfo.value)
+
+
+# ---------------------------------------------------------------------------
+# the URL the code fetches must be the URL the source ledger declares
+# ---------------------------------------------------------------------------
+def _ledger_url(source_id: str) -> str:
+    import json
+    from pathlib import Path
+
+    data = json.loads(
+        (Path(__file__).resolve().parent.parent / "src" / "data" / "sources_verified.json").read_text()
+    )
+    for source in data["sources"]:
+        if source["id"] == source_id:
+            return source["url"]
+    raise AssertionError(f"{source_id} is not declared in the source ledger")
+
+
+def test_nflverse_urls_match_the_source_ledger():
+    """A 404 in a citation is a broken claim, so the code and the ledger are asserted to agree.
+
+    This caught a live bug: `player_stats/player_stats_<season>.csv` was a 404 for 2025 because
+    the publisher moved current-season weekly stats to the `stats_player` tag.
+    """
+    assert NFLVERSE_PLAYER_STATS_TEMPLATE.format(season=2025) == _ledger_url(
+        "nflverse_player_stats_asset"
+    )
+    assert NFLVERSE_SCHEDULES_URL == _ledger_url("nflverse_schedules_asset")
+    assert NFLVERSE_INJURIES_TEMPLATE.format(season=2025) == _ledger_url("nflverse_injuries_asset")
+
+
+def test_ingest_urls_live_on_the_hosts_the_ledger_declares():
+    """Hosts, not just paths: a citation that moved to another domain is a different source."""
+    # the ledger cites a concrete call (schedule for a date); the code builds from the same base
+    assert _ledger_url("mlb_statsapi").startswith(MLB_BASE)
+    ledger_espn = _ledger_url("espn_scoreboard")
+    assert ledger_espn.startswith(ESPN_SCOREBOARD_BASE)

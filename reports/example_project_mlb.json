@@ -2,7 +2,7 @@
   "_provenance": {
     "command": "python -m src.stokengineer.cli project --sample sample_mlb_dk.json",
     "engine_version": "0.4.0",
-    "generated_at_utc": "2026-09-23T00:12:54+00:00",
+    "generated_at_utc": "2026-09-23T01:03:46+00:00",
     "notes": [
       "Sample slates in src/data/samples are synthetic and labelled as such. They exist so the engine can be tested deterministically offline; they are not real salaries or real projections, and no report generated from them describes real players."
     ],
