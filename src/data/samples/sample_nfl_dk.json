@@ -1,0 +1,1562 @@
+{
+ "_meta": {
+  "synthetic": true,
+  "purpose": "Deterministic offline fixture for tests and CLI demos.",
+  "warning": "NOT real data. Names, salaries and projections are generated. Reports built from these files are labelled synthetic and must never be presented as real slate results.",
+  "generated_by": "tools/make_sample_data.py",
+  "generated_on": "2026-09-22",
+  "seed": 20260922
+ },
+ "sport": "nfl",
+ "site": "draftkings",
+ "date": "2026-09-20",
+ "games": [
+  {
+   "game_id": "BUF@KC",
+   "away_team": "BUF",
+   "home_team": "KC",
+   "away_implied_total": 22.7,
+   "home_implied_total": 22.0
+  },
+  {
+   "game_id": "DAL@SF",
+   "away_team": "DAL",
+   "home_team": "SF",
+   "away_implied_total": 24.7,
+   "home_implied_total": 23.2
+  },
+  {
+   "game_id": "DET@PHI",
+   "away_team": "DET",
+   "home_team": "PHI",
+   "away_implied_total": 24.8,
+   "home_implied_total": 26.8
+  }
+ ],
+ "players": [
+  {
+   "id": "nfl-qb-1",
+   "name": "Synthetic BUF QB1",
+   "team": "BUF",
+   "opponent": "KC",
+   "positions": [
+    "QB"
+   ],
+   "salary": 6049,
+   "game_id": "BUF@KC",
+   "props": {
+    "pass_att": 33.173,
+    "comp_rate": 0.677,
+    "pass_yd_per_att": 6.721,
+    "pass_td_per_att": 0.0437,
+    "int_per_att": 0.0122,
+    "rush_att": 7.373,
+    "rush_yd_per_att": 4.823,
+    "rush_td_per_att": 0.0419,
+    "implied_total": 22.7
+   }
+  },
+  {
+   "id": "nfl-qb-2",
+   "name": "Synthetic BUF QB2",
+   "team": "BUF",
+   "opponent": "KC",
+   "positions": [
+    "QB"
+   ],
+   "salary": 6264,
+   "game_id": "BUF@KC",
+   "props": {
+    "pass_att": 31.143,
+    "comp_rate": 0.687,
+    "pass_yd_per_att": 7.972,
+    "pass_td_per_att": 0.0344,
+    "int_per_att": 0.0199,
+    "rush_att": 6.852,
+    "rush_yd_per_att": 5.064,
+    "rush_td_per_att": 0.0289,
+    "implied_total": 22.7
+   }
+  },
+  {
+   "id": "nfl-rb-3",
+   "name": "Synthetic BUF RB1",
+   "team": "BUF",
+   "opponent": "KC",
+   "positions": [
+    "RB"
+   ],
+   "salary": 6538,
+   "game_id": "BUF@KC",
+   "props": {
+    "rush_att": 17.439,
+    "rush_yd_per_att": 4.911,
+    "rush_td_per_att": 0.031,
+    "targets": 3.988,
+    "catch_rate": 0.696,
+    "rec_yd_per_rec": 8.356,
+    "rec_td_per_target": 0.0403,
+    "implied_total": 22.7
+   }
+  },
+  {
+   "id": "nfl-rb-4",
+   "name": "Synthetic BUF RB2",
+   "team": "BUF",
+   "opponent": "KC",
+   "positions": [
+    "RB"
+   ],
+   "salary": 4396,
+   "game_id": "BUF@KC",
+   "props": {
+    "rush_att": 14.308,
+    "rush_yd_per_att": 4.35,
+    "rush_td_per_att": 0.0594,
+    "targets": 4.008,
+    "catch_rate": 0.707,
+    "rec_yd_per_rec": 8.565,
+    "rec_td_per_target": 0.0333,
+    "implied_total": 22.7
+   }
+  },
+  {
+   "id": "nfl-rb-5",
+   "name": "Synthetic BUF RB3",
+   "team": "BUF",
+   "opponent": "KC",
+   "positions": [
+    "RB"
+   ],
+   "salary": 5755,
+   "game_id": "BUF@KC",
+   "props": {
+    "rush_att": 9.388,
+    "rush_yd_per_att": 4.341,
+    "rush_td_per_att": 0.0433,
+    "targets": 1.876,
+    "catch_rate": 0.651,
+    "rec_yd_per_rec": 6.581,
+    "rec_td_per_target": 0.0462,
+    "implied_total": 22.7
+   }
+  },
+  {
+   "id": "nfl-wr-6",
+   "name": "Synthetic BUF WR1",
+   "team": "BUF",
+   "opponent": "KC",
+   "positions": [
+    "WR"
+   ],
+   "salary": 6660,
+   "game_id": "BUF@KC",
+   "props": {
+    "targets": 8.441,
+    "catch_rate": 0.749,
+    "rec_yd_per_rec": 11.547,
+    "rec_td_per_target": 0.0728,
+    "implied_total": 22.7
+   }
+  },
+  {
+   "id": "nfl-wr-7",
+   "name": "Synthetic BUF WR2",
+   "team": "BUF",
+   "opponent": "KC",
+   "positions": [
+    "WR"
+   ],
+   "salary": 6812,
+   "game_id": "BUF@KC",
+   "props": {
+    "targets": 7.457,
+    "catch_rate": 0.759,
+    "rec_yd_per_rec": 12.306,
+    "rec_td_per_target": 0.08,
+    "implied_total": 22.7
+   }
+  },
+  {
+   "id": "nfl-wr-8",
+   "name": "Synthetic BUF WR3",
+   "team": "BUF",
+   "opponent": "KC",
+   "positions": [
+    "WR"
+   ],
+   "salary": 6642,
+   "game_id": "BUF@KC",
+   "props": {
+    "targets": 4.002,
+    "catch_rate": 0.748,
+    "rec_yd_per_rec": 11.841,
+    "rec_td_per_target": 0.0761,
+    "implied_total": 22.7
+   }
+  },
+  {
+   "id": "nfl-wr-9",
+   "name": "Synthetic BUF WR4",
+   "team": "BUF",
+   "opponent": "KC",
+   "positions": [
+    "WR"
+   ],
+   "salary": 6021,
+   "game_id": "BUF@KC",
+   "props": {
+    "targets": 7.442,
+    "catch_rate": 0.685,
+    "rec_yd_per_rec": 11.536,
+    "rec_td_per_target": 0.0772,
+    "implied_total": 22.7
+   }
+  },
+  {
+   "id": "nfl-wr-10",
+   "name": "Synthetic BUF WR5",
+   "team": "BUF",
+   "opponent": "KC",
+   "positions": [
+    "WR"
+   ],
+   "salary": 5103,
+   "game_id": "BUF@KC",
+   "props": {
+    "targets": 5.634,
+    "catch_rate": 0.641,
+    "rec_yd_per_rec": 11.952,
+    "rec_td_per_target": 0.0498,
+    "implied_total": 22.7
+   }
+  },
+  {
+   "id": "nfl-te-11",
+   "name": "Synthetic BUF TE1",
+   "team": "BUF",
+   "opponent": "KC",
+   "positions": [
+    "TE"
+   ],
+   "salary": 4015,
+   "game_id": "BUF@KC",
+   "props": {
+    "targets": 8.314,
+    "catch_rate": 0.723,
+    "rec_yd_per_rec": 11.625,
+    "rec_td_per_target": 0.0684,
+    "implied_total": 22.7
+   }
+  },
+  {
+   "id": "nfl-te-12",
+   "name": "Synthetic BUF TE2",
+   "team": "BUF",
+   "opponent": "KC",
+   "positions": [
+    "TE"
+   ],
+   "salary": 6405,
+   "game_id": "BUF@KC",
+   "props": {
+    "targets": 5.346,
+    "catch_rate": 0.787,
+    "rec_yd_per_rec": 12.953,
+    "rec_td_per_target": 0.0659,
+    "implied_total": 22.7
+   }
+  },
+  {
+   "id": "nfl-dst-13",
+   "name": "Synthetic BUF DST1",
+   "team": "BUF",
+   "opponent": "KC",
+   "positions": [
+    "DST"
+   ],
+   "salary": 3316,
+   "game_id": "BUF@KC",
+   "props": {
+    "dst_sacks": 3.644,
+    "dst_interceptions": 1.91,
+    "dst_fumble_recoveries": 0.345,
+    "dst_return_td": 0.231,
+    "dst_safeties": 0.124,
+    "dst_blocked_kicks": 0.239,
+    "dst_pa": 22.0,
+    "implied_total": 22.7
+   }
+  },
+  {
+   "id": "nfl-qb-14",
+   "name": "Synthetic KC QB1",
+   "team": "KC",
+   "opponent": "BUF",
+   "positions": [
+    "QB"
+   ],
+   "salary": 6720,
+   "game_id": "BUF@KC",
+   "props": {
+    "pass_att": 33.24,
+    "comp_rate": 0.631,
+    "pass_yd_per_att": 7.207,
+    "pass_td_per_att": 0.0307,
+    "int_per_att": 0.0171,
+    "rush_att": 7.867,
+    "rush_yd_per_att": 5.391,
+    "rush_td_per_att": 0.0481,
+    "implied_total": 22.0
+   }
+  },
+  {
+   "id": "nfl-qb-15",
+   "name": "Synthetic KC QB2",
+   "team": "KC",
+   "opponent": "BUF",
+   "positions": [
+    "QB"
+   ],
+   "salary": 5320,
+   "game_id": "BUF@KC",
+   "props": {
+    "pass_att": 28.312,
+    "comp_rate": 0.616,
+    "pass_yd_per_att": 7.466,
+    "pass_td_per_att": 0.0381,
+    "int_per_att": 0.022,
+    "rush_att": 6.771,
+    "rush_yd_per_att": 4.318,
+    "rush_td_per_att": 0.0379,
+    "implied_total": 22.0
+   }
+  },
+  {
+   "id": "nfl-rb-16",
+   "name": "Synthetic KC RB1",
+   "team": "KC",
+   "opponent": "BUF",
+   "positions": [
+    "RB"
+   ],
+   "salary": 6242,
+   "game_id": "BUF@KC",
+   "props": {
+    "rush_att": 13.572,
+    "rush_yd_per_att": 4.679,
+    "rush_td_per_att": 0.0373,
+    "targets": 5.779,
+    "catch_rate": 0.77,
+    "rec_yd_per_rec": 6.783,
+    "rec_td_per_target": 0.0452,
+    "implied_total": 22.0
+   }
+  },
+  {
+   "id": "nfl-rb-17",
+   "name": "Synthetic KC RB2",
+   "team": "KC",
+   "opponent": "BUF",
+   "positions": [
+    "RB"
+   ],
+   "salary": 4339,
+   "game_id": "BUF@KC",
+   "props": {
+    "rush_att": 14.829,
+    "rush_yd_per_att": 3.679,
+    "rush_td_per_att": 0.0562,
+    "targets": 5.239,
+    "catch_rate": 0.779,
+    "rec_yd_per_rec": 6.141,
+    "rec_td_per_target": 0.0492,
+    "implied_total": 22.0
+   }
+  },
+  {
+   "id": "nfl-rb-18",
+   "name": "Synthetic KC RB3",
+   "team": "KC",
+   "opponent": "BUF",
+   "positions": [
+    "RB"
+   ],
+   "salary": 4533,
+   "game_id": "BUF@KC",
+   "props": {
+    "rush_att": 10.514,
+    "rush_yd_per_att": 4.872,
+    "rush_td_per_att": 0.0364,
+    "targets": 2.463,
+    "catch_rate": 0.631,
+    "rec_yd_per_rec": 8.181,
+    "rec_td_per_target": 0.0398,
+    "implied_total": 22.0
+   }
+  },
+  {
+   "id": "nfl-wr-19",
+   "name": "Synthetic KC WR1",
+   "team": "KC",
+   "opponent": "BUF",
+   "positions": [
+    "WR"
+   ],
+   "salary": 6394,
+   "game_id": "BUF@KC",
+   "props": {
+    "targets": 9.392,
+    "catch_rate": 0.655,
+    "rec_yd_per_rec": 12.508,
+    "rec_td_per_target": 0.0729,
+    "implied_total": 22.0
+   }
+  },
+  {
+   "id": "nfl-wr-20",
+   "name": "Synthetic KC WR2",
+   "team": "KC",
+   "opponent": "BUF",
+   "positions": [
+    "WR"
+   ],
+   "salary": 7710,
+   "game_id": "BUF@KC",
+   "props": {
+    "targets": 5.934,
+    "catch_rate": 0.691,
+    "rec_yd_per_rec": 10.339,
+    "rec_td_per_target": 0.0475,
+    "implied_total": 22.0
+   }
+  },
+  {
+   "id": "nfl-wr-21",
+   "name": "Synthetic KC WR3",
+   "team": "KC",
+   "opponent": "BUF",
+   "positions": [
+    "WR"
+   ],
+   "salary": 3989,
+   "game_id": "BUF@KC",
+   "props": {
+    "targets": 4.584,
+    "catch_rate": 0.619,
+    "rec_yd_per_rec": 11.625,
+    "rec_td_per_target": 0.0781,
+    "implied_total": 22.0
+   }
+  },
+  {
+   "id": "nfl-wr-22",
+   "name": "Synthetic KC WR4",
+   "team": "KC",
+   "opponent": "BUF",
+   "positions": [
+    "WR"
+   ],
+   "salary": 5290,
+   "game_id": "BUF@KC",
+   "props": {
+    "targets": 8.474,
+    "catch_rate": 0.714,
+    "rec_yd_per_rec": 11.016,
+    "rec_td_per_target": 0.0401,
+    "implied_total": 22.0
+   }
+  },
+  {
+   "id": "nfl-wr-23",
+   "name": "Synthetic KC WR5",
+   "team": "KC",
+   "opponent": "BUF",
+   "positions": [
+    "WR"
+   ],
+   "salary": 4231,
+   "game_id": "BUF@KC",
+   "props": {
+    "targets": 5.637,
+    "catch_rate": 0.754,
+    "rec_yd_per_rec": 13.302,
+    "rec_td_per_target": 0.0702,
+    "implied_total": 22.0
+   }
+  },
+  {
+   "id": "nfl-te-24",
+   "name": "Synthetic KC TE1",
+   "team": "KC",
+   "opponent": "BUF",
+   "positions": [
+    "TE"
+   ],
+   "salary": 6442,
+   "game_id": "BUF@KC",
+   "props": {
+    "targets": 7.585,
+    "catch_rate": 0.714,
+    "rec_yd_per_rec": 12.268,
+    "rec_td_per_target": 0.0771,
+    "implied_total": 22.0
+   }
+  },
+  {
+   "id": "nfl-te-25",
+   "name": "Synthetic KC TE2",
+   "team": "KC",
+   "opponent": "BUF",
+   "positions": [
+    "TE"
+   ],
+   "salary": 3834,
+   "game_id": "BUF@KC",
+   "props": {
+    "targets": 5.328,
+    "catch_rate": 0.788,
+    "rec_yd_per_rec": 10.048,
+    "rec_td_per_target": 0.0688,
+    "implied_total": 22.0
+   }
+  },
+  {
+   "id": "nfl-dst-26",
+   "name": "Synthetic KC DST1",
+   "team": "KC",
+   "opponent": "BUF",
+   "positions": [
+    "DST"
+   ],
+   "salary": 3419,
+   "game_id": "BUF@KC",
+   "props": {
+    "dst_sacks": 3.001,
+    "dst_interceptions": 1.413,
+    "dst_fumble_recoveries": 0.737,
+    "dst_return_td": 0.252,
+    "dst_safeties": 0.081,
+    "dst_blocked_kicks": 0.063,
+    "dst_pa": 23.2,
+    "implied_total": 22.0
+   }
+  },
+  {
+   "id": "nfl-qb-27",
+   "name": "Synthetic DAL QB1",
+   "team": "DAL",
+   "opponent": "SF",
+   "positions": [
+    "QB"
+   ],
+   "salary": 6025,
+   "game_id": "DAL@SF",
+   "props": {
+    "pass_att": 30.699,
+    "comp_rate": 0.658,
+    "pass_yd_per_att": 7.226,
+    "pass_td_per_att": 0.0335,
+    "int_per_att": 0.0202,
+    "rush_att": 3.912,
+    "rush_yd_per_att": 4.671,
+    "rush_td_per_att": 0.0286,
+    "implied_total": 24.7
+   }
+  },
+  {
+   "id": "nfl-qb-28",
+   "name": "Synthetic DAL QB2",
+   "team": "DAL",
+   "opponent": "SF",
+   "positions": [
+    "QB"
+   ],
+   "salary": 6555,
+   "game_id": "DAL@SF",
+   "props": {
+    "pass_att": 31.296,
+    "comp_rate": 0.664,
+    "pass_yd_per_att": 6.7,
+    "pass_td_per_att": 0.0405,
+    "int_per_att": 0.013,
+    "rush_att": 6.389,
+    "rush_yd_per_att": 4.831,
+    "rush_td_per_att": 0.0312,
+    "implied_total": 24.7
+   }
+  },
+  {
+   "id": "nfl-rb-29",
+   "name": "Synthetic DAL RB1",
+   "team": "DAL",
+   "opponent": "SF",
+   "positions": [
+    "RB"
+   ],
+   "salary": 4346,
+   "game_id": "DAL@SF",
+   "props": {
+    "rush_att": 16.299,
+    "rush_yd_per_att": 4.964,
+    "rush_td_per_att": 0.021,
+    "targets": 3.567,
+    "catch_rate": 0.781,
+    "rec_yd_per_rec": 6.526,
+    "rec_td_per_target": 0.0428,
+    "implied_total": 24.7
+   }
+  },
+  {
+   "id": "nfl-rb-30",
+   "name": "Synthetic DAL RB2",
+   "team": "DAL",
+   "opponent": "SF",
+   "positions": [
+    "RB"
+   ],
+   "salary": 5145,
+   "game_id": "DAL@SF",
+   "props": {
+    "rush_att": 15.88,
+    "rush_yd_per_att": 5.233,
+    "rush_td_per_att": 0.0264,
+    "targets": 3.736,
+    "catch_rate": 0.779,
+    "rec_yd_per_rec": 7.814,
+    "rec_td_per_target": 0.0275,
+    "implied_total": 24.7
+   }
+  },
+  {
+   "id": "nfl-rb-31",
+   "name": "Synthetic DAL RB3",
+   "team": "DAL",
+   "opponent": "SF",
+   "positions": [
+    "RB"
+   ],
+   "salary": 5218,
+   "game_id": "DAL@SF",
+   "props": {
+    "rush_att": 8.544,
+    "rush_yd_per_att": 4.499,
+    "rush_td_per_att": 0.0304,
+    "targets": 4.045,
+    "catch_rate": 0.633,
+    "rec_yd_per_rec": 6.099,
+    "rec_td_per_target": 0.0296,
+    "implied_total": 24.7
+   }
+  },
+  {
+   "id": "nfl-wr-32",
+   "name": "Synthetic DAL WR1",
+   "team": "DAL",
+   "opponent": "SF",
+   "positions": [
+    "WR"
+   ],
+   "salary": 4736,
+   "game_id": "DAL@SF",
+   "props": {
+    "targets": 7.68,
+    "catch_rate": 0.741,
+    "rec_yd_per_rec": 12.68,
+    "rec_td_per_target": 0.0721,
+    "implied_total": 24.7
+   }
+  },
+  {
+   "id": "nfl-wr-33",
+   "name": "Synthetic DAL WR2",
+   "team": "DAL",
+   "opponent": "SF",
+   "positions": [
+    "WR"
+   ],
+   "salary": 6301,
+   "game_id": "DAL@SF",
+   "props": {
+    "targets": 7.337,
+    "catch_rate": 0.62,
+    "rec_yd_per_rec": 12.594,
+    "rec_td_per_target": 0.0775,
+    "implied_total": 24.7
+   }
+  },
+  {
+   "id": "nfl-wr-34",
+   "name": "Synthetic DAL WR3",
+   "team": "DAL",
+   "opponent": "SF",
+   "positions": [
+    "WR"
+   ],
+   "salary": 4566,
+   "game_id": "DAL@SF",
+   "props": {
+    "targets": 6.647,
+    "catch_rate": 0.748,
+    "rec_yd_per_rec": 11.609,
+    "rec_td_per_target": 0.0322,
+    "implied_total": 24.7
+   }
+  },
+  {
+   "id": "nfl-wr-35",
+   "name": "Synthetic DAL WR4",
+   "team": "DAL",
+   "opponent": "SF",
+   "positions": [
+    "WR"
+   ],
+   "salary": 3979,
+   "game_id": "DAL@SF",
+   "props": {
+    "targets": 9.519,
+    "catch_rate": 0.655,
+    "rec_yd_per_rec": 13.075,
+    "rec_td_per_target": 0.0781,
+    "implied_total": 24.7
+   }
+  },
+  {
+   "id": "nfl-wr-36",
+   "name": "Synthetic DAL WR5",
+   "team": "DAL",
+   "opponent": "SF",
+   "positions": [
+    "WR"
+   ],
+   "salary": 7757,
+   "game_id": "DAL@SF",
+   "props": {
+    "targets": 5.826,
+    "catch_rate": 0.797,
+    "rec_yd_per_rec": 10.569,
+    "rec_td_per_target": 0.0729,
+    "implied_total": 24.7
+   }
+  },
+  {
+   "id": "nfl-te-37",
+   "name": "Synthetic DAL TE1",
+   "team": "DAL",
+   "opponent": "SF",
+   "positions": [
+    "TE"
+   ],
+   "salary": 5438,
+   "game_id": "DAL@SF",
+   "props": {
+    "targets": 6.917,
+    "catch_rate": 0.631,
+    "rec_yd_per_rec": 9.549,
+    "rec_td_per_target": 0.0667,
+    "implied_total": 24.7
+   }
+  },
+  {
+   "id": "nfl-te-38",
+   "name": "Synthetic DAL TE2",
+   "team": "DAL",
+   "opponent": "SF",
+   "positions": [
+    "TE"
+   ],
+   "salary": 6832,
+   "game_id": "DAL@SF",
+   "props": {
+    "targets": 8.039,
+    "catch_rate": 0.677,
+    "rec_yd_per_rec": 11.91,
+    "rec_td_per_target": 0.0531,
+    "implied_total": 24.7
+   }
+  },
+  {
+   "id": "nfl-dst-39",
+   "name": "Synthetic DAL DST1",
+   "team": "DAL",
+   "opponent": "SF",
+   "positions": [
+    "DST"
+   ],
+   "salary": 2366,
+   "game_id": "DAL@SF",
+   "props": {
+    "dst_sacks": 2.463,
+    "dst_interceptions": 1.766,
+    "dst_fumble_recoveries": 1.287,
+    "dst_return_td": 0.219,
+    "dst_safeties": 0.009,
+    "dst_blocked_kicks": 0.108,
+    "dst_pa": 23.8,
+    "implied_total": 24.7
+   }
+  },
+  {
+   "id": "nfl-qb-40",
+   "name": "Synthetic SF QB1",
+   "team": "SF",
+   "opponent": "DAL",
+   "positions": [
+    "QB"
+   ],
+   "salary": 6464,
+   "game_id": "DAL@SF",
+   "props": {
+    "pass_att": 26.632,
+    "comp_rate": 0.654,
+    "pass_yd_per_att": 7.581,
+    "pass_td_per_att": 0.0408,
+    "int_per_att": 0.0212,
+    "rush_att": 4.975,
+    "rush_yd_per_att": 5.211,
+    "rush_td_per_att": 0.0484,
+    "implied_total": 23.2
+   }
+  },
+  {
+   "id": "nfl-qb-41",
+   "name": "Synthetic SF QB2",
+   "team": "SF",
+   "opponent": "DAL",
+   "positions": [
+    "QB"
+   ],
+   "salary": 7470,
+   "game_id": "DAL@SF",
+   "props": {
+    "pass_att": 31.506,
+    "comp_rate": 0.685,
+    "pass_yd_per_att": 6.917,
+    "pass_td_per_att": 0.0374,
+    "int_per_att": 0.0124,
+    "rush_att": 4.709,
+    "rush_yd_per_att": 5.068,
+    "rush_td_per_att": 0.0456,
+    "implied_total": 23.2
+   }
+  },
+  {
+   "id": "nfl-rb-42",
+   "name": "Synthetic SF RB1",
+   "team": "SF",
+   "opponent": "DAL",
+   "positions": [
+    "RB"
+   ],
+   "salary": 6972,
+   "game_id": "DAL@SF",
+   "props": {
+    "rush_att": 15.58,
+    "rush_yd_per_att": 3.677,
+    "rush_td_per_att": 0.0218,
+    "targets": 6.335,
+    "catch_rate": 0.744,
+    "rec_yd_per_rec": 7.684,
+    "rec_td_per_target": 0.0295,
+    "implied_total": 23.2
+   }
+  },
+  {
+   "id": "nfl-rb-43",
+   "name": "Synthetic SF RB2",
+   "team": "SF",
+   "opponent": "DAL",
+   "positions": [
+    "RB"
+   ],
+   "salary": 7193,
+   "game_id": "DAL@SF",
+   "props": {
+    "rush_att": 11.213,
+    "rush_yd_per_att": 3.778,
+    "rush_td_per_att": 0.0212,
+    "targets": 3.361,
+    "catch_rate": 0.751,
+    "rec_yd_per_rec": 7.313,
+    "rec_td_per_target": 0.0229,
+    "implied_total": 23.2
+   }
+  },
+  {
+   "id": "nfl-rb-44",
+   "name": "Synthetic SF RB3",
+   "team": "SF",
+   "opponent": "DAL",
+   "positions": [
+    "RB"
+   ],
+   "salary": 6006,
+   "game_id": "DAL@SF",
+   "props": {
+    "rush_att": 8.346,
+    "rush_yd_per_att": 4.983,
+    "rush_td_per_att": 0.0317,
+    "targets": 2.89,
+    "catch_rate": 0.654,
+    "rec_yd_per_rec": 9.402,
+    "rec_td_per_target": 0.039,
+    "implied_total": 23.2
+   }
+  },
+  {
+   "id": "nfl-wr-45",
+   "name": "Synthetic SF WR1",
+   "team": "SF",
+   "opponent": "DAL",
+   "positions": [
+    "WR"
+   ],
+   "salary": 5358,
+   "game_id": "DAL@SF",
+   "props": {
+    "targets": 9.24,
+    "catch_rate": 0.731,
+    "rec_yd_per_rec": 12.61,
+    "rec_td_per_target": 0.0787,
+    "implied_total": 23.2
+   }
+  },
+  {
+   "id": "nfl-wr-46",
+   "name": "Synthetic SF WR2",
+   "team": "SF",
+   "opponent": "DAL",
+   "positions": [
+    "WR"
+   ],
+   "salary": 7474,
+   "game_id": "DAL@SF",
+   "props": {
+    "targets": 6.895,
+    "catch_rate": 0.662,
+    "rec_yd_per_rec": 11.64,
+    "rec_td_per_target": 0.0449,
+    "implied_total": 23.2
+   }
+  },
+  {
+   "id": "nfl-wr-47",
+   "name": "Synthetic SF WR3",
+   "team": "SF",
+   "opponent": "DAL",
+   "positions": [
+    "WR"
+   ],
+   "salary": 6062,
+   "game_id": "DAL@SF",
+   "props": {
+    "targets": 3.89,
+    "catch_rate": 0.611,
+    "rec_yd_per_rec": 9.354,
+    "rec_td_per_target": 0.0666,
+    "implied_total": 23.2
+   }
+  },
+  {
+   "id": "nfl-wr-48",
+   "name": "Synthetic SF WR4",
+   "team": "SF",
+   "opponent": "DAL",
+   "positions": [
+    "WR"
+   ],
+   "salary": 4627,
+   "game_id": "DAL@SF",
+   "props": {
+    "targets": 7.143,
+    "catch_rate": 0.63,
+    "rec_yd_per_rec": 13.085,
+    "rec_td_per_target": 0.0301,
+    "implied_total": 23.2
+   }
+  },
+  {
+   "id": "nfl-wr-49",
+   "name": "Synthetic SF WR5",
+   "team": "SF",
+   "opponent": "DAL",
+   "positions": [
+    "WR"
+   ],
+   "salary": 7212,
+   "game_id": "DAL@SF",
+   "props": {
+    "targets": 5.659,
+    "catch_rate": 0.741,
+    "rec_yd_per_rec": 10.004,
+    "rec_td_per_target": 0.0472,
+    "implied_total": 23.2
+   }
+  },
+  {
+   "id": "nfl-te-50",
+   "name": "Synthetic SF TE1",
+   "team": "SF",
+   "opponent": "DAL",
+   "positions": [
+    "TE"
+   ],
+   "salary": 6399,
+   "game_id": "DAL@SF",
+   "props": {
+    "targets": 7.308,
+    "catch_rate": 0.628,
+    "rec_yd_per_rec": 11.829,
+    "rec_td_per_target": 0.0517,
+    "implied_total": 23.2
+   }
+  },
+  {
+   "id": "nfl-te-51",
+   "name": "Synthetic SF TE2",
+   "team": "SF",
+   "opponent": "DAL",
+   "positions": [
+    "TE"
+   ],
+   "salary": 6604,
+   "game_id": "DAL@SF",
+   "props": {
+    "targets": 6.642,
+    "catch_rate": 0.631,
+    "rec_yd_per_rec": 13.555,
+    "rec_td_per_target": 0.0544,
+    "implied_total": 23.2
+   }
+  },
+  {
+   "id": "nfl-dst-52",
+   "name": "Synthetic SF DST1",
+   "team": "SF",
+   "opponent": "DAL",
+   "positions": [
+    "DST"
+   ],
+   "salary": 3598,
+   "game_id": "DAL@SF",
+   "props": {
+    "dst_sacks": 2.522,
+    "dst_interceptions": 1.844,
+    "dst_fumble_recoveries": 1.055,
+    "dst_return_td": 0.065,
+    "dst_safeties": 0.155,
+    "dst_blocked_kicks": 0.073,
+    "dst_pa": 25.3,
+    "implied_total": 23.2
+   }
+  },
+  {
+   "id": "nfl-qb-53",
+   "name": "Synthetic DET QB1",
+   "team": "DET",
+   "opponent": "PHI",
+   "positions": [
+    "QB"
+   ],
+   "salary": 6472,
+   "game_id": "DET@PHI",
+   "props": {
+    "pass_att": 29.817,
+    "comp_rate": 0.628,
+    "pass_yd_per_att": 7.876,
+    "pass_td_per_att": 0.0437,
+    "int_per_att": 0.012,
+    "rush_att": 3.309,
+    "rush_yd_per_att": 3.817,
+    "rush_td_per_att": 0.024,
+    "implied_total": 24.8
+   }
+  },
+  {
+   "id": "nfl-qb-54",
+   "name": "Synthetic DET QB2",
+   "team": "DET",
+   "opponent": "PHI",
+   "positions": [
+    "QB"
+   ],
+   "salary": 7417,
+   "game_id": "DET@PHI",
+   "props": {
+    "pass_att": 24.741,
+    "comp_rate": 0.653,
+    "pass_yd_per_att": 6.787,
+    "pass_td_per_att": 0.0442,
+    "int_per_att": 0.0271,
+    "rush_att": 4.018,
+    "rush_yd_per_att": 4.516,
+    "rush_td_per_att": 0.0428,
+    "implied_total": 24.8
+   }
+  },
+  {
+   "id": "nfl-rb-55",
+   "name": "Synthetic DET RB1",
+   "team": "DET",
+   "opponent": "PHI",
+   "positions": [
+    "RB"
+   ],
+   "salary": 4933,
+   "game_id": "DET@PHI",
+   "props": {
+    "rush_att": 14.097,
+    "rush_yd_per_att": 4.44,
+    "rush_td_per_att": 0.0284,
+    "targets": 6.159,
+    "catch_rate": 0.786,
+    "rec_yd_per_rec": 8.802,
+    "rec_td_per_target": 0.0291,
+    "implied_total": 24.8
+   }
+  },
+  {
+   "id": "nfl-rb-56",
+   "name": "Synthetic DET RB2",
+   "team": "DET",
+   "opponent": "PHI",
+   "positions": [
+    "RB"
+   ],
+   "salary": 5284,
+   "game_id": "DET@PHI",
+   "props": {
+    "rush_att": 14.972,
+    "rush_yd_per_att": 3.522,
+    "rush_td_per_att": 0.038,
+    "targets": 4.292,
+    "catch_rate": 0.777,
+    "rec_yd_per_rec": 6.589,
+    "rec_td_per_target": 0.0428,
+    "implied_total": 24.8
+   }
+  },
+  {
+   "id": "nfl-rb-57",
+   "name": "Synthetic DET RB3",
+   "team": "DET",
+   "opponent": "PHI",
+   "positions": [
+    "RB"
+   ],
+   "salary": 4506,
+   "game_id": "DET@PHI",
+   "props": {
+    "rush_att": 8.056,
+    "rush_yd_per_att": 5.092,
+    "rush_td_per_att": 0.0243,
+    "targets": 2.767,
+    "catch_rate": 0.799,
+    "rec_yd_per_rec": 7.539,
+    "rec_td_per_target": 0.0408,
+    "implied_total": 24.8
+   }
+  },
+  {
+   "id": "nfl-wr-58",
+   "name": "Synthetic DET WR1",
+   "team": "DET",
+   "opponent": "PHI",
+   "positions": [
+    "WR"
+   ],
+   "salary": 5359,
+   "game_id": "DET@PHI",
+   "props": {
+    "targets": 6.776,
+    "catch_rate": 0.797,
+    "rec_yd_per_rec": 11.822,
+    "rec_td_per_target": 0.0522,
+    "implied_total": 24.8
+   }
+  },
+  {
+   "id": "nfl-wr-59",
+   "name": "Synthetic DET WR2",
+   "team": "DET",
+   "opponent": "PHI",
+   "positions": [
+    "WR"
+   ],
+   "salary": 6154,
+   "game_id": "DET@PHI",
+   "props": {
+    "targets": 7.453,
+    "catch_rate": 0.614,
+    "rec_yd_per_rec": 11.515,
+    "rec_td_per_target": 0.064,
+    "implied_total": 24.8
+   }
+  },
+  {
+   "id": "nfl-wr-60",
+   "name": "Synthetic DET WR3",
+   "team": "DET",
+   "opponent": "PHI",
+   "positions": [
+    "WR"
+   ],
+   "salary": 5887,
+   "game_id": "DET@PHI",
+   "props": {
+    "targets": 6.003,
+    "catch_rate": 0.768,
+    "rec_yd_per_rec": 9.018,
+    "rec_td_per_target": 0.0579,
+    "implied_total": 24.8
+   }
+  },
+  {
+   "id": "nfl-wr-61",
+   "name": "Synthetic DET WR4",
+   "team": "DET",
+   "opponent": "PHI",
+   "positions": [
+    "WR"
+   ],
+   "salary": 7150,
+   "game_id": "DET@PHI",
+   "props": {
+    "targets": 7.221,
+    "catch_rate": 0.747,
+    "rec_yd_per_rec": 11.181,
+    "rec_td_per_target": 0.0692,
+    "implied_total": 24.8
+   }
+  },
+  {
+   "id": "nfl-wr-62",
+   "name": "Synthetic DET WR5",
+   "team": "DET",
+   "opponent": "PHI",
+   "positions": [
+    "WR"
+   ],
+   "salary": 5481,
+   "game_id": "DET@PHI",
+   "props": {
+    "targets": 5.816,
+    "catch_rate": 0.605,
+    "rec_yd_per_rec": 11.036,
+    "rec_td_per_target": 0.0734,
+    "implied_total": 24.8
+   }
+  },
+  {
+   "id": "nfl-te-63",
+   "name": "Synthetic DET TE1",
+   "team": "DET",
+   "opponent": "PHI",
+   "positions": [
+    "TE"
+   ],
+   "salary": 7086,
+   "game_id": "DET@PHI",
+   "props": {
+    "targets": 8.432,
+    "catch_rate": 0.745,
+    "rec_yd_per_rec": 13.064,
+    "rec_td_per_target": 0.0777,
+    "implied_total": 24.8
+   }
+  },
+  {
+   "id": "nfl-te-64",
+   "name": "Synthetic DET TE2",
+   "team": "DET",
+   "opponent": "PHI",
+   "positions": [
+    "TE"
+   ],
+   "salary": 7452,
+   "game_id": "DET@PHI",
+   "props": {
+    "targets": 5.403,
+    "catch_rate": 0.654,
+    "rec_yd_per_rec": 10.111,
+    "rec_td_per_target": 0.0398,
+    "implied_total": 24.8
+   }
+  },
+  {
+   "id": "nfl-dst-65",
+   "name": "Synthetic DET DST1",
+   "team": "DET",
+   "opponent": "PHI",
+   "positions": [
+    "DST"
+   ],
+   "salary": 2553,
+   "game_id": "DET@PHI",
+   "props": {
+    "dst_sacks": 2.704,
+    "dst_interceptions": 1.402,
+    "dst_fumble_recoveries": 0.378,
+    "dst_return_td": 0.172,
+    "dst_safeties": 0.126,
+    "dst_blocked_kicks": 0.253,
+    "dst_pa": 28.2,
+    "implied_total": 24.8
+   }
+  },
+  {
+   "id": "nfl-qb-66",
+   "name": "Synthetic PHI QB1",
+   "team": "PHI",
+   "opponent": "DET",
+   "positions": [
+    "QB"
+   ],
+   "salary": 6086,
+   "game_id": "DET@PHI",
+   "props": {
+    "pass_att": 33.188,
+    "comp_rate": 0.655,
+    "pass_yd_per_att": 6.914,
+    "pass_td_per_att": 0.034,
+    "int_per_att": 0.0193,
+    "rush_att": 6.152,
+    "rush_yd_per_att": 5.373,
+    "rush_td_per_att": 0.0344,
+    "implied_total": 26.8
+   }
+  },
+  {
+   "id": "nfl-qb-67",
+   "name": "Synthetic PHI QB2",
+   "team": "PHI",
+   "opponent": "DET",
+   "positions": [
+    "QB"
+   ],
+   "salary": 6386,
+   "game_id": "DET@PHI",
+   "props": {
+    "pass_att": 30.622,
+    "comp_rate": 0.662,
+    "pass_yd_per_att": 7.861,
+    "pass_td_per_att": 0.0332,
+    "int_per_att": 0.0156,
+    "rush_att": 6.405,
+    "rush_yd_per_att": 4.59,
+    "rush_td_per_att": 0.0472,
+    "implied_total": 26.8
+   }
+  },
+  {
+   "id": "nfl-rb-68",
+   "name": "Synthetic PHI RB1",
+   "team": "PHI",
+   "opponent": "DET",
+   "positions": [
+    "RB"
+   ],
+   "salary": 7230,
+   "game_id": "DET@PHI",
+   "props": {
+    "rush_att": 18.19,
+    "rush_yd_per_att": 5.289,
+    "rush_td_per_att": 0.0388,
+    "targets": 5.505,
+    "catch_rate": 0.728,
+    "rec_yd_per_rec": 6.218,
+    "rec_td_per_target": 0.0216,
+    "implied_total": 26.8
+   }
+  },
+  {
+   "id": "nfl-rb-69",
+   "name": "Synthetic PHI RB2",
+   "team": "PHI",
+   "opponent": "DET",
+   "positions": [
+    "RB"
+   ],
+   "salary": 5016,
+   "game_id": "DET@PHI",
+   "props": {
+    "rush_att": 12.929,
+    "rush_yd_per_att": 5.265,
+    "rush_td_per_att": 0.0345,
+    "targets": 2.874,
+    "catch_rate": 0.731,
+    "rec_yd_per_rec": 7.673,
+    "rec_td_per_target": 0.0285,
+    "implied_total": 26.8
+   }
+  },
+  {
+   "id": "nfl-rb-70",
+   "name": "Synthetic PHI RB3",
+   "team": "PHI",
+   "opponent": "DET",
+   "positions": [
+    "RB"
+   ],
+   "salary": 6828,
+   "game_id": "DET@PHI",
+   "props": {
+    "rush_att": 12.54,
+    "rush_yd_per_att": 4.833,
+    "rush_td_per_att": 0.0506,
+    "targets": 3.088,
+    "catch_rate": 0.713,
+    "rec_yd_per_rec": 8.481,
+    "rec_td_per_target": 0.0479,
+    "implied_total": 26.8
+   }
+  },
+  {
+   "id": "nfl-wr-71",
+   "name": "Synthetic PHI WR1",
+   "team": "PHI",
+   "opponent": "DET",
+   "positions": [
+    "WR"
+   ],
+   "salary": 4875,
+   "game_id": "DET@PHI",
+   "props": {
+    "targets": 9.319,
+    "catch_rate": 0.737,
+    "rec_yd_per_rec": 9.279,
+    "rec_td_per_target": 0.071,
+    "implied_total": 26.8
+   }
+  },
+  {
+   "id": "nfl-wr-72",
+   "name": "Synthetic PHI WR2",
+   "team": "PHI",
+   "opponent": "DET",
+   "positions": [
+    "WR"
+   ],
+   "salary": 7109,
+   "game_id": "DET@PHI",
+   "props": {
+    "targets": 7.393,
+    "catch_rate": 0.695,
+    "rec_yd_per_rec": 13.419,
+    "rec_td_per_target": 0.0417,
+    "implied_total": 26.8
+   }
+  },
+  {
+   "id": "nfl-wr-73",
+   "name": "Synthetic PHI WR3",
+   "team": "PHI",
+   "opponent": "DET",
+   "positions": [
+    "WR"
+   ],
+   "salary": 4714,
+   "game_id": "DET@PHI",
+   "props": {
+    "targets": 3.941,
+    "catch_rate": 0.753,
+    "rec_yd_per_rec": 9.672,
+    "rec_td_per_target": 0.0323,
+    "implied_total": 26.8
+   }
+  },
+  {
+   "id": "nfl-wr-74",
+   "name": "Synthetic PHI WR4",
+   "team": "PHI",
+   "opponent": "DET",
+   "positions": [
+    "WR"
+   ],
+   "salary": 6732,
+   "game_id": "DET@PHI",
+   "props": {
+    "targets": 8.991,
+    "catch_rate": 0.781,
+    "rec_yd_per_rec": 11.382,
+    "rec_td_per_target": 0.0472,
+    "implied_total": 26.8
+   }
+  },
+  {
+   "id": "nfl-wr-75",
+   "name": "Synthetic PHI WR5",
+   "team": "PHI",
+   "opponent": "DET",
+   "positions": [
+    "WR"
+   ],
+   "salary": 6423,
+   "game_id": "DET@PHI",
+   "props": {
+    "targets": 7.691,
+    "catch_rate": 0.604,
+    "rec_yd_per_rec": 10.566,
+    "rec_td_per_target": 0.0321,
+    "implied_total": 26.8
+   }
+  },
+  {
+   "id": "nfl-te-76",
+   "name": "Synthetic PHI TE1",
+   "team": "PHI",
+   "opponent": "DET",
+   "positions": [
+    "TE"
+   ],
+   "salary": 4243,
+   "game_id": "DET@PHI",
+   "props": {
+    "targets": 7.861,
+    "catch_rate": 0.615,
+    "rec_yd_per_rec": 9.779,
+    "rec_td_per_target": 0.0454,
+    "implied_total": 26.8
+   }
+  },
+  {
+   "id": "nfl-te-77",
+   "name": "Synthetic PHI TE2",
+   "team": "PHI",
+   "opponent": "DET",
+   "positions": [
+    "TE"
+   ],
+   "salary": 7987,
+   "game_id": "DET@PHI",
+   "props": {
+    "targets": 5.796,
+    "catch_rate": 0.732,
+    "rec_yd_per_rec": 12.483,
+    "rec_td_per_target": 0.039,
+    "implied_total": 26.8
+   }
+  },
+  {
+   "id": "nfl-dst-78",
+   "name": "Synthetic PHI DST1",
+   "team": "PHI",
+   "opponent": "DET",
+   "positions": [
+    "DST"
+   ],
+   "salary": 3656,
+   "game_id": "DET@PHI",
+   "props": {
+    "dst_sacks": 2.72,
+    "dst_interceptions": 1.761,
+    "dst_fumble_recoveries": 1.395,
+    "dst_return_td": 0.145,
+    "dst_safeties": 0.142,
+    "dst_blocked_kicks": 0.085,
+    "dst_pa": 26.2,
+    "implied_total": 26.8
+   }
+  }
+ ]
+}

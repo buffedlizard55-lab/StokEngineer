@@ -19,24 +19,58 @@ ROOT = Path(__file__).resolve().parent.parent
 UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/124.0 Safari/537.36")
 
+#: URLs deliberately not fetched, with the reason a human reviewer needs.
+EXEMPT = {
+    "http://gdx.mlb.com/components/copyright.txt":
+        "MLB publishes this notice over plain http; it is cited as text, not fetched.",
+    "https://127.0.0.1:9/definitely-not-listening":
+        "test fixture: proves the fetcher reports an unreachable host instead of inventing data.",
+}
+
 # Status codes that mean "site is alive but declined our bot" — NOT dead links.
 BOT_BLOCKED = {403, 405, 406, 418, 423, 429, 503}
 # Codes that definitively mean the URL is wrong/removed.
 DEAD = {404, 410}
 
 
+def _walk(obj, path: str, urls: dict) -> None:
+    """Collect every `url` value, wherever it sits in the tree."""
+    if isinstance(obj, dict):
+        for key, value in obj.items():
+            where = f"{path}.{key}" if path else key
+            if key == "url" and isinstance(value, str) and value.startswith("http"):
+                urls.setdefault(value, where)
+            else:
+                _walk(value, where, urls)
+    elif isinstance(obj, list):
+        for index, value in enumerate(obj):
+            _walk(value, f"{path}[{index}]", urls)
+
+
 def collect_urls() -> dict:
-    """Gather every external URL from sources_verified.json + docs/index.html."""
+    """Gather every external URL from the data files, the site and the markdown docs.
+
+    Schema note: ``sources_verified.json`` is a list under ``sources`` (not a dict of
+    categories), and claims carry their own source ids - so this walks the tree instead of
+    assuming a shape. An earlier version silently collected *zero* urls when the schema
+    changed, which is worse than failing: it reported success on an empty list.
+    """
     urls = {}
-    # 1. sources_verified.json
-    sj = ROOT / "src" / "data" / "sources_verified.json"
-    data = json.loads(sj.read_text())
-    for category, items in data.items():
-        if not isinstance(items, list):
-            continue
-        for it in items:
-            if isinstance(it, dict) and "url" in it:
-                urls[it["url"]] = f"sources_verified.json::{category}"
+    for name in ("sources_verified.json", "claims.json"):
+        path = ROOT / "src" / "data" / name
+        if path.exists():
+            _walk(json.loads(path.read_text()), name, urls)
+    for pattern in ("docs/*.html", "docs/assets/*.js", "*.md", "src/**/*.py", "tests/*.py"):
+        for path in ROOT.glob(pattern):
+            try:
+                text = path.read_text()
+            except (UnicodeDecodeError, OSError):
+                continue
+            for match in re.finditer(r"https?://[^\s\"'<>)\]]+", text):
+                url = match.group(0).rstrip(".,;:")
+                if url.startswith("https://github.com/buffedlizard55-lab/StokEngineer"):
+                    continue  # self-reference
+                urls.setdefault(url, str(path.relative_to(ROOT)))
     # 2. docs/index.html
     html = (ROOT / "docs" / "index.html").read_text()
     for m in re.finditer(r'href="(https?://[^"]+)"', html):
@@ -73,18 +107,30 @@ def check(url: str) -> str:
 
 def main() -> int:
     urls = collect_urls()
-    print(f"Checking {len(urls)} unique URLs...\n")
+    pending = {u: w for u, w in urls.items() if u not in EXEMPT}
+    print(f"Checking {len(pending)} unique URLs ({len(urls) - len(pending)} exempt)...\n")
     dead = []
     out = {}
-    for i, (url, where) in enumerate(sorted(urls.items()), 1):
+    for i, (url, where) in enumerate(sorted(pending.items()), 1):
         status = check(url)
         out[url] = {"status": status, "where": where}
         marker = "  " if status.startswith(("OK",)) else "! "
-        print(f"{i:3d}/{len(urls)} [{status:20s}] {url}")
+        print(f"{i:3d}/{len(pending)} [{status:20s}] {url}")
         if status.startswith("DEAD") or status.startswith("UNREACHABLE"):
             dead.append((url, status, where))
+    if EXEMPT:
+        print("\nExempt (documented, not fetched):")
+        for url, reason in sorted(EXEMPT.items()):
+            print(f"  - {url}\n      {reason}")
     print("\n==== SUMMARY ====")
-    print(f"total={len(urls)} ok={len(out)-len(dead)} problematic={len(dead)}")
+    print(f"total={len(urls)} checked={len(pending)} ok={len(out)-len(dead)} problematic={len(dead)}")
+    report = Path(__file__).resolve().parent.parent / "reports" / "links.json"
+    report.parent.mkdir(parents=True, exist_ok=True)
+    report.write_text(
+        json.dumps({"checked": out, "exempt": EXEMPT, "dead": [u for u, _, _ in dead]}, indent=1)
+        + "\n"
+    )
+    print(f"wrote {report.relative_to(report.parent.parent)}")
     if dead:
         print("\nProblematic (needs manual review / fix):")
         for u, s, w in dead:

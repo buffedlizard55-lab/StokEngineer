@@ -1,0 +1,250 @@
+{
+  "_provenance": {
+    "command": "python -m src.stokengineer.cli optimize --sample sample_nfl_dk.json",
+    "engine_version": "0.4.0",
+    "generated_at_utc": "2026-09-23T00:13:24+00:00",
+    "notes": [
+      "lineups built from a noisy view of the projections (sd 25%)",
+      "Sample slates in src/data/samples are synthetic and labelled as such. They exist so the engine can be tested deterministically offline; they are not real salaries or real projections, and no report generated from them describes real players."
+    ],
+    "payload_sha256": "1918953a37f6ac3f6236d4f761e4b10ef49be412b6dea03204423825e73d574f",
+    "platform": "Linux-6.1.158+-x86_64-with-glibc2.36",
+    "python": "3.11.2",
+    "sources": [
+      {
+        "id": "dk_lobby_api",
+        "publisher": "DraftKings",
+        "title": "DraftKings public lobby JSON",
+        "url": "https://www.draftkings.com/lobby/getcontests?sport=NFL"
+      },
+      {
+        "id": "dk_rules_mlb",
+        "publisher": "DraftKings",
+        "title": "DraftKings Rules & Scoring - MLB Classic",
+        "url": "https://www.draftkings.com/help/rules/2"
+      },
+      {
+        "id": "dk_rules_nba",
+        "publisher": "DraftKings",
+        "title": "DraftKings Rules & Scoring - NBA Classic",
+        "url": "https://www.draftkings.com/help/rules/4"
+      },
+      {
+        "id": "dk_rules_nfl",
+        "publisher": "DraftKings",
+        "title": "DraftKings Rules & Scoring - NFL Classic",
+        "url": "https://www.draftkings.com/help/rules/1"
+      },
+      {
+        "id": "dk_rules_nhl",
+        "publisher": "DraftKings",
+        "title": "DraftKings Rules & Scoring - NHL Classic",
+        "url": "https://www.draftkings.com/help/rules/3"
+      },
+      {
+        "id": "espn_scoreboard",
+        "publisher": "ESPN",
+        "title": "ESPN public scoreboard/odds feed",
+        "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard"
+      },
+      {
+        "id": "nflverse_data",
+        "publisher": "nflverse (open source project, not the NFL)",
+        "title": "nflverse-data (open NFL data releases)",
+        "url": "https://github.com/nflverse/nflverse-data"
+      },
+      {
+        "id": "nflverse_injuries_asset",
+        "publisher": "nflverse",
+        "title": "nflverse injuries release asset",
+        "url": "https://github.com/nflverse/nflverse-data/releases/download/injuries/injuries_2025.csv"
+      },
+      {
+        "id": "nflverse_player_stats_asset",
+        "publisher": "nflverse",
+        "title": "nflverse player_stats release asset",
+        "url": "https://github.com/nflverse/nflverse-data/releases/download/player_stats/player_stats_2025.csv"
+      },
+      {
+        "id": "nflverse_schedules_asset",
+        "publisher": "nflverse",
+        "title": "nflverse schedules/games.csv release asset",
+        "url": "https://github.com/nflverse/nflverse-data/releases/download/schedules/games.csv"
+      },
+      {
+        "id": "os_projection_system",
+        "publisher": "OddsShopper / Stokastic",
+        "title": "Stokastic projection system (OddsShopper, Stokastic's betting arm)",
+        "url": "https://www.oddsshopper.com/articles/betting-101/stokastic-projection-system"
+      },
+      {
+        "id": "sk_home",
+        "publisher": "Stokastic",
+        "title": "Stokastic home page",
+        "url": "https://www.stokastic.com/"
+      },
+      {
+        "id": "sk_nfl_review",
+        "publisher": "Stokastic",
+        "title": "Stokastic Review 2026 (written by Stokastic)",
+        "url": "https://www.stokastic.com/articles/nfl-dfs/stokastic-review"
+      },
+      {
+        "id": "sk_pricing",
+        "publisher": "Stokastic",
+        "title": "Stokastic pricing and product FAQ",
+        "url": "https://www.stokastic.com/pricing"
+      },
+      {
+        "id": "splashplay_review",
+        "publisher": "Splash Play Podcast",
+        "title": "Third-party Stokastic review (2026)",
+        "url": "https://splashplaypodcast.com/stokastic-review/"
+      }
+    ]
+  },
+  "payload": {
+    "lineups": [
+      {
+        "method": "milp",
+        "notes": [],
+        "objective_value": 206.417,
+        "player_ids": [
+          "nfl-qb-2",
+          "nfl-wr-6",
+          "nfl-rb-16",
+          "nfl-rb-17",
+          "nfl-wr-35",
+          "nfl-dst-39",
+          "nfl-rb-42",
+          "nfl-wr-45",
+          "nfl-te-63"
+        ],
+        "projected": 206.417,
+        "salary": 49266.0,
+        "slots": {
+          "DST": "nfl-dst-39",
+          "FLEX": "nfl-rb-16",
+          "QB": "nfl-qb-2",
+          "RB1": "nfl-rb-42",
+          "RB2": "nfl-rb-17",
+          "TE": "nfl-te-63",
+          "WR1": "nfl-wr-45",
+          "WR2": "nfl-wr-35",
+          "WR3": "nfl-wr-6"
+        }
+      },
+      {
+        "method": "milp",
+        "notes": [],
+        "objective_value": 203.7,
+        "player_ids": [
+          "nfl-qb-2",
+          "nfl-wr-6",
+          "nfl-rb-17",
+          "nfl-rb-29",
+          "nfl-wr-35",
+          "nfl-rb-42",
+          "nfl-wr-45",
+          "nfl-dst-52",
+          "nfl-te-63"
+        ],
+        "projected": 203.7,
+        "salary": 48602.0,
+        "slots": {
+          "DST": "nfl-dst-52",
+          "FLEX": "nfl-rb-17",
+          "QB": "nfl-qb-2",
+          "RB1": "nfl-rb-42",
+          "RB2": "nfl-rb-29",
+          "TE": "nfl-te-63",
+          "WR1": "nfl-wr-45",
+          "WR2": "nfl-wr-35",
+          "WR3": "nfl-wr-6"
+        }
+      }
+    ],
+    "projections": {
+      "nfl-dst-13": 5.1784264945055885,
+      "nfl-dst-26": 3.835785268306668,
+      "nfl-dst-39": 7.643612879127286,
+      "nfl-dst-52": 8.067539747635607,
+      "nfl-dst-65": 3.8039236594054584,
+      "nfl-dst-78": 5.4362389266487625,
+      "nfl-qb-1": 25.37283543356172,
+      "nfl-qb-14": 22.086262838398394,
+      "nfl-qb-15": 14.471383271382885,
+      "nfl-qb-2": 26.95063399093677,
+      "nfl-qb-27": 16.595388779247223,
+      "nfl-qb-28": 13.864013838672747,
+      "nfl-qb-40": 16.103264943201776,
+      "nfl-qb-41": 12.944597834576888,
+      "nfl-qb-53": 15.498907406123076,
+      "nfl-qb-54": 13.53535993119776,
+      "nfl-qb-66": 21.20783425927861,
+      "nfl-qb-67": 9.818687829202275,
+      "nfl-rb-16": 24.659315343149196,
+      "nfl-rb-17": 24.723450809212498,
+      "nfl-rb-18": 16.08514324410254,
+      "nfl-rb-29": 21.51865552726425,
+      "nfl-rb-3": 6.885386389831677,
+      "nfl-rb-30": 19.632399499739492,
+      "nfl-rb-31": 11.039766113510963,
+      "nfl-rb-4": 17.29024172020588,
+      "nfl-rb-42": 26.537182272551696,
+      "nfl-rb-43": 9.629397316821798,
+      "nfl-rb-44": 10.07434818192803,
+      "nfl-rb-5": 11.318193338866289,
+      "nfl-rb-55": 12.215333386990347,
+      "nfl-rb-56": 9.717500724070746,
+      "nfl-rb-57": 8.833693150197536,
+      "nfl-rb-68": 24.740509664755518,
+      "nfl-rb-69": 14.62447990285049,
+      "nfl-rb-70": 13.171057532810323,
+      "nfl-te-11": 18.69344708317472,
+      "nfl-te-12": 8.935417745130145,
+      "nfl-te-24": 17.34752308356384,
+      "nfl-te-25": 6.372741502277308,
+      "nfl-te-37": 10.591029758781778,
+      "nfl-te-38": 12.244330102843515,
+      "nfl-te-50": 8.110929491075959,
+      "nfl-te-51": 14.65615211602274,
+      "nfl-te-63": 22.4114434493131,
+      "nfl-te-64": 11.772579460403422,
+      "nfl-te-76": 13.747063457145323,
+      "nfl-te-77": 8.125547951428041,
+      "nfl-wr-10": 11.320913523470903,
+      "nfl-wr-19": 18.209837966554115,
+      "nfl-wr-20": 13.332872198958949,
+      "nfl-wr-21": 6.557170870351572,
+      "nfl-wr-22": 12.174709428026244,
+      "nfl-wr-23": 12.729811402920854,
+      "nfl-wr-32": 17.993200139278756,
+      "nfl-wr-33": 17.520305298529145,
+      "nfl-wr-34": 12.04456850593521,
+      "nfl-wr-35": 25.15112280599715,
+      "nfl-wr-36": 10.585900999062517,
+      "nfl-wr-45": 22.979354250464926,
+      "nfl-wr-46": 17.36988177429197,
+      "nfl-wr-47": 6.1819204377847825,
+      "nfl-wr-48": 13.960948951696375,
+      "nfl-wr-49": 10.158800453082149,
+      "nfl-wr-58": 17.150143538551085,
+      "nfl-wr-59": 11.732307189966583,
+      "nfl-wr-6": 25.360790883763958,
+      "nfl-wr-60": 12.049953115054922,
+      "nfl-wr-61": 18.692422078463746,
+      "nfl-wr-62": 10.556370115716678,
+      "nfl-wr-7": 19.671176362063225,
+      "nfl-wr-71": 13.045157820457478,
+      "nfl-wr-72": 14.506906017688161,
+      "nfl-wr-73": 6.037120814593866,
+      "nfl-wr-74": 18.70321916334788,
+      "nfl-wr-75": 8.69977715115385,
+      "nfl-wr-8": 11.667076605130301,
+      "nfl-wr-9": 16.015778508328662
+    },
+    "site": "draftkings",
+    "sport": "nfl"
+  }
+}

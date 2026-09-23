@@ -3,622 +3,220 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>StokEngineer — Open Reverse Engineering of Stokastic.com Projection System</title>
-<meta name="description" content="Verified, open-source reverse engineering of Stokastic.com DFS projection system, ownership model, and simulation engine. No hallucinations, all sources cited.">
-<link rel="stylesheet" href="./assets/style.css">
+<title>StokEngineer — open, source-verified DFS projections, ownership, optimisation and simulation</title>
+<meta name="description" content="An open DFS engine for DraftKings and FanDuel built only on free, publicly available data. Every number carries its source; every assumption is labelled.">
+<link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
-<header>
-  <div class="nav">
-    <h1><span>Stok</span>Engineer <span class="badge">v0.1.0 • verified • open-source</span></h1>
-    <div style="display:flex; gap:10px; align-items:center">
-      <input id="searchBox" placeholder="Search sections..." style="background:#0f172a; border:1px solid #1f2937; color:#e6eaf0; padding:8px 10px; border-radius:8px; width:220px">
-      <a class="btn" href="https://github.com/buffedlizard55-lab/StokEngineer" target="_blank">GitHub</a>
-    </div>
+<header class="hero">
+  <div class="wrap">
+    <h1>StokEngineer</h1>
+    <p class="muted">
+      An open DFS projection, ownership, lineup-optimisation and contest-simulation engine for
+      DraftKings and FanDuel — built only on <strong>free, publicly available data</strong>: no
+      subscriptions, no trials, no paid feeds, no manual data entry. Every number on this page
+      comes from the source registry, the claim ledger, or a real run of the engine, and every
+      assumption is labelled as an assumption.
+    </p>
+    <p class="small muted" id="meta"></p>
+    <div id="status-cards"></div>
   </div>
 </header>
 
-<div class="container">
-  <div class="hero">
-    <div>
-      <h2>Reverse Engineering <span style="color:#6ee7b7">Stokastic.com</span> — Verified, Line-by-Line, No Hallucinations</h2>
-      <p>Stokastic.com (formerly Awesemo.com) is a DFS platform founded by Alex "Awesemo" Baker, the former #1 ranked DFS player per RotoGrinders. It provides projections, ownership, boom/bust, top stacks, and contest-level simulations for DraftKings & FanDuel across NFL, NBA, MLB, NHL, PGA, NASCAR, UFC/MMA, CFB.</p>
-      <p>This project documents <b>exactly</b> what Stokastic builds behind its paywall, how to reproduce its data quality using only public, official, trusted sources, and provides an open-source Python engine to do so.</p>
-      <div class="kpi">
-        <div><b>8+ Sports</b><span>DraftKings / FanDuel</span></div>
-        <div><b>6 Tools</b><span>DataHub, Contest Sim, etc.</span></div>
-        <div><b>All claims cited</b><span>Official + verified links</span></div>
-        <div><b>0 Hallucinations</b><span>Inference flagged</span></div>
-      </div>
-      <div style="margin-top:18px; display:flex; gap:10px; flex-wrap:wrap">
-        <a class="btn btn-primary" href="#overview">Start Verification</a>
-        <a class="btn" href="#projection-system">Projection System</a>
-        <a class="btn" href="#open-source">Open Engine</a>
-      </div>
-      <div class="flag" style="margin-top:18px">
-        <b>⚠️ Irregularity Flag:</b> Stokastic's exact projection formulas are proprietary and paywalled. This site reconstructs the methodology from public statements, articles, and industry-standard DFS modeling. We explicitly flag where inference is required. No proprietary code was copied.
-      </div>
+<nav class="toc"><ul>
+  <li><a href="#what">What it does</a></li>
+  <li><a href="#quickstart">Quick start</a></li>
+  <li><a href="#rules">Verified rules</a></li>
+  <li><a href="#engine">Engine output</a></li>
+  <li><a href="#how">How it works</a></li>
+  <li><a href="#sources">Sources</a></li>
+  <li><a href="#claims">Claims ledger</a></li>
+  <li><a href="#limitations">Limitations</a></li>
+  <li><a href="#next">Next steps</a></li>
+</ul></nav>
+
+<main class="wrap" id="app">
+
+  <h2 id="what">What it does</h2>
+  <div class="grid c2">
+    <div class="card">
+      <h3>Projections</h3>
+      <p class="small">Per-sport stat-line simulation scored with the site's own published table:
+      projection, ceiling (75th percentile), floor (25th), standard deviation, boom %, bust %,
+      value, points per dollar. Basketball is minutes-first, as the published methodology says;
+      baseball is a multinomial over plate appearances with team run environment; football is
+      volume × efficiency with shared team latents.</p>
     </div>
     <div class="card">
-      <h4 style="margin-top:0">Quick Facts — Verified</h4>
-      <table>
-        <tr><th>Domain</th><td>stokastic.com <a href="https://www.stokastic.com/" target="_blank" class="verified">verified</a></td></tr>
-        <tr><th>Former Name</th><td>Awesemo.com (now Stokastic.com) <a href="https://www.stokastic.com/articles/dfs-strategy/how-to-win-dfs-tournaments" target="_blank" class="verified">verified</a></td></tr>
-        <tr><th>Founder</th><td>Alex Baker (Awesemo), attended Washington University in St. Louis; former professional poker player <a href="https://rotogrinders.com/articles/interview-with-alex-awesemo-baker-1964792" target="_blank" class="verified">verified</a></td></tr>
-        <tr><th>Ranking</th><td>#1 Overall RotoGrinders 2017-2021 <a href="https://x.com/AwesemoDFS" target="_blank" class="verified">verified</a> <a href="https://rotogrinders.com/articles/interview-with-alex-awesemo-baker-1964792" target="_blank" class="verified">RG interview</a></td></tr>
-        <tr><th>Pricing</th><td>All-Access list: Core $329.95, Max $449.95, MVP $849.95/mo; with Stokastic-avatar discount $229.95/$349.95/$599.95 <a href="https://www.stokastic.com/pricing" target="_blank" class="verified">verified</a> <span class="irregular">dynamic</span></td></tr>
-        <tr><th>Key Product</th><td>Contest Simulations — simulates slate 10k+ times vs field <a href="https://www.stokastic.com/articles/nfl-dfs/stokastic-review" target="_blank" class="verified">verified</a></td></tr>
-        <tr><th>Betting Arm</th><td>OddsShopper — Stokastic projections for player props <a href="https://www.oddsshopper.com/articles/betting-101/stokastic-projection-system" target="_blank" class="verified">verified</a></td></tr>
-      </table>
-      <h4>What This Site Contains</h4>
-      <ul class="source-list">
-        <li>Line-by-line reverse engineering with <span class="verified">verified</span> badge per claim</li>
-        <li>Full data source catalog with official links</li>
-        <li>Open-source Python reimplementation (src/)</li>
-        <li>Strategies: leverage, correlation, late swap</li>
-        <li>Limitations & next session work</li>
+      <h3>Ownership</h3>
+      <p class="small">A simulated field, priced from documented features and simulated to
+      projected ownership. Labelled a <em>simulated-field estimate</em> everywhere, never
+      "observed ownership" — the engine cannot see real ownership unless you import your own
+      contest results CSV.</p>
+    </div>
+    <div class="card">
+      <h3>Lineup optimisation</h3>
+      <p class="small">Exact mixed-integer solve (pulp/CBC) with explicit slot-assignment
+      variables, plus a branch-and-bound fallback when no solver is installed. Locks, exposures,
+      multi-entry uniqueness, stacks and bring-backs, MLB hitter caps and the multi-game rule are
+      all enforced, and <em>every</em> line is re-checked with the same validator the rules module
+      exposes.</p>
+    </div>
+    <div class="card">
+      <h3>Contest simulation</h3>
+      <p class="small">A simulated field, real ranks (<code>1 + number of strictly better
+      scores</code>), a payout table and per-lineup ROI, cash rate, top-1% rate and percentiles.
+      Payouts are meant to come from your own contest via CSV; the built-in curves are labelled
+      illustrative and the engine prints a warning when ROI looks arithmetically implausible.</p>
+    </div>
+  </div>
+
+  <h2 id="quickstart">Quick start</h2>
+  <pre><code>pip install -r requirements.txt
+python -m src.stokengineer.cli doctor          # dependencies, hosts actually reachable, registry
+python -m src.stokengineer.cli project  --sample sample_nfl_dk.json
+python -m src.stokengineer.cli ownership --sample sample_nfl_dk.json
+python -m src.stokengineer.cli optimize --sample sample_nfl_dk.json --n-lineups 3 --projection-error 0.25
+python -m src.stokengineer.cli simulate --sample sample_nfl_dk.json --field-size 600
+python -m src.stokengineer.cli forward-test --sport mlb --date 2026-09-21   # free official MLB data
+python -m src.stokengineer.cli verify</code></pre>
+  <div class="notice">
+    <strong>Synthetic inputs.</strong> The bundled slates are deterministic fixtures, not real
+    salaries or real players. They are labelled <code>"synthetic": true</code> in the file, in every
+    report built from them, and on this page. Real slates come from your own JSON/CSV export or from
+    the free ingestion helpers.
+  </div>
+
+  <h2 id="rules">Verified rules</h2>
+  <p class="small muted">Transcribed from the sites' own pages, with the source recorded next to
+  each table. FanDuel publishes scoring officially but not classic roster shapes or salary caps —
+  those stay flagged third-party until a human confirms them.</p>
+  <div class="scroll"><table>
+    <thead><tr><th>site / sport</th><th>roster</th><th>bonuses</th><th>source</th></tr></thead>
+    <tbody id="rules-body"></tbody>
+  </table></div>
+
+  <h2 id="engine">Engine output (synthetic samples)</h2>
+  <p class="small muted">Produced by <code>tools/build_site_data.py</code> during the last build of
+  this page, with the same code that ships in the repository. Every number below is a simulation
+  output, not a claim about a real player.</p>
+  <div id="demo" class="grid"></div>
+
+  <h2 id="how">How it works</h2>
+  <ol class="tight">
+    <li><strong>Rules first.</strong> One module owns legality and scoring; the optimiser and the
+      validator cannot disagree, because validation runs on every optimiser result and raises if it
+      ever does.</li>
+    <li><strong>Stat lines, not point guesses.</strong> Each sport is simulated at the level of the
+      stats the sites actually pay for, then scored with the official table — so a rule change is a
+      data change, not a code change.</li>
+    <li><strong>Correlation is structural, then calibrated.</strong> Teammates share team latents,
+      and a documented calibration reshapes variance into a shared team component plus a private one
+      while preserving each player's mean and standard deviation exactly — ceilings and boom rates
+      stay put, the joint structure is what changes.</li>
+    <li><strong>Honest testing.</strong> The MLB forward test rebuilds every input from season
+      totals <em>minus the game being predicted</em>, because a season average that already contains
+      the game is a leak, not a test.</li>
+    <li><strong>Provenance everywhere.</strong> Reports carry the command, timestamp, environment
+      and a SHA-256 of the payload; source ids are validated on load and unknown ids raise.</li>
+  </ol>
+
+  <h2 id="sources">Sources</h2>
+  <p class="small muted">Filter by publisher, sport or verification status. <code>fetched_live</code>
+  means the page was read in the session that recorded it; <code>carried_over</code> means it was
+  recorded earlier and <strong>has not been re-verified</strong> — no claim cites a carried-over
+  source as proof.</p>
+  <input type="search" id="sources-filter" placeholder="filter sources (e.g. draftkings, mlb, stokastic)" aria-label="filter sources">
+  <div class="scroll"><table>
+    <thead><tr><th>id</th><th>source</th><th>what it provides</th><th>terms</th><th>verification</th></tr></thead>
+    <tbody id="sources-body"></tbody>
+  </table></div>
+  <h3>URLs downgraded rather than reused</h3>
+  <ul class="small" id="downgraded"></ul>
+
+  <h2 id="claims">Claims ledger</h2>
+  <p class="small muted">Every factual assertion the engine depends on, with the quote it came from
+  and a link a human can open. <code>flagged</code> marks something true as quoted but with a caveat
+  (an undocumented endpoint, a number borrowed from another sport);
+  <code>not_verified</code> marks what cannot honestly be known from outside a paid product.</p>
+  <input type="search" id="claims-filter" placeholder="filter claims (e.g. boom, ownership, fanDuel)" aria-label="filter claims">
+  <div class="scroll"><table>
+    <thead><tr><th>id</th><th>claim and quote</th><th>source</th></tr></thead>
+    <tbody id="claims-body"></tbody>
+  </table></div>
+
+  <h2 id="limitations">Limitations</h2>
+  <p class="small muted">Rendered from <code>LIMITATIONS.md</code> at build time, so the site cannot
+  quietly drop the uncomfortable parts. The headline one: <strong>simulated ROI is not a
+  forecast</strong> — it is dominated by the assumed field behaviour, and the engine says so next to
+  every ROI it prints.</p>
+  <div id="limitations"></div>
+
+  <h2 id="next">Next steps</h2>
+  <div class="grid c2">
+    <div class="card">
+      <h3>Make ROI trustworthy</h3>
+      <ul class="tight small">
+        <li>Calibrate the field model (feature weights, sharp share, player exposure) against real
+          free ownership exports from a user's own contest results.</li>
+        <li>Model entrants as a distribution over strategies instead of one noisy view per entry.</li>
+        <li>Import real payout tables through <code>PayoutStructure.from_csv</code> and publish the
+          ROI distribution, not a single number.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Make the models measurable</h3>
+      <ul class="tight small">
+        <li>Run the MLB forward test on a schedule in CI and commit the reports (the harness exists,
+          this sandbox has no egress to MLB).</li>
+        <li>Wire <code>SimulationConfig.from_history</code> to nflverse / nba_api / MLB StatsAPI logs
+          so dispersions are fitted instead of assumed.</li>
+        <li>Backtest ownership against real contest ownership; report calibration curves.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Broaden coverage</h3>
+      <ul class="tight small">
+        <li>NFL and NBA forward tests and sample slates (MLB is done first because its official data
+          is the easiest to verify).</li>
+        <li>NHL projection model (rules are already transcribed and enforced).</li>
+        <li>Late swap and showdown/single-game formats.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Keep the sources honest</h3>
+      <ul class="tight small">
+        <li>Re-fetch the 11 carried-over sources and either verify or drop them.</li>
+        <li>Re-run <code>tools/check_links.py</code> in CI on every change.</li>
+        <li>Replace third-party FanDuel roster values the moment FanDuel publishes them.</li>
       </ul>
     </div>
   </div>
 
-  <div class="layout">
-    <nav class="toc">
-      <b style="font-size:12px; color:#9aa4b2; letter-spacing:1px">TABLE OF CONTENTS</b>
-      <a href="#overview">1. Overview</a>
-      <a href="#site-structure">2. Site Structure</a>
-      <a href="#data-sources">3. Data Sources (Verified)</a>
-      <a href="#scoring-rules">4. Scoring Rules</a>
-      <a href="#projection-system">5. Projection System</a>
-      <a href="#ownership-model">6. Ownership Model</a>
-      <a href="#simulation-engine">7. Simulation Engine</a>
-      <a href="#tools-parity">8. Tools Parity</a>
-      <a href="#strategies">9. Strategies</a>
-      <a href="#open-source">10. Open-Source Engine</a>
-      <a href="#verification">11. Verification Log</a>
-      <a href="#limitations">12. Limitations & Next Work</a>
-      <a href="#bibliography">13. Bibliography</a>
-    </nav>
+  <h2 id="reports">Committed example reports</h2>
+  <p class="small muted">Written by the CLI with a provenance envelope (command, timestamp,
+  environment, payload SHA-256, source ids).</p>
+  <ul class="small" id="reports"></ul>
 
-    <main>
-      <section id="overview" class="card">
-        <h3>1. Overview — What Stokastic.com Actually Does</h3>
-        <p><b>Claim:</b> Stokastic is not an optimizer; it is a contest simulator. Verified by its own review page: <i>“Instead of solving for one lineup, the Sims simulate the contest itself tens of thousands of times: every player's outcome varies sim to sim, correlations hold (a QB's big game drags his receivers up with him), and projected ownership determines how many entrants you are sharing each player with.”</i> <a href="https://www.stokastic.com/articles/nfl-dfs/stokastic-review" target="_blank" class="verified">source</a></p>
-        <div class="grid grid-2">
-          <div>
-            <h4>Core Value Proposition (Verified)</h4>
-            <ul>
-              <li><b>Most accurate projections + ownership</b> — stated on homepage: “Accurate fantasy projections, industry-leading ownership” <a href="https://www.stokastic.com/" target="_blank" class="verified">verified</a></li>
-              <li><b>Contest simulation, not just projection</b> — “nowhere else do users have the ability to perform simulations on the contest level” <a href="https://www.stokastic.com/pricing" target="_blank" class="verified">verified</a></li>
-              <li><b>Large community of winning pros</b> — “largest community of winning DFS players” + Hall of Fame testimonials <a href="https://www.stokastic.com/" target="_blank" class="verified">verified</a></li>
-              <li><b>Cross-sport coverage</b>: NFL, NBA, MLB, NHL, PGA, NASCAR, MMA/UFC, CFB <a href="https://www.stokastic.com/pricing" target="_blank" class="verified">verified</a></li>
-            </ul>
-          </div>
-          <div>
-            <h4>Business Model (Verified)</h4>
-            <table>
-              <tr><th>Tier</th><th>What you get</th><th>List / with Stokastic avatar</th></tr>
-              <tr><td>Core All-Access</td><td>Projections, ownership, live ownership, single-lineup sim, pre-contest sim up to 2K lineups</td><td>$329.95 / $229.95/mo <a href="https://www.stokastic.com/pricing" target="_blank" class="verified">verified</a></td></tr>
-              <tr><td>Max All-Access</td><td>+ Advanced Sim Data (Boom/Bust, Top Stacks, Player Stats), Post-Contest, Late Swap, up to 25K lineups classic / 50K showdown</td><td>$449.95 / $349.95/mo <a href="https://www.stokastic.com/pricing" target="_blank" class="verified">verified</a></td></tr>
-              <tr><td>MVP All-Access</td><td>Most powerful package, highest caps</td><td>$849.95 / $599.95/mo <a href="https://www.stokastic.com/pricing" target="_blank" class="verified">verified</a></td></tr>
-            </table>
-            <p class="flag"><b>Irregularity (corrected this pass):</b> The pricing page defaults to the "Stokastic avatar" toggle, which discounts ~$100/mo. Earlier builds listed avatar prices as if they were list. The real no-avatar list prices are Core $329.95 / Max $449.95 / MVP $849.95. Pricing is dynamic (coupon-gated, seasonal increases) — re-check https://www.stokastic.com/pricing live before relying on these numbers.</p>
-          </div>
-        </div>
-      </section>
+</main>
 
-      <section id="site-structure" class="card">
-        <h3>2. Site Structure — Public vs Paywalled</h3>
-        <table>
-          <tr><th>Area</th><th>URL Pattern</th><th>Access</th><th>Purpose</th><th>Verified Source</th></tr>
-          <tr><td>Marketing Home</td><td>/</td><td>Public</td><td>Hero, testimonials, tool list</td><td><a href="https://www.stokastic.com/" target="_blank">stokastic.com</a> <span class="verified">verified</span></td></tr>
-          <tr><td>Pricing</td><td>/pricing</td><td>Public</td><td>Tier comparison</td><td><a href="https://www.stokastic.com/pricing" target="_blank">/pricing</a> <span class="verified">verified</span></td></tr>
-          <tr><td>Articles / Strategy</td><td>/articles/*</td><td>Public</td><td>How to use projections, ownership, boom/bust</td><td><a href="https://www.stokastic.com/articles/dfs-strategy/how-to-win-dfs-tournaments" target="_blank">how-to-win</a> <span class="verified">verified</span></td></tr>
-          <tr><td>DataHub</td><td>tools.stokastic.com/datahub/*</td><td>Paywalled</td><td>Projections table: Name/Team/Salary/Position/Order/FP/Value/Own%, Sims columns</td><td><a href="https://www.stokastic.com/articles/mlb-dfs/how-to-use-mlb-dfs-data" target="_blank">DataHub guide</a> <span class="verified">verified</span></td></tr>
-          <tr><td>Contest Generator</td><td>tools.stokastic.com/contestgenerator/*</td><td>Paywalled</td><td>Generate optimized entries automatically</td><td><a href="https://www.stokastic.com/" target="_blank">homepage list</a> <span class="verified">verified</span></td></tr>
-          <tr><td>Pre-Contest Simulator</td><td>/precontestsimulator/*</td><td>Paywalled</td><td>Sim ROI vs field before lock</td><td><a href="https://www.stokastic.com/" target="_blank">homepage</a> <span class="verified">verified</span></td></tr>
-          <tr><td>Late Swap</td><td>/lateswap/*</td><td>Paywalled</td><td>Re-optimize after early games lock</td><td><a href="https://www.stokastic.com/articles/dfs-strategy/stokastic-mlb-dfs-subscription-workflow" target="_blank">workflow</a> <span class="verified">verified</span></td></tr>
-          <tr><td>Single Lineup Sim</td><td>/singlelineupsim/*</td><td>Core+</td><td>Grade one lineup: Sim ROI, cash rate, win%</td><td><a href="https://www.stokastic.com/articles/dfs-strategy/stokastic-mlb-dfs-subscription-workflow" target="_blank">workflow</a> <span class="verified">verified</span></td></tr>
-          <tr><td>Post-Contest Sim</td><td>/postcontestsimulator/*</td><td>Max+</td><td>Audit results</td><td><a href="https://www.stokastic.com/articles/dfs-strategy/stokastic-mlb-dfs-subscription-workflow" target="_blank">workflow</a> <span class="verified">verified</span></td></tr>
-          <tr><td>OddsShopper Props</td><td>oddsshopper.com/props</td><td>Free + Paid Add-on</td><td>Player props powered by Stokastic bottom-up projections</td><td><a href="https://www.oddsshopper.com/props" target="_blank">OddsShopper Props</a> <span class="verified">verified</span></td></tr>
-        </table>
-      </section>
-
-      <section id="data-sources" class="card">
-        <h3>3. Data Sources Required to Replicate Data Quality — Verified</h3>
-        <p>To achieve Stokastic-level data quality, you need 5 layers. Each source below is official or industry-standard and linked for manual review.</p>
-
-        <h4>Layer 1 — Official League Stats (Ground Truth)</h4>
-        <table>
-          <tr><th>League</th><th>Official Source</th><th>What It Provides</th><th>Link</th></tr>
-          <tr><td>NBA</td><td>NBA.com Stats API + nba_api wrapper</td><td>Minutes, usage%, FPPM, pace, DVP, box scores, play-by-play, tracking</td><td><a href="https://www.nba.com/stats" target="_blank">nba.com/stats</a> <span class="verified">verified</span>, <a href="https://github.com/swar/nba_api" target="_blank">nba_api</a> <span class="verified">verified</span>, <a href="https://nbaanalytic.com/articles/free-basketball-data-sources-ranked.html" target="_blank">ranked sources</a> <span class="verified">verified</span></td></tr>
-          <tr><td>NFL</td><td>NFL.com + nflverse + ESPN API</td><td>Snap counts, target share, air yards, red zone usage, OL metrics</td><td><a href="https://www.nfl.com/" target="_blank">nfl.com</a> <span class="verified">verified</span>, <a href="https://github.com/nflverse" target="_blank">nflverse</a> <span class="verified">verified</span></td></tr>
-          <tr><td>MLB</td><td>MLB Statcast via Baseball Savant</td><td>Exit velo, launch angle, xwOBA, barrel%, pitcher spin, sprint speed</td><td><a href="https://www.mlb.com/glossary/statcast" target="_blank">mlb.com/glossary/statcast</a> <span class="verified">verified</span>, <a href="https://baseballsavant.mlb.com/" target="_blank">Baseball Savant</a> <span class="verified">verified</span></td></tr>
-          <tr><td>NHL</td><td>NHL Stats API</td><td>TOI, line combos, power-play time, shot attempts (Corsi)</td><td><a href="https://www.nhl.com/" target="_blank">nhl.com</a> <span class="verified">verified</span></td></tr>
-        </table>
-
-        <h4>Layer 2 — Vegas / Sportsbook Data (Market Implied Truth)</h4>
-        <p>Stokastic explicitly says MLB chalk follows Vegas: “Implied run totals, ballparks and pitching matchups drive the crowd” <a href="https://www.stokastic.com/articles/mlb-dfs/mlb-dfs-ownership-projections" target="_blank" class="verified">verified</a>. Stokastic's DST guide gives the implied-team-total math worked by hand <a href="https://www.stokastic.com/articles/nfl-dfs/nfl-dfs-defense-strategy" target="_blank" class="verified">verified</a>.</p>
-        <table>
-          <tr><th>Data Point</th><th>Formula</th><th>Why It Matters</th><th>Source</th></tr>
-          <tr><td>Implied Team Total</td><td>(Total/2) ± (Spread/2) — favorite adds half the spread, underdog subtracts it</td><td>Drives usage, ownership & DST targets</td><td><a href="https://www.stokastic.com/articles/nfl-dfs/nfl-dfs-defense-strategy" target="_blank">Stokastic DST guide (worked example)</a> <span class="verified">verified</span></td></tr>
-          <tr><td>Player Props (O/U)</td><td>Direct from books, vs a projection</td><td>Window into expected volume; fair price vs market</td><td><a href="https://www.oddsshopper.com/articles/betting-101/stokastic-projection-system" target="_blank">OddsShopper</a> <span class="verified">verified</span></td></tr>
-          <tr><td>Line Shopping</td><td>Best price across books vs your fair number</td><td>Shop the best line; only bet when the price beats your projection</td><td><a href="https://www.oddsshopper.com/articles/betting-101/betting-nfl-props-with-projections" target="_blank">props 4-step process</a> <span class="verified">verified</span></td></tr>
-          <tr><td>No-Vig Fair Odds</td><td>De-vig consensus (“remove the vig”)</td><td>True probability, used for EV</td><td><a href="https://www.oddsshopper.com/articles/betting-101/betting-nfl-props-with-projections" target="_blank">OddsShopper devig guide</a> <span class="verified">verified</span></td></tr>
-        </table>
-
-        <h4>Layer 3 — Contextual / Situational Data</h4>
-        <ul>
-          <li><b>Injury & Lineup News</b>: Biggest edge in NBA per Stokastic: “A ruled-out starter spikes a teammate's minutes and usage” <a href="https://www.stokastic.com/articles/nba-dfs/how-to-use-nba-dfs-projections" target="_blank" class="verified">verified</a>. Sources: official team injury reports (NBA.com, NFL.com), beat reporters.</li>
-          <li><b>Depth Charts & Rotations</b>: RotoGrinders minutes guide shows method: 240 total minutes per team, allocate by injury, role change, blowout risk <a href="https://rotogrinders.com/fantasy/lessons/accurately-predicting-minutes-nba-dfs" target="_blank" class="verified">verified</a></li>
-          <li><b>Weather (MLB, NFL)</b>: Wind, temp, ballpark factors — Baseball Savant park factors <a href="https://baseballsavant.mlb.com/" target="_blank" class="verified">verified</a></li>
-          <li><b>Pace & Totals</b>: NBA pace-adjusted matchup data <a href="https://draftedge.com/nba/nba-daily-projections/" target="_blank" class="verified">verified</a></li>
-        </ul>
-
-        <h4>Layer 4 — DFS-Specific Data</h4>
-        <table>
-          <tr><th>Field</th><th>Definition (Verified)</th><th>Source</th></tr>
-          <tr><td>Salary</td><td>Fixed cap $50K DK, $60K FD — determined by performance, not real salary</td><td><a href="https://www.draftkings.com/help/rules/1" target="_blank">DraftKings rules (NFL)</a> <span class="verified">verified</span>, <a href="https://www.fanduel.com/rules" target="_blank">FD Rules</a> <span class="verified">verified</span></td></tr>
-          <tr><td>Position Eligibility</td><td>Site-specific (e.g., DK Flex vs FD Kicker in NFL)</td><td><a href="https://fantasyfootballers.org/featured/draftkings-vs-fanduel/" target="_blank">DK vs FD scoring chart</a> <span class="verified">verified</span></td></tr>
-          <tr><td>Contest Type</td><td>Cash (50/50, Double-Up) vs GPP (tournaments) — need different builds</td><td><a href="https://www.stokastic.com/articles/dfs-strategy/how-to-win-dfs-tournaments" target="_blank">Stokastic cash vs GPP</a> <span class="verified">verified</span></td></tr>
-          <tr><td>Payout Structure</td><td>Determines ROI — Sims rank by simulated ROI against real payout</td><td><a href="https://www.stokastic.com/articles/nfl-dfs/stokastic-review" target="_blank">review</a> <span class="verified">verified</span></td></tr>
-        </table>
-
-        <h4>Layer 5 — Advanced Derived Metrics (Stokastic Proprietary but Reproducible)</h4>
-        <table>
-          <tr><th>Metric</th><th>Definition (Verified from Stokastic)</th><th>How to Reproduce Open-Source</th><th>Source</th></tr>
-          <tr><td>Value</td><td>FP − (Salary/1000 × 5) — points above break-even baseline</td><td>Simple arithmetic</td><td><a href="https://www.stokastic.com/articles/nba-dfs/how-to-use-nba-dfs-projections" target="_blank">NBA projections guide</a> <span class="verified">verified</span></td></tr>
-          <tr><td>Pts/$</td><td>FP ÷ Salary × 1000 — raw efficiency</td><td>Arithmetic</td><td><a href="https://www.stokastic.com/articles/nba-dfs/how-to-use-nba-dfs-projections" target="_blank">same</a> <span class="verified">verified</span></td></tr>
-          <tr><td>Boom/Bust</td><td>Boom% = chance to smash (top-tier for salary), Bust% = chance to tank, plus Ceiling (75th pct), Floor (25th pct), StdDev</td><td>Monte Carlo sims around median with player volatility model</td><td><a href="https://www.stokastic.com/articles/dfs-strategy/dfs-boom-bust-probability" target="_blank">Boom/Bust explainer</a> <span class="verified">verified</span>, <a href="https://www.stokastic.com/articles/nba-dfs/nba-dfs-boom-bust-strategy" target="_blank">NBA version</a> <span class="verified">verified</span></td></tr>
-          <tr><td>Ownership %</td><td>Forecast % of tournament entries rostering each player — “film study on opponents”</td><td>ML model on Vegas, salaries, recent performance, news</td><td><a href="https://www.stokastic.com/articles/mlb-dfs/mlb-dfs-ownership-projections" target="_blank">ownership guide</a> <span class="verified">verified</span></td></tr>
-          <tr><td>Top Stacks</td><td>Scores whole teams: projected stack total, stack ownership, optimal%</td><td>Correlated sims: if 1-4 hitters hit HR, others get RBI+Run</td><td><a href="https://www.stokastic.com/articles/mlb-dfs/how-to-use-mlb-dfs-data" target="_blank">Top Stacks guide</a> <span class="verified">verified</span></td></tr>
-          <tr><td>Leverage</td><td>Exposure minus ownership; low-owned high-upside</td><td>Sim ROI minus ownership factor</td><td><a href="https://www.stokastic.com/articles/dfs-strategy/how-to-win-dfs-tournaments" target="_blank">leverage explainer</a> <span class="verified">verified</span></td></tr>
-        </table>
-      </section>
-
-      <section id="scoring-rules" class="card">
-        <h3>4. Scoring Rules — Official Verified</h3>
-        <p>Projections must be built for specific site scoring. Stokastic: “FanDuel uses a flatter system with no double-double bonus, but it values steals and blocks more and penalizes turnovers harder” <a href="https://www.stokastic.com/articles/nba-dfs/how-to-use-nba-dfs-projections" target="_blank" class="verified">verified</a></p>
-        <div class="grid grid-2">
-          <div>
-            <h4>NFL — DK vs FD (Verified)</h4>
-            <table>
-              <tr><th>Stat</th><th>DraftKings</th><th>FanDuel</th><th>Source</th></tr>
-              <tr><td>Pass TD</td><td>4</td><td>4</td><td><a href="https://www.fanduel.com/rules" target="_blank">FD Rules</a> <span class="verified">verified</span></td></tr>
-              <tr><td>Reception</td><td>1 (full PPR)</td><td>0.5 (half PPR)</td><td><a href="https://www.fanduel.com/rules" target="_blank">FD Rules</a> + <a href="https://fantasyfootballers.org/featured/draftkings-vs-fanduel/" target="_blank">DK vs FD chart</a> <span class="verified">verified</span></td></tr>
-              <tr><td>300+ Pass Yds Bonus</td><td>3</td><td>3</td><td><a href="https://www.fanduel.com/rules" target="_blank">FD Rules</a> <span class="verified">verified</span></td></tr>
-              <tr><td>100+ Rush/Rec Bonus</td><td>3</td><td>3</td><td><a href="https://www.fanduel.com/rules" target="_blank">FD Rules</a> <span class="verified">verified</span></td></tr>
-              <tr><td>Fumble Lost</td><td>-1</td><td>-2</td><td><a href="https://fantasyfootballers.org/featured/draftkings-vs-fanduel/" target="_blank">DK vs FD</a> <span class="verified">verified</span></td></tr>
-            </table>
-          </div>
-          <div>
-            <h4>NBA — DK (Official DraftKings Rules)</h4>
-            <table>
-              <tr><th>Stat</th><th>DK Points</th><th>Source</th></tr>
-              <tr><td>Point</td><td>1</td><td><a href="https://www.draftkings.com/help/rules/4" target="_blank">DraftKings NBA rules</a> <span class="verified">verified</span></td></tr>
-              <tr><td>Made 3pt Shot</td><td>+0.5 bonus (total 3.5)</td><td><a href="https://www.draftkings.com/help/rules/4" target="_blank">same</a> <span class="verified">verified</span></td></tr>
-              <tr><td>Rebound</td><td>1.25</td><td><a href="https://www.draftkings.com/help/rules/4" target="_blank">same</a> <span class="verified">verified</span></td></tr>
-              <tr><td>Assist</td><td>1.5</td><td><a href="https://www.draftkings.com/help/rules/4" target="_blank">same</a> <span class="verified">verified</span></td></tr>
-              <tr><td>Steal / Block</td><td>2 / 2</td><td><a href="https://www.draftkings.com/help/rules/4" target="_blank">same</a> <span class="verified">verified</span></td></tr>
-              <tr><td>Turnover</td><td>-0.5</td><td><a href="https://www.draftkings.com/help/rules/4" target="_blank">same</a> <span class="verified">verified</span></td></tr>
-              <tr><td>Double-Double</td><td>1.5</td><td><a href="https://www.draftkings.com/help/rules/4" target="_blank">same</a> <span class="verified">verified</span></td></tr>
-              <tr><td>Triple-Double</td><td>3</td><td><a href="https://www.draftkings.com/help/rules/4" target="_blank">same</a> <span class="verified">verified</span></td></tr>
-            </table>
-            <p><b>FD NBA (official)</b>: 3-pt FG 3, 2-pt FG 2, FT 1, rebound 1.2, assist 1.5, block/steal 3, turnover -1, no double-double bonus <a href="https://www.fanduel.com/rules" target="_blank" class="verified">verified</a></p>
-          </div>
-        </div>
-        <div class="grid grid-2" style="margin-top:16px">
-          <div>
-            <h4>MLB — DK (Official DraftKings Rules)</h4>
-            <table>
-              <tr><th>Stat</th><th>DK</th><th>Source</th></tr>
-              <tr><td>Single / Double / Triple / HR</td><td>3 / 5 / 8 / 10</td><td><a href="https://www.draftkings.com/help/rules/2" target="_blank">DraftKings MLB rules</a> <span class="verified">verified</span></td></tr>
-              <tr><td>IP / SO / Win</td><td>2.25 / 2 / 4</td><td><a href="https://www.draftkings.com/help/rules/2" target="_blank">same</a> <span class="verified">verified</span></td></tr>
-              <tr><td>ER / H / BB Allowed</td><td>-2 / -0.6 / -0.6</td><td><a href="https://www.draftkings.com/help/rules/2" target="_blank">same</a> <span class="verified">verified</span></td></tr>
-              <tr><td>RBI / Run / BB / SB</td><td>2 / 2 / 2 / 5</td><td><a href="https://www.draftkings.com/help/rules/2" target="_blank">same</a> <span class="verified">verified</span></td></tr>
-            </table>
-          </div>
-          <div>
-            <h4>NHL — DK (Official DraftKings Rules)</h4>
-            <table>
-              <tr><th>Stat</th><th>DK</th><th>Source</th></tr>
-              <tr><td>Goal / Assist / SOG</td><td>8.5 / 5 / 1.5</td><td><a href="https://www.draftkings.com/help/rules/3" target="_blank">DraftKings NHL rules</a> <span class="verified">verified</span></td></tr>
-              <tr><td>Blocked Shot / 5+ Shots Bonus</td><td>1.3 / +3</td><td><a href="https://www.draftkings.com/help/rules/3" target="_blank">same</a> <span class="verified">verified</span></td></tr>
-              <tr><td>Goalie Win / Save / GA</td><td>6 / 0.7 / -3.5</td><td><a href="https://www.draftkings.com/help/rules/3" target="_blank">same</a> <span class="verified">verified</span></td></tr>
-              <tr><td>Shutout Bonus / OT Loss</td><td>+4 / +2</td><td><a href="https://www.draftkings.com/help/rules/3" target="_blank">same</a> <span class="verified">verified</span></td></tr>
-            </table>
-          </div>
-        </div>
-      </section>
-
-      <section id="projection-system" class="card">
-        <h3>5. Projection System — How Stokastic Builds It (Verified + Reproducible)</h3>
-        <p><b>Official description:</b> “The projection system is not a rating built off last season's box scores. It runs high-level simulations, many times over, before each contest to settle on the most fine-tuned number for a player.” <a href="https://www.oddsshopper.com/articles/betting-101/stokastic-projection-system" target="_blank" class="verified">verified</a></p>
-        <p><b>Also:</b> “the Sims simulate every game play by play with QB-to-pass-catcher correlation baked in… run the Contest Sims, which play every lineup in your pool against all the others… across tens of thousands of simulated contests” <a href="https://www.stokastic.com/articles/nfl-dfs/stokastic-vs-fantasylabs-nfl-dfs" target="_blank" class="verified">verified</a> (an earlier “millions of data points” marketing claim lived on a page that now redirects — flagged, re-sourced to live copy).</p>
-
-        <div class="grid grid-2">
-          <div>
-            <h4>Stokastic's Stated Inputs (Line-by-Line)</h4>
-            <ul>
-              <li><b>Minutes first</b>: “No minutes, no production” — NBA is volume-driven <a href="https://www.stokastic.com/articles/nba-dfs/how-to-use-nba-dfs-projections" target="_blank" class="verified">verified</a></li>
-              <li><b>Usage multiplier</b>: “share of team's possessions a player finishes” <a href="https://www.stokastic.com/articles/nba-dfs/how-to-use-nba-dfs-projections" target="_blank" class="verified">verified</a></li>
-              <li><b>Vegas team totals</b>: “implied run totals, ballparks and pitching matchups” <a href="https://www.stokastic.com/articles/mlb-dfs/mlb-dfs-ownership-projections" target="_blank" class="verified">verified</a></li>
-              <li><b>Advanced stats</b>: “fantasy points per minute on the floor” separates two equal-projection players (JaVale McGee-type high-rate big vs low-usage role player) <a href="https://www.stokastic.com/articles/dfs-strategy/how-to-win-draftkings-dfs" target="_blank" class="verified">verified</a></li>
-              <li><b>Bottom-up</b>: “built bottom-up from player data and simulation” for props <a href="https://www.oddsshopper.com/props" target="_blank" class="verified">verified</a></li>
-              <li><b>Blend with market</b>: Custom NBA projections let you “Slide between 100% your model and a model/market blend” <a href="https://www.oddsshopper.com/articles/betting-101/how-to-make-your-own-nba-projections" target="_blank" class="verified">verified</a></li>
-            </ul>
-            <div class="flag"><b>Flag:</b> Exact weights are proprietary. We reconstruct a plausible open-source weighting that matches industry practice: minutes 40%, usage 25%, matchup/Vegas 20%, recent form 10%, other 5%. This is inference, flagged as such.</div>
-          </div>
-          <div>
-            <h4>Open-Source Reconstruction — Formula</h4>
-            <pre><code># NBA Example — Verified logic
-# Source: RotoGrinders minutes guide + Stokastic minutes-first principle
-
-baseline_minutes = (season_avg * 0.75) + (last5_avg * 0.25)  # RG method
-# Adjust for:
-# - Injury: if starter out, backup gets +X minutes from depth chart
-# - Blowout: spread >7, minutes *= (1 - 0.015*(spread-7))
-# Source: https://rotogrinders.com/fantasy/lessons/accurately-predicting-minutes-nba-dfs
-
-fantasy_per_min = historical_FP / historical_MIN
-matchup_multiplier = pace_factor * dvp_factor * implied_total_factor
-
-projection = baseline_minutes * fantasy_per_min * matchup_multiplier
-
-# Then simulate distribution:
-# Ceiling = 75th percentile, Floor = 25th percentile
-# StdDev from historical volatility
-# Boom% = P(FP > salary/1000*5 + 10) — per Stokastic definition in NBA Boom/Bust
-# Source: https://www.stokastic.com/articles/nba-dfs/nba-dfs-boom-bust-strategy
-</code></pre>
-            <p><b>NFL:</b> Snaps → target share / carry share → air yards → Vegas total → sim correlation (QB-WR stack)</p>
-            <p><b>MLB:</b> Order → plate appearances → Statcast xwOBA / barrel% → ballpark → pitcher matchup → stack correlation</p>
-            <p><b>Props pipeline (Stokastic Props):</b> Origination projections → editable minutes/rates → blend slider → X-Win/X-ROI vs book hold <a href="https://www.oddsshopper.com/articles/betting-101/stokastic-projection-system" target="_blank" class="verified">verified</a></p>
-          </div>
-        </div>
-
-        <h4>Data Quality Requirements — What “Same Data Quality” Means</h4>
-        <table>
-          <tr><th>Requirement</th><th>Stokastic Standard (Verified)</th><th>Open-Source Equivalent</th><th>Verified Source</th></tr>
-          <tr><td>Freshness</td><td>“Live ownership, refreshed repeatedly up until lineups lock”</td><td>Poll official APIs every 1-5 min + beat writer feed</td><td><a href="https://www.stokastic.com/articles/dfs-strategy/dfs-boom-bust-probability" target="_blank">Boom/Bust page</a> <span class="verified">verified</span></td></tr>
-          <tr><td>Accuracy</td><td>“Most accurate projections and ownership” claim on homepage</td><td>Backtest vs actuals, use no-vig consensus</td><td><a href="https://www.stokastic.com/" target="_blank">homepage</a> <span class="verified">verified</span></td></tr>
-          <tr><td>Correlation</td><td>“Correlations hold (QB big game drags receivers)”</td><td>Joint distribution sims, not independent</td><td><a href="https://www.stokastic.com/articles/nfl-dfs/stokastic-review" target="_blank">review</a> <span class="verified">verified</span></td></tr>
-          <tr><td>Distribution not point</td><td>Projection is middle of range, plus ceiling/floor/Boom/Bust</td><td>Monte Carlo, not single number</td><td><a href="https://www.stokastic.com/articles/dfs-strategy/dfs-boom-bust-probability" target="_blank">Boom/Bust</a> <span class="verified">verified</span></td></tr>
-        </table>
-      </section>
-
-      <section id="ownership-model" class="card">
-        <h3>6. Ownership Model — How Field Behavior is Predicted</h3>
-        <p><b>Verified definition:</b> “Projected ownership is a forecast of the percentage of tournament entries that will roster each player, which means it is really a forecast of your opponents' behavior.” <a href="https://www.stokastic.com/articles/mlb-dfs/mlb-dfs-ownership-projections" target="_blank" class="verified">verified</a></p>
-        <p><b>Verified driver:</b> “MLB ownership is not random. The crowd is looking at same handful: Vegas over/unders, each team's implied run total, ballpark, pitching matchups.” <a href="https://www.stokastic.com/articles/mlb-dfs/mlb-dfs-ownership-projections" target="_blank" class="verified">verified</a></p>
-        <div class="grid grid-2">
-          <div>
-            <h4>Stokastic Method (Publicly Stated)</h4>
-            <ul>
-              <li>Algorithm developed over years by Alex Baker <a href="https://www.stokastic.com/articles/dfs-strategy/how-to-win-dfs-tournaments" target="_blank" class="verified">verified</a></li>
-              <li>Ownership projections sortable so heaviest concentrations float to top <a href="https://www.stokastic.com/articles/mlb-dfs/mlb-dfs-contrarian-strategy" target="_blank" class="verified">verified</a></li>
-              <li>Used for leverage: “rostering a player at less than his ‘fair’ ownership when field is over-piled” <a href="https://www.stokastic.com/articles/dfs-strategy/how-to-win-dfs-tournaments" target="_blank" class="verified">verified</a></li>
-            </ul>
-            <h4>Open-Source Rebuild</h4>
-            <pre><code>features = [
-  salary, 
-  projected_points,
-  value,               # FP - salary/1000*5
-  implied_team_total,  # from Vegas
-  recency_avg,         # last 5 games
-  news_boost,          # injury bump flag
-  position_scarcity
-]
-# Model: Gradient Boosting or XGBoost trained on historical
-# contest results (DK/FD public contest ownership where available)
-# + proxy: if unavailable, train on % of lineups where player is optimal
-# Then calibrate: sum(ownership) ~ entries * avg_players_per_entry
-</code></pre>
-          </div>
-          <div>
-            <h4>Leverage Math (Verified)</h4>
-            <p>From Stokastic: “Leverage is just rostering a player at less than his ‘fair’ ownership when the field is over-piled somewhere else” <a href="https://www.stokastic.com/articles/dfs-strategy/how-to-win-dfs-tournaments" target="_blank" class="verified">verified</a></p>
-            <table>
-              <tr><th>Metric</th><th>Formula</th><th>Use</th></tr>
-              <tr><td>Leverage</td><td>Exposure% − Projected Ownership%</td><td>Positive = contrarian</td></tr>
-              <tr><td>Optimal%</td><td>% of sims where player in optimal lineup</td><td>If Optimal > Own% = leverage</td></tr>
-              <tr><td>Field ROI Impact</td><td>Sim ROI with vs without player</td><td>From Pre-Contest Sim</td></tr>
-            </table>
-            <p><b>Benchmark:</b> “Stay Within 10-15 Points Of The Max Projection. A contrarian lineup that gives up 20-25 points of slate's ceiling has no realistic path” <a href="https://www.stokastic.com/articles/mlb-dfs/mlb-dfs-ownership-projections" target="_blank" class="verified">verified</a></p>
-          </div>
-        </div>
-      </section>
-
-      <section id="simulation-engine" class="card">
-        <h3>7. Simulation Engine — Contest-Level (The Core Differentiator)</h3>
-        <p><b>Verified:</b> “Game level simulation tools exist on the market currently to help users with projecting player performance. However, nowhere else do users have the ability to perform simulations on the contest level, helping you find the edge in real tournaments.” <a href="https://www.stokastic.com/pricing" target="_blank" class="verified">verified</a></p>
-        <p><b>Verified workflow:</b> “A DFS Sim is an advanced simulation tool that tests lineups in realistic tournament models… Import lineups through our contest generator, or by uploading a .csv file containing lineups and pit them against each other in a lifelike slate simulation.” <a href="https://www.stokastic.com/pricing" target="_blank" class="verified">verified</a> — plus “play every lineup in your pool against all the others, at your chosen field size and percent-to-first, across tens of thousands of simulated contests… The output is a simulated ROI for every lineup” <a href="https://www.stokastic.com/articles/nfl-dfs/stokastic-vs-fantasylabs-nfl-dfs" target="_blank" class="verified">verified</a></p>
-
-        <div class="grid grid-2">
-          <div>
-            <h4>Steps to Rebuild (Open Source)</h4>
-            <ol>
-              <li><b>Player Distributions</b>: For each player, have median + stddev + ceiling/floor from historical. Not independent — use correlation matrix (e.g., QB-WR 0.6, WR-WR same team 0.3, QB-opp WR -0.1)</li>
-              <li><b>Monte Carlo Slate Sims</b>: Run N=10,000+ slates. Each sim draws each player from his distribution with correlation via Cholesky decomposition.</li>
-              <li><b>Field Simulation</b>: Generate field lineups using projected ownership as sampling weights. Field size = actual contest entries.</li>
-              <li><b>Lineup vs Field</b>: For each user lineup, compute fantasy score per sim, rank vs field, assign payout per contest payout structure, compute ROI = (avg payout - entry)/entry</li>
-              <li><b>Output</b>: Sim ROI%, Cash Rate%, Win%, Optimal Rate%, Leverage Score</li>
-            </ol>
-            <p>Code: <code>src/projection_engine/simulation_engine.py</code> implements this with numpy.</p>
-          </div>
-          <div>
-            <h4>Why It Beats Optimizer (Verified)</h4>
-            <p>“Most DFS tools are optimizers. You feed in projections, optimizer solves for highest-projected lineup under salary cap, and you get median answer to a question that tournaments never ask. A Milly Maker does not pay median lineup. It pays lineup that beats field of hundreds of thousands once” <a href="https://www.stokastic.com/articles/nfl-dfs/stokastic-review" target="_blank" class="verified">verified</a></p>
-            <table>
-              <tr><th>Optimizer</th><th>Contest Sims</th></tr>
-              <tr><td>Max median points</td><td>Max win probability / ROI</td></tr>
-              <tr><td>Ignores ownership</td><td>Models field ownership</td></tr>
-              <tr><td>Single lineup</td><td>Ranks pool by ROI</td></tr>
-              <tr><td>No correlation handling (needs manual rules)</td><td>Correlation naturally rewarded</td></tr>
-            </table>
-            <p>Source: <a href="https://www.stokastic.com/articles/dfs-strategy/how-expected-value-works-in-dfs" target="_blank">Expected Value in DFS</a> <span class="verified">verified</span> + <a href="https://www.stokastic.com/articles/nfl-dfs/stokastic-review" target="_blank">Stokastic Review (optimizer vs Sims)</a> <span class="verified">verified</span></p>
-          </div>
-        </div>
-      </section>
-
-      <section id="tools-parity" class="card">
-        <h3>8. Tools Parity — Rebuilding Everything Behind Paywall</h3>
-        <table>
-          <tr><th>Stokastic Tool</th><th>What It Does (Verified)</th><th>Open-Source File</th><th>Status</th></tr>
-          <tr><td>DataHub</td><td>Comprehensive DFS projections, ownership, top stacks, boom/bust <a href="https://www.stokastic.com/" target="_blank" class="verified">verified</a></td><td>src/data/scoring_rules.json + data_sources.py</td><td>✅ Spec'd, sample impl</td></tr>
-          <tr><td>Contest Generator</td><td>Generate optimized contest entries automatically <a href="https://www.stokastic.com/" target="_blank" class="verified">verified</a></td><td>simulation_engine.py — generate_lineups()</td><td>✅ Impl</td></tr>
-          <tr><td>Pre-Contest Simulator</td><td>Run simulations before contests to maximize ROI <a href="https://www.stokastic.com/" target="_blank" class="verified">verified</a></td><td>simulation_engine.py — pre_contest_sim()</td><td>✅ Impl</td></tr>
-          <tr><td>Late Swap</td><td>Optimize lineups with late-breaking news <a href="https://www.stokastic.com/" target="_blank" class="verified">verified</a></td><td>simulation_engine.py — late_swap()</td><td>✅ Impl</td></tr>
-          <tr><td>Single Lineup Simulator</td><td>Simulate individual lineups to find optimal plays <a href="https://www.stokastic.com/" target="_blank" class="verified">verified</a></td><td>simulation_engine.py — single_lineup_sim()</td><td>✅ Impl</td></tr>
-          <tr><td>Post-Contest Simulator</td><td>Analyze results and improve strategy <a href="https://www.stokastic.com/" target="_blank" class="verified">verified</a></td><td>simulation_engine.py — post_contest_audit()</td><td>✅ Impl</td></tr>
-          <tr><td>Ownership Projections</td><td>Know who field is playing before lock <a href="https://www.stokastic.com/articles/mlb-dfs/mlb-dfs-ownership-projections" target="_blank" class="verified">verified</a></td><td>ownership_model.py</td><td>✅ Impl</td></tr>
-          <tr><td>Boom/Bust</td><td>Ceiling (75th), Floor (25th), Boom%, Bust%, StdDev <a href="https://www.stokastic.com/articles/dfs-strategy/dfs-boom-bust-probability" target="_blank" class="verified">verified</a></td><td>boom_bust.py</td><td>✅ Impl</td></tr>
-          <tr><td>Top Stacks</td><td>Stack probabilities and implied totals by team <a href="https://www.stokastic.com/articles/mlb-dfs/how-to-use-mlb-dfs-data" target="_blank" class="verified">verified</a></td><td>top_stacks.py</td><td>✅ Impl</td></tr>
-          <tr><td>Player Props (OddsShopper)</td><td>Bottom-up projections vs 15+ books, X-Win/X-ROI/Hold <a href="https://www.oddsshopper.com/props" target="_blank" class="verified">verified</a></td><td>src/projection_engine/nfl_projections.py + props logic</td><td>✅ Spec'd</td></tr>
-        </table>
-      </section>
-
-      <section id="strategies" class="card">
-        <h3>9. Strategies Built Into Stokastic — Verified</h3>
-        <div class="grid grid-2">
-          <div>
-            <h4>Cash vs GPP — Opposite Builds (Verified)</h4>
-            <table>
-              <tr><th></th><th>Cash (50/50s, Double-Ups)</th><th>Tournaments (GPPs)</th><th>Source</th></tr>
-              <tr><td>Field to Beat</td><td>Roughly half entries</td><td>Nearly whole field</td><td><a href="https://www.stokastic.com/articles/dfs-strategy/how-to-win-dfs-tournaments" target="_blank">Win Tournaments guide</a> <span class="verified">verified</span></td></tr>
-              <tr><td>Build Target</td><td>Highest floor, straight from projections</td><td>Ceiling, correlation, leverage</td><td><a href="https://www.stokastic.com/articles/dfs-strategy/how-to-win-dfs-tournaments" target="_blank">same</a> <span class="verified">verified</span></td></tr>
-              <tr><td>Ownership Stance</td><td>Chalk is fine — safety wins</td><td>Differentiate from field</td><td><a href="https://www.stokastic.com/articles/dfs-strategy/how-to-win-dfs-tournaments" target="_blank">same</a> <span class="verified">verified</span></td></tr>
-              <tr><td>Right Surface</td><td>Projections</td><td>Sims, Ownership, Top Stacks</td><td><a href="https://www.stokastic.com/articles/dfs-strategy/how-to-win-dfs-tournaments" target="_blank">same</a> <span class="verified">verified</span></td></tr>
-            </table>
-            <h4>Boom/Bust Usage (Verified)</h4>
-            <ul>
-              <li><b>Cash:</b> prioritize high floor, lowest Bust% <a href="https://www.stokastic.com/articles/nba-dfs/nba-dfs-boom-bust-strategy" target="_blank" class="verified">verified</a></li>
-              <li><b>GPP:</b> prioritize high ceiling + Boom%, cross-ref ownership for leverage <a href="https://www.stokastic.com/articles/nba-dfs/nba-dfs-boom-bust-strategy" target="_blank" class="verified">verified</a></li>
-              <li><b>Definition:</b> Ceiling = 75th pct, Floor = 25th pct, Boom% = top-tier for salary, Bust% = fail to clear value <a href="https://www.stokastic.com/articles/dfs-strategy/dfs-boom-bust-probability" target="_blank" class="verified">verified</a></li>
-            </ul>
-          </div>
-          <div>
-            <h4>Stacking & Correlation (Verified)</h4>
-            <p>“Correlation Is The Engine Of A Winning GPP Lineup” <a href="https://www.stokastic.com/articles/dfs-strategy/how-to-win-dfs-tournaments" target="_blank" class="verified">verified</a></p>
-            <ul>
-              <li><b>NFL:</b> QB + pass-catcher stacks and bring-backs naturally, because sims reward correlation instead of needing a rule <a href="https://www.stokastic.com/articles/nfl-dfs/stokastic-review" target="_blank" class="verified">verified</a></li>
-              <li><b>MLB:</b> “Baseball is a correlated game (when a team bats around, four hitters cash together)” — Top Stacks view <a href="https://www.stokastic.com/articles/mlb-dfs/how-to-use-mlb-dfs-data" target="_blank" class="verified">verified</a></li>
-              <li><b>NBA:</b> “The Sims and the Top Stacks view build that correlation in rather than leaving you to guess” <a href="https://www.stokastic.com/articles/nba-dfs/how-to-use-nba-dfs-projections" target="_blank" class="verified">verified</a></li>
-            </ul>
-            <h4>Late Swap Edge (Verified)</h4>
-            <p>“One NBA edge Alex walked through in detail is late swap: changing players in later games after news breaks post-lock. On the show it came up as one of the biggest edges in the sport” <a href="https://www.stokastic.com/articles/dfs-strategy/how-to-win-draftkings-dfs" target="_blank" class="verified">verified</a></p>
-            <p>“Re-rank your live lineups after the early games lock, which is where a lot of the real money gets made” <a href="https://www.stokastic.com/articles/nfl-dfs/stokastic-review" target="_blank" class="verified">verified</a></p>
-            <h4>Ownership + Leverage (Verified)</h4>
-            <p>“Balancing projection against ownership. Your goal is a lineup that's differentiated from the field but still a realistic high scorer” — Single most important skill in tournaments <a href="https://www.stokastic.com/articles/dfs-strategy/how-to-win-dfs-tournaments" target="_blank" class="verified">verified</a></p>
-            <p>NBA specific: “you want to be in the top ~20% of lineups by projection, but only need to beat about 30% of the field on ownership” <a href="https://www.stokastic.com/articles/dfs-strategy/how-to-win-draftkings-dfs" target="_blank" class="verified">verified</a></p>
-          </div>
-        </div>
-
-        <h4>20-Minute Daily Workflow (Verified from Stokastic MLB Workflow)</h4>
-        <table>
-          <tr><th>Step</th><th>Tool</th><th>Time</th><th>Source</th></tr>
-          <tr><td>Morning read</td><td>Projections</td><td>5 min</td><td><a href="https://www.stokastic.com/articles/dfs-strategy/stokastic-mlb-dfs-subscription-workflow" target="_blank">20-min workflow</a> <span class="verified">verified</span></td></tr>
-          <tr><td>Build & pre-lock</td><td>Ownership Projections</td><td>5 min</td><td><a href="https://www.stokastic.com/articles/dfs-strategy/stokastic-mlb-dfs-subscription-workflow" target="_blank">same</a> <span class="verified">verified</span></td></tr>
-          <tr><td>Build</td><td>Contest Sims, Single Lineup Sim, Top Stacks</td><td>7 min</td><td><a href="https://www.stokastic.com/articles/dfs-strategy/stokastic-mlb-dfs-subscription-workflow" target="_blank">same</a> <span class="verified">verified</span></td></tr>
-          <tr><td>Pre-lock & in-game</td><td>Late Swap</td><td>2 min</td><td><a href="https://www.stokastic.com/articles/dfs-strategy/stokastic-mlb-dfs-subscription-workflow" target="_blank">same</a> <span class="verified">verified</span></td></tr>
-          <tr><td>Post-slate</td><td>Post-Contest Sims</td><td>1 min</td><td><a href="https://www.stokastic.com/articles/dfs-strategy/stokastic-mlb-dfs-subscription-workflow" target="_blank">same</a> <span class="verified">verified</span></td></tr>
-        </table>
-      </section>
-
-      <section id="open-source" class="card">
-        <h3>10. Open-Source Engine — How to Run It</h3>
-        <div class="grid grid-2">
-          <div>
-            <h4>Repository Layout</h4>
-            <pre>src/
-  projection_engine/
-    data_sources.py      # Verified official sources, fetchers
-    nba_projections.py   # Minutes-first, usage, pace
-    nfl_projections.py   # Snap share, air yards, Vegas total
-    mlb_projections.py   # Statcast xwOBA, barrel, lineup order
-    ownership_model.py   # Gradient boosting on Vegas+salary+value
-    boom_bust.py         # 75th/25th, Boom%, Bust%, StdDev
-    top_stacks.py        # Team stack scores, correlation
-    simulation_engine.py # Contest-level Monte Carlo
-  data/
-    scoring_rules.json   # DK/FD official scoring
-    sources_verified.json# All links for manual review</pre>
-            <h4>Install & Run (Verified Working)</h4>
-            <pre><code>pip install -r requirements.txt
-python -m src.projection_engine.data_sources --verify
-python -m src.projection_engine.nba_projections --slate today
-python -m src.projection_engine.simulation_engine --contest milly-maker --entries 150</code></pre>
-          </div>
-          <div>
-            <h4>Key Implementation Details — No Hallucinations</h4>
-            <ul>
-              <li><b>NBA minutes</b>: baseline = season*0.75 + last5*0.25, then blowout adjust spread>7 by 1.5% per point — method from RotoGrinders <a href="https://rotogrinders.com/fantasy/lessons/accurately-predicting-minutes-nba-dfs" target="_blank" class="verified">verified</a></li>
-              <li><b>Value calc</b>: FP − (Salary/1000*5) — from Stokastic <a href="https://www.stokastic.com/articles/nba-dfs/how-to-use-nba-dfs-projections" target="_blank" class="verified">verified</a></li>
-              <li><b>Boom definition</b>: “returning a top score for salary, about 5x salary/1000 +10 fantasy points” — Stokastic FAQ <a href="https://www.stokastic.com/articles/nba-dfs/nba-dfs-boom-bust-strategy" target="_blank" class="verified">verified</a></li>
-              <li><b>Correlation</b>: QB-WR 0.6, RB-DEF same team 0.2, etc. — industry standard, flagged as inference not proprietary leak</li>
-              <li><b>Props pricing</b>: Projection → fair odds → shop best line → size to edge — 4-step process <a href="https://www.oddsshopper.com/articles/betting-101/betting-nfl-props-with-projections" target="_blank" class="verified">verified</a></li>
-            </ul>
-            <div class="flag"><b>Irregularity Flag:</b> True ownership data requires historical contest results which are not public. Our model uses proxy training on optimal% and salary. For production accuracy, need to purchase historical ownership from third-party or scrape community data where allowed.</div>
-          </div>
-        </div>
-      </section>
-
-      <section id="verification" class="card">
-        <h3>11. Verification Log — Line-by-Line</h3>
-        <p>Every claim below was checked against official or primary source. <span class="verified">verified</span> = direct source found. <span class="irregular">irregular</span> = inference or dynamic content flagged.</p>
-        <table>
-          <tr><th>#</th><th>Claim</th><th>Verification Method</th><th>Source Link</th><th>Status</th></tr>
-          <tr><td>1</td><td>Stokastic domain is stokastic.com</td><td>Direct fetch</td><td><a href="https://www.stokastic.com/">https://www.stokastic.com/</a></td><td><span class="verified">verified</span></td></tr>
-          <tr><td>2</td><td>Formerly Awesemo.com</td><td>Author bio + strategy articles</td><td><a href="https://www.stokastic.com/articles/dfs-strategy/how-to-win-dfs-tournaments">how-to-win</a></td><td><span class="verified">verified</span></td></tr>
-          <tr><td>3</td><td>Founder Alex Baker — WashU St. Louis, ex-pro poker</td><td>RotoGrinders interview</td><td><a href="https://rotogrinders.com/articles/interview-with-alex-awesemo-baker-1964792">RG interview</a></td><td><span class="verified">verified</span></td></tr>
-          <tr><td>4</td><td>#1 ranked RotoGrinders overall 2017-2021</td><td>Twitter bio + RG interview</td><td><a href="https://x.com/AwesemoDFS">X profile</a>, <a href="https://rotogrinders.com/articles/interview-with-alex-awesemo-baker-1964792">RG interview</a></td><td><span class="verified">verified</span></td></tr>
-          <tr><td>5</td><td>Projections run high-level simulations many times</td><td>OddsShopper explainer</td><td><a href="https://www.oddsshopper.com/articles/betting-101/stokastic-projection-system">projection-system</a></td><td><span class="verified">verified</span></td></tr>
-          <tr><td>6</td><td>Contest Sims simulate contest tens of thousands times, ranking by ROI</td><td>Stokastic review</td><td><a href="https://www.stokastic.com/articles/nfl-dfs/stokastic-review">review</a></td><td><span class="verified">verified</span></td></tr>
-          <tr><td>7</td><td>Correlations hold: QB big game drags receivers</td><td>Same review</td><td><a href="https://www.stokastic.com/articles/nfl-dfs/stokastic-review">review</a></td><td><span class="verified">verified</span></td></tr>
-          <tr><td>8</td><td>Boom/Bust: Ceiling 75th, Floor 25th, Boom% top-tier, Bust% dud</td><td>Boom/Bust strategy pages</td><td><a href="https://www.stokastic.com/articles/dfs-strategy/dfs-boom-bust-probability">boom/bust</a>, <a href="https://www.stokastic.com/articles/nba-dfs/nba-dfs-boom-bust-strategy">NBA version</a></td><td><span class="verified">verified</span></td></tr>
-          <tr><td>9</td><td>Ownership forecast = % of entries rostering player, map of field behavior</td><td>MLB ownership guide</td><td><a href="https://www.stokastic.com/articles/mlb-dfs/mlb-dfs-ownership-projections">ownership</a></td><td><span class="verified">verified</span></td></tr>
-          <tr><td>10</td><td>MLB chalk follows Vegas implied totals, ballpark, pitching matchups</td><td>Same</td><td><a href="https://www.stokastic.com/articles/mlb-dfs/mlb-dfs-ownership-projections">same</a></td><td><span class="verified">verified</span></td></tr>
-          <tr><td>11</td><td>Value formula = FP - (Salary/1000*5)</td><td>NBA projections guide</td><td><a href="https://www.stokastic.com/articles/nba-dfs/how-to-use-nba-dfs-projections">NBA projections</a></td><td><span class="verified">verified</span></td></tr>
-          <tr><td>12</td><td>Pts/$ = FP / Salary *1000</td><td>Same</td><td><a href="https://www.stokastic.com/articles/nba-dfs/how-to-use-nba-dfs-projections">same</a></td><td><span class="verified">verified</span></td></tr>
-          <tr><td>13</td><td>Minutes first, no minutes no production, NBA volume-driven</td><td>Same</td><td><a href="https://www.stokastic.com/articles/nba-dfs/how-to-use-nba-dfs-projections">same</a></td><td><span class="verified">verified</span></td></tr>
-          <tr><td>14</td><td>Usage = share possessions player finishes</td><td>Same</td><td><a href="https://www.stokastic.com/articles/nba-dfs/how-to-use-nba-dfs-projections">same</a></td><td><span class="verified">verified</span></td></tr>
-          <tr><td>15</td><td>Cash vs GPP need opposite builds</td><td>Win tournaments guide</td><td><a href="https://www.stokastic.com/articles/dfs-strategy/how-to-win-dfs-tournaments">how-to-win</a></td><td><span class="verified">verified</span></td></tr>
-          <tr><td>16</td><td>Late swap biggest edge in NBA</td><td>Alex Baker playbook</td><td><a href="https://www.stokastic.com/articles/dfs-strategy/how-to-win-draftkings-dfs">playbook</a></td><td><span class="verified">verified</span></td></tr>
-          <tr><td>17</td><td>Props bottom-up from player data and simulation, vs 15+ books, X-Win/X-ROI/Hold</td><td>OddsShopper props page + projection system</td><td><a href="https://www.oddsshopper.com/props">props</a>, <a href="https://www.oddsshopper.com/articles/betting-101/stokastic-projection-system">system</a></td><td><span class="verified">verified</span></td></tr>
-          <tr><td>18</td><td>DK NBA scoring: 1 pt, 0.5 3pt bonus, 1.25 reb, 1.5 ast, 2 stl/blk, -0.5 TO, 1.5 DD, 3 TD</td><td>Official DraftKings NBA rules</td><td><a href="https://www.draftkings.com/help/rules/4">draftkings.com/help/rules/4</a></td><td><span class="verified">verified</span></td></tr>
-          <tr><td>19</td><td>FD Rules page contains official scoring</td><td>Direct fetch fanduel.com/rules</td><td><a href="https://www.fanduel.com/rules">fanduel.com/rules</a></td><td><span class="verified">verified</span></td></tr>
-          <tr><td>20</td><td>MLB Statcast is official tracking tech, installed 2015, Hawk-Eye 2020</td><td>MLB glossary</td><td><a href="https://www.mlb.com/glossary/statcast">mlb.com/glossary/statcast</a></td><td><span class="verified">verified</span></td></tr>
-          <tr><td>21</td><td>NBA stats sources ranked: nba_api free wrapper around stats.nba.com</td><td>Third-party ranked list</td><td><a href="https://nbaanalytic.com/articles/free-basketball-data-sources-ranked.html">free sources ranked</a></td><td><span class="verified">verified</span></td></tr>
-          <tr><td>22</td><td>All-Access pricing: list Core $329.95 / Max $449.95 / MVP $849.95; avatar-discounted $229.95 / $349.95 / $599.95 (snapshot 2026-09-22)</td><td>Direct fetch pricing page (both toggles)</td><td><a href="https://www.stokastic.com/pricing">pricing</a></td><td><span class="verified">verified</span> <span class="irregular">dynamic — flag for review if changed</span></td></tr>
-          <tr><td>23</td><td>Exact projection weights proprietary</td><td>No public formula found</td><td>N/A</td><td><span class="irregular">flagged as proprietary — inference only</span></td></tr>
-          <tr><td>24</td><td>Ownership model algorithm developed over years by Alex Baker</td><td>Win tournaments guide</td><td><a href="https://www.stokastic.com/articles/dfs-strategy/how-to-win-dfs-tournaments">how-to-win</a></td><td><span class="verified">verified</span></td></tr>
-        </table>
-        <p><b>No hallucinations policy:</b> Every row above has a clickable source. If source not found, we flag as irregular/inference. Manual reviewers can click each link to verify.</p>
-      </section>
-
-      <section id="limitations" class="card">
-        <h3>12. Limitations & Next Session Work</h3>
-        <div class="grid grid-2">
-          <div>
-            <h4>Current Limitations (Honest)</h4>
-            <ul>
-              <li><b>Historical ownership data:</b> Stokastic's ownership accuracy comes from years of private contest data. We proxy with optimal% + salary. To match quality, need to buy or crowdsource historical ownership.</li>
-              <li><b>Real-time news pipeline:</b> Stokastic has live injury feed. Our open version polls NBA.com injury report + Twitter beat writers. Needs WebSocket for <1min latency.</li>
-              <li><b>Correlation matrix:</b> True correlations require play-by-play joint distributions. We use industry heuristics (0.6 QB-WR). Next: compute from nflverse / pbpstats.</li>
-              <li><b>Statcast rate limits:</b> Baseball Savant blocks aggressive scraping. Need official MLB Stats API key or SportsGameOdds feed.</li>
-              <li><b>No paid data:</b> Stokastic ships proprietary simulation + correlation machinery. We only use free tiers. For same quality, need Cleaning the Glass, PFF, or SportsInfoSolutions subscription.</li>
-              <li><b>Contest payout structures:</b> DK/FD payout curves change weekly. Need scraper for contest lobby.</li>
-              <li><b>Legal:</b> Cannot copy Stokastic's proprietary code. Only reverse engineer methodology from public statements — which we did.</li>
-            </ul>
-          </div>
-          <div>
-            <h4>Suggested Work — Next Session</h4>
-            <ol>
-              <li><b>Pass 2 — Data Ingestion Hardening:</b>
-                <ul>
-                  <li>Implement nba_api fetcher with retry + rate limit (src/projection_engine/data_sources.py already scaffolded)</li>
-                  <li>Add nflverse loader for NFL snap share & target share</li>
-                  <li>Add pybaseball for Statcast</li>
-                  <li>Add Vegas odds feed via The Odds API (free tier) — official: <a href="https://the-odds-api.com/" target="_blank">the-odds-api.com</a></li>
-                </ul>
-              </li>
-              <li><b>Pass 3 — Model Training:</b>
-                <ul>
-                  <li>Train ownership model on 2023-2025 historical slates (need dataset)</li>
-                  <li>Backtest projections vs actual FP — compute RMSE, compare to Stokastic claims</li>
-                  <li>Build boom/bust calibration: is 75th percentile actually 75%?</li>
-                </ul>
-              </li>
-              <li><b>Pass 4 — Simulation at Scale:</b>
-                <ul>
-                  <li>Optimize simulation_engine.py with Numba/CuPy for 50K lineups × 10K sims</li>
-                  <li>Add late swap real-time loop</li>
-                  <li>Build Top Stacks correlation from actual game logs</li>
-                </ul>
-              </li>
-              <li><b>Pass 5 — UI Polish:</b>
-                <ul>
-                  <li>Add live slate viewer to GitHub Pages (JS + WASM for sims)</li>
-                  <li>Add export to DraftKings/FanDuel CSV format (Stokastic supports custom upload <a href="https://www.stokastic.com/articles/nfl-dfs/stokastic-review" target="_blank" class="verified">verified</a>)</li>
-                  <li>Add PR for GitHub Pages deploy (this session will create PR and merge)</li>
-                </ul>
-              </li>
-            </ol>
-            <h4>What Still Needs Manual Input? (Per Requirements: Should Be None)</h4>
-            <p>We designed system to have zero manual input: auto-fetch from official APIs. Only manual step is obtaining API keys for odds (The Odds API) and optionally SportsGameOdds for no-vig. All code paths have fallback to free sources.</p>
-          </div>
-        </div>
-      </section>
-
-      <section id="bibliography" class="card">
-        <h3>13. Bibliography — All Official Verified Links for Manual Review</h3>
-        <p>Grouped by category. Click each to verify claim. No hallucinations — every link was fetched live during build.</p>
-        <h4>Stokastic Official</h4>
-        <ul class="source-list">
-          <li><a href="https://www.stokastic.com/" target="_blank">https://www.stokastic.com/ — Homepage, tool list, “most accurate projections and ownership”</a></li>
-          <li><a href="https://www.stokastic.com/pricing" target="_blank">https://www.stokastic.com/pricing — Pricing tiers Core/Max/MVP + contest-level sim uniqueness + DFS Sim definition</a></li>
-          <li><a href="https://rotogrinders.com/articles/interview-with-alex-awesemo-baker-1964792" target="_blank">RotoGrinders interview with Alex Baker — WashU St. Louis, pro poker, DFS origins</a></li>
-          <li><a href="https://x.com/AwesemoDFS" target="_blank">@AwesemoDFS X bio — “2017-2021 #1 ranked overall for daily fantasy. @Stokastic cofounder.”</a></li>
-          <li><a href="https://www.stokastic.com/articles/nfl-dfs/stokastic-vs-fantasylabs-nfl-dfs" target="_blank">Stokastic vs FantasyLabs — sims play-by-play + correlation + tens of thousands of contests + ROI</a></li>
-        </ul>
-        <h4>Stokastic Strategy Articles (Public Methodology)</h4>
-        <ul class="source-list">
-          <li><a href="https://www.stokastic.com/articles/nfl-dfs/stokastic-review" target="_blank">Stokastic Review 2026 — Sim description, correlation handling, Milly Maker win</a></li>
-          <li><a href="https://www.stokastic.com/articles/dfs-strategy/how-to-win-dfs-tournaments" target="_blank">How to Win DFS Tournaments: Ownership + Leverage — Cash vs GPP table, leverage definition</a></li>
-          <li><a href="https://www.stokastic.com/articles/dfs-strategy/dfs-boom-bust-probability" target="_blank">DFS Boom Bust Probability — Ceiling 75th, Floor 25th, Boom% Bust%</a></li>
-          <li><a href="https://www.stokastic.com/articles/nba-dfs/nba-dfs-boom-bust-strategy" target="_blank">NBA DFS Boom Bust — 5x salary/1000+10 definition</a></li>
-          <li><a href="https://www.stokastic.com/articles/mlb-dfs/mlb-dfs-ownership-projections" target="_blank">MLB DFS Ownership — Forecast of field behavior, Vegas drivers</a></li>
-          <li><a href="https://www.stokastic.com/articles/nba-dfs/how-to-use-nba-dfs-projections" target="_blank">How To Use NBA DFS Projections — Minutes first, usage multiplier, Value formula</a></li>
-          <li><a href="https://www.stokastic.com/articles/mlb-dfs/how-to-use-mlb-dfs-data" target="_blank">How To Use MLB DFS Data — DataHub columns, Top Stacks</a></li>
-          <li><a href="https://www.stokastic.com/articles/dfs-strategy/how-to-win-draftkings-dfs" target="_blank">Alex Baker's Playbook — Late swap edge, top 20% projection / 30% ownership rule</a></li>
-          <li><a href="https://www.stokastic.com/articles/dfs-strategy/stokastic-mlb-dfs-subscription-workflow" target="_blank">MLB DFS Subscription Workflow — 20-min workflow, tool list</a></li>
-          <li><a href="https://www.stokastic.com/articles/dfs-strategy/how-expected-value-works-in-dfs" target="_blank">How Expected Value Works in DFS — EV = score relative to field</a></li>
-          <li><a href="https://www.stokastic.com/articles/nfl-dfs/nfl-dfs-defense-strategy" target="_blank">NFL DFS Defense Strategy — implied team total formula worked by hand (44 total, -7 => 25.5 / 18.5)</a></li>
-        </ul>
-        <h4>OddsShopper (Stokastic Props Arm)</h4>
-        <ul class="source-list">
-          <li><a href="https://www.oddsshopper.com/articles/betting-101/stokastic-projection-system" target="_blank">Stokastic Projection System For Player Props — High-level sims, fair value, X-Win/X-ROI/Hold</a></li>
-          <li><a href="https://www.oddsshopper.com/props" target="_blank">Stokastic Props — Bottom-up, vs 15+ books, tune inputs, blend</a></li>
-          <li><a href="https://www.oddsshopper.com/articles/betting-101/betting-nfl-props-with-projections" target="_blank">Betting NFL Props With Projections — 4-step process, devig</a></li>
-          <li><a href="https://www.oddsshopper.com/articles/betting-101/how-to-make-your-own-nba-projections" target="_blank">How To Make Your Own NBA Projections — Edit minutes/rates, model vs market blend</a></li>
-        </ul>
-        <h4>Official Scoring & Rules</h4>
-        <ul class="source-list">
-          <li><a href="https://www.draftkings.com/help/rules/1" target="_blank">DraftKings Official NFL Rules & Scoring — $50K cap, full PPR, bonuses</a></li>
-          <li><a href="https://www.draftkings.com/help/rules/2" target="_blank">DraftKings Official MLB Rules & Scoring</a></li>
-          <li><a href="https://www.draftkings.com/help/rules/3" target="_blank">DraftKings Official NHL Rules & Scoring</a></li>
-          <li><a href="https://www.draftkings.com/help/rules/4" target="_blank">DraftKings Official NBA Rules & Scoring — 1 pt, 0.5 3pt bonus, 1.25 reb, 1.5 ast, etc.</a></li>
-          <li><a href="https://www.fanduel.com/rules" target="_blank">FanDuel Rules — Official scoring all sports</a></li>
-          <li><a href="https://fantasyfootballers.org/featured/draftkings-vs-fanduel/" target="_blank">DK vs FD NFL Scoring Chart — PPR difference, bonuses</a></li>
-        </ul>
-        <h4>Official League Data</h4>
-        <ul class="source-list">
-          <li><a href="https://www.nba.com/stats" target="_blank">NBA.com Stats — Official stats API</a></li>
-          <li><a href="https://github.com/swar/nba_api" target="_blank">nba_api GitHub — Wrapper around stats.nba.com</a></li>
-          <li><a href="https://nbaanalytic.com/articles/free-basketball-data-sources-ranked.html" target="_blank">Free Basketball Data Sources Ranked — Verified nba_api is best free</a></li>
-          <li><a href="https://www.mlb.com/glossary/statcast" target="_blank">MLB Statcast Glossary — Official tracking tech definition</a></li>
-          <li><a href="https://baseballsavant.mlb.com/" target="_blank">Baseball Savant — Statcast clearinghouse</a></li>
-          <li><a href="https://www.nfl.com/" target="_blank">NFL.com — Official</a></li>
-          <li><a href="https://github.com/nflverse" target="_blank">nflverse — Open NFL data</a></li>
-        </ul>
-        <h4>DFS Industry Context</h4>
-        <ul class="source-list">
-          <li><a href="https://rotogrinders.com/articles/interview-with-alex-awesemo-baker-1964792" target="_blank">RotoGrinders Interview Alex Baker — #1 ranked, poker background</a></li>
-          <li><a href="https://x.com/AwesemoDFS" target="_blank">Alex Baker X @AwesemoDFS — 2017-2021 #1 ranked bio</a></li>
-          <li><a href="https://rotogrinders.com/fantasy/lessons/accurately-predicting-minutes-nba-dfs" target="_blank">RotoGrinders Minutes Guide — 240 min, 0.75/0.25 baseline, blowout scale</a></li>
-          <li><a href="https://sportsgameodds.com/use-cases/dfs-data-api" target="_blank">SportsGameOdds — DFS Data API (commercial player-props & projections reference)</a></li>
-          <li><a href="https://splashplaypodcast.com/stokastic-review/" target="_blank">SplashPlay Stokastic Review 2026 — Pricing, CORE vs MAX, contest sim best</a></li>
-        </ul>
-      </section>
-
-      <footer>
-        <p><b>StokEngineer</b> — Open-source reverse engineering for educational purposes. Not affiliated with Stokastic.com, DraftKings, or FanDuel. All trademarks belong to respective owners.</p>
-        <p>Built with verified sources only. No hallucinations. Flagged where inference required. Last verified: 2026-09-22 UTC.</p>
-        <p><a href="https://github.com/buffedlizard55-lab/StokEngineer">GitHub Repo</a> • <a href="#verification">Verification Log</a> • <a href="#bibliography">Bibliography</a></p>
-      </footer>
-    </main>
+<footer>
+  <div class="wrap small">
+    <p>Data belongs to its publishers: MLB StatsAPI content carries MLB's copyright notice, nflverse
+    data is CC-BY-4.0, and the DraftKings, FanDuel and ESPN endpoints are public services — check
+    their terms before redistributing anything fetched with this engine, and keep request volume
+    polite (every response is cached on disk).</p>
+    <p>This project is not affiliated with Stokastic, DraftKings, FanDuel, ESPN or MLB. Stokastic's
+    published methodology is quoted as the thing being reimplemented from public information; its
+    internal weights are explicitly recorded as unknowable, never guessed.</p>
+    <p><a href="https://github.com/buffedlizard55-lab/StokEngineer">Repository</a> ·
+       <a href="https://github.com/buffedlizard55-lab/StokEngineer/blob/main/README.md">README</a> ·
+       <a href="https://github.com/buffedlizard55-lab/StokEngineer/blob/main/LIMITATIONS.md">Limitations</a> ·
+       <a href="https://github.com/buffedlizard55-lab/StokEngineer/blob/main/VERIFICATION.md">Verification</a> ·
+       <a href="https://github.com/buffedlizard55-lab/StokEngineer/blob/main/PASSES.md">Pass log</a></p>
   </div>
-</div>
-
-<script src="./assets/app.js"></script>
+</footer>
+<script src="assets/data.js"></script>
+<script src="assets/app.js"></script>
 </body>
 </html>
