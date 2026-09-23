@@ -1,0 +1,7 @@
+{
+ "ok": true,
+ "errors": [],
+ "warnings": [
+  "demo[0] (sample_mlb_dk.json): ROI drifted by up to 0.3 points between the committed run and this one ([205.5, 210.4, 398.4] -> [205.5, 210.6, 398.1])"
+ ]
+}

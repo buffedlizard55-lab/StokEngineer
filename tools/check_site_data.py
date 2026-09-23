@@ -18,6 +18,7 @@ Exit code 1 only when a claim-level section differs or the demo loses its struct
 from __future__ import annotations
 
 import json
+import os
 import subprocess
 import sys
 import tempfile
@@ -117,6 +118,24 @@ def _check_demo(committed: List[Dict[str, Any]], built: List[Dict[str, Any]]) ->
     return errors, warnings
 
 
+def _report(ok: bool, errors: List[str], warnings: List[str]) -> None:
+    """Write the verdict next to the other reports, and annotate a GitHub Actions run.
+
+    A failed check is only useful if the reason is readable: the run's log API is not reachable
+    from every environment, so the reason is written to reports/site_data_check.json (uploaded as
+    a CI artifact) and, in Actions, emitted as a check annotation.
+    """
+    path = ROOT / "reports" / "site_data_check.json"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(
+        json.dumps({"ok": ok, "errors": errors, "warnings": warnings}, indent=1) + "\n"
+    )
+    if os.environ.get("GITHUB_ACTIONS") == "true":
+        for message in errors:
+            escaped = f"Site payload stale: {message}".replace("%", "%25").replace("\n", "%0A")
+            print(f"::error title=Site payload::{escaped}")
+
+
 def main() -> int:
     if not COMMITTED.exists():
         print(f"missing {COMMITTED.relative_to(ROOT)} - run python tools/build_site_data.py")
@@ -153,6 +172,7 @@ def main() -> int:
         for error in errors:
             print("  - " + error)
         print("\nrun: python tools/build_site_data.py && git add docs/data docs/assets/data.js")
+        _report(False, errors, warnings)
         return 1
     if warnings:
         print(
@@ -161,6 +181,7 @@ def main() -> int:
         )
     else:
         print("site payload matches the builder output (claims and demo digits)")
+    _report(True, [], warnings)
     return 0
 
 
