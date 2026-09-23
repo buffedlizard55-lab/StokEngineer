@@ -25,7 +25,14 @@ flagged for a human to look at. The machine-readable versions are
   run relied on. `reports/` in this repo contains examples produced exactly that way.
 * `tools/check_links.py` walks every URL in the data files, the site and the documentation and
   reports dead links. It is designed for CI (this sandbox blocks most hosts, so `doctor` reports
-  `PARTIAL` rather than pretending otherwise).
+  `PARTIAL` rather than pretending otherwise). URLs that are deliberately not fetched (an http-only
+  copyright notice, a test fixture that must stay unreachable) are listed as exempt, with reasons.
+* `tools/check_site_data.py` regenerates the site payload and compares it with the committed copy.
+  Claim-level sections (sources, claim ledger, rules, limitations, integrity status) must match
+  **exactly** or the build fails. The demo section is a live engine run, and optimisation ties are
+  not portable between machines, so drift there is reported as a warning - with the numbers - rather
+  than silently accepted or falsely declared identical. Nothing about the demo is used as evidence
+  for any claim on the site.
 
 ## What was verified, and how
 

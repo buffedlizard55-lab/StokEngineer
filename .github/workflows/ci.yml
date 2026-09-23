@@ -65,3 +65,9 @@ jobs:
           python-version: "3.11"
       - name: Check every cited URL
         run: python tools/check_links.py
+      - name: Upload the link report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: link-report
+          path: reports/links.json
