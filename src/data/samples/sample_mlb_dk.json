@@ -1,0 +1,2861 @@
+{
+ "_meta": {
+  "synthetic": true,
+  "purpose": "Deterministic offline fixture for tests and CLI demos.",
+  "warning": "NOT real data. Names, salaries and projections are generated. Reports built from these files are labelled synthetic and must never be presented as real slate results.",
+  "generated_by": "tools/make_sample_data.py",
+  "generated_on": "2026-09-22",
+  "seed": 20260923
+ },
+ "sport": "mlb",
+ "site": "draftkings",
+ "date": "2026-09-21",
+ "games": [
+  {
+   "game_id": "BOS@NYY",
+   "away_team": "BOS",
+   "home_team": "NYY",
+   "away_implied_total": 4.7,
+   "home_implied_total": 5.4
+  },
+  {
+   "game_id": "SF@LAD",
+   "away_team": "SF",
+   "home_team": "LAD",
+   "away_implied_total": 4.7,
+   "home_implied_total": 4.2
+  },
+  {
+   "game_id": "SEA@HOU",
+   "away_team": "SEA",
+   "home_team": "HOU",
+   "away_implied_total": 4.8,
+   "home_implied_total": 4.7
+  },
+  {
+   "game_id": "PHI@ATL",
+   "away_team": "PHI",
+   "home_team": "ATL",
+   "away_implied_total": 3.9,
+   "home_implied_total": 3.7
+  }
+ ],
+ "players": [
+  {
+   "id": "mlb-sp-1",
+   "name": "Synthetic BOS SP1",
+   "team": "BOS",
+   "opponent": "NYY",
+   "positions": [
+    "SP"
+   ],
+   "salary": 8324,
+   "game_id": "BOS@NYY",
+   "props": {
+    "outs": 15.478,
+    "so_per_out": 0.2971,
+    "bb_per_out": 0.0959,
+    "hit_per_out": 0.2639,
+    "run_per_out": 0.146,
+    "er_per_out": 0.1301,
+    "hbp_per_out": 0.0119,
+    "win_prob": 0.492,
+    "implied_runs": 4.7
+   }
+  },
+  {
+   "id": "mlb-sp-2",
+   "name": "Synthetic BOS SP2",
+   "team": "BOS",
+   "opponent": "NYY",
+   "positions": [
+    "SP"
+   ],
+   "salary": 6985,
+   "game_id": "BOS@NYY",
+   "props": {
+    "outs": 19.784,
+    "so_per_out": 0.2929,
+    "bb_per_out": 0.0918,
+    "hit_per_out": 0.3168,
+    "run_per_out": 0.141,
+    "er_per_out": 0.1009,
+    "hbp_per_out": 0.0054,
+    "win_prob": 0.332,
+    "implied_runs": 4.7
+   }
+  },
+  {
+   "id": "mlb-sp-3",
+   "name": "Synthetic BOS SP3",
+   "team": "BOS",
+   "opponent": "NYY",
+   "positions": [
+    "SP"
+   ],
+   "salary": 7585,
+   "game_id": "BOS@NYY",
+   "props": {
+    "outs": 16.44,
+    "so_per_out": 0.3398,
+    "bb_per_out": 0.0725,
+    "hit_per_out": 0.2486,
+    "run_per_out": 0.1356,
+    "er_per_out": 0.1317,
+    "hbp_per_out": 0.0104,
+    "win_prob": 0.465,
+    "implied_runs": 4.7
+   }
+  },
+  {
+   "id": "mlb-sp-4",
+   "name": "Synthetic BOS SP4",
+   "team": "BOS",
+   "opponent": "NYY",
+   "positions": [
+    "SP"
+   ],
+   "salary": 7202,
+   "game_id": "BOS@NYY",
+   "props": {
+    "outs": 17.698,
+    "so_per_out": 0.2631,
+    "bb_per_out": 0.0946,
+    "hit_per_out": 0.266,
+    "run_per_out": 0.1128,
+    "er_per_out": 0.0949,
+    "hbp_per_out": 0.0113,
+    "win_prob": 0.477,
+    "implied_runs": 4.7
+   }
+  },
+  {
+   "id": "mlb-c-5",
+   "name": "Synthetic BOS C1",
+   "team": "BOS",
+   "opponent": "NYY",
+   "positions": [
+    "C"
+   ],
+   "salary": 2584,
+   "game_id": "BOS@NYY",
+   "props": {
+    "pa": 4.966,
+    "p_single": 0.1452,
+    "p_double": 0.0519,
+    "p_triple": 0.0017,
+    "p_hr": 0.0403,
+    "p_bb": 0.1081,
+    "p_hbp": 0.0117,
+    "run_per_on_base": 0.277,
+    "rbi_per_on_base": 0.237,
+    "sb_rate": 0.196,
+    "implied_runs": 4.7
+   }
+  },
+  {
+   "id": "mlb-1b-6",
+   "name": "Synthetic BOS 1B1",
+   "team": "BOS",
+   "opponent": "NYY",
+   "positions": [
+    "1B"
+   ],
+   "salary": 3340,
+   "game_id": "BOS@NYY",
+   "props": {
+    "pa": 4.826,
+    "p_single": 0.176,
+    "p_double": 0.039,
+    "p_triple": 0.0001,
+    "p_hr": 0.0345,
+    "p_bb": 0.0724,
+    "p_hbp": 0.0142,
+    "run_per_on_base": 0.213,
+    "rbi_per_on_base": 0.245,
+    "sb_rate": 0.022,
+    "implied_runs": 4.7
+   }
+  },
+  {
+   "id": "mlb-2b-7",
+   "name": "Synthetic BOS 2B1",
+   "team": "BOS",
+   "opponent": "NYY",
+   "positions": [
+    "2B"
+   ],
+   "salary": 5396,
+   "game_id": "BOS@NYY",
+   "props": {
+    "pa": 4.93,
+    "p_single": 0.1434,
+    "p_double": 0.0533,
+    "p_triple": 0.0009,
+    "p_hr": 0.0196,
+    "p_bb": 0.0867,
+    "p_hbp": 0.0116,
+    "run_per_on_base": 0.182,
+    "rbi_per_on_base": 0.39,
+    "sb_rate": 0.055,
+    "implied_runs": 4.7
+   }
+  },
+  {
+   "id": "mlb-3b-8",
+   "name": "Synthetic BOS 3B1",
+   "team": "BOS",
+   "opponent": "NYY",
+   "positions": [
+    "3B"
+   ],
+   "salary": 5157,
+   "game_id": "BOS@NYY",
+   "props": {
+    "pa": 4.618,
+    "p_single": 0.1311,
+    "p_double": 0.0412,
+    "p_triple": 0.0013,
+    "p_hr": 0.0214,
+    "p_bb": 0.0746,
+    "p_hbp": 0.0076,
+    "run_per_on_base": 0.191,
+    "rbi_per_on_base": 0.342,
+    "sb_rate": 0.123,
+    "implied_runs": 4.7
+   }
+  },
+  {
+   "id": "mlb-ss-9",
+   "name": "Synthetic BOS SS1",
+   "team": "BOS",
+   "opponent": "NYY",
+   "positions": [
+    "SS"
+   ],
+   "salary": 5494,
+   "game_id": "BOS@NYY",
+   "props": {
+    "pa": 4.183,
+    "p_single": 0.164,
+    "p_double": 0.0493,
+    "p_triple": 0.0058,
+    "p_hr": 0.0212,
+    "p_bb": 0.0855,
+    "p_hbp": 0.0078,
+    "run_per_on_base": 0.193,
+    "rbi_per_on_base": 0.385,
+    "sb_rate": 0.206,
+    "implied_runs": 4.7
+   }
+  },
+  {
+   "id": "mlb-of-10",
+   "name": "Synthetic BOS OF1",
+   "team": "BOS",
+   "opponent": "NYY",
+   "positions": [
+    "OF"
+   ],
+   "salary": 4791,
+   "game_id": "BOS@NYY",
+   "props": {
+    "pa": 4.923,
+    "p_single": 0.1521,
+    "p_double": 0.058,
+    "p_triple": 0.0045,
+    "p_hr": 0.0292,
+    "p_bb": 0.1174,
+    "p_hbp": 0.015,
+    "run_per_on_base": 0.246,
+    "rbi_per_on_base": 0.297,
+    "sb_rate": 0.134,
+    "implied_runs": 4.7
+   }
+  },
+  {
+   "id": "mlb-of-11",
+   "name": "Synthetic BOS OF2",
+   "team": "BOS",
+   "opponent": "NYY",
+   "positions": [
+    "OF"
+   ],
+   "salary": 6007,
+   "game_id": "BOS@NYY",
+   "props": {
+    "pa": 4.306,
+    "p_single": 0.172,
+    "p_double": 0.0612,
+    "p_triple": 0.0004,
+    "p_hr": 0.0412,
+    "p_bb": 0.0833,
+    "p_hbp": 0.0073,
+    "run_per_on_base": 0.286,
+    "rbi_per_on_base": 0.296,
+    "sb_rate": 0.197,
+    "implied_runs": 4.7
+   }
+  },
+  {
+   "id": "mlb-of-12",
+   "name": "Synthetic BOS OF3",
+   "team": "BOS",
+   "opponent": "NYY",
+   "positions": [
+    "OF"
+   ],
+   "salary": 2931,
+   "game_id": "BOS@NYY",
+   "props": {
+    "pa": 4.79,
+    "p_single": 0.1264,
+    "p_double": 0.0401,
+    "p_triple": 0.0032,
+    "p_hr": 0.0255,
+    "p_bb": 0.0638,
+    "p_hbp": 0.0121,
+    "run_per_on_base": 0.217,
+    "rbi_per_on_base": 0.358,
+    "sb_rate": 0.11,
+    "implied_runs": 4.7
+   }
+  },
+  {
+   "id": "mlb-of-13",
+   "name": "Synthetic BOS OF4",
+   "team": "BOS",
+   "opponent": "NYY",
+   "positions": [
+    "OF"
+   ],
+   "salary": 3458,
+   "game_id": "BOS@NYY",
+   "props": {
+    "pa": 3.708,
+    "p_single": 0.1508,
+    "p_double": 0.0664,
+    "p_triple": 0.0054,
+    "p_hr": 0.0321,
+    "p_bb": 0.0721,
+    "p_hbp": 0.0094,
+    "run_per_on_base": 0.221,
+    "rbi_per_on_base": 0.326,
+    "sb_rate": 0.061,
+    "implied_runs": 4.7
+   }
+  },
+  {
+   "id": "mlb-of-14",
+   "name": "Synthetic BOS OF5",
+   "team": "BOS",
+   "opponent": "NYY",
+   "positions": [
+    "OF"
+   ],
+   "salary": 2709,
+   "game_id": "BOS@NYY",
+   "props": {
+    "pa": 3.786,
+    "p_single": 0.1362,
+    "p_double": 0.0465,
+    "p_triple": 0.0022,
+    "p_hr": 0.023,
+    "p_bb": 0.0883,
+    "p_hbp": 0.0124,
+    "run_per_on_base": 0.25,
+    "rbi_per_on_base": 0.261,
+    "sb_rate": 0.106,
+    "implied_runs": 4.7
+   }
+  },
+  {
+   "id": "mlb-of-15",
+   "name": "Synthetic BOS OF6",
+   "team": "BOS",
+   "opponent": "NYY",
+   "positions": [
+    "OF"
+   ],
+   "salary": 3402,
+   "game_id": "BOS@NYY",
+   "props": {
+    "pa": 4.011,
+    "p_single": 0.137,
+    "p_double": 0.062,
+    "p_triple": 0.0005,
+    "p_hr": 0.0448,
+    "p_bb": 0.0697,
+    "p_hbp": 0.0094,
+    "run_per_on_base": 0.282,
+    "rbi_per_on_base": 0.29,
+    "sb_rate": 0.113,
+    "implied_runs": 4.7
+   }
+  },
+  {
+   "id": "mlb-sp-16",
+   "name": "Synthetic NYY SP1",
+   "team": "NYY",
+   "opponent": "BOS",
+   "positions": [
+    "SP"
+   ],
+   "salary": 8187,
+   "game_id": "BOS@NYY",
+   "props": {
+    "outs": 17.662,
+    "so_per_out": 0.2676,
+    "bb_per_out": 0.0865,
+    "hit_per_out": 0.2676,
+    "run_per_out": 0.1113,
+    "er_per_out": 0.138,
+    "hbp_per_out": 0.0098,
+    "win_prob": 0.571,
+    "implied_runs": 5.4
+   }
+  },
+  {
+   "id": "mlb-sp-17",
+   "name": "Synthetic NYY SP2",
+   "team": "NYY",
+   "opponent": "BOS",
+   "positions": [
+    "SP"
+   ],
+   "salary": 5658,
+   "game_id": "BOS@NYY",
+   "props": {
+    "outs": 15.995,
+    "so_per_out": 0.3563,
+    "bb_per_out": 0.0829,
+    "hit_per_out": 0.3141,
+    "run_per_out": 0.112,
+    "er_per_out": 0.1323,
+    "hbp_per_out": 0.0065,
+    "win_prob": 0.429,
+    "implied_runs": 5.4
+   }
+  },
+  {
+   "id": "mlb-sp-18",
+   "name": "Synthetic NYY SP3",
+   "team": "NYY",
+   "opponent": "BOS",
+   "positions": [
+    "SP"
+   ],
+   "salary": 7052,
+   "game_id": "BOS@NYY",
+   "props": {
+    "outs": 19.128,
+    "so_per_out": 0.2527,
+    "bb_per_out": 0.1048,
+    "hit_per_out": 0.2939,
+    "run_per_out": 0.1102,
+    "er_per_out": 0.1353,
+    "hbp_per_out": 0.0117,
+    "win_prob": 0.439,
+    "implied_runs": 5.4
+   }
+  },
+  {
+   "id": "mlb-sp-19",
+   "name": "Synthetic NYY SP4",
+   "team": "NYY",
+   "opponent": "BOS",
+   "positions": [
+    "SP"
+   ],
+   "salary": 8094,
+   "game_id": "BOS@NYY",
+   "props": {
+    "outs": 17.484,
+    "so_per_out": 0.2527,
+    "bb_per_out": 0.0733,
+    "hit_per_out": 0.2707,
+    "run_per_out": 0.1239,
+    "er_per_out": 0.1375,
+    "hbp_per_out": 0.0142,
+    "win_prob": 0.422,
+    "implied_runs": 5.4
+   }
+  },
+  {
+   "id": "mlb-c-20",
+   "name": "Synthetic NYY C1",
+   "team": "NYY",
+   "opponent": "BOS",
+   "positions": [
+    "C"
+   ],
+   "salary": 5850,
+   "game_id": "BOS@NYY",
+   "props": {
+    "pa": 4.767,
+    "p_single": 0.1599,
+    "p_double": 0.0671,
+    "p_triple": 0.0014,
+    "p_hr": 0.041,
+    "p_bb": 0.0976,
+    "p_hbp": 0.0122,
+    "run_per_on_base": 0.345,
+    "rbi_per_on_base": 0.378,
+    "sb_rate": 0.107,
+    "implied_runs": 5.4
+   }
+  },
+  {
+   "id": "mlb-1b-21",
+   "name": "Synthetic NYY 1B1",
+   "team": "NYY",
+   "opponent": "BOS",
+   "positions": [
+    "1B"
+   ],
+   "salary": 2538,
+   "game_id": "BOS@NYY",
+   "props": {
+    "pa": 4.747,
+    "p_single": 0.178,
+    "p_double": 0.0544,
+    "p_triple": 0.0024,
+    "p_hr": 0.0447,
+    "p_bb": 0.1144,
+    "p_hbp": 0.0147,
+    "run_per_on_base": 0.244,
+    "rbi_per_on_base": 0.25,
+    "sb_rate": 0.127,
+    "implied_runs": 5.4
+   }
+  },
+  {
+   "id": "mlb-2b-22",
+   "name": "Synthetic NYY 2B1",
+   "team": "NYY",
+   "opponent": "BOS",
+   "positions": [
+    "2B"
+   ],
+   "salary": 3085,
+   "game_id": "BOS@NYY",
+   "props": {
+    "pa": 3.723,
+    "p_single": 0.1503,
+    "p_double": 0.0623,
+    "p_triple": 0.0028,
+    "p_hr": 0.0199,
+    "p_bb": 0.0814,
+    "p_hbp": 0.0113,
+    "run_per_on_base": 0.293,
+    "rbi_per_on_base": 0.373,
+    "sb_rate": 0.16,
+    "implied_runs": 5.4
+   }
+  },
+  {
+   "id": "mlb-3b-23",
+   "name": "Synthetic NYY 3B1",
+   "team": "NYY",
+   "opponent": "BOS",
+   "positions": [
+    "3B"
+   ],
+   "salary": 4131,
+   "game_id": "BOS@NYY",
+   "props": {
+    "pa": 4.513,
+    "p_single": 0.174,
+    "p_double": 0.0533,
+    "p_triple": 0.0044,
+    "p_hr": 0.0254,
+    "p_bb": 0.0871,
+    "p_hbp": 0.0138,
+    "run_per_on_base": 0.343,
+    "rbi_per_on_base": 0.399,
+    "sb_rate": 0.148,
+    "implied_runs": 5.4
+   }
+  },
+  {
+   "id": "mlb-ss-24",
+   "name": "Synthetic NYY SS1",
+   "team": "NYY",
+   "opponent": "BOS",
+   "positions": [
+    "SS"
+   ],
+   "salary": 3740,
+   "game_id": "BOS@NYY",
+   "props": {
+    "pa": 4.571,
+    "p_single": 0.1624,
+    "p_double": 0.0583,
+    "p_triple": 0.0027,
+    "p_hr": 0.0324,
+    "p_bb": 0.0878,
+    "p_hbp": 0.0167,
+    "run_per_on_base": 0.257,
+    "rbi_per_on_base": 0.369,
+    "sb_rate": 0.057,
+    "implied_runs": 5.4
+   }
+  },
+  {
+   "id": "mlb-of-25",
+   "name": "Synthetic NYY OF1",
+   "team": "NYY",
+   "opponent": "BOS",
+   "positions": [
+    "OF"
+   ],
+   "salary": 5203,
+   "game_id": "BOS@NYY",
+   "props": {
+    "pa": 3.842,
+    "p_single": 0.1208,
+    "p_double": 0.0696,
+    "p_triple": 0.0016,
+    "p_hr": 0.0212,
+    "p_bb": 0.087,
+    "p_hbp": 0.0087,
+    "run_per_on_base": 0.206,
+    "rbi_per_on_base": 0.302,
+    "sb_rate": 0.023,
+    "implied_runs": 5.4
+   }
+  },
+  {
+   "id": "mlb-of-26",
+   "name": "Synthetic NYY OF2",
+   "team": "NYY",
+   "opponent": "BOS",
+   "positions": [
+    "OF"
+   ],
+   "salary": 4685,
+   "game_id": "BOS@NYY",
+   "props": {
+    "pa": 4.325,
+    "p_single": 0.1261,
+    "p_double": 0.0498,
+    "p_triple": 0.0037,
+    "p_hr": 0.0202,
+    "p_bb": 0.0827,
+    "p_hbp": 0.0145,
+    "run_per_on_base": 0.328,
+    "rbi_per_on_base": 0.309,
+    "sb_rate": 0.043,
+    "implied_runs": 5.4
+   }
+  },
+  {
+   "id": "mlb-of-27",
+   "name": "Synthetic NYY OF3",
+   "team": "NYY",
+   "opponent": "BOS",
+   "positions": [
+    "OF"
+   ],
+   "salary": 3014,
+   "game_id": "BOS@NYY",
+   "props": {
+    "pa": 4.477,
+    "p_single": 0.1252,
+    "p_double": 0.0399,
+    "p_triple": 0.0022,
+    "p_hr": 0.0227,
+    "p_bb": 0.0643,
+    "p_hbp": 0.0093,
+    "run_per_on_base": 0.315,
+    "rbi_per_on_base": 0.406,
+    "sb_rate": 0.069,
+    "implied_runs": 5.4
+   }
+  },
+  {
+   "id": "mlb-of-28",
+   "name": "Synthetic NYY OF4",
+   "team": "NYY",
+   "opponent": "BOS",
+   "positions": [
+    "OF"
+   ],
+   "salary": 4832,
+   "game_id": "BOS@NYY",
+   "props": {
+    "pa": 4.665,
+    "p_single": 0.1447,
+    "p_double": 0.0469,
+    "p_triple": 0.0024,
+    "p_hr": 0.0268,
+    "p_bb": 0.0755,
+    "p_hbp": 0.0067,
+    "run_per_on_base": 0.235,
+    "rbi_per_on_base": 0.344,
+    "sb_rate": 0.019,
+    "implied_runs": 5.4
+   }
+  },
+  {
+   "id": "mlb-of-29",
+   "name": "Synthetic NYY OF5",
+   "team": "NYY",
+   "opponent": "BOS",
+   "positions": [
+    "OF"
+   ],
+   "salary": 4420,
+   "game_id": "BOS@NYY",
+   "props": {
+    "pa": 4.476,
+    "p_single": 0.1553,
+    "p_double": 0.06,
+    "p_triple": 0.0038,
+    "p_hr": 0.0396,
+    "p_bb": 0.0942,
+    "p_hbp": 0.0153,
+    "run_per_on_base": 0.214,
+    "rbi_per_on_base": 0.377,
+    "sb_rate": 0.204,
+    "implied_runs": 5.4
+   }
+  },
+  {
+   "id": "mlb-of-30",
+   "name": "Synthetic NYY OF6",
+   "team": "NYY",
+   "opponent": "BOS",
+   "positions": [
+    "OF"
+   ],
+   "salary": 5789,
+   "game_id": "BOS@NYY",
+   "props": {
+    "pa": 4.263,
+    "p_single": 0.1475,
+    "p_double": 0.0603,
+    "p_triple": 0.002,
+    "p_hr": 0.0239,
+    "p_bb": 0.0898,
+    "p_hbp": 0.0073,
+    "run_per_on_base": 0.35,
+    "rbi_per_on_base": 0.327,
+    "sb_rate": 0.185,
+    "implied_runs": 5.4
+   }
+  },
+  {
+   "id": "mlb-sp-31",
+   "name": "Synthetic SF SP1",
+   "team": "SF",
+   "opponent": "LAD",
+   "positions": [
+    "SP"
+   ],
+   "salary": 9186,
+   "game_id": "SF@LAD",
+   "props": {
+    "outs": 20.338,
+    "so_per_out": 0.3026,
+    "bb_per_out": 0.0965,
+    "hit_per_out": 0.2695,
+    "run_per_out": 0.1384,
+    "er_per_out": 0.1261,
+    "hbp_per_out": 0.0097,
+    "win_prob": 0.515,
+    "implied_runs": 4.7
+   }
+  },
+  {
+   "id": "mlb-sp-32",
+   "name": "Synthetic SF SP2",
+   "team": "SF",
+   "opponent": "LAD",
+   "positions": [
+    "SP"
+   ],
+   "salary": 6610,
+   "game_id": "SF@LAD",
+   "props": {
+    "outs": 18.387,
+    "so_per_out": 0.2341,
+    "bb_per_out": 0.0781,
+    "hit_per_out": 0.3189,
+    "run_per_out": 0.1564,
+    "er_per_out": 0.1372,
+    "hbp_per_out": 0.0142,
+    "win_prob": 0.519,
+    "implied_runs": 4.7
+   }
+  },
+  {
+   "id": "mlb-sp-33",
+   "name": "Synthetic SF SP3",
+   "team": "SF",
+   "opponent": "LAD",
+   "positions": [
+    "SP"
+   ],
+   "salary": 7419,
+   "game_id": "SF@LAD",
+   "props": {
+    "outs": 15.42,
+    "so_per_out": 0.3199,
+    "bb_per_out": 0.0864,
+    "hit_per_out": 0.3044,
+    "run_per_out": 0.1375,
+    "er_per_out": 0.0914,
+    "hbp_per_out": 0.0094,
+    "win_prob": 0.31,
+    "implied_runs": 4.7
+   }
+  },
+  {
+   "id": "mlb-sp-34",
+   "name": "Synthetic SF SP4",
+   "team": "SF",
+   "opponent": "LAD",
+   "positions": [
+    "SP"
+   ],
+   "salary": 6933,
+   "game_id": "SF@LAD",
+   "props": {
+    "outs": 18.806,
+    "so_per_out": 0.3478,
+    "bb_per_out": 0.1002,
+    "hit_per_out": 0.2822,
+    "run_per_out": 0.1579,
+    "er_per_out": 0.1018,
+    "hbp_per_out": 0.0147,
+    "win_prob": 0.4,
+    "implied_runs": 4.7
+   }
+  },
+  {
+   "id": "mlb-c-35",
+   "name": "Synthetic SF C1",
+   "team": "SF",
+   "opponent": "LAD",
+   "positions": [
+    "C"
+   ],
+   "salary": 4438,
+   "game_id": "SF@LAD",
+   "props": {
+    "pa": 4.657,
+    "p_single": 0.1202,
+    "p_double": 0.0416,
+    "p_triple": 0.001,
+    "p_hr": 0.0283,
+    "p_bb": 0.1139,
+    "p_hbp": 0.0155,
+    "run_per_on_base": 0.249,
+    "rbi_per_on_base": 0.399,
+    "sb_rate": 0.084,
+    "implied_runs": 4.7
+   }
+  },
+  {
+   "id": "mlb-1b-36",
+   "name": "Synthetic SF 1B1",
+   "team": "SF",
+   "opponent": "LAD",
+   "positions": [
+    "1B"
+   ],
+   "salary": 4078,
+   "game_id": "SF@LAD",
+   "props": {
+    "pa": 4.445,
+    "p_single": 0.1452,
+    "p_double": 0.0407,
+    "p_triple": 0.0042,
+    "p_hr": 0.0223,
+    "p_bb": 0.0674,
+    "p_hbp": 0.0102,
+    "run_per_on_base": 0.323,
+    "rbi_per_on_base": 0.344,
+    "sb_rate": 0.199,
+    "implied_runs": 4.7
+   }
+  },
+  {
+   "id": "mlb-2b-37",
+   "name": "Synthetic SF 2B1",
+   "team": "SF",
+   "opponent": "LAD",
+   "positions": [
+    "2B"
+   ],
+   "salary": 2522,
+   "game_id": "SF@LAD",
+   "props": {
+    "pa": 3.994,
+    "p_single": 0.1793,
+    "p_double": 0.0395,
+    "p_triple": 0.0054,
+    "p_hr": 0.0339,
+    "p_bb": 0.1155,
+    "p_hbp": 0.0141,
+    "run_per_on_base": 0.209,
+    "rbi_per_on_base": 0.352,
+    "sb_rate": 0.015,
+    "implied_runs": 4.7
+   }
+  },
+  {
+   "id": "mlb-3b-38",
+   "name": "Synthetic SF 3B1",
+   "team": "SF",
+   "opponent": "LAD",
+   "positions": [
+    "3B"
+   ],
+   "salary": 3829,
+   "game_id": "SF@LAD",
+   "props": {
+    "pa": 4.067,
+    "p_single": 0.146,
+    "p_double": 0.0655,
+    "p_triple": 0.0003,
+    "p_hr": 0.026,
+    "p_bb": 0.0985,
+    "p_hbp": 0.0123,
+    "run_per_on_base": 0.181,
+    "rbi_per_on_base": 0.309,
+    "sb_rate": 0.005,
+    "implied_runs": 4.7
+   }
+  },
+  {
+   "id": "mlb-ss-39",
+   "name": "Synthetic SF SS1",
+   "team": "SF",
+   "opponent": "LAD",
+   "positions": [
+    "SS"
+   ],
+   "salary": 3764,
+   "game_id": "SF@LAD",
+   "props": {
+    "pa": 4.41,
+    "p_single": 0.168,
+    "p_double": 0.0678,
+    "p_triple": 0.002,
+    "p_hr": 0.0365,
+    "p_bb": 0.1025,
+    "p_hbp": 0.0126,
+    "run_per_on_base": 0.369,
+    "rbi_per_on_base": 0.345,
+    "sb_rate": 0.045,
+    "implied_runs": 4.7
+   }
+  },
+  {
+   "id": "mlb-of-40",
+   "name": "Synthetic SF OF1",
+   "team": "SF",
+   "opponent": "LAD",
+   "positions": [
+    "OF"
+   ],
+   "salary": 3610,
+   "game_id": "SF@LAD",
+   "props": {
+    "pa": 4.163,
+    "p_single": 0.1555,
+    "p_double": 0.0359,
+    "p_triple": 0.0052,
+    "p_hr": 0.0273,
+    "p_bb": 0.0857,
+    "p_hbp": 0.0109,
+    "run_per_on_base": 0.306,
+    "rbi_per_on_base": 0.235,
+    "sb_rate": 0.195,
+    "implied_runs": 4.7
+   }
+  },
+  {
+   "id": "mlb-of-41",
+   "name": "Synthetic SF OF2",
+   "team": "SF",
+   "opponent": "LAD",
+   "positions": [
+    "OF"
+   ],
+   "salary": 4326,
+   "game_id": "SF@LAD",
+   "props": {
+    "pa": 3.653,
+    "p_single": 0.1583,
+    "p_double": 0.0489,
+    "p_triple": 0.0043,
+    "p_hr": 0.028,
+    "p_bb": 0.1007,
+    "p_hbp": 0.0163,
+    "run_per_on_base": 0.184,
+    "rbi_per_on_base": 0.416,
+    "sb_rate": 0.176,
+    "implied_runs": 4.7
+   }
+  },
+  {
+   "id": "mlb-of-42",
+   "name": "Synthetic SF OF3",
+   "team": "SF",
+   "opponent": "LAD",
+   "positions": [
+    "OF"
+   ],
+   "salary": 5294,
+   "game_id": "SF@LAD",
+   "props": {
+    "pa": 4.93,
+    "p_single": 0.1756,
+    "p_double": 0.0435,
+    "p_triple": 0.0051,
+    "p_hr": 0.025,
+    "p_bb": 0.0693,
+    "p_hbp": 0.0074,
+    "run_per_on_base": 0.226,
+    "rbi_per_on_base": 0.203,
+    "sb_rate": 0.061,
+    "implied_runs": 4.7
+   }
+  },
+  {
+   "id": "mlb-of-43",
+   "name": "Synthetic SF OF4",
+   "team": "SF",
+   "opponent": "LAD",
+   "positions": [
+    "OF"
+   ],
+   "salary": 5229,
+   "game_id": "SF@LAD",
+   "props": {
+    "pa": 4.291,
+    "p_single": 0.1508,
+    "p_double": 0.0411,
+    "p_triple": 0.0005,
+    "p_hr": 0.0387,
+    "p_bb": 0.0673,
+    "p_hbp": 0.0088,
+    "run_per_on_base": 0.31,
+    "rbi_per_on_base": 0.417,
+    "sb_rate": 0.137,
+    "implied_runs": 4.7
+   }
+  },
+  {
+   "id": "mlb-of-44",
+   "name": "Synthetic SF OF5",
+   "team": "SF",
+   "opponent": "LAD",
+   "positions": [
+    "OF"
+   ],
+   "salary": 2789,
+   "game_id": "SF@LAD",
+   "props": {
+    "pa": 3.973,
+    "p_single": 0.1669,
+    "p_double": 0.0477,
+    "p_triple": 0.0038,
+    "p_hr": 0.0321,
+    "p_bb": 0.0866,
+    "p_hbp": 0.0161,
+    "run_per_on_base": 0.304,
+    "rbi_per_on_base": 0.346,
+    "sb_rate": 0.197,
+    "implied_runs": 4.7
+   }
+  },
+  {
+   "id": "mlb-of-45",
+   "name": "Synthetic SF OF6",
+   "team": "SF",
+   "opponent": "LAD",
+   "positions": [
+    "OF"
+   ],
+   "salary": 2970,
+   "game_id": "SF@LAD",
+   "props": {
+    "pa": 3.603,
+    "p_single": 0.1645,
+    "p_double": 0.0403,
+    "p_triple": 0.0012,
+    "p_hr": 0.0411,
+    "p_bb": 0.1022,
+    "p_hbp": 0.0137,
+    "run_per_on_base": 0.197,
+    "rbi_per_on_base": 0.246,
+    "sb_rate": 0.026,
+    "implied_runs": 4.7
+   }
+  },
+  {
+   "id": "mlb-sp-46",
+   "name": "Synthetic LAD SP1",
+   "team": "LAD",
+   "opponent": "SF",
+   "positions": [
+    "SP"
+   ],
+   "salary": 6961,
+   "game_id": "SF@LAD",
+   "props": {
+    "outs": 20.614,
+    "so_per_out": 0.2538,
+    "bb_per_out": 0.0902,
+    "hit_per_out": 0.318,
+    "run_per_out": 0.1508,
+    "er_per_out": 0.1033,
+    "hbp_per_out": 0.0052,
+    "win_prob": 0.597,
+    "implied_runs": 4.2
+   }
+  },
+  {
+   "id": "mlb-sp-47",
+   "name": "Synthetic LAD SP2",
+   "team": "LAD",
+   "opponent": "SF",
+   "positions": [
+    "SP"
+   ],
+   "salary": 5492,
+   "game_id": "SF@LAD",
+   "props": {
+    "outs": 20.235,
+    "so_per_out": 0.2918,
+    "bb_per_out": 0.0663,
+    "hit_per_out": 0.2619,
+    "run_per_out": 0.1579,
+    "er_per_out": 0.1278,
+    "hbp_per_out": 0.0085,
+    "win_prob": 0.418,
+    "implied_runs": 4.2
+   }
+  },
+  {
+   "id": "mlb-sp-48",
+   "name": "Synthetic LAD SP3",
+   "team": "LAD",
+   "opponent": "SF",
+   "positions": [
+    "SP"
+   ],
+   "salary": 8514,
+   "game_id": "SF@LAD",
+   "props": {
+    "outs": 17.833,
+    "so_per_out": 0.2669,
+    "bb_per_out": 0.0773,
+    "hit_per_out": 0.3049,
+    "run_per_out": 0.1023,
+    "er_per_out": 0.1079,
+    "hbp_per_out": 0.0094,
+    "win_prob": 0.368,
+    "implied_runs": 4.2
+   }
+  },
+  {
+   "id": "mlb-sp-49",
+   "name": "Synthetic LAD SP4",
+   "team": "LAD",
+   "opponent": "SF",
+   "positions": [
+    "SP"
+   ],
+   "salary": 8726,
+   "game_id": "SF@LAD",
+   "props": {
+    "outs": 19.981,
+    "so_per_out": 0.2762,
+    "bb_per_out": 0.0858,
+    "hit_per_out": 0.2569,
+    "run_per_out": 0.1505,
+    "er_per_out": 0.0957,
+    "hbp_per_out": 0.011,
+    "win_prob": 0.471,
+    "implied_runs": 4.2
+   }
+  },
+  {
+   "id": "mlb-c-50",
+   "name": "Synthetic LAD C1",
+   "team": "LAD",
+   "opponent": "SF",
+   "positions": [
+    "C"
+   ],
+   "salary": 3216,
+   "game_id": "SF@LAD",
+   "props": {
+    "pa": 3.891,
+    "p_single": 0.1398,
+    "p_double": 0.043,
+    "p_triple": 0.004,
+    "p_hr": 0.0372,
+    "p_bb": 0.0619,
+    "p_hbp": 0.0063,
+    "run_per_on_base": 0.367,
+    "rbi_per_on_base": 0.362,
+    "sb_rate": 0.109,
+    "implied_runs": 4.2
+   }
+  },
+  {
+   "id": "mlb-1b-51",
+   "name": "Synthetic LAD 1B1",
+   "team": "LAD",
+   "opponent": "SF",
+   "positions": [
+    "1B"
+   ],
+   "salary": 4560,
+   "game_id": "SF@LAD",
+   "props": {
+    "pa": 4.401,
+    "p_single": 0.1697,
+    "p_double": 0.0437,
+    "p_triple": 0.0003,
+    "p_hr": 0.039,
+    "p_bb": 0.1003,
+    "p_hbp": 0.0109,
+    "run_per_on_base": 0.344,
+    "rbi_per_on_base": 0.264,
+    "sb_rate": 0.082,
+    "implied_runs": 4.2
+   }
+  },
+  {
+   "id": "mlb-2b-52",
+   "name": "Synthetic LAD 2B1",
+   "team": "LAD",
+   "opponent": "SF",
+   "positions": [
+    "2B"
+   ],
+   "salary": 4350,
+   "game_id": "SF@LAD",
+   "props": {
+    "pa": 4.128,
+    "p_single": 0.1756,
+    "p_double": 0.0584,
+    "p_triple": 0.0056,
+    "p_hr": 0.0339,
+    "p_bb": 0.0682,
+    "p_hbp": 0.0054,
+    "run_per_on_base": 0.306,
+    "rbi_per_on_base": 0.324,
+    "sb_rate": 0.084,
+    "implied_runs": 4.2
+   }
+  },
+  {
+   "id": "mlb-3b-53",
+   "name": "Synthetic LAD 3B1",
+   "team": "LAD",
+   "opponent": "SF",
+   "positions": [
+    "3B"
+   ],
+   "salary": 3061,
+   "game_id": "SF@LAD",
+   "props": {
+    "pa": 4.597,
+    "p_single": 0.1611,
+    "p_double": 0.0665,
+    "p_triple": 0.0011,
+    "p_hr": 0.0245,
+    "p_bb": 0.1046,
+    "p_hbp": 0.0087,
+    "run_per_on_base": 0.354,
+    "rbi_per_on_base": 0.339,
+    "sb_rate": 0.055,
+    "implied_runs": 4.2
+   }
+  },
+  {
+   "id": "mlb-ss-54",
+   "name": "Synthetic LAD SS1",
+   "team": "LAD",
+   "opponent": "SF",
+   "positions": [
+    "SS"
+   ],
+   "salary": 6279,
+   "game_id": "SF@LAD",
+   "props": {
+    "pa": 4.787,
+    "p_single": 0.179,
+    "p_double": 0.0608,
+    "p_triple": 0.0055,
+    "p_hr": 0.0349,
+    "p_bb": 0.0787,
+    "p_hbp": 0.0078,
+    "run_per_on_base": 0.353,
+    "rbi_per_on_base": 0.32,
+    "sb_rate": 0.191,
+    "implied_runs": 4.2
+   }
+  },
+  {
+   "id": "mlb-of-55",
+   "name": "Synthetic LAD OF1",
+   "team": "LAD",
+   "opponent": "SF",
+   "positions": [
+    "OF"
+   ],
+   "salary": 6319,
+   "game_id": "SF@LAD",
+   "props": {
+    "pa": 4.774,
+    "p_single": 0.1384,
+    "p_double": 0.0539,
+    "p_triple": 0.0033,
+    "p_hr": 0.0321,
+    "p_bb": 0.1155,
+    "p_hbp": 0.0115,
+    "run_per_on_base": 0.207,
+    "rbi_per_on_base": 0.384,
+    "sb_rate": 0.129,
+    "implied_runs": 4.2
+   }
+  },
+  {
+   "id": "mlb-of-56",
+   "name": "Synthetic LAD OF2",
+   "team": "LAD",
+   "opponent": "SF",
+   "positions": [
+    "OF"
+   ],
+   "salary": 3672,
+   "game_id": "SF@LAD",
+   "props": {
+    "pa": 3.994,
+    "p_single": 0.1583,
+    "p_double": 0.0469,
+    "p_triple": 0.0048,
+    "p_hr": 0.0177,
+    "p_bb": 0.1165,
+    "p_hbp": 0.0063,
+    "run_per_on_base": 0.206,
+    "rbi_per_on_base": 0.387,
+    "sb_rate": 0.036,
+    "implied_runs": 4.2
+   }
+  },
+  {
+   "id": "mlb-of-57",
+   "name": "Synthetic LAD OF3",
+   "team": "LAD",
+   "opponent": "SF",
+   "positions": [
+    "OF"
+   ],
+   "salary": 2813,
+   "game_id": "SF@LAD",
+   "props": {
+    "pa": 4.87,
+    "p_single": 0.1282,
+    "p_double": 0.0667,
+    "p_triple": 0.0039,
+    "p_hr": 0.0154,
+    "p_bb": 0.1148,
+    "p_hbp": 0.0062,
+    "run_per_on_base": 0.327,
+    "rbi_per_on_base": 0.259,
+    "sb_rate": 0.12,
+    "implied_runs": 4.2
+   }
+  },
+  {
+   "id": "mlb-of-58",
+   "name": "Synthetic LAD OF4",
+   "team": "LAD",
+   "opponent": "SF",
+   "positions": [
+    "OF"
+   ],
+   "salary": 3998,
+   "game_id": "SF@LAD",
+   "props": {
+    "pa": 4.238,
+    "p_single": 0.166,
+    "p_double": 0.043,
+    "p_triple": 0.0048,
+    "p_hr": 0.0224,
+    "p_bb": 0.0846,
+    "p_hbp": 0.0146,
+    "run_per_on_base": 0.304,
+    "rbi_per_on_base": 0.261,
+    "sb_rate": 0.208,
+    "implied_runs": 4.2
+   }
+  },
+  {
+   "id": "mlb-of-59",
+   "name": "Synthetic LAD OF5",
+   "team": "LAD",
+   "opponent": "SF",
+   "positions": [
+    "OF"
+   ],
+   "salary": 4518,
+   "game_id": "SF@LAD",
+   "props": {
+    "pa": 4.923,
+    "p_single": 0.1266,
+    "p_double": 0.0483,
+    "p_triple": 0.0047,
+    "p_hr": 0.0187,
+    "p_bb": 0.0868,
+    "p_hbp": 0.0061,
+    "run_per_on_base": 0.246,
+    "rbi_per_on_base": 0.386,
+    "sb_rate": 0.049,
+    "implied_runs": 4.2
+   }
+  },
+  {
+   "id": "mlb-of-60",
+   "name": "Synthetic LAD OF6",
+   "team": "LAD",
+   "opponent": "SF",
+   "positions": [
+    "OF"
+   ],
+   "salary": 6405,
+   "game_id": "SF@LAD",
+   "props": {
+    "pa": 4.657,
+    "p_single": 0.1545,
+    "p_double": 0.0598,
+    "p_triple": 0.004,
+    "p_hr": 0.0432,
+    "p_bb": 0.0649,
+    "p_hbp": 0.0161,
+    "run_per_on_base": 0.286,
+    "rbi_per_on_base": 0.264,
+    "sb_rate": 0.161,
+    "implied_runs": 4.2
+   }
+  },
+  {
+   "id": "mlb-sp-61",
+   "name": "Synthetic SEA SP1",
+   "team": "SEA",
+   "opponent": "HOU",
+   "positions": [
+    "SP"
+   ],
+   "salary": 9599,
+   "game_id": "SEA@HOU",
+   "props": {
+    "outs": 16.686,
+    "so_per_out": 0.2576,
+    "bb_per_out": 0.0886,
+    "hit_per_out": 0.2865,
+    "run_per_out": 0.108,
+    "er_per_out": 0.0926,
+    "hbp_per_out": 0.0134,
+    "win_prob": 0.584,
+    "implied_runs": 4.8
+   }
+  },
+  {
+   "id": "mlb-sp-62",
+   "name": "Synthetic SEA SP2",
+   "team": "SEA",
+   "opponent": "HOU",
+   "positions": [
+    "SP"
+   ],
+   "salary": 7623,
+   "game_id": "SEA@HOU",
+   "props": {
+    "outs": 19.539,
+    "so_per_out": 0.3562,
+    "bb_per_out": 0.089,
+    "hit_per_out": 0.3002,
+    "run_per_out": 0.1254,
+    "er_per_out": 0.1266,
+    "hbp_per_out": 0.0111,
+    "win_prob": 0.586,
+    "implied_runs": 4.8
+   }
+  },
+  {
+   "id": "mlb-sp-63",
+   "name": "Synthetic SEA SP3",
+   "team": "SEA",
+   "opponent": "HOU",
+   "positions": [
+    "SP"
+   ],
+   "salary": 5316,
+   "game_id": "SEA@HOU",
+   "props": {
+    "outs": 17.413,
+    "so_per_out": 0.3476,
+    "bb_per_out": 0.0652,
+    "hit_per_out": 0.226,
+    "run_per_out": 0.1197,
+    "er_per_out": 0.1196,
+    "hbp_per_out": 0.0116,
+    "win_prob": 0.565,
+    "implied_runs": 4.8
+   }
+  },
+  {
+   "id": "mlb-sp-64",
+   "name": "Synthetic SEA SP4",
+   "team": "SEA",
+   "opponent": "HOU",
+   "positions": [
+    "SP"
+   ],
+   "salary": 5504,
+   "game_id": "SEA@HOU",
+   "props": {
+    "outs": 16.229,
+    "so_per_out": 0.2652,
+    "bb_per_out": 0.0739,
+    "hit_per_out": 0.2678,
+    "run_per_out": 0.1267,
+    "er_per_out": 0.1152,
+    "hbp_per_out": 0.0121,
+    "win_prob": 0.522,
+    "implied_runs": 4.8
+   }
+  },
+  {
+   "id": "mlb-c-65",
+   "name": "Synthetic SEA C1",
+   "team": "SEA",
+   "opponent": "HOU",
+   "positions": [
+    "C"
+   ],
+   "salary": 3477,
+   "game_id": "SEA@HOU",
+   "props": {
+    "pa": 4.251,
+    "p_single": 0.1401,
+    "p_double": 0.0417,
+    "p_triple": 0.0044,
+    "p_hr": 0.0282,
+    "p_bb": 0.1095,
+    "p_hbp": 0.0166,
+    "run_per_on_base": 0.194,
+    "rbi_per_on_base": 0.343,
+    "sb_rate": 0.128,
+    "implied_runs": 4.8
+   }
+  },
+  {
+   "id": "mlb-1b-66",
+   "name": "Synthetic SEA 1B1",
+   "team": "SEA",
+   "opponent": "HOU",
+   "positions": [
+    "1B"
+   ],
+   "salary": 5554,
+   "game_id": "SEA@HOU",
+   "props": {
+    "pa": 3.63,
+    "p_single": 0.1505,
+    "p_double": 0.0582,
+    "p_triple": 0.0029,
+    "p_hr": 0.0407,
+    "p_bb": 0.1127,
+    "p_hbp": 0.0109,
+    "run_per_on_base": 0.213,
+    "rbi_per_on_base": 0.375,
+    "sb_rate": 0.166,
+    "implied_runs": 4.8
+   }
+  },
+  {
+   "id": "mlb-2b-67",
+   "name": "Synthetic SEA 2B1",
+   "team": "SEA",
+   "opponent": "HOU",
+   "positions": [
+    "2B"
+   ],
+   "salary": 6497,
+   "game_id": "SEA@HOU",
+   "props": {
+    "pa": 3.899,
+    "p_single": 0.1409,
+    "p_double": 0.0403,
+    "p_triple": 0.0033,
+    "p_hr": 0.0327,
+    "p_bb": 0.0695,
+    "p_hbp": 0.012,
+    "run_per_on_base": 0.198,
+    "rbi_per_on_base": 0.254,
+    "sb_rate": 0.121,
+    "implied_runs": 4.8
+   }
+  },
+  {
+   "id": "mlb-3b-68",
+   "name": "Synthetic SEA 3B1",
+   "team": "SEA",
+   "opponent": "HOU",
+   "positions": [
+    "3B"
+   ],
+   "salary": 5901,
+   "game_id": "SEA@HOU",
+   "props": {
+    "pa": 3.71,
+    "p_single": 0.1785,
+    "p_double": 0.0515,
+    "p_triple": 0.0026,
+    "p_hr": 0.0222,
+    "p_bb": 0.0756,
+    "p_hbp": 0.0064,
+    "run_per_on_base": 0.252,
+    "rbi_per_on_base": 0.376,
+    "sb_rate": 0.161,
+    "implied_runs": 4.8
+   }
+  },
+  {
+   "id": "mlb-ss-69",
+   "name": "Synthetic SEA SS1",
+   "team": "SEA",
+   "opponent": "HOU",
+   "positions": [
+    "SS"
+   ],
+   "salary": 2639,
+   "game_id": "SEA@HOU",
+   "props": {
+    "pa": 4.832,
+    "p_single": 0.1537,
+    "p_double": 0.0461,
+    "p_triple": 0.0047,
+    "p_hr": 0.0403,
+    "p_bb": 0.0874,
+    "p_hbp": 0.0132,
+    "run_per_on_base": 0.287,
+    "rbi_per_on_base": 0.208,
+    "sb_rate": 0.018,
+    "implied_runs": 4.8
+   }
+  },
+  {
+   "id": "mlb-of-70",
+   "name": "Synthetic SEA OF1",
+   "team": "SEA",
+   "opponent": "HOU",
+   "positions": [
+    "OF"
+   ],
+   "salary": 5195,
+   "game_id": "SEA@HOU",
+   "props": {
+    "pa": 4.519,
+    "p_single": 0.1422,
+    "p_double": 0.0405,
+    "p_triple": 0.0056,
+    "p_hr": 0.019,
+    "p_bb": 0.0858,
+    "p_hbp": 0.0095,
+    "run_per_on_base": 0.204,
+    "rbi_per_on_base": 0.298,
+    "sb_rate": 0.038,
+    "implied_runs": 4.8
+   }
+  },
+  {
+   "id": "mlb-of-71",
+   "name": "Synthetic SEA OF2",
+   "team": "SEA",
+   "opponent": "HOU",
+   "positions": [
+    "OF"
+   ],
+   "salary": 4680,
+   "game_id": "SEA@HOU",
+   "props": {
+    "pa": 3.712,
+    "p_single": 0.1649,
+    "p_double": 0.0411,
+    "p_triple": 0.0016,
+    "p_hr": 0.0237,
+    "p_bb": 0.0879,
+    "p_hbp": 0.0074,
+    "run_per_on_base": 0.298,
+    "rbi_per_on_base": 0.388,
+    "sb_rate": 0.213,
+    "implied_runs": 4.8
+   }
+  },
+  {
+   "id": "mlb-of-72",
+   "name": "Synthetic SEA OF3",
+   "team": "SEA",
+   "opponent": "HOU",
+   "positions": [
+    "OF"
+   ],
+   "salary": 2919,
+   "game_id": "SEA@HOU",
+   "props": {
+    "pa": 4.193,
+    "p_single": 0.1544,
+    "p_double": 0.056,
+    "p_triple": 0.0052,
+    "p_hr": 0.025,
+    "p_bb": 0.0636,
+    "p_hbp": 0.0138,
+    "run_per_on_base": 0.368,
+    "rbi_per_on_base": 0.378,
+    "sb_rate": 0.213,
+    "implied_runs": 4.8
+   }
+  },
+  {
+   "id": "mlb-of-73",
+   "name": "Synthetic SEA OF4",
+   "team": "SEA",
+   "opponent": "HOU",
+   "positions": [
+    "OF"
+   ],
+   "salary": 6457,
+   "game_id": "SEA@HOU",
+   "props": {
+    "pa": 3.846,
+    "p_single": 0.1242,
+    "p_double": 0.0686,
+    "p_triple": 0.0006,
+    "p_hr": 0.0205,
+    "p_bb": 0.0628,
+    "p_hbp": 0.0109,
+    "run_per_on_base": 0.239,
+    "rbi_per_on_base": 0.26,
+    "sb_rate": 0.106,
+    "implied_runs": 4.8
+   }
+  },
+  {
+   "id": "mlb-of-74",
+   "name": "Synthetic SEA OF5",
+   "team": "SEA",
+   "opponent": "HOU",
+   "positions": [
+    "OF"
+   ],
+   "salary": 6267,
+   "game_id": "SEA@HOU",
+   "props": {
+    "pa": 4.786,
+    "p_single": 0.1349,
+    "p_double": 0.0565,
+    "p_triple": 0.0035,
+    "p_hr": 0.0178,
+    "p_bb": 0.0776,
+    "p_hbp": 0.0102,
+    "run_per_on_base": 0.354,
+    "rbi_per_on_base": 0.412,
+    "sb_rate": 0.07,
+    "implied_runs": 4.8
+   }
+  },
+  {
+   "id": "mlb-of-75",
+   "name": "Synthetic SEA OF6",
+   "team": "SEA",
+   "opponent": "HOU",
+   "positions": [
+    "OF"
+   ],
+   "salary": 4923,
+   "game_id": "SEA@HOU",
+   "props": {
+    "pa": 4.895,
+    "p_single": 0.1487,
+    "p_double": 0.0572,
+    "p_triple": 0.0028,
+    "p_hr": 0.0175,
+    "p_bb": 0.0628,
+    "p_hbp": 0.0079,
+    "run_per_on_base": 0.255,
+    "rbi_per_on_base": 0.329,
+    "sb_rate": 0.171,
+    "implied_runs": 4.8
+   }
+  },
+  {
+   "id": "mlb-sp-76",
+   "name": "Synthetic HOU SP1",
+   "team": "HOU",
+   "opponent": "SEA",
+   "positions": [
+    "SP"
+   ],
+   "salary": 9198,
+   "game_id": "SEA@HOU",
+   "props": {
+    "outs": 15.803,
+    "so_per_out": 0.3229,
+    "bb_per_out": 0.086,
+    "hit_per_out": 0.2532,
+    "run_per_out": 0.1011,
+    "er_per_out": 0.1188,
+    "hbp_per_out": 0.0136,
+    "win_prob": 0.426,
+    "implied_runs": 4.7
+   }
+  },
+  {
+   "id": "mlb-sp-77",
+   "name": "Synthetic HOU SP2",
+   "team": "HOU",
+   "opponent": "SEA",
+   "positions": [
+    "SP"
+   ],
+   "salary": 8209,
+   "game_id": "SEA@HOU",
+   "props": {
+    "outs": 19.459,
+    "so_per_out": 0.3285,
+    "bb_per_out": 0.0908,
+    "hit_per_out": 0.2642,
+    "run_per_out": 0.1454,
+    "er_per_out": 0.0998,
+    "hbp_per_out": 0.011,
+    "win_prob": 0.529,
+    "implied_runs": 4.7
+   }
+  },
+  {
+   "id": "mlb-sp-78",
+   "name": "Synthetic HOU SP3",
+   "team": "HOU",
+   "opponent": "SEA",
+   "positions": [
+    "SP"
+   ],
+   "salary": 9206,
+   "game_id": "SEA@HOU",
+   "props": {
+    "outs": 15.091,
+    "so_per_out": 0.271,
+    "bb_per_out": 0.0739,
+    "hit_per_out": 0.234,
+    "run_per_out": 0.1471,
+    "er_per_out": 0.1256,
+    "hbp_per_out": 0.0067,
+    "win_prob": 0.336,
+    "implied_runs": 4.7
+   }
+  },
+  {
+   "id": "mlb-sp-79",
+   "name": "Synthetic HOU SP4",
+   "team": "HOU",
+   "opponent": "SEA",
+   "positions": [
+    "SP"
+   ],
+   "salary": 8612,
+   "game_id": "SEA@HOU",
+   "props": {
+    "outs": 14.406,
+    "so_per_out": 0.3162,
+    "bb_per_out": 0.0879,
+    "hit_per_out": 0.3171,
+    "run_per_out": 0.1327,
+    "er_per_out": 0.1226,
+    "hbp_per_out": 0.014,
+    "win_prob": 0.467,
+    "implied_runs": 4.7
+   }
+  },
+  {
+   "id": "mlb-c-80",
+   "name": "Synthetic HOU C1",
+   "team": "HOU",
+   "opponent": "SEA",
+   "positions": [
+    "C"
+   ],
+   "salary": 3205,
+   "game_id": "SEA@HOU",
+   "props": {
+    "pa": 4.567,
+    "p_single": 0.1618,
+    "p_double": 0.0392,
+    "p_triple": 0.0035,
+    "p_hr": 0.0158,
+    "p_bb": 0.0673,
+    "p_hbp": 0.0081,
+    "run_per_on_base": 0.294,
+    "rbi_per_on_base": 0.286,
+    "sb_rate": 0.116,
+    "implied_runs": 4.7
+   }
+  },
+  {
+   "id": "mlb-1b-81",
+   "name": "Synthetic HOU 1B1",
+   "team": "HOU",
+   "opponent": "SEA",
+   "positions": [
+    "1B"
+   ],
+   "salary": 3080,
+   "game_id": "SEA@HOU",
+   "props": {
+    "pa": 4.883,
+    "p_single": 0.1204,
+    "p_double": 0.055,
+    "p_triple": 0.0034,
+    "p_hr": 0.0205,
+    "p_bb": 0.0639,
+    "p_hbp": 0.006,
+    "run_per_on_base": 0.202,
+    "rbi_per_on_base": 0.306,
+    "sb_rate": 0.161,
+    "implied_runs": 4.7
+   }
+  },
+  {
+   "id": "mlb-2b-82",
+   "name": "Synthetic HOU 2B1",
+   "team": "HOU",
+   "opponent": "SEA",
+   "positions": [
+    "2B"
+   ],
+   "salary": 6210,
+   "game_id": "SEA@HOU",
+   "props": {
+    "pa": 3.861,
+    "p_single": 0.1719,
+    "p_double": 0.039,
+    "p_triple": 0.0038,
+    "p_hr": 0.0213,
+    "p_bb": 0.1033,
+    "p_hbp": 0.0069,
+    "run_per_on_base": 0.319,
+    "rbi_per_on_base": 0.222,
+    "sb_rate": 0.109,
+    "implied_runs": 4.7
+   }
+  },
+  {
+   "id": "mlb-3b-83",
+   "name": "Synthetic HOU 3B1",
+   "team": "HOU",
+   "opponent": "SEA",
+   "positions": [
+    "3B"
+   ],
+   "salary": 6114,
+   "game_id": "SEA@HOU",
+   "props": {
+    "pa": 3.963,
+    "p_single": 0.1363,
+    "p_double": 0.0554,
+    "p_triple": 0.002,
+    "p_hr": 0.0234,
+    "p_bb": 0.1046,
+    "p_hbp": 0.0139,
+    "run_per_on_base": 0.294,
+    "rbi_per_on_base": 0.353,
+    "sb_rate": 0.147,
+    "implied_runs": 4.7
+   }
+  },
+  {
+   "id": "mlb-ss-84",
+   "name": "Synthetic HOU SS1",
+   "team": "HOU",
+   "opponent": "SEA",
+   "positions": [
+    "SS"
+   ],
+   "salary": 6126,
+   "game_id": "SEA@HOU",
+   "props": {
+    "pa": 4.366,
+    "p_single": 0.1645,
+    "p_double": 0.0687,
+    "p_triple": 0.0038,
+    "p_hr": 0.027,
+    "p_bb": 0.1022,
+    "p_hbp": 0.0081,
+    "run_per_on_base": 0.216,
+    "rbi_per_on_base": 0.287,
+    "sb_rate": 0.157,
+    "implied_runs": 4.7
+   }
+  },
+  {
+   "id": "mlb-of-85",
+   "name": "Synthetic HOU OF1",
+   "team": "HOU",
+   "opponent": "SEA",
+   "positions": [
+    "OF"
+   ],
+   "salary": 5564,
+   "game_id": "SEA@HOU",
+   "props": {
+    "pa": 4.254,
+    "p_single": 0.1502,
+    "p_double": 0.0591,
+    "p_triple": 0.0014,
+    "p_hr": 0.0362,
+    "p_bb": 0.098,
+    "p_hbp": 0.0165,
+    "run_per_on_base": 0.333,
+    "rbi_per_on_base": 0.246,
+    "sb_rate": 0.014,
+    "implied_runs": 4.7
+   }
+  },
+  {
+   "id": "mlb-of-86",
+   "name": "Synthetic HOU OF2",
+   "team": "HOU",
+   "opponent": "SEA",
+   "positions": [
+    "OF"
+   ],
+   "salary": 5442,
+   "game_id": "SEA@HOU",
+   "props": {
+    "pa": 4.633,
+    "p_single": 0.124,
+    "p_double": 0.069,
+    "p_triple": 0.0007,
+    "p_hr": 0.0267,
+    "p_bb": 0.0675,
+    "p_hbp": 0.0117,
+    "run_per_on_base": 0.214,
+    "rbi_per_on_base": 0.313,
+    "sb_rate": 0.011,
+    "implied_runs": 4.7
+   }
+  },
+  {
+   "id": "mlb-of-87",
+   "name": "Synthetic HOU OF3",
+   "team": "HOU",
+   "opponent": "SEA",
+   "positions": [
+    "OF"
+   ],
+   "salary": 2571,
+   "game_id": "SEA@HOU",
+   "props": {
+    "pa": 4.677,
+    "p_single": 0.1677,
+    "p_double": 0.0661,
+    "p_triple": 0.0051,
+    "p_hr": 0.0167,
+    "p_bb": 0.0757,
+    "p_hbp": 0.0157,
+    "run_per_on_base": 0.257,
+    "rbi_per_on_base": 0.417,
+    "sb_rate": 0.114,
+    "implied_runs": 4.7
+   }
+  },
+  {
+   "id": "mlb-of-88",
+   "name": "Synthetic HOU OF4",
+   "team": "HOU",
+   "opponent": "SEA",
+   "positions": [
+    "OF"
+   ],
+   "salary": 3106,
+   "game_id": "SEA@HOU",
+   "props": {
+    "pa": 3.824,
+    "p_single": 0.1591,
+    "p_double": 0.0694,
+    "p_triple": 0.0055,
+    "p_hr": 0.0427,
+    "p_bb": 0.0672,
+    "p_hbp": 0.0155,
+    "run_per_on_base": 0.322,
+    "rbi_per_on_base": 0.398,
+    "sb_rate": 0.179,
+    "implied_runs": 4.7
+   }
+  },
+  {
+   "id": "mlb-of-89",
+   "name": "Synthetic HOU OF5",
+   "team": "HOU",
+   "opponent": "SEA",
+   "positions": [
+    "OF"
+   ],
+   "salary": 6011,
+   "game_id": "SEA@HOU",
+   "props": {
+    "pa": 4.359,
+    "p_single": 0.13,
+    "p_double": 0.0375,
+    "p_triple": 0.0005,
+    "p_hr": 0.016,
+    "p_bb": 0.0836,
+    "p_hbp": 0.0164,
+    "run_per_on_base": 0.337,
+    "rbi_per_on_base": 0.353,
+    "sb_rate": 0.197,
+    "implied_runs": 4.7
+   }
+  },
+  {
+   "id": "mlb-of-90",
+   "name": "Synthetic HOU OF6",
+   "team": "HOU",
+   "opponent": "SEA",
+   "positions": [
+    "OF"
+   ],
+   "salary": 5961,
+   "game_id": "SEA@HOU",
+   "props": {
+    "pa": 3.961,
+    "p_single": 0.1499,
+    "p_double": 0.0509,
+    "p_triple": 0.0017,
+    "p_hr": 0.0259,
+    "p_bb": 0.0918,
+    "p_hbp": 0.0157,
+    "run_per_on_base": 0.321,
+    "rbi_per_on_base": 0.258,
+    "sb_rate": 0.003,
+    "implied_runs": 4.7
+   }
+  },
+  {
+   "id": "mlb-sp-91",
+   "name": "Synthetic PHI SP1",
+   "team": "PHI",
+   "opponent": "ATL",
+   "positions": [
+    "SP"
+   ],
+   "salary": 5648,
+   "game_id": "PHI@ATL",
+   "props": {
+    "outs": 17.994,
+    "so_per_out": 0.3111,
+    "bb_per_out": 0.09,
+    "hit_per_out": 0.3037,
+    "run_per_out": 0.1117,
+    "er_per_out": 0.114,
+    "hbp_per_out": 0.0071,
+    "win_prob": 0.513,
+    "implied_runs": 3.9
+   }
+  },
+  {
+   "id": "mlb-sp-92",
+   "name": "Synthetic PHI SP2",
+   "team": "PHI",
+   "opponent": "ATL",
+   "positions": [
+    "SP"
+   ],
+   "salary": 8858,
+   "game_id": "PHI@ATL",
+   "props": {
+    "outs": 16.582,
+    "so_per_out": 0.269,
+    "bb_per_out": 0.0642,
+    "hit_per_out": 0.2401,
+    "run_per_out": 0.1259,
+    "er_per_out": 0.097,
+    "hbp_per_out": 0.0109,
+    "win_prob": 0.332,
+    "implied_runs": 3.9
+   }
+  },
+  {
+   "id": "mlb-sp-93",
+   "name": "Synthetic PHI SP3",
+   "team": "PHI",
+   "opponent": "ATL",
+   "positions": [
+    "SP"
+   ],
+   "salary": 9355,
+   "game_id": "PHI@ATL",
+   "props": {
+    "outs": 14.089,
+    "so_per_out": 0.2643,
+    "bb_per_out": 0.1044,
+    "hit_per_out": 0.2457,
+    "run_per_out": 0.1204,
+    "er_per_out": 0.1259,
+    "hbp_per_out": 0.0112,
+    "win_prob": 0.308,
+    "implied_runs": 3.9
+   }
+  },
+  {
+   "id": "mlb-sp-94",
+   "name": "Synthetic PHI SP4",
+   "team": "PHI",
+   "opponent": "ATL",
+   "positions": [
+    "SP"
+   ],
+   "salary": 5894,
+   "game_id": "PHI@ATL",
+   "props": {
+    "outs": 14.497,
+    "so_per_out": 0.2505,
+    "bb_per_out": 0.0649,
+    "hit_per_out": 0.2497,
+    "run_per_out": 0.152,
+    "er_per_out": 0.1191,
+    "hbp_per_out": 0.0113,
+    "win_prob": 0.561,
+    "implied_runs": 3.9
+   }
+  },
+  {
+   "id": "mlb-c-95",
+   "name": "Synthetic PHI C1",
+   "team": "PHI",
+   "opponent": "ATL",
+   "positions": [
+    "C"
+   ],
+   "salary": 4325,
+   "game_id": "PHI@ATL",
+   "props": {
+    "pa": 4.726,
+    "p_single": 0.1406,
+    "p_double": 0.0442,
+    "p_triple": 0.0014,
+    "p_hr": 0.0266,
+    "p_bb": 0.0878,
+    "p_hbp": 0.0132,
+    "run_per_on_base": 0.354,
+    "rbi_per_on_base": 0.231,
+    "sb_rate": 0.164,
+    "implied_runs": 3.9
+   }
+  },
+  {
+   "id": "mlb-1b-96",
+   "name": "Synthetic PHI 1B1",
+   "team": "PHI",
+   "opponent": "ATL",
+   "positions": [
+    "1B"
+   ],
+   "salary": 6254,
+   "game_id": "PHI@ATL",
+   "props": {
+    "pa": 3.793,
+    "p_single": 0.1703,
+    "p_double": 0.0683,
+    "p_triple": 0.0002,
+    "p_hr": 0.0228,
+    "p_bb": 0.0726,
+    "p_hbp": 0.01,
+    "run_per_on_base": 0.307,
+    "rbi_per_on_base": 0.335,
+    "sb_rate": 0.089,
+    "implied_runs": 3.9
+   }
+  },
+  {
+   "id": "mlb-2b-97",
+   "name": "Synthetic PHI 2B1",
+   "team": "PHI",
+   "opponent": "ATL",
+   "positions": [
+    "2B"
+   ],
+   "salary": 3125,
+   "game_id": "PHI@ATL",
+   "props": {
+    "pa": 4.313,
+    "p_single": 0.123,
+    "p_double": 0.051,
+    "p_triple": 0.0043,
+    "p_hr": 0.0165,
+    "p_bb": 0.1129,
+    "p_hbp": 0.016,
+    "run_per_on_base": 0.284,
+    "rbi_per_on_base": 0.347,
+    "sb_rate": 0.13,
+    "implied_runs": 3.9
+   }
+  },
+  {
+   "id": "mlb-3b-98",
+   "name": "Synthetic PHI 3B1",
+   "team": "PHI",
+   "opponent": "ATL",
+   "positions": [
+    "3B"
+   ],
+   "salary": 4418,
+   "game_id": "PHI@ATL",
+   "props": {
+    "pa": 4.929,
+    "p_single": 0.1655,
+    "p_double": 0.0587,
+    "p_triple": 0.0035,
+    "p_hr": 0.0369,
+    "p_bb": 0.0938,
+    "p_hbp": 0.0125,
+    "run_per_on_base": 0.205,
+    "rbi_per_on_base": 0.214,
+    "sb_rate": 0.075,
+    "implied_runs": 3.9
+   }
+  },
+  {
+   "id": "mlb-ss-99",
+   "name": "Synthetic PHI SS1",
+   "team": "PHI",
+   "opponent": "ATL",
+   "positions": [
+    "SS"
+   ],
+   "salary": 6158,
+   "game_id": "PHI@ATL",
+   "props": {
+    "pa": 4.18,
+    "p_single": 0.1245,
+    "p_double": 0.0568,
+    "p_triple": 0.0057,
+    "p_hr": 0.0406,
+    "p_bb": 0.0649,
+    "p_hbp": 0.0164,
+    "run_per_on_base": 0.297,
+    "rbi_per_on_base": 0.212,
+    "sb_rate": 0.22,
+    "implied_runs": 3.9
+   }
+  },
+  {
+   "id": "mlb-of-100",
+   "name": "Synthetic PHI OF1",
+   "team": "PHI",
+   "opponent": "ATL",
+   "positions": [
+    "OF"
+   ],
+   "salary": 4502,
+   "game_id": "PHI@ATL",
+   "props": {
+    "pa": 4.893,
+    "p_single": 0.1775,
+    "p_double": 0.0522,
+    "p_triple": 0.0048,
+    "p_hr": 0.0178,
+    "p_bb": 0.1133,
+    "p_hbp": 0.007,
+    "run_per_on_base": 0.338,
+    "rbi_per_on_base": 0.396,
+    "sb_rate": 0.012,
+    "implied_runs": 3.9
+   }
+  },
+  {
+   "id": "mlb-of-101",
+   "name": "Synthetic PHI OF2",
+   "team": "PHI",
+   "opponent": "ATL",
+   "positions": [
+    "OF"
+   ],
+   "salary": 3323,
+   "game_id": "PHI@ATL",
+   "props": {
+    "pa": 4.914,
+    "p_single": 0.1633,
+    "p_double": 0.0569,
+    "p_triple": 0.0041,
+    "p_hr": 0.0413,
+    "p_bb": 0.0866,
+    "p_hbp": 0.0168,
+    "run_per_on_base": 0.21,
+    "rbi_per_on_base": 0.308,
+    "sb_rate": 0.118,
+    "implied_runs": 3.9
+   }
+  },
+  {
+   "id": "mlb-of-102",
+   "name": "Synthetic PHI OF3",
+   "team": "PHI",
+   "opponent": "ATL",
+   "positions": [
+    "OF"
+   ],
+   "salary": 5528,
+   "game_id": "PHI@ATL",
+   "props": {
+    "pa": 3.701,
+    "p_single": 0.1495,
+    "p_double": 0.0556,
+    "p_triple": 0.0025,
+    "p_hr": 0.0244,
+    "p_bb": 0.0722,
+    "p_hbp": 0.0116,
+    "run_per_on_base": 0.197,
+    "rbi_per_on_base": 0.272,
+    "sb_rate": 0.083,
+    "implied_runs": 3.9
+   }
+  },
+  {
+   "id": "mlb-of-103",
+   "name": "Synthetic PHI OF4",
+   "team": "PHI",
+   "opponent": "ATL",
+   "positions": [
+    "OF"
+   ],
+   "salary": 4042,
+   "game_id": "PHI@ATL",
+   "props": {
+    "pa": 4.776,
+    "p_single": 0.1537,
+    "p_double": 0.0497,
+    "p_triple": 0.0009,
+    "p_hr": 0.0428,
+    "p_bb": 0.0972,
+    "p_hbp": 0.0153,
+    "run_per_on_base": 0.324,
+    "rbi_per_on_base": 0.397,
+    "sb_rate": 0.202,
+    "implied_runs": 3.9
+   }
+  },
+  {
+   "id": "mlb-of-104",
+   "name": "Synthetic PHI OF5",
+   "team": "PHI",
+   "opponent": "ATL",
+   "positions": [
+    "OF"
+   ],
+   "salary": 2921,
+   "game_id": "PHI@ATL",
+   "props": {
+    "pa": 4.313,
+    "p_single": 0.1565,
+    "p_double": 0.0362,
+    "p_triple": 0.002,
+    "p_hr": 0.026,
+    "p_bb": 0.068,
+    "p_hbp": 0.0107,
+    "run_per_on_base": 0.37,
+    "rbi_per_on_base": 0.354,
+    "sb_rate": 0.149,
+    "implied_runs": 3.9
+   }
+  },
+  {
+   "id": "mlb-of-105",
+   "name": "Synthetic PHI OF6",
+   "team": "PHI",
+   "opponent": "ATL",
+   "positions": [
+    "OF"
+   ],
+   "salary": 5786,
+   "game_id": "PHI@ATL",
+   "props": {
+    "pa": 3.875,
+    "p_single": 0.1403,
+    "p_double": 0.0384,
+    "p_triple": 0.0053,
+    "p_hr": 0.0342,
+    "p_bb": 0.1128,
+    "p_hbp": 0.0064,
+    "run_per_on_base": 0.233,
+    "rbi_per_on_base": 0.209,
+    "sb_rate": 0.128,
+    "implied_runs": 3.9
+   }
+  },
+  {
+   "id": "mlb-sp-106",
+   "name": "Synthetic ATL SP1",
+   "team": "ATL",
+   "opponent": "PHI",
+   "positions": [
+    "SP"
+   ],
+   "salary": 9257,
+   "game_id": "PHI@ATL",
+   "props": {
+    "outs": 19.289,
+    "so_per_out": 0.238,
+    "bb_per_out": 0.0699,
+    "hit_per_out": 0.2733,
+    "run_per_out": 0.1086,
+    "er_per_out": 0.108,
+    "hbp_per_out": 0.0124,
+    "win_prob": 0.502,
+    "implied_runs": 3.7
+   }
+  },
+  {
+   "id": "mlb-sp-107",
+   "name": "Synthetic ATL SP2",
+   "team": "ATL",
+   "opponent": "PHI",
+   "positions": [
+    "SP"
+   ],
+   "salary": 5705,
+   "game_id": "PHI@ATL",
+   "props": {
+    "outs": 14.182,
+    "so_per_out": 0.312,
+    "bb_per_out": 0.0939,
+    "hit_per_out": 0.2953,
+    "run_per_out": 0.1308,
+    "er_per_out": 0.1105,
+    "hbp_per_out": 0.0109,
+    "win_prob": 0.372,
+    "implied_runs": 3.7
+   }
+  },
+  {
+   "id": "mlb-sp-108",
+   "name": "Synthetic ATL SP3",
+   "team": "ATL",
+   "opponent": "PHI",
+   "positions": [
+    "SP"
+   ],
+   "salary": 7259,
+   "game_id": "PHI@ATL",
+   "props": {
+    "outs": 19.791,
+    "so_per_out": 0.2738,
+    "bb_per_out": 0.0876,
+    "hit_per_out": 0.2336,
+    "run_per_out": 0.1201,
+    "er_per_out": 0.124,
+    "hbp_per_out": 0.0082,
+    "win_prob": 0.559,
+    "implied_runs": 3.7
+   }
+  },
+  {
+   "id": "mlb-sp-109",
+   "name": "Synthetic ATL SP4",
+   "team": "ATL",
+   "opponent": "PHI",
+   "positions": [
+    "SP"
+   ],
+   "salary": 6715,
+   "game_id": "PHI@ATL",
+   "props": {
+    "outs": 19.965,
+    "so_per_out": 0.2719,
+    "bb_per_out": 0.1046,
+    "hit_per_out": 0.2603,
+    "run_per_out": 0.1129,
+    "er_per_out": 0.1214,
+    "hbp_per_out": 0.0098,
+    "win_prob": 0.541,
+    "implied_runs": 3.7
+   }
+  },
+  {
+   "id": "mlb-c-110",
+   "name": "Synthetic ATL C1",
+   "team": "ATL",
+   "opponent": "PHI",
+   "positions": [
+    "C"
+   ],
+   "salary": 4744,
+   "game_id": "PHI@ATL",
+   "props": {
+    "pa": 3.916,
+    "p_single": 0.1567,
+    "p_double": 0.0544,
+    "p_triple": 0.0058,
+    "p_hr": 0.0341,
+    "p_bb": 0.0678,
+    "p_hbp": 0.008,
+    "run_per_on_base": 0.198,
+    "rbi_per_on_base": 0.2,
+    "sb_rate": 0.178,
+    "implied_runs": 3.7
+   }
+  },
+  {
+   "id": "mlb-1b-111",
+   "name": "Synthetic ATL 1B1",
+   "team": "ATL",
+   "opponent": "PHI",
+   "positions": [
+    "1B"
+   ],
+   "salary": 5762,
+   "game_id": "PHI@ATL",
+   "props": {
+    "pa": 4.94,
+    "p_single": 0.1411,
+    "p_double": 0.0592,
+    "p_triple": 0.0014,
+    "p_hr": 0.0444,
+    "p_bb": 0.0606,
+    "p_hbp": 0.0117,
+    "run_per_on_base": 0.317,
+    "rbi_per_on_base": 0.32,
+    "sb_rate": 0.178,
+    "implied_runs": 3.7
+   }
+  },
+  {
+   "id": "mlb-2b-112",
+   "name": "Synthetic ATL 2B1",
+   "team": "ATL",
+   "opponent": "PHI",
+   "positions": [
+    "2B"
+   ],
+   "salary": 4798,
+   "game_id": "PHI@ATL",
+   "props": {
+    "pa": 4.32,
+    "p_single": 0.1253,
+    "p_double": 0.0497,
+    "p_triple": 0.0045,
+    "p_hr": 0.0206,
+    "p_bb": 0.1154,
+    "p_hbp": 0.0104,
+    "run_per_on_base": 0.256,
+    "rbi_per_on_base": 0.208,
+    "sb_rate": 0.214,
+    "implied_runs": 3.7
+   }
+  },
+  {
+   "id": "mlb-3b-113",
+   "name": "Synthetic ATL 3B1",
+   "team": "ATL",
+   "opponent": "PHI",
+   "positions": [
+    "3B"
+   ],
+   "salary": 4272,
+   "game_id": "PHI@ATL",
+   "props": {
+    "pa": 4.692,
+    "p_single": 0.1657,
+    "p_double": 0.0686,
+    "p_triple": 0.0023,
+    "p_hr": 0.0244,
+    "p_bb": 0.1103,
+    "p_hbp": 0.0072,
+    "run_per_on_base": 0.213,
+    "rbi_per_on_base": 0.304,
+    "sb_rate": 0.171,
+    "implied_runs": 3.7
+   }
+  },
+  {
+   "id": "mlb-ss-114",
+   "name": "Synthetic ATL SS1",
+   "team": "ATL",
+   "opponent": "PHI",
+   "positions": [
+    "SS"
+   ],
+   "salary": 6194,
+   "game_id": "PHI@ATL",
+   "props": {
+    "pa": 4.227,
+    "p_single": 0.1668,
+    "p_double": 0.0608,
+    "p_triple": 0.0012,
+    "p_hr": 0.0238,
+    "p_bb": 0.0922,
+    "p_hbp": 0.0104,
+    "run_per_on_base": 0.314,
+    "rbi_per_on_base": 0.267,
+    "sb_rate": 0.172,
+    "implied_runs": 3.7
+   }
+  },
+  {
+   "id": "mlb-of-115",
+   "name": "Synthetic ATL OF1",
+   "team": "ATL",
+   "opponent": "PHI",
+   "positions": [
+    "OF"
+   ],
+   "salary": 5989,
+   "game_id": "PHI@ATL",
+   "props": {
+    "pa": 4.609,
+    "p_single": 0.1446,
+    "p_double": 0.0457,
+    "p_triple": 0.0053,
+    "p_hr": 0.0284,
+    "p_bb": 0.0732,
+    "p_hbp": 0.0059,
+    "run_per_on_base": 0.265,
+    "rbi_per_on_base": 0.265,
+    "sb_rate": 0.025,
+    "implied_runs": 3.7
+   }
+  },
+  {
+   "id": "mlb-of-116",
+   "name": "Synthetic ATL OF2",
+   "team": "ATL",
+   "opponent": "PHI",
+   "positions": [
+    "OF"
+   ],
+   "salary": 6009,
+   "game_id": "PHI@ATL",
+   "props": {
+    "pa": 4.881,
+    "p_single": 0.1454,
+    "p_double": 0.0649,
+    "p_triple": 0.0032,
+    "p_hr": 0.0283,
+    "p_bb": 0.0847,
+    "p_hbp": 0.0152,
+    "run_per_on_base": 0.3,
+    "rbi_per_on_base": 0.415,
+    "sb_rate": 0.185,
+    "implied_runs": 3.7
+   }
+  },
+  {
+   "id": "mlb-of-117",
+   "name": "Synthetic ATL OF3",
+   "team": "ATL",
+   "opponent": "PHI",
+   "positions": [
+    "OF"
+   ],
+   "salary": 5445,
+   "game_id": "PHI@ATL",
+   "props": {
+    "pa": 4.709,
+    "p_single": 0.1548,
+    "p_double": 0.0667,
+    "p_triple": 0.0026,
+    "p_hr": 0.0154,
+    "p_bb": 0.101,
+    "p_hbp": 0.0125,
+    "run_per_on_base": 0.272,
+    "rbi_per_on_base": 0.285,
+    "sb_rate": 0.201,
+    "implied_runs": 3.7
+   }
+  },
+  {
+   "id": "mlb-of-118",
+   "name": "Synthetic ATL OF4",
+   "team": "ATL",
+   "opponent": "PHI",
+   "positions": [
+    "OF"
+   ],
+   "salary": 4659,
+   "game_id": "PHI@ATL",
+   "props": {
+    "pa": 4.378,
+    "p_single": 0.1236,
+    "p_double": 0.0482,
+    "p_triple": 0.0053,
+    "p_hr": 0.0342,
+    "p_bb": 0.0695,
+    "p_hbp": 0.0166,
+    "run_per_on_base": 0.213,
+    "rbi_per_on_base": 0.419,
+    "sb_rate": 0.163,
+    "implied_runs": 3.7
+   }
+  },
+  {
+   "id": "mlb-of-119",
+   "name": "Synthetic ATL OF5",
+   "team": "ATL",
+   "opponent": "PHI",
+   "positions": [
+    "OF"
+   ],
+   "salary": 4453,
+   "game_id": "PHI@ATL",
+   "props": {
+    "pa": 4.612,
+    "p_single": 0.1554,
+    "p_double": 0.0379,
+    "p_triple": 0.0033,
+    "p_hr": 0.024,
+    "p_bb": 0.1125,
+    "p_hbp": 0.0066,
+    "run_per_on_base": 0.192,
+    "rbi_per_on_base": 0.319,
+    "sb_rate": 0.156,
+    "implied_runs": 3.7
+   }
+  },
+  {
+   "id": "mlb-of-120",
+   "name": "Synthetic ATL OF6",
+   "team": "ATL",
+   "opponent": "PHI",
+   "positions": [
+    "OF"
+   ],
+   "salary": 3656,
+   "game_id": "PHI@ATL",
+   "props": {
+    "pa": 4.301,
+    "p_single": 0.1205,
+    "p_double": 0.0596,
+    "p_triple": 0.0046,
+    "p_hr": 0.0266,
+    "p_bb": 0.0943,
+    "p_hbp": 0.0128,
+    "run_per_on_base": 0.302,
+    "rbi_per_on_base": 0.245,
+    "sb_rate": 0.047,
+    "implied_runs": 3.7
+   }
+  }
+ ]
+}

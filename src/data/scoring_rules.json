@@ -1,148 +1,290 @@
 {
-  "_comment": "Scoring rules verified live 2026-09-22 against official DraftKings rules pages (https://www.draftkings.com/help/rules/{1=NFL,2=MLB,3=NHL,4=NBA}) and official FanDuel rules (https://www.fanduel.com/rules). No hallucinations: every number matches the official page.",
+  "_meta": {
+    "verified_on": "2026-09-22",
+    "method": "Every coefficient below was read directly off the official rules page named in that block's `source` field using fetch_page on 2026-09-22. If a coefficient is not on the official page it is not in this file.",
+    "special_rules_note": "Non-linear bonuses (NBA double/triple-double, NFL yardage bonuses, NHL hat-trick/5+ shot/3+ block/3+ point bonuses, DK MLB complete game/shutout/no-hitter) are listed under `bonus_rules` and are applied by src/stokengineer/rules.py only when the stat line qualifies.",
+    "dst_points_allowed_note": "Points-allowed (PA) tiers are stored as an ordered table. DK NFL rules state PA 'only includes points surrendered while DST is on the field'; this engine is handed the PA value by the caller."
+  },
   "draftkings": {
     "nfl": {
-      "pass_yard": 0.04,
-      "pass_td": 4,
-      "pass_bonus_300": 3,
-      "interception": -1,
-      "rush_yard": 0.1,
-      "rush_td": 6,
-      "rush_bonus_100": 3,
-      "rec": 1,
-      "rec_yard": 0.1,
-      "rec_td": 6,
-      "rec_bonus_100": 3,
-      "fumble_lost": -1,
-      "two_pt": 2,
-      "dst_sack": 1,
-      "dst_int": 2,
-      "dst_fumble_rec": 2,
-      "dst_safety": 2,
-      "dst_blocked_kick": 2,
-      "dst_0_pa": 10,
-      "dst_1_6_pa": 7,
-      "dst_7_13_pa": 4,
-      "dst_14_20_pa": 1,
-      "dst_21_27_pa": 0,
-      "dst_28_34_pa": -1,
-      "dst_35_plus_pa": -4,
-      "source": "https://www.draftkings.com/help/rules/1"
+      "verified": "official",
+      "source": "https://www.draftkings.com/help/rules/1",
+      "verified_on": "2026-09-22",
+      "salary_cap": 50000,
+      "stats": {
+        "pass_td": 4,
+        "pass_yd": 0.04,
+        "pass_300_bonus": 3,
+        "pass_int": -1,
+        "rush_td": 6,
+        "rush_yd": 0.1,
+        "rush_100_bonus": 3,
+        "rec_td": 6,
+        "rec_yd": 0.1,
+        "rec_100_bonus": 3,
+        "rec": 1,
+        "ret_td": 6,
+        "fumble_lost": -1,
+        "two_pt": 2,
+        "off_fum_rec_td": 6
+      },
+      "dst_stats": {
+        "dst_sack": 1,
+        "dst_int": 2,
+        "dst_fum_rec": 2,
+        "dst_ret_td": 6,
+        "dst_safety": 2,
+        "dst_blocked_kick": 2,
+        "dst_2pt_ret": 2
+      },
+      "dst_points_allowed_table": [
+        {"min": 0, "max": 0, "points": 10},
+        {"min": 1, "max": 6, "points": 7},
+        {"min": 7, "max": 13, "points": 4},
+        {"min": 14, "max": 20, "points": 1},
+        {"min": 21, "max": 27, "points": 0},
+        {"min": 28, "max": 34, "points": -1},
+        {"min": 35, "max": null, "points": -4}
+      ],
+      "bonus_rules": [
+        {"id": "pass_300_bonus", "when": "pass_yd >= 300", "points": 3},
+        {"id": "rush_100_bonus", "when": "rush_yd >= 100", "points": 3},
+        {"id": "rec_100_bonus", "when": "rec_yd >= 100", "points": 3}
+      ]
     },
     "nba": {
-      "point": 1,
-      "made_three_bonus": 0.5,
-      "rebound": 1.25,
-      "assist": 1.5,
-      "steal": 2,
-      "block": 2,
-      "turnover": -0.5,
-      "double_double": 1.5,
-      "triple_double": 3,
-      "source": "https://www.draftkings.com/help/rules/4"
+      "verified": "official",
+      "source": "https://www.draftkings.com/help/rules/4",
+      "verified_on": "2026-09-22",
+      "salary_cap": 50000,
+      "stats": {
+        "pts": 1,
+        "fg3m": 0.5,
+        "reb": 1.25,
+        "ast": 1.5,
+        "stl": 2,
+        "blk": 2,
+        "to": -0.5
+      },
+      "bonus_rules": [
+        {"id": "double_double", "when": "at least two of {pts, reb, ast, stl, blk} >= 10", "points": 1.5, "max_per_player": 1},
+        {"id": "triple_double", "when": "at least three of {pts, reb, ast, stl, blk} >= 10", "points": 3, "max_per_player": 1}
+      ]
     },
     "mlb": {
-      "single": 3,
-      "double": 5,
-      "triple": 8,
-      "home_run": 10,
-      "rbi": 2,
-      "run": 2,
-      "bb": 2,
-      "hbp": 2,
-      "sb": 5,
-      "ip": 2.25,
-      "strikeout": 2,
-      "win": 4,
-      "er": -2,
-      "hit_against": -0.6,
-      "bb_against": -0.6,
-      "hit_batsman": -0.6,
-      "complete_game": 2.5,
-      "shutout": 2.5,
-      "no_hitter": 5,
-      "source": "https://www.draftkings.com/help/rules/2"
+      "verified": "official",
+      "source": "https://www.draftkings.com/help/rules/2",
+      "verified_on": "2026-09-22",
+      "salary_cap": 50000,
+      "stats": {
+        "single": 3,
+        "double": 5,
+        "triple": 8,
+        "hr": 10,
+        "rbi": 2,
+        "run": 2,
+        "bb": 2,
+        "hbp": 2,
+        "sb": 5
+      },
+      "pitching_stats": {
+        "ip": 2.25,
+        "so": 2,
+        "win": 4,
+        "er": -2,
+        "hit_against": -0.6,
+        "bb_against": -0.6,
+        "hit_batsman": -0.6
+      },
+      "pitching_bonus_rules": [
+        {"id": "complete_game", "when": "complete_game == true", "points": 2.5},
+        {"id": "complete_game_shutout", "when": "complete_game_shutout == true", "points": 2.5},
+        {"id": "no_hitter", "when": "no_hitter == true", "points": 5}
+      ],
+      "note": "Official page: hitting stats for pitchers do not count and pitching stats for hitters do not count."
     },
     "nhl": {
-      "goal": 8.5,
-      "assist": 5,
-      "sog": 1.5,
-      "blocked_shot": 1.3,
-      "short_handed_bonus": 2,
-      "shootout_goal": 1.5,
-      "hat_trick_bonus": 3,
-      "five_plus_shots_bonus": 3,
-      "three_plus_blocked_bonus": 3,
-      "three_plus_points_bonus": 3,
-      "goalie_win": 6,
-      "goalie_save": 0.7,
-      "goal_against": -3.5,
-      "shutout_bonus": 4,
-      "overtime_loss": 2,
-      "35_plus_saves_bonus": 3,
-      "source": "https://www.draftkings.com/help/rules/3"
-    },
-    "salary_cap": 50000,
-    "source_cap": "https://www.draftkings.com/help/rules/1 (each sport rules page states a $50,000 salary cap)"
+      "verified": "official",
+      "source": "https://www.draftkings.com/help/rules/3",
+      "verified_on": "2026-09-22",
+      "salary_cap": 50000,
+      "stats": {
+        "goal": 8.5,
+        "assist": 5,
+        "sog": 1.5,
+        "blocked_shot": 1.3,
+        "shp": 2,
+        "shootout_goal": 1.5
+      },
+      "goalie_stats": {
+        "g_win": 6,
+        "g_save": 0.7,
+        "g_ga": -3.5,
+        "g_shutout": 4,
+        "g_ot_loss": 2
+      },
+      "bonus_rules": [
+        {"id": "hat_trick", "when": "goal >= 3", "points": 3},
+        {"id": "shots_5plus", "when": "sog >= 5", "points": 3},
+        {"id": "blocks_3plus", "when": "blocked_shot >= 3", "points": 3},
+        {"id": "points_3plus", "when": "goal + assist >= 3", "points": 3},
+        {"id": "saves_35plus", "when": "g_save >= 35", "points": 3}
+      ],
+      "note": "Goalies receive points for all stats they accrue, including goals and assists (official scoring note)."
+    }
   },
   "fanduel": {
     "nfl": {
-      "pass_yard": 0.04,
-      "pass_td": 4,
-      "pass_bonus_300": 3,
-      "interception": -1,
-      "rush_yard": 0.1,
-      "rush_td": 6,
-      "rush_bonus_100": 3,
-      "rec": 0.5,
-      "rec_yard": 0.1,
-      "rec_td": 6,
-      "rec_bonus_100": 3,
-      "fumble_lost": -2,
-      "two_pt": 2,
-      "source": "https://www.fanduel.com/rules"
+      "verified": "official",
+      "source": "https://www.fanduel.com/rules",
+      "verified_on": "2026-09-22",
+      "salary_cap": 60000,
+      "salary_cap_verified": "third-party",
+      "stats": {
+        "rec": 0.5,
+        "rec_yd": 0.1,
+        "rec_100_bonus": 3,
+        "rec_td": 6,
+        "rush_yd": 0.1,
+        "rush_100_bonus": 3,
+        "rush_td": 6,
+        "pass_yd": 0.04,
+        "pass_300_bonus": 3,
+        "pass_td": 4,
+        "pass_int": -1,
+        "ret_td": 6,
+        "fumble_lost": -2,
+        "two_pt": 2,
+        "two_pt_pass": 2,
+        "off_fum_rec_td": 6,
+        "fg_0_39": 3,
+        "fg_40_49": 4,
+        "fg_50_plus": 5,
+        "xp": 1
+      },
+      "dst_stats": {
+        "dst_sack": 1,
+        "dst_fum_rec": 2,
+        "dst_ret_td": 6,
+        "dst_2pt_ret": 2,
+        "dst_safety": 2,
+        "dst_blocked_kick": 2,
+        "dst_int": 2
+      },
+      "dst_points_allowed_table": [
+        {"min": 0, "max": 0, "points": 10},
+        {"min": 1, "max": 6, "points": 7},
+        {"min": 7, "max": 13, "points": 4},
+        {"min": 14, "max": 20, "points": 1},
+        {"min": 21, "max": 27, "points": 0},
+        {"min": 28, "max": 34, "points": -1},
+        {"min": 35, "max": null, "points": -4}
+      ],
+      "note": "FG/XP scoring appears on the official FanDuel rules page; classic FanDuel NFL lineups as listed in roster_rules.json have no kicker slot, so those keys only apply to formats that use them."
     },
     "nba": {
-      "point_3pm": 3,
-      "point_2pm": 2,
-      "ft": 1,
-      "rebound": 1.2,
-      "assist": 1.5,
-      "steal": 3,
-      "block": 3,
-      "turnover": -1,
-      "source": "https://www.fanduel.com/rules"
+      "verified": "official",
+      "source": "https://www.fanduel.com/rules",
+      "verified_on": "2026-09-22",
+      "salary_cap": 60000,
+      "salary_cap_verified": "third-party",
+      "stats": {
+        "fg3m": 3,
+        "fg2m": 2,
+        "ft": 1,
+        "reb": 1.2,
+        "ast": 1.5,
+        "blk": 3,
+        "stl": 3,
+        "to": -1
+      },
+      "note": "FanDuel NBA has no double-double or triple-double bonus (its official scoring table lists none), unlike DraftKings. 'fg2m' is a distinct key from 'pts' because FanDuel scores 2-pt and 3-pt makes separately."
     },
     "mlb": {
-      "single": 3,
-      "double": 6,
-      "triple": 9,
-      "home_run": 12,
-      "rbi": 3.5,
-      "run": 3.2,
-      "bb": 3,
-      "sb": 6,
-      "hbp": 3,
-      "pitcher_win": 6,
-      "quality_start": 4,
-      "er": -3,
-      "strikeout": 3,
-      "ip": 3,
-      "source": "https://www.fanduel.com/rules"
+      "verified": "official",
+      "source": "https://www.fanduel.com/rules",
+      "verified_on": "2026-09-22",
+      "salary_cap": 60000,
+      "salary_cap_verified": "third-party",
+      "stats": {
+        "single": 3,
+        "double": 6,
+        "triple": 9,
+        "hr": 12,
+        "rbi": 3.5,
+        "run": 3.2,
+        "bb": 3,
+        "sb": 6,
+        "hbp": 3
+      },
+      "pitching_stats": {
+        "win": 6,
+        "quality_start": 4,
+        "er": -3,
+        "so": 3,
+        "ip": 3
+      },
+      "note": "Official FanDuel note: 'Fractional scoring per out' for IP; a Quality Start is a start of >= 6 IP with <= 3 earned runs."
     },
-    "salary_cap": 60000,
-    "source_cap": "https://www.fanduel.com/rules (FanDuel classic contests; $60,000 cap also documented in third-party comparisons cited in README)"
+    "nhl": {
+      "verified": "official",
+      "source": "https://www.fanduel.com/rules",
+      "verified_on": "2026-09-22",
+      "salary_cap": 55000,
+      "salary_cap_verified": "third-party",
+      "stats": {
+        "goal": 12,
+        "assist": 8,
+        "sog": 1.6,
+        "shp": 2,
+        "ppp": 0.5,
+        "blocked_shot": 1.6
+      },
+      "goalie_stats": {
+        "g_win": 12,
+        "g_ga": -4,
+        "g_save": 0.8,
+        "g_shutout": 8
+      },
+      "note": "Official FanDuel note: 'No points are awarded for goals or saves during shootouts.'"
+    }
   },
-  "formulas": {
-    "value": "FP - (Salary/1000*5)",
-    "value_source": "https://www.stokastic.com/articles/nba-dfs/how-to-use-nba-dfs-projections",
-    "pts_per_dollar": "FP / Salary * 1000",
-    "pts_per_dollar_source": "https://www.stokastic.com/articles/nba-dfs/how-to-use-nba-dfs-projections",
-    "boom_definition": "P(FP > salary/1000*5 + 10) — (~5x salary/1000 + 10 FP)",
-    "boom_source": "https://www.stokastic.com/articles/nba-dfs/nba-dfs-boom-bust-strategy",
-    "bust_definition": "P(FP < salary/1000*5) — failing to clear 5x salary/1000",
-    "bust_source": "https://www.stokastic.com/articles/nba-dfs/nba-dfs-boom-bust-strategy",
-    "implied_team_total": "total/2 + spread/2 (favorite); total/2 - spread/2 (underdog)",
-    "implied_source": "https://www.stokastic.com/articles/nfl-dfs/nfl-dfs-defense-strategy"
+  "stokastic_derived_metrics": {
+    "verified_on": "2026-09-22",
+    "value": {
+      "formula": "fp - (salary / 1000 * 5)",
+      "source": "https://www.stokastic.com/articles/nba-dfs/how-to-use-nba-dfs-projections",
+      "quote": "Value = Fantasy Projection - (Salary / 1,000 x 5). Using that same $10,000 center at 55 points: 55 - (10 x 5) = a value of 5.0"
+    },
+    "points_per_dollar": {
+      "formula": "fp / salary * 1000",
+      "source": "https://www.stokastic.com/articles/nba-dfs/how-to-use-nba-dfs-projections",
+      "quote": "Points per dollar (Pts/$) ... The formula is simple: Fantasy Points / Salary x 1,000. Say a top-tier center projects for 55 fantasy points at a $10,000 salary ... gives you 5.5 points per dollar."
+    },
+    "boom_threshold": {
+      "formula": "5 * (salary / 1000) + 10",
+      "source": "https://www.stokastic.com/articles/nba-dfs/nba-dfs-boom-bust-strategy",
+      "quote": "Success ('boom') is reaching about 5 x (salary/1000) + 10 fantasy points ... a $9,000 player needs ~45 to clear value and ~55 to 'boom,' while a $4,000 punt only needs ~20 and ~30."
+    },
+    "bust_threshold": {
+      "formula": "5 * (salary / 1000)",
+      "source": "https://www.stokastic.com/articles/nba-dfs/nba-dfs-boom-bust-strategy",
+      "quote": "failure ('bust') is falling short of 5 x (salary/1000)"
+    },
+    "ceiling_definition": {
+      "formula": "75th percentile of the player's simulated outcome distribution",
+      "source": "https://www.stokastic.com/articles/nba-dfs/nba-dfs-boom-bust-strategy",
+      "quote": "Ceiling projection - the 75th-percentile outcome."
+    },
+    "floor_definition": {
+      "formula": "25th percentile of the player's simulated outcome distribution",
+      "source": "https://www.stokastic.com/articles/nba-dfs/nba-dfs-boom-bust-strategy",
+      "quote": "Floor projection - the 25th-percentile outcome."
+    },
+    "implied_team_total": {
+      "formula": "total/2 + spread/2 (favorite); total/2 - spread/2 (underdog)",
+      "source": "https://www.stokastic.com/articles/nfl-dfs/nfl-dfs-defense-strategy",
+      "quote": "worked example: 44 total with a -7 spread gives the favorite 25.5 and the underdog 18.5"
+    }
   }
 }

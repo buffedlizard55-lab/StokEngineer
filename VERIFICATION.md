@@ -1,74 +1,89 @@
-# Verification Log — Line-by-Line No Hallucinations
+# Verification
 
-This file is the authoritative verification log. Every claim in docs/index.html and code must have a source here.
+How each class of statement in this repository was checked, what could not be checked, and what is
+flagged for a human to look at. The machine-readable versions are
+`src/data/sources_verified.json` (sources) and `src/data/claims.json` (claims).
 
-## Method
-- Fetched live on 2026-09-22 UTC via fetch_page and web_search tools
-- Each claim requires URL that directly states claim
-- If no direct source, flag as irregular/inference
-- All sources stored in src/data/sources_verified.json
+## The mechanism
 
-## 2026-09-22 Re-Verification Pass (this session)
+* **`sources_verified.json`** declares every external source with id, URL, publisher, what it
+  provides, licence/terms, whether it is free, whether a key is required, whether it is the
+  publisher's own page, and *how it was verified*:
+  * `fetched_live` — read from the live page in the session that recorded it (13 sources);
+  * `github_api` — verified through the GitHub API, including the licence file (5 sources);
+  * `carried_over` — recorded in an earlier session and **not** re-fetched (11 sources). These are
+    treated as unverified: no claim in this repository cites one as proof.
+* **`claims.json`** records every factual assertion with the exact quote and the source id.
+  Statuses: `verified` (19), `flagged` (5 — true as quoted but with a caveat a reader must know, or
+  an undocumented endpoint), `not_verified` (1 — the one thing that simply cannot be known from
+  outside: the paid product's internal weights).
+* `Registry.validate()` fails on an undeclared source id, a duplicate id, a non-https URL or a
+  missing verification marker. `python -m src.stokengineer.cli verify` runs that plus the rules
+  integrity checks plus the sample-slate checks, and exits non-zero on any problem. CI runs it.
+* Every report the CLI writes goes through `provenance.write_json_with_provenance`, which records
+  the command, UTC timestamp, python/numpy versions, the payload's SHA-256 and the source ids the
+  run relied on. `reports/` in this repo contains examples produced exactly that way.
+* `tools/check_links.py` walks every URL in the data files, the site and the documentation and
+  reports dead links. It is designed for CI (this sandbox blocks most hosts, so `doctor` reports
+  `PARTIAL` rather than pretending otherwise). URLs that are deliberately not fetched (an http-only
+  copyright notice, a test fixture that must stay unreachable) are listed as exempt, with reasons.
+* `tools/check_site_data.py` regenerates the site payload and compares it with the committed copy.
+  Claim-level sections (sources, claim ledger, rules, limitations, integrity status) must match
+  **exactly** or the build fails. The demo section is a live engine run, and optimisation ties are
+  not portable between machines, so drift there is reported as a warning - with the numbers - rather
+  than silently accepted or falsely declared identical. Nothing about the demo is used as evidence
+  for any claim on the site.
 
-Every source was re-fetched live with `fetch_page`/`web_search`. Corrections applied where the site had moved/redirected since the original build:
+## What was verified, and how
 
-1. **Founder/rebrand claims** — `who-is-awesemo-what-is-stokastic` now redirects to the homepage. Re-sourced: rebrand to the "I started Awesemo.com (now Stokastic.com)" statement in how-to-win-dfs-tournaments; founder background to the RotoGrinders interview (WashU St. Louis, pro poker). The "Mathematics, WashU 2008" degree claim was replaced with the verified wording ("attended Washington University in St. Louis"; degree not restated on the live page).
-2. **Contest-level sim uniqueness** — old `/stokastic-nfl-faq/` redirects. Re-sourced verbatim to the pricing-page FAQ.
-3. **Sim workflow quotes** — old `/join-stokastic-all-access...` redirects. Re-sourced to pricing-page FAQ + stokastic-vs-fantasylabs (both fetched live).
-4. **Implied team total** — old `/nba/how-to-use-vegas-odds...` redirects. Re-sourced to the DST-strategy article's worked example (44 total, -7 => 25.5/18.5).
-5. **DK scoring** — old DK Network / DK Nation article links redirect/404. Re-sourced to official `draftkings.com/help/rules/1-4`, which state every number identically.
-6. **Pricing** — the pricing page defaults to the Stokastic-avatar toggle. Corrected to show list ($329.95/$449.95/$849.95) vs avatar-discounted ($229.95/$349.95/$599.95). Older builds listed the avatar prices as if list.
-7. **"millions of data points"** — lived on a now-redirecting page. Re-sourced to live copy ("tens of thousands of simulated contests" + play-by-play correlation) in stokastic-vs-fantasylabs; flagged.
-8. **Sim ROI bug** — `simulation_engine.py` demo produced ~21,000% Sim ROI because field lineups were generated from a pool the same size as the roster (every field lineup tied the user lineup). Fixed with a realistic payout curve, pool larger than roster, and a guard that raises when pool size == lineup size.
+| Claim area | Source | How |
+| --- | --- | --- |
+| DraftKings scoring, roster shape, caps, multi-game rules (NFL, NBA, MLB, NHL) | `dk_rules_*` | page fetched live; every coefficient transcribed into `scoring_rules.json` / `roster_rules.json` next to its source id |
+| FanDuel scoring (all four sports) | `fd_rules` | page fetched live; roster shapes/caps deliberately left third-party and flagged |
+| MLB schedules, box scores, season aggregates are keyless and official | `mlb_statsapi` | endpoints called live; response shapes confirmed field-by-field; parsed in `ingest.py` |
+| Game odds → implied team totals | `espn_scoreboard`, `sk_nfl_defense` | odds structure read live; the published formula is reproduced and unit-tested against its worked example |
+| Contest metadata (entry fee, prize pool, draft group) is available keyless | `dk_lobby` | endpoint called live; values matched a real contest; flagged as undocumented |
+| Published DFS methodology being reimplemented (boom/bust, value, points-per-$) | `sk_nba_boom_bust`, `sk_nba_projections` | both articles fetched live; the formulas are quoted in the claim ledger and implemented with unit tests |
+| Simulation methodology (correlated sims, ownership-weighted field, ROI-ranked lineups, late swap) | `sk_nfl_review` | review article fetched live; drives the simulator's design |
+| Historical player data is free and openly licensed | `nflverse_data` + assets (CC-BY-4.0), `nba_api` (MIT) | repo metadata and licence files read through the GitHub API |
+| The engine's own behaviour | this repository | 100 tests: rule legality (including the double-double and points-allowed bugs), model distributions, correlation calibration, optimiser legality and solver-vs-fallback agreement, payout arithmetic, leak-free forward-test inputs, registry integrity |
 
-## Verified Claims (24 lines)
+## What could **not** be verified here
 
-| # | Claim | Source URL | Status |
-|---|-------|------------|--------|
-| 1 | Stokastic domain is stokastic.com | https://www.stokastic.com/ | verified |
-| 2 | Formerly Awesemo.com | https://www.stokastic.com/articles/dfs-strategy/how-to-win-dfs-tournaments | verified |
-| 3 | Founder Alex Baker — WashU St. Louis, ex-pro poker | https://rotogrinders.com/articles/interview-with-alex-awesemo-baker-1964792 | verified |
-| 4 | #1 ranked RotoGrinders overall 2017-2021 | https://x.com/AwesemoDFS (bio) + https://rotogrinders.com/articles/interview-with-alex-awesemo-baker-1964792 | verified |
-| 5 | Projections run high-level simulations many times | https://www.oddsshopper.com/articles/betting-101/stokastic-projection-system | verified |
-| 6 | Contest Sims simulate contest tens of thousands times, ranking by ROI | https://www.stokastic.com/articles/nfl-dfs/stokastic-review | verified |
-| 7 | Correlations hold: QB big game drags receivers | https://www.stokastic.com/articles/nfl-dfs/stokastic-review | verified |
-| 8 | Boom/Bust: Ceiling 75th, Floor 25th, Boom% smash, Bust% dud | https://www.stokastic.com/articles/dfs-strategy/dfs-boom-bust-probability + https://www.stokastic.com/articles/nba-dfs/nba-dfs-boom-bust-strategy | verified |
-| 9 | Ownership forecast = % of entries rostering player, map of field behavior | https://www.stokastic.com/articles/mlb-dfs/mlb-dfs-ownership-projections | verified |
-| 10 | MLB chalk follows Vegas implied totals, ballpark, pitching matchups | https://www.stokastic.com/articles/mlb-dfs/mlb-dfs-ownership-projections | verified |
-| 11 | Value formula = FP - (Salary/1000*5) | https://www.stokastic.com/articles/nba-dfs/how-to-use-nba-dfs-projections | verified |
-| 12 | Pts/$ = FP / Salary *1000 | https://www.stokastic.com/articles/nba-dfs/how-to-use-nba-dfs-projections | verified |
-| 13 | Minutes first, no minutes no production, NBA volume-driven | https://www.stokastic.com/articles/nba-dfs/how-to-use-nba-dfs-projections | verified |
-| 14 | Usage = share possessions player finishes | https://www.stokastic.com/articles/nba-dfs/how-to-use-nba-dfs-projections | verified |
-| 15 | Cash vs GPP need opposite builds | https://www.stokastic.com/articles/dfs-strategy/how-to-win-dfs-tournaments | verified |
-| 16 | Late swap biggest edge in NBA | https://www.stokastic.com/articles/dfs-strategy/how-to-win-draftkings-dfs | verified |
-| 17 | Props bottom-up from player data and simulation, vs 15+ books, X-Win/X-ROI/Hold | https://www.oddsshopper.com/props + https://www.oddsshopper.com/articles/betting-101/stokastic-projection-system | verified |
-| 18 | DK NBA scoring: 1 pt, 0.5 3pt bonus, 1.25 reb, 1.5 ast, 2 stl/blk, -0.5 TO, 1.5 DD, 3 TD | https://www.draftkings.com/help/rules/4 | verified |
-| 19 | FD Rules page contains official scoring | https://www.fanduel.com/rules | verified |
-| 20 | MLB Statcast is official tracking tech, installed 2015, Hawk-Eye 2020 | https://www.mlb.com/glossary/statcast | verified |
-| 21 | NBA stats sources ranked: nba_api free wrapper around stats.nba.com | https://nbaanalytic.com/articles/free-basketball-data-sources-ranked.html + https://github.com/swar/nba_api | verified |
-| 22 | All-Access pricing: list $329.95/$449.95/$849.95; avatar $229.95/$349.95/$599.95 (snapshot 2026-09-22) | https://www.stokastic.com/pricing | verified + dynamic flagged |
-| 23 | Exact projection weights proprietary | No public formula found — flagged as proprietary | irregular flagged |
-| 24 | Ownership model algorithm developed over years by Alex Baker | https://www.stokastic.com/articles/dfs-strategy/how-to-win-dfs-tournaments | verified |
+* **Live data integration end to end.** This sandbox blocks `statsapi.mlb.com`, `espn`, and
+  `draftkings.com` (see `doctor`). Shapes and URLs were confirmed by fetching pages, parsers are
+  unit-tested against those shapes, and the forward test is implemented — but it has not been
+  executed against live MLB data from here. Run it in CI or locally.
+* **Anything behind a login or a paywall.** No credentials were used or requested anywhere in this
+  work. Stokastic's internal projection weights, sigma model and ownership coefficients are
+  explicitly recorded as `not_verified` (`c24`) because they cannot be honestly obtained.
+* **FanDuel classic roster shapes and salary caps** (`c18`): not published on the official rules
+  page that was checked.
 
-## Irregularities Flagged for Review
+## Flagged irregularities (for a human to review)
 
-1. **Pricing dynamic + avatar default** — Pricing page uses coupon gating, changes seasonally, and defaults to the Stokastic-avatar discount toggle. Snapshot taken 2026-09-22 (both toggles recorded). Manual reviewer should re-fetch https://www.stokastic.com/pricing live. Flagged in site with orange banner.
+1. `https://www.draftkings.com/lobby/getcontests` and the ESPN scoreboard are **undocumented**
+   endpoints. Public, keyless, live-verified — but not published contracts. Best-effort with CSV
+   fallbacks, and their terms are worth a human read before heavy use. (`c21`, `c22`)
+2. **FanDuel roster/cap gap** (`c18`) — third-party values in use for FanDuel lineups; scoring is
+   official, roster shapes are not.
+3. **MLB box scores are large** (23 fetch-page chunks) and carry MLB's copyright notice; the
+   response shape was confirmed from the visible region, and the parser handles the fields it needs.
+4. **Boom/bust thresholds are borrowed from an NBA article** and applied to all sports; they are
+   aggressive where the salary-to-points relationship differs (notably MLB pitchers). (`c05`, `c07`)
+5. Nine URLs recorded in earlier sessions were **downgraded** rather than silently reused; they are
+   listed in `sources_verified.json → removed_or_downgraded` with the reason, and no claim cites
+   them as verified.
 
-2. **Projection weights proprietary** — Stokastic does not publish exact weights. We use industry-standard heuristic (minutes 40%, usage 25%, matchup 20%, recent form 10%, other 5%). Flagged as inference, not leak.
+## Reproducing this verification
 
-3. **Historical ownership private** — True ownership accuracy requires private contest history. We proxy with optimal% + salary. Need to purchase historical data for production. Flagged in limitations.
-
-4. **Correlation matrix not public** — True correlations require play-by-play joint distributions. We use heuristic 0.6 QB-WR, 0.3 WR-WR, etc. Flagged as inference, need to compute from nflverse in next session.
-
-## No Hallucinations Check
-
-- All sources have URL starting http
-- All sources have verifies field describing what it proves
-- No source invented — each fetched via fetch_page tool live
-- See src/data/sources_verified.json for machine-readable list
-
-## Manual Review Links
-
-All links in docs/index.html bibliography are clickable. Reviewer can click each to verify claim.
-
-Last verified: 2026-09-22 UTC
+```bash
+pip install -r requirements.txt
+python -m src.stokengineer.cli doctor          # environment, hosts actually reachable, registry
+python -m src.stokengineer.cli verify          # registry + claims + rules + sample integrity
+python -m src.stokengineer.cli rules --site draftkings --sport nfl   # every number + its source
+pytest                                          # the behaviour claims above
+python tools/check_links.py                     # every cited URL (needs network)
+python tools/make_sample_data.py --check        # fixtures are reproducible, not hand-edited
+python tools/build_site_data.py                 # rebuild the site data from the above
+```

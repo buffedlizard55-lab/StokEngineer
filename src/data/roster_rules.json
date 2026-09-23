@@ -1,0 +1,582 @@
+{
+ "_meta": {
+  "verified_on": "2026-09-22",
+  "method": "Every DraftKings roster value below was read directly off the official DraftKings rules page for that sport (fetch_page, 2026-09-22). FanDuel does NOT publish roster shapes or salary caps on a public official page as of 2026-09-22 (fanduel.com/rules documents scoring only; /nfl-guide and /nba-guide redirect away). FanDuel roster/cap entries are therefore marked verified:third-party and must be re-checked in the DFS client before being trusted.",
+  "eligibility_note": "A slot's `eligible` list is the set of positions a player must have to fill that slot. FLEX/UTIL slots accept several positions; that is the only thing that makes a lineup legal in these rules.",
+  "constraints_note": "Constraints that are NOT stated on the official page are recorded as null with an explicit note, never guessed."
+ },
+ "draftkings": {
+  "nfl": {
+   "verified": "official",
+   "source": "https://www.draftkings.com/help/rules/1",
+   "verified_on": "2026-09-22",
+   "salary_cap": 50000,
+   "roster_size": 9,
+   "slots": [
+    {
+     "id": "QB",
+     "eligible": [
+      "QB"
+     ]
+    },
+    {
+     "id": "RB1",
+     "eligible": [
+      "RB"
+     ]
+    },
+    {
+     "id": "RB2",
+     "eligible": [
+      "RB"
+     ]
+    },
+    {
+     "id": "WR1",
+     "eligible": [
+      "WR"
+     ]
+    },
+    {
+     "id": "WR2",
+     "eligible": [
+      "WR"
+     ]
+    },
+    {
+     "id": "WR3",
+     "eligible": [
+      "WR"
+     ]
+    },
+    {
+     "id": "TE",
+     "eligible": [
+      "TE"
+     ]
+    },
+    {
+     "id": "FLEX",
+     "eligible": [
+      "RB",
+      "WR",
+      "TE"
+     ]
+    },
+    {
+     "id": "DST",
+     "eligible": [
+      "DST"
+     ]
+    }
+   ],
+   "min_games": 2,
+   "max_players_per_team": null,
+   "notes": "Official page says lineups 'must include players from at least 2 different NFL games' and states the $50,000 cap. No per-team maximum is stated on that page, so it is left null rather than guessed."
+  },
+  "nba": {
+   "verified": "official",
+   "source": "https://www.draftkings.com/help/rules/4",
+   "verified_on": "2026-09-22",
+   "salary_cap": 50000,
+   "roster_size": 8,
+   "slots": [
+    {
+     "id": "PG",
+     "eligible": [
+      "PG"
+     ]
+    },
+    {
+     "id": "SG",
+     "eligible": [
+      "SG"
+     ]
+    },
+    {
+     "id": "SF",
+     "eligible": [
+      "SF"
+     ]
+    },
+    {
+     "id": "PF",
+     "eligible": [
+      "PF"
+     ]
+    },
+    {
+     "id": "C",
+     "eligible": [
+      "C"
+     ]
+    },
+    {
+     "id": "G",
+     "eligible": [
+      "PG",
+      "SG"
+     ]
+    },
+    {
+     "id": "F",
+     "eligible": [
+      "SF",
+      "PF"
+     ]
+    },
+    {
+     "id": "UTIL",
+     "eligible": [
+      "PG",
+      "SG",
+      "SF",
+      "PF",
+      "C"
+     ]
+    }
+   ],
+   "min_games": 2,
+   "max_players_per_team": null,
+   "notes": "Official page: 8 players, at least 2 different NBA games, $50,000 cap."
+  },
+  "mlb": {
+   "verified": "official",
+   "source": "https://www.draftkings.com/help/rules/2",
+   "verified_on": "2026-09-22",
+   "salary_cap": 50000,
+   "roster_size": 10,
+   "slots": [
+    {
+     "id": "P1",
+     "eligible": [
+      "P",
+      "SP",
+      "RP"
+     ]
+    },
+    {
+     "id": "P2",
+     "eligible": [
+      "P",
+      "SP",
+      "RP"
+     ]
+    },
+    {
+     "id": "C",
+     "eligible": [
+      "C"
+     ]
+    },
+    {
+     "id": "1B",
+     "eligible": [
+      "1B"
+     ]
+    },
+    {
+     "id": "2B",
+     "eligible": [
+      "2B"
+     ]
+    },
+    {
+     "id": "3B",
+     "eligible": [
+      "3B"
+     ]
+    },
+    {
+     "id": "SS",
+     "eligible": [
+      "SS"
+     ]
+    },
+    {
+     "id": "OF1",
+     "eligible": [
+      "OF"
+     ]
+    },
+    {
+     "id": "OF2",
+     "eligible": [
+      "OF"
+     ]
+    },
+    {
+     "id": "OF3",
+     "eligible": [
+      "OF"
+     ]
+    }
+   ],
+   "min_games": 2,
+   "max_players_per_team": null,
+   "max_hitters_per_team": 5,
+   "notes": "Official page: 10 players, at least 2 different MLB games, 'no more than 5 hitters from any one team', $50,000 cap. The 5-hitter cap does not limit pitchers, which are scored separately. Interpretation, not a quote: the rules page labels the slot 'P', while real DK/FD salary exports label pitchers 'SP'/'RP'. Accepting all three is what lets a real export load; the slot count (2) and the cap are the verified part."
+  },
+  "nhl": {
+   "verified": "official",
+   "source": "https://www.draftkings.com/help/rules/3",
+   "verified_on": "2026-09-22",
+   "salary_cap": 50000,
+   "roster_size": 9,
+   "slots": [
+    {
+     "id": "C1",
+     "eligible": [
+      "C"
+     ]
+    },
+    {
+     "id": "C2",
+     "eligible": [
+      "C"
+     ]
+    },
+    {
+     "id": "W1",
+     "eligible": [
+      "LW",
+      "RW"
+     ]
+    },
+    {
+     "id": "W2",
+     "eligible": [
+      "LW",
+      "RW"
+     ]
+    },
+    {
+     "id": "W3",
+     "eligible": [
+      "LW",
+      "RW"
+     ]
+    },
+    {
+     "id": "D1",
+     "eligible": [
+      "D"
+     ]
+    },
+    {
+     "id": "D2",
+     "eligible": [
+      "D"
+     ]
+    },
+    {
+     "id": "UTIL",
+     "eligible": [
+      "LW",
+      "RW",
+      "C",
+      "D"
+     ]
+    },
+    {
+     "id": "G",
+     "eligible": [
+      "G"
+     ]
+    }
+   ],
+   "min_games": 2,
+   "min_skater_teams": 3,
+   "max_players_per_team": null,
+   "notes": "Official page: 9 players; 'must include skaters (non-goalies) from at least 3 different NHL teams'; $50,000 cap."
+  }
+ },
+ "fanduel": {
+  "nfl": {
+   "verified": "third-party",
+   "source": "https://www.fanduel.com/rules",
+   "source_scope": "scoring only",
+   "verified_on": "2026-09-22",
+   "salary_cap": 60000,
+   "roster_size": 9,
+   "slots": [
+    {
+     "id": "QB",
+     "eligible": [
+      "QB"
+     ]
+    },
+    {
+     "id": "RB1",
+     "eligible": [
+      "RB"
+     ]
+    },
+    {
+     "id": "RB2",
+     "eligible": [
+      "RB"
+     ]
+    },
+    {
+     "id": "WR1",
+     "eligible": [
+      "WR"
+     ]
+    },
+    {
+     "id": "WR2",
+     "eligible": [
+      "WR"
+     ]
+    },
+    {
+     "id": "WR3",
+     "eligible": [
+      "WR"
+     ]
+    },
+    {
+     "id": "TE",
+     "eligible": [
+      "TE"
+     ]
+    },
+    {
+     "id": "FLEX",
+     "eligible": [
+      "RB",
+      "WR",
+      "TE"
+     ]
+    },
+    {
+     "id": "DEF",
+     "eligible": [
+      "DST"
+     ]
+    }
+   ],
+   "min_games": 2,
+   "max_players_per_team": null,
+   "notes": "FLAGGED: FanDuel publishes scoring at fanduel.com/rules (verified official) but not the classic roster/cap on any public official page found 2026-09-22 (fanduel.com/nfl-guide redirects to FanDuel Research). These values match the roster shown in the FanDuel DFS client and multiple independent third-party references; treat as unverified-official and confirm in-client."
+  },
+  "nba": {
+   "verified": "third-party",
+   "source": "https://www.fanduel.com/rules",
+   "source_scope": "scoring only",
+   "verified_on": "2026-09-22",
+   "salary_cap": 60000,
+   "roster_size": 9,
+   "slots": [
+    {
+     "id": "PG1",
+     "eligible": [
+      "PG"
+     ]
+    },
+    {
+     "id": "PG2",
+     "eligible": [
+      "PG"
+     ]
+    },
+    {
+     "id": "SG1",
+     "eligible": [
+      "SG"
+     ]
+    },
+    {
+     "id": "SG2",
+     "eligible": [
+      "SG"
+     ]
+    },
+    {
+     "id": "SF1",
+     "eligible": [
+      "SF"
+     ]
+    },
+    {
+     "id": "SF2",
+     "eligible": [
+      "SF"
+     ]
+    },
+    {
+     "id": "PF1",
+     "eligible": [
+      "PF"
+     ]
+    },
+    {
+     "id": "PF2",
+     "eligible": [
+      "PF"
+     ]
+    },
+    {
+     "id": "C",
+     "eligible": [
+      "C"
+     ]
+    }
+   ],
+   "min_games": 2,
+   "max_players_per_team": null,
+   "notes": "FLAGGED: same as FanDuel NFL - scoring is officially published, roster shape and $60,000 cap are not on a public official page; confirm in-client."
+  },
+  "mlb": {
+   "verified": "third-party",
+   "source": "https://www.fanduel.com/rules",
+   "source_scope": "scoring only",
+   "verified_on": "2026-09-22",
+   "salary_cap": 60000,
+   "roster_size": 10,
+   "slots": [
+    {
+     "id": "P1",
+     "eligible": [
+      "P",
+      "SP",
+      "RP"
+     ]
+    },
+    {
+     "id": "P2",
+     "eligible": [
+      "P",
+      "SP",
+      "RP"
+     ]
+    },
+    {
+     "id": "C",
+     "eligible": [
+      "C"
+     ]
+    },
+    {
+     "id": "1B",
+     "eligible": [
+      "1B"
+     ]
+    },
+    {
+     "id": "2B",
+     "eligible": [
+      "2B"
+     ]
+    },
+    {
+     "id": "3B",
+     "eligible": [
+      "3B"
+     ]
+    },
+    {
+     "id": "SS",
+     "eligible": [
+      "SS"
+     ]
+    },
+    {
+     "id": "OF1",
+     "eligible": [
+      "OF"
+     ]
+    },
+    {
+     "id": "OF2",
+     "eligible": [
+      "OF"
+     ]
+    },
+    {
+     "id": "OF3",
+     "eligible": [
+      "OF"
+     ]
+    }
+   ],
+   "min_games": 2,
+   "max_players_per_team": null,
+   "notes": "FLAGGED: scoring officially published; roster shape and cap not on a public official page; confirm in-client. Interpretation, not a quote: the rules page labels the slot 'P', while real DK/FD salary exports label pitchers 'SP'/'RP'. Accepting all three is what lets a real export load; the slot count (2) and the cap are the verified part."
+  },
+  "nhl": {
+   "verified": "third-party",
+   "source": "https://www.fanduel.com/rules",
+   "source_scope": "scoring only",
+   "verified_on": "2026-09-22",
+   "salary_cap": 55000,
+   "roster_size": 9,
+   "slots": [
+    {
+     "id": "C1",
+     "eligible": [
+      "C"
+     ]
+    },
+    {
+     "id": "C2",
+     "eligible": [
+      "C"
+     ]
+    },
+    {
+     "id": "W1",
+     "eligible": [
+      "LW",
+      "RW"
+     ]
+    },
+    {
+     "id": "W2",
+     "eligible": [
+      "LW",
+      "RW"
+     ]
+    },
+    {
+     "id": "W3",
+     "eligible": [
+      "LW",
+      "RW"
+     ]
+    },
+    {
+     "id": "D1",
+     "eligible": [
+      "D"
+     ]
+    },
+    {
+     "id": "D2",
+     "eligible": [
+      "D"
+     ]
+    },
+    {
+     "id": "UTIL",
+     "eligible": [
+      "LW",
+      "RW",
+      "C",
+      "D"
+     ]
+    },
+    {
+     "id": "G",
+     "eligible": [
+      "G"
+     ]
+    }
+   ],
+   "min_games": 2,
+   "max_players_per_team": null,
+   "notes": "FLAGGED: scoring officially published; roster shape and cap not on a public official page; confirm in-client."
+  }
+ }
+}

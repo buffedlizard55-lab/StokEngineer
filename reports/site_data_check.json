@@ -1,0 +1,8 @@
+{
+ "ok": true,
+ "errors": [],
+ "warnings": [
+  "demo[0] (sample_mlb_dk.json): ROI drifted by up to 6.0 points between the committed run and this one ([205.8, 210.9, 403.2] -> [205.0, 210.5, 397.2])",
+  "demo[0] (sample_mlb_dk.json): cash rate drifted by up to 0.2 points between the committed run and this one ([28.2, 28.6, 40.2] -> [28.0, 28.5, 40.1])"
+ ]
+}

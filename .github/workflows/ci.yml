@@ -1,0 +1,73 @@
+name: CI
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Environment, registry and rules integrity
+        run: python -m src.stokengineer.cli doctor && python -m src.stokengineer.cli verify
+      - name: Tests
+        run: |
+          python -m pytest -q --junitxml=reports/junit.xml
+          python - <<'PY'
+          import json, xml.etree.ElementTree as ET, pathlib
+          suites = ET.parse("reports/junit.xml").getroot()
+          cases = suites.iter("testcase")
+          passed = failed = skipped = 0
+          for case in cases:
+              if case.find("failure") is not None or case.find("error") is not None:
+                  failed += 1
+              elif case.find("skipped") is not None:
+                  skipped += 1
+              else:
+                  passed += 1
+          pathlib.Path("reports/tests_summary.json").write_text(
+              json.dumps({"passed": passed, "failed": failed, "skipped": skipped}, indent=1) + "\n"
+          )
+          print(f"{passed} passed, {failed} failed, {skipped} skipped")
+          PY
+      - name: Synthetic fixtures are reproducible
+        run: python tools/make_sample_data.py --check
+      - name: Site payload matches the engine (regenerates it and diffs)
+        run: python tools/check_site_data.py
+      - name: Upload reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: reports
+          path: reports/
+
+  links:
+    runs-on: ubuntu-latest
+    continue-on-error: true   # a bot-blocked 403 is not a broken link; humans review the output
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Check every cited URL
+        run: python tools/check_links.py
+      - name: Upload the link report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: link-report
+          path: reports/links.json

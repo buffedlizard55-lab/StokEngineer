@@ -1,0 +1,1994 @@
+{
+  "_provenance": {
+    "command": "python -m src.stokengineer.cli simulate --sample sample_nfl_dk.json",
+    "engine_version": "0.4.0",
+    "generated_at_utc": "2026-09-23T01:04:11+00:00",
+    "notes": [
+      "lineups were built from a noisy view of the projections (sd 25%); this models the user's own projection error",
+      "ownership is a simulated-field estimate (see ownership.py); it is not observed contest ownership",
+      "field model: 35% of entries draft with sharp error, the rest with a looser view (see ownership.generate_field_lineups). Simulated ROI is sensitive to this assumption and to the payout structure; read it as a ranking, not a forecast.",
+      "lineup_1: simulated ROI 490% with a 37% cash rate. A cash rate near the paid fraction cannot justify that ROI unless the lineup is winning top prizes far more often than the field. Check (1) the field model, (2) whether the lineups were built on info the field lacked, (3) the payout structure.",
+      "payout structure is illustrative, so ROI is a ranking aid only",
+      "payout structure is ILLUSTRATIVE: supply the real contest payout (CSV) before treating any ROI here as expected money",
+      "Sample slates in src/data/samples are synthetic and labelled as such. They exist so the engine can be tested deterministically offline; they are not real salaries or real projections, and no report generated from them describes real players."
+    ],
+    "payload_sha256": "a8c677f0573baf0b2ac51601ecc93150b93bfa2b09a4a11c08ea10f50ab3314c",
+    "platform": "Linux-6.1.158+-x86_64-with-glibc2.36",
+    "python": "3.11.2",
+    "sources": [
+      {
+        "id": "dk_lobby_api",
+        "publisher": "DraftKings",
+        "title": "DraftKings public lobby JSON",
+        "url": "https://www.draftkings.com/lobby/getcontests?sport=NFL"
+      },
+      {
+        "id": "dk_rules_mlb",
+        "publisher": "DraftKings",
+        "title": "DraftKings Rules & Scoring - MLB Classic",
+        "url": "https://www.draftkings.com/help/rules/2"
+      },
+      {
+        "id": "dk_rules_nba",
+        "publisher": "DraftKings",
+        "title": "DraftKings Rules & Scoring - NBA Classic",
+        "url": "https://www.draftkings.com/help/rules/4"
+      },
+      {
+        "id": "dk_rules_nfl",
+        "publisher": "DraftKings",
+        "title": "DraftKings Rules & Scoring - NFL Classic",
+        "url": "https://www.draftkings.com/help/rules/1"
+      },
+      {
+        "id": "dk_rules_nhl",
+        "publisher": "DraftKings",
+        "title": "DraftKings Rules & Scoring - NHL Classic",
+        "url": "https://www.draftkings.com/help/rules/3"
+      },
+      {
+        "id": "espn_scoreboard",
+        "publisher": "ESPN",
+        "title": "ESPN public scoreboard/odds feed",
+        "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard"
+      },
+      {
+        "id": "nflverse_data",
+        "publisher": "nflverse (open source project, not the NFL)",
+        "title": "nflverse-data (open NFL data releases)",
+        "url": "https://github.com/nflverse/nflverse-data"
+      },
+      {
+        "id": "nflverse_injuries_asset",
+        "publisher": "nflverse",
+        "title": "nflverse injuries release asset",
+        "url": "https://github.com/nflverse/nflverse-data/releases/download/injuries/injuries_2025.csv"
+      },
+      {
+        "id": "nflverse_player_stats_asset",
+        "publisher": "nflverse",
+        "title": "nflverse player_stats release asset",
+        "url": "https://github.com/nflverse/nflverse-data/releases/download/stats_player/stats_player_week_2025.csv"
+      },
+      {
+        "id": "nflverse_schedules_asset",
+        "publisher": "nflverse",
+        "title": "nflverse schedules/games.csv release asset",
+        "url": "https://github.com/nflverse/nflverse-data/releases/download/schedules/games.csv"
+      },
+      {
+        "id": "os_projection_system",
+        "publisher": "OddsShopper / Stokastic",
+        "title": "Stokastic projection system (OddsShopper, Stokastic's betting arm)",
+        "url": "https://www.oddsshopper.com/articles/betting-101/stokastic-projection-system"
+      },
+      {
+        "id": "sk_home",
+        "publisher": "Stokastic",
+        "title": "Stokastic home page",
+        "url": "https://www.stokastic.com/"
+      },
+      {
+        "id": "sk_nfl_review",
+        "publisher": "Stokastic",
+        "title": "Stokastic Review 2026 (written by Stokastic)",
+        "url": "https://www.stokastic.com/articles/nfl-dfs/stokastic-review"
+      },
+      {
+        "id": "sk_pricing",
+        "publisher": "Stokastic",
+        "title": "Stokastic pricing and product FAQ",
+        "url": "https://www.stokastic.com/pricing"
+      },
+      {
+        "id": "splashplay_review",
+        "publisher": "Splash Play Podcast",
+        "title": "Third-party Stokastic review (2026)",
+        "url": "https://splashplaypodcast.com/stokastic-review/"
+      }
+    ]
+  },
+  "payload": {
+    "contest": [
+      {
+        "best_rank": 1,
+        "cash_rate_pct": 37.0,
+        "expected_payout": 117.962,
+        "label": "lineup_1",
+        "mean_percentile": 56.39,
+        "mean_score": 151.24,
+        "median_rank": 166.0,
+        "method": "milp",
+        "players": [
+          "13",
+          "15",
+          "29",
+          "54",
+          "57",
+          "62",
+          "64",
+          "70",
+          "73"
+        ],
+        "projected_score": 210.92,
+        "roi_pct": 489.81,
+        "salary": 49645.0,
+        "slots": {
+          "DST": "nfl-dst-65",
+          "FLEX": "nfl-rb-16",
+          "QB": "nfl-qb-14",
+          "RB1": "nfl-rb-55",
+          "RB2": "nfl-rb-30",
+          "TE": "nfl-te-63",
+          "WR1": "nfl-wr-74",
+          "WR2": "nfl-wr-71",
+          "WR3": "nfl-wr-58"
+        },
+        "top_1pct_rate_pct": 8.75,
+        "win_rate_pct": 3.0
+      },
+      {
+        "best_rank": 1,
+        "cash_rate_pct": 37.75,
+        "expected_payout": 119.185,
+        "label": "lineup_2",
+        "mean_percentile": 58.91,
+        "mean_score": 153.8,
+        "median_rank": 150.5,
+        "method": "milp",
+        "players": [
+          "12",
+          "13",
+          "29",
+          "44",
+          "54",
+          "57",
+          "62",
+          "70",
+          "73"
+        ],
+        "projected_score": 209.66,
+        "roi_pct": 495.92,
+        "salary": 49524.0,
+        "slots": {
+          "DST": "nfl-dst-13",
+          "FLEX": "nfl-wr-45",
+          "QB": "nfl-qb-14",
+          "RB1": "nfl-rb-55",
+          "RB2": "nfl-rb-30",
+          "TE": "nfl-te-63",
+          "WR1": "nfl-wr-74",
+          "WR2": "nfl-wr-71",
+          "WR3": "nfl-wr-58"
+        },
+        "top_1pct_rate_pct": 9.5,
+        "win_rate_pct": 3.25
+      }
+    ],
+    "date": "2026-09-20",
+    "field_size": 400,
+    "lineups": [
+      {
+        "method": "milp",
+        "notes": [],
+        "objective_value": 210.922,
+        "player_ids": [
+          "nfl-qb-14",
+          "nfl-rb-16",
+          "nfl-rb-30",
+          "nfl-rb-55",
+          "nfl-wr-58",
+          "nfl-te-63",
+          "nfl-dst-65",
+          "nfl-wr-71",
+          "nfl-wr-74"
+        ],
+        "projected": 210.922,
+        "salary": 49645.0,
+        "slots": {
+          "DST": "nfl-dst-65",
+          "FLEX": "nfl-rb-16",
+          "QB": "nfl-qb-14",
+          "RB1": "nfl-rb-55",
+          "RB2": "nfl-rb-30",
+          "TE": "nfl-te-63",
+          "WR1": "nfl-wr-74",
+          "WR2": "nfl-wr-71",
+          "WR3": "nfl-wr-58"
+        }
+      },
+      {
+        "method": "milp",
+        "notes": [],
+        "objective_value": 209.665,
+        "player_ids": [
+          "nfl-dst-13",
+          "nfl-qb-14",
+          "nfl-rb-30",
+          "nfl-wr-45",
+          "nfl-rb-55",
+          "nfl-wr-58",
+          "nfl-te-63",
+          "nfl-wr-71",
+          "nfl-wr-74"
+        ],
+        "projected": 209.665,
+        "salary": 49524.0,
+        "slots": {
+          "DST": "nfl-dst-13",
+          "FLEX": "nfl-wr-45",
+          "QB": "nfl-qb-14",
+          "RB1": "nfl-rb-55",
+          "RB2": "nfl-rb-30",
+          "TE": "nfl-te-63",
+          "WR1": "nfl-wr-74",
+          "WR2": "nfl-wr-71",
+          "WR3": "nfl-wr-58"
+        }
+      }
+    ],
+    "n_sims": 400,
+    "notes": [
+      "lineups were built from a noisy view of the projections (sd 25%); this models the user's own projection error",
+      "ownership is a simulated-field estimate (see ownership.py); it is not observed contest ownership",
+      "field model: 35% of entries draft with sharp error, the rest with a looser view (see ownership.generate_field_lineups). Simulated ROI is sensitive to this assumption and to the payout structure; read it as a ranking, not a forecast.",
+      "lineup_1: simulated ROI 490% with a 37% cash rate. A cash rate near the paid fraction cannot justify that ROI unless the lineup is winning top prizes far more often than the field. Check (1) the field model, (2) whether the lineups were built on info the field lacked, (3) the payout structure.",
+      "payout structure is illustrative, so ROI is a ranking aid only",
+      "payout structure is ILLUSTRATIVE: supply the real contest payout (CSV) before treating any ROI here as expected money"
+    ],
+    "ownership": {
+      "nfl-dst-13": 10.5,
+      "nfl-dst-26": 7.5,
+      "nfl-dst-39": 46.5,
+      "nfl-dst-52": 5.0,
+      "nfl-dst-65": 22.0,
+      "nfl-dst-78": 8.5,
+      "nfl-qb-1": 26.5,
+      "nfl-qb-14": 8.0,
+      "nfl-qb-15": 13.0,
+      "nfl-qb-2": 11.5,
+      "nfl-qb-27": 5.5,
+      "nfl-qb-28": 7.0,
+      "nfl-qb-40": 2.5,
+      "nfl-qb-41": 0.5,
+      "nfl-qb-53": 2.5,
+      "nfl-qb-54": 0.0,
+      "nfl-qb-66": 18.5,
+      "nfl-qb-67": 4.5,
+      "nfl-rb-16": 5.0,
+      "nfl-rb-17": 69.5,
+      "nfl-rb-18": 2.0,
+      "nfl-rb-29": 36.5,
+      "nfl-rb-3": 4.0,
+      "nfl-rb-30": 13.5,
+      "nfl-rb-31": 0.5,
+      "nfl-rb-4": 45.5,
+      "nfl-rb-42": 1.5,
+      "nfl-rb-43": 0.0,
+      "nfl-rb-44": 0.5,
+      "nfl-rb-5": 0.0,
+      "nfl-rb-55": 54.0,
+      "nfl-rb-56": 3.5,
+      "nfl-rb-57": 3.5,
+      "nfl-rb-68": 3.5,
+      "nfl-rb-69": 6.5,
+      "nfl-rb-70": 0.5,
+      "nfl-te-11": 83.5,
+      "nfl-te-12": 0.5,
+      "nfl-te-24": 3.5,
+      "nfl-te-25": 13.5,
+      "nfl-te-37": 1.0,
+      "nfl-te-38": 0.5,
+      "nfl-te-50": 0.5,
+      "nfl-te-51": 0.0,
+      "nfl-te-63": 2.0,
+      "nfl-te-64": 0.0,
+      "nfl-te-76": 9.0,
+      "nfl-te-77": 0.0,
+      "nfl-wr-10": 3.5,
+      "nfl-wr-19": 7.0,
+      "nfl-wr-20": 0.0,
+      "nfl-wr-21": 3.0,
+      "nfl-wr-22": 12.5,
+      "nfl-wr-23": 14.5,
+      "nfl-wr-32": 52.0,
+      "nfl-wr-33": 2.0,
+      "nfl-wr-34": 6.0,
+      "nfl-wr-35": 91.5,
+      "nfl-wr-36": 0.0,
+      "nfl-wr-45": 45.5,
+      "nfl-wr-46": 0.5,
+      "nfl-wr-47": 0.0,
+      "nfl-wr-48": 9.5,
+      "nfl-wr-49": 0.0,
+      "nfl-wr-58": 9.0,
+      "nfl-wr-59": 1.0,
+      "nfl-wr-6": 4.0,
+      "nfl-wr-60": 1.5,
+      "nfl-wr-61": 1.0,
+      "nfl-wr-62": 0.0,
+      "nfl-wr-7": 3.5,
+      "nfl-wr-71": 59.5,
+      "nfl-wr-72": 0.0,
+      "nfl-wr-73": 1.5,
+      "nfl-wr-74": 3.5,
+      "nfl-wr-75": 0.0,
+      "nfl-wr-8": 0.5,
+      "nfl-wr-9": 3.5
+    },
+    "payout": {
+      "entries": 400,
+      "entry_fee": 20.0,
+      "paid_entries": 80,
+      "rake": 0.12,
+      "source": "ILLUSTRATIVE curve generated in-engine (not a real contest)",
+      "tiers": [
+        {
+          "amount": 1836.8123428365766,
+          "end_rank": 1,
+          "start_rank": 1
+        },
+        {
+          "amount": 1138.8236525586776,
+          "end_rank": 2,
+          "start_rank": 2
+        },
+        {
+          "amount": 706.0706645863801,
+          "end_rank": 3,
+          "start_rank": 3
+        },
+        {
+          "amount": 437.7638120435556,
+          "end_rank": 4,
+          "start_rank": 4
+        },
+        {
+          "amount": 271.41356346700445,
+          "end_rank": 5,
+          "start_rank": 5
+        },
+        {
+          "amount": 168.27640934954277,
+          "end_rank": 6,
+          "start_rank": 6
+        },
+        {
+          "amount": 104.33137379671652,
+          "end_rank": 7,
+          "start_rank": 7
+        },
+        {
+          "amount": 64.68545175396424,
+          "end_rank": 8,
+          "start_rank": 8
+        },
+        {
+          "amount": 40.10498008745783,
+          "end_rank": 9,
+          "start_rank": 9
+        },
+        {
+          "amount": 24.865087654223853,
+          "end_rank": 10,
+          "start_rank": 10
+        },
+        {
+          "amount": 15.416354345618789,
+          "end_rank": 11,
+          "start_rank": 11
+        },
+        {
+          "amount": 9.55813969428365,
+          "end_rank": 12,
+          "start_rank": 12
+        },
+        {
+          "amount": 5.926046610455862,
+          "end_rank": 13,
+          "start_rank": 13
+        },
+        {
+          "amount": 3.674148898482635,
+          "end_rank": 14,
+          "start_rank": 14
+        },
+        {
+          "amount": 2.277972317059233,
+          "end_rank": 15,
+          "start_rank": 15
+        },
+        {
+          "amount": 34.0,
+          "end_rank": 80,
+          "start_rank": 16
+        }
+      ],
+      "total_pool": 7040.0
+    },
+    "projections": [
+      {
+        "boom_pct": 1.25,
+        "boom_threshold": 46.15,
+        "bust_pct": 93.25,
+        "bust_threshold": 36.15,
+        "ceiling": 27.56,
+        "floor": 14.51,
+        "name": "Synthetic PHI RB1",
+        "opponent": "DET",
+        "player_id": "nfl-rb-68",
+        "positions": [
+          "RB"
+        ],
+        "projection": 21.73,
+        "pts_per_dollar": 3.01,
+        "salary": 7230.0,
+        "stddev": 9.34,
+        "team": "PHI",
+        "value": -14.42
+      },
+      {
+        "boom_pct": 0.5,
+        "boom_threshold": 43.6,
+        "bust_pct": 93.75,
+        "bust_threshold": 33.6,
+        "ceiling": 25.06,
+        "floor": 14.38,
+        "name": "Synthetic KC QB1",
+        "opponent": "BUF",
+        "player_id": "nfl-qb-14",
+        "positions": [
+          "QB"
+        ],
+        "projection": 20.14,
+        "pts_per_dollar": 3.0,
+        "salary": 6720.0,
+        "stddev": 7.97,
+        "team": "KC",
+        "value": -13.46
+      },
+      {
+        "boom_pct": 2.25,
+        "boom_threshold": 40.25,
+        "bust_pct": 90.0,
+        "bust_threshold": 30.25,
+        "ceiling": 23.98,
+        "floor": 14.13,
+        "name": "Synthetic BUF QB1",
+        "opponent": "KC",
+        "player_id": "nfl-qb-1",
+        "positions": [
+          "QB"
+        ],
+        "projection": 19.71,
+        "pts_per_dollar": 3.26,
+        "salary": 6049.0,
+        "stddev": 8.01,
+        "team": "BUF",
+        "value": -10.54
+      },
+      {
+        "boom_pct": 7.75,
+        "boom_threshold": 36.79,
+        "bust_pct": 75.25,
+        "bust_threshold": 26.79,
+        "ceiling": 26.59,
+        "floor": 11.31,
+        "name": "Synthetic SF WR1",
+        "opponent": "DAL",
+        "player_id": "nfl-wr-45",
+        "positions": [
+          "WR"
+        ],
+        "projection": 19.7,
+        "pts_per_dollar": 3.68,
+        "salary": 5358.0,
+        "stddev": 10.94,
+        "team": "SF",
+        "value": -7.09
+      },
+      {
+        "boom_pct": 14.0,
+        "boom_threshold": 29.89,
+        "bust_pct": 55.75,
+        "bust_threshold": 19.89,
+        "ceiling": 25.82,
+        "floor": 11.75,
+        "name": "Synthetic DAL WR4",
+        "opponent": "SF",
+        "player_id": "nfl-wr-35",
+        "positions": [
+          "WR"
+        ],
+        "projection": 19.58,
+        "pts_per_dollar": 4.92,
+        "salary": 3979.0,
+        "stddev": 10.56,
+        "team": "DAL",
+        "value": -0.31
+      },
+      {
+        "boom_pct": 1.0,
+        "boom_threshold": 45.43,
+        "bust_pct": 93.0,
+        "bust_threshold": 35.43,
+        "ceiling": 25.64,
+        "floor": 11.67,
+        "name": "Synthetic DET TE1",
+        "opponent": "PHI",
+        "player_id": "nfl-te-63",
+        "positions": [
+          "TE"
+        ],
+        "projection": 19.29,
+        "pts_per_dollar": 2.72,
+        "salary": 7086.0,
+        "stddev": 10.04,
+        "team": "DET",
+        "value": -16.14
+      },
+      {
+        "boom_pct": 5.5,
+        "boom_threshold": 34.66,
+        "bust_pct": 78.0,
+        "bust_threshold": 24.66,
+        "ceiling": 23.76,
+        "floor": 13.88,
+        "name": "Synthetic DET RB1",
+        "opponent": "PHI",
+        "player_id": "nfl-rb-55",
+        "positions": [
+          "RB"
+        ],
+        "projection": 19.27,
+        "pts_per_dollar": 3.91,
+        "salary": 4933.0,
+        "stddev": 8.34,
+        "team": "DET",
+        "value": -5.39
+      },
+      {
+        "boom_pct": 2.0,
+        "boom_threshold": 41.97,
+        "bust_pct": 89.0,
+        "bust_threshold": 31.97,
+        "ceiling": 25.69,
+        "floor": 11.17,
+        "name": "Synthetic KC WR1",
+        "opponent": "BUF",
+        "player_id": "nfl-wr-19",
+        "positions": [
+          "WR"
+        ],
+        "projection": 18.87,
+        "pts_per_dollar": 2.95,
+        "salary": 6394.0,
+        "stddev": 10.01,
+        "team": "KC",
+        "value": -13.1
+      },
+      {
+        "boom_pct": 8.75,
+        "boom_threshold": 31.7,
+        "bust_pct": 65.75,
+        "bust_threshold": 21.7,
+        "ceiling": 24.54,
+        "floor": 11.33,
+        "name": "Synthetic KC RB2",
+        "opponent": "BUF",
+        "player_id": "nfl-rb-17",
+        "positions": [
+          "RB"
+        ],
+        "projection": 18.65,
+        "pts_per_dollar": 4.3,
+        "salary": 4339.0,
+        "stddev": 9.01,
+        "team": "KC",
+        "value": -3.05
+      },
+      {
+        "boom_pct": 0.75,
+        "boom_threshold": 42.69,
+        "bust_pct": 94.25,
+        "bust_threshold": 32.69,
+        "ceiling": 23.85,
+        "floor": 12.02,
+        "name": "Synthetic BUF RB1",
+        "opponent": "KC",
+        "player_id": "nfl-rb-3",
+        "positions": [
+          "RB"
+        ],
+        "projection": 18.55,
+        "pts_per_dollar": 2.84,
+        "salary": 6538.0,
+        "stddev": 8.36,
+        "team": "BUF",
+        "value": -14.14
+      },
+      {
+        "boom_pct": 0.0,
+        "boom_threshold": 41.32,
+        "bust_pct": 97.0,
+        "bust_threshold": 31.32,
+        "ceiling": 23.07,
+        "floor": 13.51,
+        "name": "Synthetic BUF QB2",
+        "opponent": "KC",
+        "player_id": "nfl-qb-2",
+        "positions": [
+          "QB"
+        ],
+        "projection": 18.45,
+        "pts_per_dollar": 2.95,
+        "salary": 6264.0,
+        "stddev": 6.54,
+        "team": "BUF",
+        "value": -12.87
+      },
+      {
+        "boom_pct": 1.0,
+        "boom_threshold": 41.21,
+        "bust_pct": 92.75,
+        "bust_threshold": 31.21,
+        "ceiling": 23.46,
+        "floor": 12.17,
+        "name": "Synthetic KC RB1",
+        "opponent": "BUF",
+        "player_id": "nfl-rb-16",
+        "positions": [
+          "RB"
+        ],
+        "projection": 18.39,
+        "pts_per_dollar": 2.95,
+        "salary": 6242.0,
+        "stddev": 8.28,
+        "team": "KC",
+        "value": -12.82
+      },
+      {
+        "boom_pct": 2.5,
+        "boom_threshold": 43.3,
+        "bust_pct": 89.5,
+        "bust_threshold": 33.3,
+        "ceiling": 24.37,
+        "floor": 10.86,
+        "name": "Synthetic BUF WR1",
+        "opponent": "KC",
+        "player_id": "nfl-wr-6",
+        "positions": [
+          "WR"
+        ],
+        "projection": 18.36,
+        "pts_per_dollar": 2.76,
+        "salary": 6660.0,
+        "stddev": 10.36,
+        "team": "BUF",
+        "value": -14.94
+      },
+      {
+        "boom_pct": 1.5,
+        "boom_threshold": 43.66,
+        "bust_pct": 91.75,
+        "bust_threshold": 33.66,
+        "ceiling": 24.99,
+        "floor": 10.76,
+        "name": "Synthetic PHI WR4",
+        "opponent": "DET",
+        "player_id": "nfl-wr-74",
+        "positions": [
+          "WR"
+        ],
+        "projection": 18.36,
+        "pts_per_dollar": 2.73,
+        "salary": 6732.0,
+        "stddev": 10.25,
+        "team": "PHI",
+        "value": -15.3
+      },
+      {
+        "boom_pct": 7.75,
+        "boom_threshold": 34.38,
+        "bust_pct": 77.75,
+        "bust_threshold": 24.38,
+        "ceiling": 23.06,
+        "floor": 11.42,
+        "name": "Synthetic PHI WR1",
+        "opponent": "DET",
+        "player_id": "nfl-wr-71",
+        "positions": [
+          "WR"
+        ],
+        "projection": 18.18,
+        "pts_per_dollar": 3.73,
+        "salary": 4875.0,
+        "stddev": 9.57,
+        "team": "PHI",
+        "value": -6.2
+      },
+      {
+        "boom_pct": 1.0,
+        "boom_threshold": 40.43,
+        "bust_pct": 94.0,
+        "bust_threshold": 30.43,
+        "ceiling": 21.99,
+        "floor": 12.58,
+        "name": "Synthetic PHI QB1",
+        "opponent": "DET",
+        "player_id": "nfl-qb-66",
+        "positions": [
+          "QB"
+        ],
+        "projection": 17.91,
+        "pts_per_dollar": 2.94,
+        "salary": 6086.0,
+        "stddev": 7.25,
+        "team": "PHI",
+        "value": -12.52
+      },
+      {
+        "boom_pct": 0.0,
+        "boom_threshold": 41.93,
+        "bust_pct": 95.25,
+        "bust_threshold": 31.93,
+        "ceiling": 21.74,
+        "floor": 12.61,
+        "name": "Synthetic PHI QB2",
+        "opponent": "DET",
+        "player_id": "nfl-qb-67",
+        "positions": [
+          "QB"
+        ],
+        "projection": 17.77,
+        "pts_per_dollar": 2.78,
+        "salary": 6386.0,
+        "stddev": 7.05,
+        "team": "PHI",
+        "value": -14.16
+      },
+      {
+        "boom_pct": 0.5,
+        "boom_threshold": 42.77,
+        "bust_pct": 96.5,
+        "bust_threshold": 32.77,
+        "ceiling": 22.18,
+        "floor": 12.9,
+        "name": "Synthetic DAL QB2",
+        "opponent": "SF",
+        "player_id": "nfl-qb-28",
+        "positions": [
+          "QB"
+        ],
+        "projection": 17.73,
+        "pts_per_dollar": 2.71,
+        "salary": 6555.0,
+        "stddev": 7.19,
+        "team": "DAL",
+        "value": -15.04
+      },
+      {
+        "boom_pct": 8.25,
+        "boom_threshold": 33.68,
+        "bust_pct": 75.75,
+        "bust_threshold": 23.68,
+        "ceiling": 23.38,
+        "floor": 10.01,
+        "name": "Synthetic DAL WR1",
+        "opponent": "SF",
+        "player_id": "nfl-wr-32",
+        "positions": [
+          "WR"
+        ],
+        "projection": 17.6,
+        "pts_per_dollar": 3.72,
+        "salary": 4736.0,
+        "stddev": 10.25,
+        "team": "DAL",
+        "value": -6.08
+      },
+      {
+        "boom_pct": 0.0,
+        "boom_threshold": 44.86,
+        "bust_pct": 96.75,
+        "bust_threshold": 34.86,
+        "ceiling": 21.44,
+        "floor": 11.61,
+        "name": "Synthetic SF RB1",
+        "opponent": "DAL",
+        "player_id": "nfl-rb-42",
+        "positions": [
+          "RB"
+        ],
+        "projection": 17.17,
+        "pts_per_dollar": 2.46,
+        "salary": 6972.0,
+        "stddev": 7.92,
+        "team": "SF",
+        "value": -17.69
+      },
+      {
+        "boom_pct": 6.5,
+        "boom_threshold": 31.98,
+        "bust_pct": 75.0,
+        "bust_threshold": 21.98,
+        "ceiling": 21.94,
+        "floor": 10.9,
+        "name": "Synthetic BUF RB2",
+        "opponent": "KC",
+        "player_id": "nfl-rb-4",
+        "positions": [
+          "RB"
+        ],
+        "projection": 17.13,
+        "pts_per_dollar": 3.9,
+        "salary": 4396.0,
+        "stddev": 8.48,
+        "team": "BUF",
+        "value": -4.85
+      },
+      {
+        "boom_pct": 0.0,
+        "boom_threshold": 47.35,
+        "bust_pct": 98.75,
+        "bust_threshold": 37.35,
+        "ceiling": 21.66,
+        "floor": 11.0,
+        "name": "Synthetic SF QB2",
+        "opponent": "DAL",
+        "player_id": "nfl-qb-41",
+        "positions": [
+          "QB"
+        ],
+        "projection": 16.74,
+        "pts_per_dollar": 2.24,
+        "salary": 7470.0,
+        "stddev": 7.28,
+        "team": "SF",
+        "value": -20.61
+      },
+      {
+        "boom_pct": 2.5,
+        "boom_threshold": 35.72,
+        "bust_pct": 87.5,
+        "bust_threshold": 25.72,
+        "ceiling": 21.14,
+        "floor": 10.66,
+        "name": "Synthetic DAL RB2",
+        "opponent": "SF",
+        "player_id": "nfl-rb-30",
+        "positions": [
+          "RB"
+        ],
+        "projection": 16.63,
+        "pts_per_dollar": 3.23,
+        "salary": 5145.0,
+        "stddev": 7.98,
+        "team": "DAL",
+        "value": -9.09
+      },
+      {
+        "boom_pct": 1.75,
+        "boom_threshold": 36.6,
+        "bust_pct": 90.5,
+        "bust_threshold": 26.6,
+        "ceiling": 20.42,
+        "floor": 11.29,
+        "name": "Synthetic KC QB2",
+        "opponent": "BUF",
+        "player_id": "nfl-qb-15",
+        "positions": [
+          "QB"
+        ],
+        "projection": 16.59,
+        "pts_per_dollar": 3.12,
+        "salary": 5320.0,
+        "stddev": 7.27,
+        "team": "KC",
+        "value": -10.01
+      },
+      {
+        "boom_pct": 0.0,
+        "boom_threshold": 42.36,
+        "bust_pct": 97.0,
+        "bust_threshold": 32.36,
+        "ceiling": 21.51,
+        "floor": 11.04,
+        "name": "Synthetic DET QB1",
+        "opponent": "PHI",
+        "player_id": "nfl-qb-53",
+        "positions": [
+          "QB"
+        ],
+        "projection": 16.59,
+        "pts_per_dollar": 2.56,
+        "salary": 6472.0,
+        "stddev": 7.16,
+        "team": "DET",
+        "value": -15.77
+      },
+      {
+        "boom_pct": 8.5,
+        "boom_threshold": 30.07,
+        "bust_pct": 70.0,
+        "bust_threshold": 20.07,
+        "ceiling": 21.99,
+        "floor": 9.33,
+        "name": "Synthetic BUF TE1",
+        "opponent": "KC",
+        "player_id": "nfl-te-11",
+        "positions": [
+          "TE"
+        ],
+        "projection": 16.46,
+        "pts_per_dollar": 4.1,
+        "salary": 4015.0,
+        "stddev": 9.26,
+        "team": "BUF",
+        "value": -3.62
+      },
+      {
+        "boom_pct": 1.5,
+        "boom_threshold": 42.21,
+        "bust_pct": 94.5,
+        "bust_threshold": 32.21,
+        "ceiling": 21.75,
+        "floor": 9.2,
+        "name": "Synthetic KC TE1",
+        "opponent": "BUF",
+        "player_id": "nfl-te-24",
+        "positions": [
+          "TE"
+        ],
+        "projection": 16.42,
+        "pts_per_dollar": 2.55,
+        "salary": 6442.0,
+        "stddev": 9.79,
+        "team": "KC",
+        "value": -15.79
+      },
+      {
+        "boom_pct": 5.25,
+        "boom_threshold": 31.73,
+        "bust_pct": 78.0,
+        "bust_threshold": 21.73,
+        "ceiling": 20.81,
+        "floor": 10.65,
+        "name": "Synthetic DAL RB1",
+        "opponent": "SF",
+        "player_id": "nfl-rb-29",
+        "positions": [
+          "RB"
+        ],
+        "projection": 16.25,
+        "pts_per_dollar": 3.74,
+        "salary": 4346.0,
+        "stddev": 7.52,
+        "team": "DAL",
+        "value": -5.48
+      },
+      {
+        "boom_pct": 0.0,
+        "boom_threshold": 42.32,
+        "bust_pct": 97.25,
+        "bust_threshold": 32.32,
+        "ceiling": 19.3,
+        "floor": 11.13,
+        "name": "Synthetic SF QB1",
+        "opponent": "DAL",
+        "player_id": "nfl-qb-40",
+        "positions": [
+          "QB"
+        ],
+        "projection": 15.94,
+        "pts_per_dollar": 2.47,
+        "salary": 6464.0,
+        "stddev": 6.84,
+        "team": "SF",
+        "value": -16.38
+      },
+      {
+        "boom_pct": 1.0,
+        "boom_threshold": 44.06,
+        "bust_pct": 94.75,
+        "bust_threshold": 34.06,
+        "ceiling": 20.8,
+        "floor": 9.42,
+        "name": "Synthetic BUF WR2",
+        "opponent": "KC",
+        "player_id": "nfl-wr-7",
+        "positions": [
+          "WR"
+        ],
+        "projection": 15.72,
+        "pts_per_dollar": 2.31,
+        "salary": 6812.0,
+        "stddev": 9.31,
+        "team": "BUF",
+        "value": -18.34
+      },
+      {
+        "boom_pct": 1.5,
+        "boom_threshold": 36.45,
+        "bust_pct": 88.75,
+        "bust_threshold": 26.45,
+        "ceiling": 20.46,
+        "floor": 9.19,
+        "name": "Synthetic KC WR4",
+        "opponent": "BUF",
+        "player_id": "nfl-wr-22",
+        "positions": [
+          "WR"
+        ],
+        "projection": 15.41,
+        "pts_per_dollar": 2.91,
+        "salary": 5290.0,
+        "stddev": 8.63,
+        "team": "KC",
+        "value": -11.04
+      },
+      {
+        "boom_pct": 0.25,
+        "boom_threshold": 40.12,
+        "bust_pct": 97.75,
+        "bust_threshold": 30.12,
+        "ceiling": 18.96,
+        "floor": 10.33,
+        "name": "Synthetic DAL QB1",
+        "opponent": "SF",
+        "player_id": "nfl-qb-27",
+        "positions": [
+          "QB"
+        ],
+        "projection": 15.34,
+        "pts_per_dollar": 2.55,
+        "salary": 6025.0,
+        "stddev": 6.43,
+        "team": "DAL",
+        "value": -14.79
+      },
+      {
+        "boom_pct": 1.75,
+        "boom_threshold": 36.8,
+        "bust_pct": 89.75,
+        "bust_threshold": 26.8,
+        "ceiling": 20.49,
+        "floor": 8.65,
+        "name": "Synthetic DET WR1",
+        "opponent": "PHI",
+        "player_id": "nfl-wr-58",
+        "positions": [
+          "WR"
+        ],
+        "projection": 15.29,
+        "pts_per_dollar": 2.85,
+        "salary": 5359.0,
+        "stddev": 8.61,
+        "team": "DET",
+        "value": -11.5
+      },
+      {
+        "boom_pct": 1.0,
+        "boom_threshold": 36.42,
+        "bust_pct": 93.0,
+        "bust_threshold": 26.42,
+        "ceiling": 19.16,
+        "floor": 9.71,
+        "name": "Synthetic DET RB2",
+        "opponent": "PHI",
+        "player_id": "nfl-rb-56",
+        "positions": [
+          "RB"
+        ],
+        "projection": 14.96,
+        "pts_per_dollar": 2.83,
+        "salary": 5284.0,
+        "stddev": 7.1,
+        "team": "DET",
+        "value": -11.46
+      },
+      {
+        "boom_pct": 1.25,
+        "boom_threshold": 41.51,
+        "bust_pct": 96.0,
+        "bust_threshold": 31.51,
+        "ceiling": 20.11,
+        "floor": 8.4,
+        "name": "Synthetic DAL WR2",
+        "opponent": "SF",
+        "player_id": "nfl-wr-33",
+        "positions": [
+          "WR"
+        ],
+        "projection": 14.79,
+        "pts_per_dollar": 2.35,
+        "salary": 6301.0,
+        "stddev": 8.78,
+        "team": "DAL",
+        "value": -16.72
+      },
+      {
+        "boom_pct": 0.0,
+        "boom_threshold": 45.75,
+        "bust_pct": 98.25,
+        "bust_threshold": 35.75,
+        "ceiling": 19.69,
+        "floor": 8.4,
+        "name": "Synthetic DET WR4",
+        "opponent": "PHI",
+        "player_id": "nfl-wr-61",
+        "positions": [
+          "WR"
+        ],
+        "projection": 14.72,
+        "pts_per_dollar": 2.06,
+        "salary": 7150.0,
+        "stddev": 8.55,
+        "team": "DET",
+        "value": -21.03
+      },
+      {
+        "boom_pct": 0.25,
+        "boom_threshold": 44.14,
+        "bust_pct": 98.0,
+        "bust_threshold": 34.14,
+        "ceiling": 19.47,
+        "floor": 8.86,
+        "name": "Synthetic PHI RB3",
+        "opponent": "DET",
+        "player_id": "nfl-rb-70",
+        "positions": [
+          "RB"
+        ],
+        "projection": 14.68,
+        "pts_per_dollar": 2.15,
+        "salary": 6828.0,
+        "stddev": 7.6,
+        "team": "PHI",
+        "value": -19.46
+      },
+      {
+        "boom_pct": 1.25,
+        "boom_threshold": 40.11,
+        "bust_pct": 93.75,
+        "bust_threshold": 30.11,
+        "ceiling": 18.93,
+        "floor": 8.14,
+        "name": "Synthetic BUF WR4",
+        "opponent": "KC",
+        "player_id": "nfl-wr-9",
+        "positions": [
+          "WR"
+        ],
+        "projection": 14.65,
+        "pts_per_dollar": 2.43,
+        "salary": 6021.0,
+        "stddev": 9.06,
+        "team": "BUF",
+        "value": -15.45
+      },
+      {
+        "boom_pct": 0.75,
+        "boom_threshold": 35.08,
+        "bust_pct": 90.0,
+        "bust_threshold": 25.08,
+        "ceiling": 19.01,
+        "floor": 8.74,
+        "name": "Synthetic PHI RB2",
+        "opponent": "DET",
+        "player_id": "nfl-rb-69",
+        "positions": [
+          "RB"
+        ],
+        "projection": 14.49,
+        "pts_per_dollar": 2.89,
+        "salary": 5016.0,
+        "stddev": 7.35,
+        "team": "PHI",
+        "value": -10.59
+      },
+      {
+        "boom_pct": 0.0,
+        "boom_threshold": 44.16,
+        "bust_pct": 98.5,
+        "bust_threshold": 34.16,
+        "ceiling": 18.95,
+        "floor": 8.71,
+        "name": "Synthetic DAL TE2",
+        "opponent": "SF",
+        "player_id": "nfl-te-38",
+        "positions": [
+          "TE"
+        ],
+        "projection": 14.46,
+        "pts_per_dollar": 2.12,
+        "salary": 6832.0,
+        "stddev": 7.76,
+        "team": "DAL",
+        "value": -19.7
+      },
+      {
+        "boom_pct": 0.25,
+        "boom_threshold": 45.55,
+        "bust_pct": 98.75,
+        "bust_threshold": 35.55,
+        "ceiling": 18.18,
+        "floor": 7.44,
+        "name": "Synthetic PHI WR2",
+        "opponent": "DET",
+        "player_id": "nfl-wr-72",
+        "positions": [
+          "WR"
+        ],
+        "projection": 13.53,
+        "pts_per_dollar": 1.9,
+        "salary": 7109.0,
+        "stddev": 8.48,
+        "team": "PHI",
+        "value": -22.01
+      },
+      {
+        "boom_pct": 0.0,
+        "boom_threshold": 47.09,
+        "bust_pct": 100.0,
+        "bust_threshold": 37.09,
+        "ceiling": 16.7,
+        "floor": 8.7,
+        "name": "Synthetic DET QB2",
+        "opponent": "PHI",
+        "player_id": "nfl-qb-54",
+        "positions": [
+          "QB"
+        ],
+        "projection": 13.36,
+        "pts_per_dollar": 1.8,
+        "salary": 7417.0,
+        "stddev": 6.21,
+        "team": "DET",
+        "value": -23.72
+      },
+      {
+        "boom_pct": 0.75,
+        "boom_threshold": 40.77,
+        "bust_pct": 96.5,
+        "bust_threshold": 30.77,
+        "ceiling": 17.62,
+        "floor": 7.1,
+        "name": "Synthetic DET WR2",
+        "opponent": "PHI",
+        "player_id": "nfl-wr-59",
+        "positions": [
+          "WR"
+        ],
+        "projection": 12.94,
+        "pts_per_dollar": 2.1,
+        "salary": 6154.0,
+        "stddev": 7.95,
+        "team": "DET",
+        "value": -17.83
+      },
+      {
+        "boom_pct": 0.0,
+        "boom_threshold": 43.02,
+        "bust_pct": 98.0,
+        "bust_threshold": 33.02,
+        "ceiling": 17.14,
+        "floor": 6.86,
+        "name": "Synthetic SF TE2",
+        "opponent": "DAL",
+        "player_id": "nfl-te-51",
+        "positions": [
+          "TE"
+        ],
+        "projection": 12.7,
+        "pts_per_dollar": 1.92,
+        "salary": 6604.0,
+        "stddev": 8.18,
+        "team": "SF",
+        "value": -20.32
+      },
+      {
+        "boom_pct": 2.0,
+        "boom_threshold": 31.16,
+        "bust_pct": 85.25,
+        "bust_threshold": 21.16,
+        "ceiling": 17.14,
+        "floor": 6.67,
+        "name": "Synthetic KC WR5",
+        "opponent": "BUF",
+        "player_id": "nfl-wr-23",
+        "positions": [
+          "WR"
+        ],
+        "projection": 12.58,
+        "pts_per_dollar": 2.97,
+        "salary": 4231.0,
+        "stddev": 7.85,
+        "team": "KC",
+        "value": -8.57
+      },
+      {
+        "boom_pct": 0.25,
+        "boom_threshold": 47.37,
+        "bust_pct": 99.25,
+        "bust_threshold": 37.37,
+        "ceiling": 15.93,
+        "floor": 7.28,
+        "name": "Synthetic SF WR2",
+        "opponent": "DAL",
+        "player_id": "nfl-wr-46",
+        "positions": [
+          "WR"
+        ],
+        "projection": 12.56,
+        "pts_per_dollar": 1.68,
+        "salary": 7474.0,
+        "stddev": 7.75,
+        "team": "SF",
+        "value": -24.81
+      },
+      {
+        "boom_pct": 0.0,
+        "boom_threshold": 48.78,
+        "bust_pct": 99.5,
+        "bust_threshold": 38.78,
+        "ceiling": 16.34,
+        "floor": 7.06,
+        "name": "Synthetic DAL WR5",
+        "opponent": "SF",
+        "player_id": "nfl-wr-36",
+        "positions": [
+          "WR"
+        ],
+        "projection": 12.55,
+        "pts_per_dollar": 1.62,
+        "salary": 7757.0,
+        "stddev": 7.48,
+        "team": "DAL",
+        "value": -26.23
+      },
+      {
+        "boom_pct": 0.25,
+        "boom_threshold": 42.0,
+        "bust_pct": 97.75,
+        "bust_threshold": 32.0,
+        "ceiling": 16.45,
+        "floor": 7.01,
+        "name": "Synthetic SF TE1",
+        "opponent": "DAL",
+        "player_id": "nfl-te-50",
+        "positions": [
+          "TE"
+        ],
+        "projection": 12.44,
+        "pts_per_dollar": 1.94,
+        "salary": 6399.0,
+        "stddev": 7.7,
+        "team": "SF",
+        "value": -19.56
+      },
+      {
+        "boom_pct": 1.0,
+        "boom_threshold": 32.83,
+        "bust_pct": 90.75,
+        "bust_threshold": 22.83,
+        "ceiling": 16.24,
+        "floor": 7.12,
+        "name": "Synthetic DAL WR3",
+        "opponent": "SF",
+        "player_id": "nfl-wr-34",
+        "positions": [
+          "WR"
+        ],
+        "projection": 12.34,
+        "pts_per_dollar": 2.7,
+        "salary": 4566.0,
+        "stddev": 7.4,
+        "team": "DAL",
+        "value": -10.49
+      },
+      {
+        "boom_pct": 1.5,
+        "boom_threshold": 33.13,
+        "bust_pct": 92.0,
+        "bust_threshold": 23.13,
+        "ceiling": 15.19,
+        "floor": 6.75,
+        "name": "Synthetic SF WR4",
+        "opponent": "DAL",
+        "player_id": "nfl-wr-48",
+        "positions": [
+          "WR"
+        ],
+        "projection": 11.89,
+        "pts_per_dollar": 2.57,
+        "salary": 4627.0,
+        "stddev": 7.26,
+        "team": "SF",
+        "value": -11.25
+      },
+      {
+        "boom_pct": 2.75,
+        "boom_threshold": 31.22,
+        "bust_pct": 87.75,
+        "bust_threshold": 21.22,
+        "ceiling": 15.38,
+        "floor": 6.06,
+        "name": "Synthetic PHI TE1",
+        "opponent": "DET",
+        "player_id": "nfl-te-76",
+        "positions": [
+          "TE"
+        ],
+        "projection": 11.76,
+        "pts_per_dollar": 2.77,
+        "salary": 4243.0,
+        "stddev": 7.67,
+        "team": "PHI",
+        "value": -9.45
+      },
+      {
+        "boom_pct": 0.25,
+        "boom_threshold": 42.02,
+        "bust_pct": 98.25,
+        "bust_threshold": 32.02,
+        "ceiling": 15.47,
+        "floor": 6.18,
+        "name": "Synthetic BUF TE2",
+        "opponent": "KC",
+        "player_id": "nfl-te-12",
+        "positions": [
+          "TE"
+        ],
+        "projection": 11.43,
+        "pts_per_dollar": 1.78,
+        "salary": 6405.0,
+        "stddev": 7.45,
+        "team": "BUF",
+        "value": -20.6
+      },
+      {
+        "boom_pct": 0.5,
+        "boom_threshold": 37.19,
+        "bust_pct": 95.5,
+        "bust_threshold": 27.19,
+        "ceiling": 15.35,
+        "floor": 5.71,
+        "name": "Synthetic DAL TE1",
+        "opponent": "SF",
+        "player_id": "nfl-te-37",
+        "positions": [
+          "TE"
+        ],
+        "projection": 11.3,
+        "pts_per_dollar": 2.08,
+        "salary": 5438.0,
+        "stddev": 7.64,
+        "team": "DAL",
+        "value": -15.89
+      },
+      {
+        "boom_pct": 0.0,
+        "boom_threshold": 49.94,
+        "bust_pct": 100.0,
+        "bust_threshold": 39.94,
+        "ceiling": 14.86,
+        "floor": 6.06,
+        "name": "Synthetic PHI TE2",
+        "opponent": "DET",
+        "player_id": "nfl-te-77",
+        "positions": [
+          "TE"
+        ],
+        "projection": 11.14,
+        "pts_per_dollar": 1.39,
+        "salary": 7987.0,
+        "stddev": 6.76,
+        "team": "PHI",
+        "value": -28.8
+      },
+      {
+        "boom_pct": 0.25,
+        "boom_threshold": 42.12,
+        "bust_pct": 99.25,
+        "bust_threshold": 32.12,
+        "ceiling": 14.65,
+        "floor": 6.07,
+        "name": "Synthetic PHI WR5",
+        "opponent": "DET",
+        "player_id": "nfl-wr-75",
+        "positions": [
+          "WR"
+        ],
+        "projection": 11.02,
+        "pts_per_dollar": 1.72,
+        "salary": 6423.0,
+        "stddev": 6.71,
+        "team": "PHI",
+        "value": -21.09
+      },
+      {
+        "boom_pct": 0.5,
+        "boom_threshold": 32.67,
+        "bust_pct": 97.0,
+        "bust_threshold": 22.67,
+        "ceiling": 14.28,
+        "floor": 6.59,
+        "name": "Synthetic KC RB3",
+        "opponent": "BUF",
+        "player_id": "nfl-rb-18",
+        "positions": [
+          "RB"
+        ],
+        "projection": 10.89,
+        "pts_per_dollar": 2.4,
+        "salary": 4533.0,
+        "stddev": 5.91,
+        "team": "KC",
+        "value": -11.77
+      },
+      {
+        "boom_pct": 0.25,
+        "boom_threshold": 39.44,
+        "bust_pct": 98.25,
+        "bust_threshold": 29.43,
+        "ceiling": 14.47,
+        "floor": 5.63,
+        "name": "Synthetic DET WR3",
+        "opponent": "PHI",
+        "player_id": "nfl-wr-60",
+        "positions": [
+          "WR"
+        ],
+        "projection": 10.73,
+        "pts_per_dollar": 1.82,
+        "salary": 5887.0,
+        "stddev": 7.13,
+        "team": "DET",
+        "value": -18.7
+      },
+      {
+        "boom_pct": 0.0,
+        "boom_threshold": 45.96,
+        "bust_pct": 100.0,
+        "bust_threshold": 35.96,
+        "ceiling": 13.79,
+        "floor": 6.64,
+        "name": "Synthetic SF RB2",
+        "opponent": "DAL",
+        "player_id": "nfl-rb-43",
+        "positions": [
+          "RB"
+        ],
+        "projection": 10.57,
+        "pts_per_dollar": 1.47,
+        "salary": 7193.0,
+        "stddev": 5.31,
+        "team": "SF",
+        "value": -25.4
+      },
+      {
+        "boom_pct": 1.25,
+        "boom_threshold": 29.17,
+        "bust_pct": 89.75,
+        "bust_threshold": 19.17,
+        "ceiling": 13.95,
+        "floor": 5.42,
+        "name": "Synthetic KC TE2",
+        "opponent": "BUF",
+        "player_id": "nfl-te-25",
+        "positions": [
+          "TE"
+        ],
+        "projection": 10.53,
+        "pts_per_dollar": 2.75,
+        "salary": 3834.0,
+        "stddev": 6.9,
+        "team": "KC",
+        "value": -8.64
+      },
+      {
+        "boom_pct": 0.0,
+        "boom_threshold": 36.09,
+        "bust_pct": 99.25,
+        "bust_threshold": 26.09,
+        "ceiling": 13.43,
+        "floor": 6.43,
+        "name": "Synthetic DAL RB3",
+        "opponent": "SF",
+        "player_id": "nfl-rb-31",
+        "positions": [
+          "RB"
+        ],
+        "projection": 10.44,
+        "pts_per_dollar": 2.0,
+        "salary": 5218.0,
+        "stddev": 5.39,
+        "team": "DAL",
+        "value": -15.65
+      },
+      {
+        "boom_pct": 0.0,
+        "boom_threshold": 48.55,
+        "bust_pct": 99.75,
+        "bust_threshold": 38.55,
+        "ceiling": 13.32,
+        "floor": 5.66,
+        "name": "Synthetic KC WR2",
+        "opponent": "BUF",
+        "player_id": "nfl-wr-20",
+        "positions": [
+          "WR"
+        ],
+        "projection": 10.14,
+        "pts_per_dollar": 1.31,
+        "salary": 7710.0,
+        "stddev": 6.39,
+        "team": "KC",
+        "value": -28.41
+      },
+      {
+        "boom_pct": 0.0,
+        "boom_threshold": 40.03,
+        "bust_pct": 99.75,
+        "bust_threshold": 30.03,
+        "ceiling": 12.62,
+        "floor": 6.38,
+        "name": "Synthetic SF RB3",
+        "opponent": "DAL",
+        "player_id": "nfl-rb-44",
+        "positions": [
+          "RB"
+        ],
+        "projection": 9.95,
+        "pts_per_dollar": 1.66,
+        "salary": 6006.0,
+        "stddev": 5.29,
+        "team": "SF",
+        "value": -20.08
+      },
+      {
+        "boom_pct": 0.5,
+        "boom_threshold": 37.41,
+        "bust_pct": 98.0,
+        "bust_threshold": 27.41,
+        "ceiling": 13.14,
+        "floor": 5.09,
+        "name": "Synthetic DET WR5",
+        "opponent": "PHI",
+        "player_id": "nfl-wr-62",
+        "positions": [
+          "WR"
+        ],
+        "projection": 9.85,
+        "pts_per_dollar": 1.8,
+        "salary": 5481.0,
+        "stddev": 7.11,
+        "team": "DET",
+        "value": -17.55
+      },
+      {
+        "boom_pct": 0.0,
+        "boom_threshold": 46.06,
+        "bust_pct": 100.0,
+        "bust_threshold": 36.06,
+        "ceiling": 13.01,
+        "floor": 5.07,
+        "name": "Synthetic SF WR5",
+        "opponent": "DAL",
+        "player_id": "nfl-wr-49",
+        "positions": [
+          "WR"
+        ],
+        "projection": 9.69,
+        "pts_per_dollar": 1.34,
+        "salary": 7212.0,
+        "stddev": 6.12,
+        "team": "SF",
+        "value": -26.37
+      },
+      {
+        "boom_pct": 0.5,
+        "boom_threshold": 32.53,
+        "bust_pct": 97.5,
+        "bust_threshold": 22.53,
+        "ceiling": 12.5,
+        "floor": 5.83,
+        "name": "Synthetic DET RB3",
+        "opponent": "PHI",
+        "player_id": "nfl-rb-57",
+        "positions": [
+          "RB"
+        ],
+        "projection": 9.54,
+        "pts_per_dollar": 2.12,
+        "salary": 4506.0,
+        "stddev": 5.22,
+        "team": "DET",
+        "value": -12.99
+      },
+      {
+        "boom_pct": 0.5,
+        "boom_threshold": 35.52,
+        "bust_pct": 97.75,
+        "bust_threshold": 25.52,
+        "ceiling": 12.53,
+        "floor": 4.85,
+        "name": "Synthetic BUF WR5",
+        "opponent": "KC",
+        "player_id": "nfl-wr-10",
+        "positions": [
+          "WR"
+        ],
+        "projection": 9.42,
+        "pts_per_dollar": 1.85,
+        "salary": 5103.0,
+        "stddev": 6.42,
+        "team": "BUF",
+        "value": -16.09
+      },
+      {
+        "boom_pct": 0.0,
+        "boom_threshold": 38.77,
+        "bust_pct": 100.0,
+        "bust_threshold": 28.77,
+        "ceiling": 11.59,
+        "floor": 4.36,
+        "name": "Synthetic BUF RB3",
+        "opponent": "KC",
+        "player_id": "nfl-rb-5",
+        "positions": [
+          "RB"
+        ],
+        "projection": 8.4,
+        "pts_per_dollar": 1.46,
+        "salary": 5755.0,
+        "stddev": 5.29,
+        "team": "BUF",
+        "value": -20.38
+      },
+      {
+        "boom_pct": 0.25,
+        "boom_threshold": 29.95,
+        "bust_pct": 94.25,
+        "bust_threshold": 19.95,
+        "ceiling": 11.75,
+        "floor": 3.81,
+        "name": "Synthetic KC WR3",
+        "opponent": "BUF",
+        "player_id": "nfl-wr-21",
+        "positions": [
+          "WR"
+        ],
+        "projection": 8.25,
+        "pts_per_dollar": 2.07,
+        "salary": 3989.0,
+        "stddev": 6.29,
+        "team": "KC",
+        "value": -11.69
+      },
+      {
+        "boom_pct": 0.0,
+        "boom_threshold": 43.21,
+        "bust_pct": 99.75,
+        "bust_threshold": 33.21,
+        "ceiling": 11.17,
+        "floor": 3.79,
+        "name": "Synthetic BUF WR3",
+        "opponent": "KC",
+        "player_id": "nfl-wr-8",
+        "positions": [
+          "WR"
+        ],
+        "projection": 8.22,
+        "pts_per_dollar": 1.24,
+        "salary": 6642.0,
+        "stddev": 6.39,
+        "team": "BUF",
+        "value": -24.99
+      },
+      {
+        "boom_pct": 0.0,
+        "boom_threshold": 47.26,
+        "bust_pct": 100.0,
+        "bust_threshold": 37.26,
+        "ceiling": 10.66,
+        "floor": 4.27,
+        "name": "Synthetic DET TE2",
+        "opponent": "PHI",
+        "player_id": "nfl-te-64",
+        "positions": [
+          "TE"
+        ],
+        "projection": 8.2,
+        "pts_per_dollar": 1.1,
+        "salary": 7452.0,
+        "stddev": 5.69,
+        "team": "DET",
+        "value": -29.06
+      },
+      {
+        "boom_pct": 0.0,
+        "boom_threshold": 27.09,
+        "bust_pct": 98.0,
+        "bust_threshold": 17.09,
+        "ceiling": 10.29,
+        "floor": 4.27,
+        "name": "Synthetic KC DST1",
+        "opponent": "BUF",
+        "player_id": "nfl-dst-26",
+        "positions": [
+          "DST"
+        ],
+        "projection": 7.12,
+        "pts_per_dollar": 2.08,
+        "salary": 3419.0,
+        "stddev": 4.41,
+        "team": "KC",
+        "value": -9.97
+      },
+      {
+        "boom_pct": 0.0,
+        "boom_threshold": 26.58,
+        "bust_pct": 97.5,
+        "bust_threshold": 16.58,
+        "ceiling": 9.68,
+        "floor": 3.97,
+        "name": "Synthetic BUF DST1",
+        "opponent": "KC",
+        "player_id": "nfl-dst-13",
+        "positions": [
+          "DST"
+        ],
+        "projection": 6.93,
+        "pts_per_dollar": 2.09,
+        "salary": 3316.0,
+        "stddev": 4.38,
+        "team": "BUF",
+        "value": -9.64
+      },
+      {
+        "boom_pct": 0.5,
+        "boom_threshold": 33.57,
+        "bust_pct": 98.5,
+        "bust_threshold": 23.57,
+        "ceiling": 9.62,
+        "floor": 3.12,
+        "name": "Synthetic PHI WR3",
+        "opponent": "DET",
+        "player_id": "nfl-wr-73",
+        "positions": [
+          "WR"
+        ],
+        "projection": 6.89,
+        "pts_per_dollar": 1.46,
+        "salary": 4714.0,
+        "stddev": 5.4,
+        "team": "PHI",
+        "value": -16.68
+      },
+      {
+        "boom_pct": 0.25,
+        "boom_threshold": 21.83,
+        "bust_pct": 89.0,
+        "bust_threshold": 11.83,
+        "ceiling": 9.19,
+        "floor": 3.6,
+        "name": "Synthetic DAL DST1",
+        "opponent": "SF",
+        "player_id": "nfl-dst-39",
+        "positions": [
+          "DST"
+        ],
+        "projection": 6.54,
+        "pts_per_dollar": 2.76,
+        "salary": 2366.0,
+        "stddev": 4.16,
+        "team": "DAL",
+        "value": -5.29
+      },
+      {
+        "boom_pct": 0.0,
+        "boom_threshold": 40.31,
+        "bust_pct": 99.75,
+        "bust_threshold": 30.31,
+        "ceiling": 9.06,
+        "floor": 2.44,
+        "name": "Synthetic SF WR3",
+        "opponent": "DAL",
+        "player_id": "nfl-wr-47",
+        "positions": [
+          "WR"
+        ],
+        "projection": 6.37,
+        "pts_per_dollar": 1.05,
+        "salary": 6062.0,
+        "stddev": 5.45,
+        "team": "SF",
+        "value": -23.94
+      },
+      {
+        "boom_pct": 0.0,
+        "boom_threshold": 28.28,
+        "bust_pct": 99.0,
+        "bust_threshold": 18.28,
+        "ceiling": 8.94,
+        "floor": 3.35,
+        "name": "Synthetic PHI DST1",
+        "opponent": "DET",
+        "player_id": "nfl-dst-78",
+        "positions": [
+          "DST"
+        ],
+        "projection": 6.33,
+        "pts_per_dollar": 1.73,
+        "salary": 3656.0,
+        "stddev": 4.25,
+        "team": "PHI",
+        "value": -11.95
+      },
+      {
+        "boom_pct": 0.0,
+        "boom_threshold": 27.99,
+        "bust_pct": 99.75,
+        "bust_threshold": 17.99,
+        "ceiling": 8.16,
+        "floor": 2.9,
+        "name": "Synthetic SF DST1",
+        "opponent": "DAL",
+        "player_id": "nfl-dst-52",
+        "positions": [
+          "DST"
+        ],
+        "projection": 5.74,
+        "pts_per_dollar": 1.59,
+        "salary": 3598.0,
+        "stddev": 4.03,
+        "team": "SF",
+        "value": -12.25
+      },
+      {
+        "boom_pct": 0.5,
+        "boom_threshold": 22.77,
+        "bust_pct": 94.75,
+        "bust_threshold": 12.77,
+        "ceiling": 8.2,
+        "floor": 2.52,
+        "name": "Synthetic DET DST1",
+        "opponent": "PHI",
+        "player_id": "nfl-dst-65",
+        "positions": [
+          "DST"
+        ],
+        "projection": 5.68,
+        "pts_per_dollar": 2.22,
+        "salary": 2553.0,
+        "stddev": 4.45,
+        "team": "DET",
+        "value": -7.09
+      }
+    ],
+    "site": "draftkings",
+    "sport": "nfl"
+  }
+}

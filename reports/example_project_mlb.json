@@ -1,0 +1,2507 @@
+{
+  "_provenance": {
+    "command": "python -m src.stokengineer.cli project --sample sample_mlb_dk.json",
+    "engine_version": "0.4.0",
+    "generated_at_utc": "2026-09-23T01:03:46+00:00",
+    "notes": [
+      "Sample slates in src/data/samples are synthetic and labelled as such. They exist so the engine can be tested deterministically offline; they are not real salaries or real projections, and no report generated from them describes real players."
+    ],
+    "payload_sha256": "ae7c1ee4ae091f6f6494a84e20b6fe557ec48669ac172ccce991994c1ba8b60b",
+    "platform": "Linux-6.1.158+-x86_64-with-glibc2.36",
+    "python": "3.11.2",
+    "sources": [
+      {
+        "id": "dk_lobby_api",
+        "publisher": "DraftKings",
+        "title": "DraftKings public lobby JSON",
+        "url": "https://www.draftkings.com/lobby/getcontests?sport=NFL"
+      },
+      {
+        "id": "dk_rules_mlb",
+        "publisher": "DraftKings",
+        "title": "DraftKings Rules & Scoring - MLB Classic",
+        "url": "https://www.draftkings.com/help/rules/2"
+      },
+      {
+        "id": "dk_rules_nba",
+        "publisher": "DraftKings",
+        "title": "DraftKings Rules & Scoring - NBA Classic",
+        "url": "https://www.draftkings.com/help/rules/4"
+      },
+      {
+        "id": "dk_rules_nfl",
+        "publisher": "DraftKings",
+        "title": "DraftKings Rules & Scoring - NFL Classic",
+        "url": "https://www.draftkings.com/help/rules/1"
+      },
+      {
+        "id": "dk_rules_nhl",
+        "publisher": "DraftKings",
+        "title": "DraftKings Rules & Scoring - NHL Classic",
+        "url": "https://www.draftkings.com/help/rules/3"
+      },
+      {
+        "id": "espn_scoreboard",
+        "publisher": "ESPN",
+        "title": "ESPN public scoreboard/odds feed",
+        "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard"
+      },
+      {
+        "id": "mlb_statsapi",
+        "publisher": "MLB Advanced Media",
+        "title": "MLB Stats API (official, keyless)",
+        "url": "https://statsapi.mlb.com/api/v1/schedule?sportId=1&date=2026-09-21&hydrate=team,linescore"
+      },
+      {
+        "id": "os_projection_system",
+        "publisher": "OddsShopper / Stokastic",
+        "title": "Stokastic projection system (OddsShopper, Stokastic's betting arm)",
+        "url": "https://www.oddsshopper.com/articles/betting-101/stokastic-projection-system"
+      },
+      {
+        "id": "sk_home",
+        "publisher": "Stokastic",
+        "title": "Stokastic home page",
+        "url": "https://www.stokastic.com/"
+      },
+      {
+        "id": "sk_mlb_datahub",
+        "publisher": "Stokastic",
+        "title": "How to use MLB DFS data (DataHub columns)",
+        "url": "https://www.stokastic.com/articles/mlb-dfs/how-to-use-mlb-dfs-data"
+      },
+      {
+        "id": "sk_mlb_ownership",
+        "publisher": "Stokastic",
+        "title": "MLB DFS ownership projections",
+        "url": "https://www.stokastic.com/articles/mlb-dfs/mlb-dfs-ownership-projections"
+      },
+      {
+        "id": "sk_nfl_review",
+        "publisher": "Stokastic",
+        "title": "Stokastic Review 2026 (written by Stokastic)",
+        "url": "https://www.stokastic.com/articles/nfl-dfs/stokastic-review"
+      },
+      {
+        "id": "sk_pricing",
+        "publisher": "Stokastic",
+        "title": "Stokastic pricing and product FAQ",
+        "url": "https://www.stokastic.com/pricing"
+      },
+      {
+        "id": "splashplay_review",
+        "publisher": "Splash Play Podcast",
+        "title": "Third-party Stokastic review (2026)",
+        "url": "https://splashplaypodcast.com/stokastic-review/"
+      }
+    ]
+  },
+  "payload": {
+    "date": "2026-09-21",
+    "n_sims": 2000,
+    "players": [
+      {
+        "boom_pct": 0.25,
+        "boom_threshold": 48.12,
+        "bust_pct": 96.2,
+        "bust_threshold": 38.12,
+        "ceiling": 27.97,
+        "floor": 17.53,
+        "name": "Synthetic SEA SP2",
+        "opponent": "HOU",
+        "player_id": "mlb-sp-62",
+        "positions": [
+          "SP"
+        ],
+        "projection": 23.07,
+        "pts_per_dollar": 3.03,
+        "salary": 7623.0,
+        "stddev": 8.03,
+        "team": "SEA",
+        "value": -15.05
+      },
+      {
+        "boom_pct": 0.05,
+        "boom_threshold": 51.05,
+        "bust_pct": 99.0,
+        "bust_threshold": 41.05,
+        "ceiling": 26.89,
+        "floor": 16.69,
+        "name": "Synthetic HOU SP2",
+        "opponent": "SEA",
+        "player_id": "mlb-sp-77",
+        "positions": [
+          "SP"
+        ],
+        "projection": 22.1,
+        "pts_per_dollar": 2.69,
+        "salary": 8209.0,
+        "stddev": 7.55,
+        "team": "HOU",
+        "value": -18.95
+      },
+      {
+        "boom_pct": 3.7,
+        "boom_threshold": 36.58,
+        "bust_pct": 75.15,
+        "bust_threshold": 26.58,
+        "ceiling": 26.54,
+        "floor": 16.4,
+        "name": "Synthetic SEA SP3",
+        "opponent": "HOU",
+        "player_id": "mlb-sp-63",
+        "positions": [
+          "SP"
+        ],
+        "projection": 21.89,
+        "pts_per_dollar": 4.12,
+        "salary": 5316.0,
+        "stddev": 7.78,
+        "team": "SEA",
+        "value": -4.69
+      },
+      {
+        "boom_pct": 0.0,
+        "boom_threshold": 55.93,
+        "bust_pct": 99.85,
+        "bust_threshold": 45.93,
+        "ceiling": 26.62,
+        "floor": 16.33,
+        "name": "Synthetic SF SP1",
+        "opponent": "LAD",
+        "player_id": "mlb-sp-31",
+        "positions": [
+          "SP"
+        ],
+        "projection": 21.69,
+        "pts_per_dollar": 2.36,
+        "salary": 9186.0,
+        "stddev": 7.55,
+        "team": "SF",
+        "value": -24.24
+      },
+      {
+        "boom_pct": 0.25,
+        "boom_threshold": 44.66,
+        "bust_pct": 95.15,
+        "bust_threshold": 34.66,
+        "ceiling": 26.16,
+        "floor": 15.88,
+        "name": "Synthetic SF SP4",
+        "opponent": "LAD",
+        "player_id": "mlb-sp-34",
+        "positions": [
+          "SP"
+        ],
+        "projection": 21.32,
+        "pts_per_dollar": 3.07,
+        "salary": 6933.0,
+        "stddev": 7.67,
+        "team": "SF",
+        "value": -13.35
+      },
+      {
+        "boom_pct": 2.05,
+        "boom_threshold": 37.46,
+        "bust_pct": 80.65,
+        "bust_threshold": 27.46,
+        "ceiling": 25.94,
+        "floor": 15.89,
+        "name": "Synthetic LAD SP2",
+        "opponent": "SF",
+        "player_id": "mlb-sp-47",
+        "positions": [
+          "SP"
+        ],
+        "projection": 20.99,
+        "pts_per_dollar": 3.82,
+        "salary": 5492.0,
+        "stddev": 7.54,
+        "team": "LAD",
+        "value": -6.47
+      },
+      {
+        "boom_pct": 0.0,
+        "boom_threshold": 46.3,
+        "bust_pct": 97.2,
+        "bust_threshold": 36.3,
+        "ceiling": 25.18,
+        "floor": 15.55,
+        "name": "Synthetic ATL SP3",
+        "opponent": "PHI",
+        "player_id": "mlb-sp-108",
+        "positions": [
+          "SP"
+        ],
+        "projection": 20.69,
+        "pts_per_dollar": 2.85,
+        "salary": 7259.0,
+        "stddev": 7.38,
+        "team": "ATL",
+        "value": -15.61
+      },
+      {
+        "boom_pct": 0.0,
+        "boom_threshold": 53.63,
+        "bust_pct": 99.85,
+        "bust_threshold": 43.63,
+        "ceiling": 25.49,
+        "floor": 15.6,
+        "name": "Synthetic LAD SP4",
+        "opponent": "SF",
+        "player_id": "mlb-sp-49",
+        "positions": [
+          "SP"
+        ],
+        "projection": 20.59,
+        "pts_per_dollar": 2.36,
+        "salary": 8726.0,
+        "stddev": 7.23,
+        "team": "LAD",
+        "value": -23.04
+      },
+      {
+        "boom_pct": 0.2,
+        "boom_threshold": 43.58,
+        "bust_pct": 94.85,
+        "bust_threshold": 33.58,
+        "ceiling": 25.18,
+        "floor": 15.47,
+        "name": "Synthetic ATL SP4",
+        "opponent": "PHI",
+        "player_id": "mlb-sp-109",
+        "positions": [
+          "SP"
+        ],
+        "projection": 20.58,
+        "pts_per_dollar": 3.06,
+        "salary": 6715.0,
+        "stddev": 7.45,
+        "team": "ATL",
+        "value": -13.0
+      },
+      {
+        "boom_pct": 0.1,
+        "boom_threshold": 44.8,
+        "bust_pct": 97.65,
+        "bust_threshold": 34.8,
+        "ceiling": 24.29,
+        "floor": 15.12,
+        "name": "Synthetic LAD SP1",
+        "opponent": "SF",
+        "player_id": "mlb-sp-46",
+        "positions": [
+          "SP"
+        ],
+        "projection": 19.91,
+        "pts_per_dollar": 2.86,
+        "salary": 6961.0,
+        "stddev": 7.07,
+        "team": "LAD",
+        "value": -14.89
+      },
+      {
+        "boom_pct": 0.05,
+        "boom_threshold": 44.93,
+        "bust_pct": 97.3,
+        "bust_threshold": 34.93,
+        "ceiling": 24.25,
+        "floor": 14.8,
+        "name": "Synthetic BOS SP2",
+        "opponent": "NYY",
+        "player_id": "mlb-sp-2",
+        "positions": [
+          "SP"
+        ],
+        "projection": 19.84,
+        "pts_per_dollar": 2.84,
+        "salary": 6985.0,
+        "stddev": 7.23,
+        "team": "BOS",
+        "value": -15.09
+      },
+      {
+        "boom_pct": 1.05,
+        "boom_threshold": 38.24,
+        "bust_pct": 88.1,
+        "bust_threshold": 28.24,
+        "ceiling": 24.65,
+        "floor": 14.64,
+        "name": "Synthetic PHI SP1",
+        "opponent": "ATL",
+        "player_id": "mlb-sp-91",
+        "positions": [
+          "SP"
+        ],
+        "projection": 19.75,
+        "pts_per_dollar": 3.5,
+        "salary": 5648.0,
+        "stddev": 7.19,
+        "team": "PHI",
+        "value": -8.49
+      },
+      {
+        "boom_pct": 0.05,
+        "boom_threshold": 47.92,
+        "bust_pct": 99.0,
+        "bust_threshold": 37.92,
+        "ceiling": 23.57,
+        "floor": 14.06,
+        "name": "Synthetic BOS SP3",
+        "opponent": "NYY",
+        "player_id": "mlb-sp-3",
+        "positions": [
+          "SP"
+        ],
+        "projection": 19.05,
+        "pts_per_dollar": 2.51,
+        "salary": 7585.0,
+        "stddev": 7.13,
+        "team": "BOS",
+        "value": -18.87
+      },
+      {
+        "boom_pct": 0.05,
+        "boom_threshold": 50.93,
+        "bust_pct": 99.75,
+        "bust_threshold": 40.93,
+        "ceiling": 23.15,
+        "floor": 14.07,
+        "name": "Synthetic NYY SP1",
+        "opponent": "BOS",
+        "player_id": "mlb-sp-16",
+        "positions": [
+          "SP"
+        ],
+        "projection": 18.85,
+        "pts_per_dollar": 2.3,
+        "salary": 8187.0,
+        "stddev": 6.89,
+        "team": "NYY",
+        "value": -22.09
+      },
+      {
+        "boom_pct": 0.0,
+        "boom_threshold": 56.28,
+        "bust_pct": 100.0,
+        "bust_threshold": 46.28,
+        "ceiling": 23.2,
+        "floor": 14.04,
+        "name": "Synthetic ATL SP1",
+        "opponent": "PHI",
+        "player_id": "mlb-sp-106",
+        "positions": [
+          "SP"
+        ],
+        "projection": 18.83,
+        "pts_per_dollar": 2.03,
+        "salary": 9257.0,
+        "stddev": 6.77,
+        "team": "ATL",
+        "value": -27.46
+      },
+      {
+        "boom_pct": 0.65,
+        "boom_threshold": 38.29,
+        "bust_pct": 90.1,
+        "bust_threshold": 28.29,
+        "ceiling": 23.37,
+        "floor": 13.8,
+        "name": "Synthetic NYY SP2",
+        "opponent": "BOS",
+        "player_id": "mlb-sp-17",
+        "positions": [
+          "SP"
+        ],
+        "projection": 18.77,
+        "pts_per_dollar": 3.32,
+        "salary": 5658.0,
+        "stddev": 7.16,
+        "team": "NYY",
+        "value": -9.52
+      },
+      {
+        "boom_pct": 0.0,
+        "boom_threshold": 55.99,
+        "bust_pct": 99.85,
+        "bust_threshold": 45.99,
+        "ceiling": 22.88,
+        "floor": 13.55,
+        "name": "Synthetic HOU SP1",
+        "opponent": "SEA",
+        "player_id": "mlb-sp-76",
+        "positions": [
+          "SP"
+        ],
+        "projection": 18.46,
+        "pts_per_dollar": 2.01,
+        "salary": 9198.0,
+        "stddev": 7.01,
+        "team": "HOU",
+        "value": -27.53
+      },
+      {
+        "boom_pct": 0.0,
+        "boom_threshold": 45.26,
+        "bust_pct": 98.95,
+        "bust_threshold": 35.26,
+        "ceiling": 22.6,
+        "floor": 13.47,
+        "name": "Synthetic NYY SP3",
+        "opponent": "BOS",
+        "player_id": "mlb-sp-18",
+        "positions": [
+          "SP"
+        ],
+        "projection": 18.27,
+        "pts_per_dollar": 2.59,
+        "salary": 7052.0,
+        "stddev": 6.92,
+        "team": "NYY",
+        "value": -16.99
+      },
+      {
+        "boom_pct": 0.0,
+        "boom_threshold": 46.01,
+        "bust_pct": 98.6,
+        "bust_threshold": 36.01,
+        "ceiling": 22.58,
+        "floor": 13.42,
+        "name": "Synthetic BOS SP4",
+        "opponent": "NYY",
+        "player_id": "mlb-sp-4",
+        "positions": [
+          "SP"
+        ],
+        "projection": 18.23,
+        "pts_per_dollar": 2.53,
+        "salary": 7202.0,
+        "stddev": 6.92,
+        "team": "BOS",
+        "value": -17.78
+      },
+      {
+        "boom_pct": 0.0,
+        "boom_threshold": 52.57,
+        "bust_pct": 100.0,
+        "bust_threshold": 42.57,
+        "ceiling": 22.27,
+        "floor": 13.24,
+        "name": "Synthetic LAD SP3",
+        "opponent": "SF",
+        "player_id": "mlb-sp-48",
+        "positions": [
+          "SP"
+        ],
+        "projection": 17.99,
+        "pts_per_dollar": 2.11,
+        "salary": 8514.0,
+        "stddev": 6.78,
+        "team": "LAD",
+        "value": -24.58
+      },
+      {
+        "boom_pct": 0.0,
+        "boom_threshold": 58.0,
+        "bust_pct": 100.0,
+        "bust_threshold": 48.0,
+        "ceiling": 21.77,
+        "floor": 12.8,
+        "name": "Synthetic SEA SP1",
+        "opponent": "HOU",
+        "player_id": "mlb-sp-61",
+        "positions": [
+          "SP"
+        ],
+        "projection": 17.5,
+        "pts_per_dollar": 1.82,
+        "salary": 9599.0,
+        "stddev": 6.47,
+        "team": "SEA",
+        "value": -30.49
+      },
+      {
+        "boom_pct": 0.0,
+        "boom_threshold": 54.29,
+        "bust_pct": 99.95,
+        "bust_threshold": 44.29,
+        "ceiling": 21.73,
+        "floor": 12.66,
+        "name": "Synthetic PHI SP2",
+        "opponent": "ATL",
+        "player_id": "mlb-sp-92",
+        "positions": [
+          "SP"
+        ],
+        "projection": 17.27,
+        "pts_per_dollar": 1.95,
+        "salary": 8858.0,
+        "stddev": 6.59,
+        "team": "PHI",
+        "value": -27.02
+      },
+      {
+        "boom_pct": 0.0,
+        "boom_threshold": 47.09,
+        "bust_pct": 99.3,
+        "bust_threshold": 37.09,
+        "ceiling": 21.5,
+        "floor": 12.27,
+        "name": "Synthetic SF SP3",
+        "opponent": "LAD",
+        "player_id": "mlb-sp-33",
+        "positions": [
+          "SP"
+        ],
+        "projection": 17.15,
+        "pts_per_dollar": 2.31,
+        "salary": 7419.0,
+        "stddev": 6.79,
+        "team": "SF",
+        "value": -19.95
+      },
+      {
+        "boom_pct": 0.45,
+        "boom_threshold": 37.52,
+        "bust_pct": 94.6,
+        "bust_threshold": 27.52,
+        "ceiling": 21.15,
+        "floor": 12.6,
+        "name": "Synthetic SEA SP4",
+        "opponent": "HOU",
+        "player_id": "mlb-sp-64",
+        "positions": [
+          "SP"
+        ],
+        "projection": 17.06,
+        "pts_per_dollar": 3.1,
+        "salary": 5504.0,
+        "stddev": 6.39,
+        "team": "SEA",
+        "value": -10.46
+      },
+      {
+        "boom_pct": 0.0,
+        "boom_threshold": 50.47,
+        "bust_pct": 100.0,
+        "bust_threshold": 40.47,
+        "ceiling": 21.45,
+        "floor": 12.22,
+        "name": "Synthetic NYY SP4",
+        "opponent": "BOS",
+        "player_id": "mlb-sp-19",
+        "positions": [
+          "SP"
+        ],
+        "projection": 17.01,
+        "pts_per_dollar": 2.1,
+        "salary": 8094.0,
+        "stddev": 6.62,
+        "team": "NYY",
+        "value": -23.46
+      },
+      {
+        "boom_pct": 0.0,
+        "boom_threshold": 51.62,
+        "bust_pct": 99.95,
+        "bust_threshold": 41.62,
+        "ceiling": 20.78,
+        "floor": 12.17,
+        "name": "Synthetic BOS SP1",
+        "opponent": "NYY",
+        "player_id": "mlb-sp-1",
+        "positions": [
+          "SP"
+        ],
+        "projection": 16.87,
+        "pts_per_dollar": 2.03,
+        "salary": 8324.0,
+        "stddev": 6.66,
+        "team": "BOS",
+        "value": -24.75
+      },
+      {
+        "boom_pct": 0.05,
+        "boom_threshold": 43.05,
+        "bust_pct": 98.95,
+        "bust_threshold": 33.05,
+        "ceiling": 21.07,
+        "floor": 11.98,
+        "name": "Synthetic SF SP2",
+        "opponent": "LAD",
+        "player_id": "mlb-sp-32",
+        "positions": [
+          "SP"
+        ],
+        "projection": 16.54,
+        "pts_per_dollar": 2.5,
+        "salary": 6610.0,
+        "stddev": 6.68,
+        "team": "SF",
+        "value": -16.51
+      },
+      {
+        "boom_pct": 0.0,
+        "boom_threshold": 53.06,
+        "bust_pct": 100.0,
+        "bust_threshold": 43.06,
+        "ceiling": 20.31,
+        "floor": 11.22,
+        "name": "Synthetic HOU SP4",
+        "opponent": "SEA",
+        "player_id": "mlb-sp-79",
+        "positions": [
+          "SP"
+        ],
+        "projection": 15.88,
+        "pts_per_dollar": 1.84,
+        "salary": 8612.0,
+        "stddev": 6.55,
+        "team": "HOU",
+        "value": -27.18
+      },
+      {
+        "boom_pct": 0.0,
+        "boom_threshold": 56.03,
+        "bust_pct": 100.0,
+        "bust_threshold": 46.03,
+        "ceiling": 19.58,
+        "floor": 10.93,
+        "name": "Synthetic HOU SP3",
+        "opponent": "SEA",
+        "player_id": "mlb-sp-78",
+        "positions": [
+          "SP"
+        ],
+        "projection": 15.5,
+        "pts_per_dollar": 1.68,
+        "salary": 9206.0,
+        "stddev": 6.41,
+        "team": "HOU",
+        "value": -30.53
+      },
+      {
+        "boom_pct": 0.1,
+        "boom_threshold": 38.52,
+        "bust_pct": 96.95,
+        "bust_threshold": 28.52,
+        "ceiling": 19.41,
+        "floor": 10.84,
+        "name": "Synthetic ATL SP2",
+        "opponent": "PHI",
+        "player_id": "mlb-sp-107",
+        "positions": [
+          "SP"
+        ],
+        "projection": 15.4,
+        "pts_per_dollar": 2.7,
+        "salary": 5705.0,
+        "stddev": 6.34,
+        "team": "ATL",
+        "value": -13.12
+      },
+      {
+        "boom_pct": 0.0,
+        "boom_threshold": 39.47,
+        "bust_pct": 98.45,
+        "bust_threshold": 29.47,
+        "ceiling": 18.89,
+        "floor": 10.77,
+        "name": "Synthetic PHI SP4",
+        "opponent": "ATL",
+        "player_id": "mlb-sp-94",
+        "positions": [
+          "SP"
+        ],
+        "projection": 15.01,
+        "pts_per_dollar": 2.55,
+        "salary": 5894.0,
+        "stddev": 5.99,
+        "team": "PHI",
+        "value": -14.46
+      },
+      {
+        "boom_pct": 0.0,
+        "boom_threshold": 56.78,
+        "bust_pct": 100.0,
+        "bust_threshold": 46.78,
+        "ceiling": 17.83,
+        "floor": 9.75,
+        "name": "Synthetic PHI SP3",
+        "opponent": "ATL",
+        "player_id": "mlb-sp-93",
+        "positions": [
+          "SP"
+        ],
+        "projection": 14.04,
+        "pts_per_dollar": 1.5,
+        "salary": 9355.0,
+        "stddev": 5.95,
+        "team": "PHI",
+        "value": -32.74
+      },
+      {
+        "boom_pct": 1.35,
+        "boom_threshold": 39.25,
+        "bust_pct": 95.6,
+        "bust_threshold": 29.25,
+        "ceiling": 15.23,
+        "floor": 3.61,
+        "name": "Synthetic NYY C1",
+        "opponent": "BOS",
+        "player_id": "mlb-c-20",
+        "positions": [
+          "C"
+        ],
+        "projection": 10.49,
+        "pts_per_dollar": 1.79,
+        "salary": 5850.0,
+        "stddev": 9.52,
+        "team": "NYY",
+        "value": -18.76
+      },
+      {
+        "boom_pct": 9.3,
+        "boom_threshold": 22.69,
+        "bust_pct": 66.9,
+        "bust_threshold": 12.69,
+        "ceiling": 15.07,
+        "floor": 3.88,
+        "name": "Synthetic NYY 1B1",
+        "opponent": "BOS",
+        "player_id": "mlb-1b-21",
+        "positions": [
+          "1B"
+        ],
+        "projection": 10.41,
+        "pts_per_dollar": 4.1,
+        "salary": 2538.0,
+        "stddev": 8.72,
+        "team": "NYY",
+        "value": -2.28
+      },
+      {
+        "boom_pct": 3.6,
+        "boom_threshold": 30.21,
+        "bust_pct": 86.3,
+        "bust_threshold": 20.21,
+        "ceiling": 14.94,
+        "floor": 3.7,
+        "name": "Synthetic PHI OF4",
+        "opponent": "ATL",
+        "player_id": "mlb-of-103",
+        "positions": [
+          "OF"
+        ],
+        "projection": 10.38,
+        "pts_per_dollar": 2.57,
+        "salary": 4042.0,
+        "stddev": 9.03,
+        "team": "PHI",
+        "value": -9.83
+      },
+      {
+        "boom_pct": 0.5,
+        "boom_threshold": 41.39,
+        "bust_pct": 97.55,
+        "bust_threshold": 31.39,
+        "ceiling": 14.95,
+        "floor": 3.57,
+        "name": "Synthetic LAD SS1",
+        "opponent": "SF",
+        "player_id": "mlb-ss-54",
+        "positions": [
+          "SS"
+        ],
+        "projection": 10.11,
+        "pts_per_dollar": 1.61,
+        "salary": 6279.0,
+        "stddev": 8.72,
+        "team": "LAD",
+        "value": -21.29
+      },
+      {
+        "boom_pct": 7.7,
+        "boom_threshold": 22.92,
+        "bust_pct": 70.35,
+        "bust_threshold": 12.92,
+        "ceiling": 14.29,
+        "floor": 3.71,
+        "name": "Synthetic BOS C1",
+        "opponent": "NYY",
+        "player_id": "mlb-c-5",
+        "positions": [
+          "C"
+        ],
+        "projection": 9.89,
+        "pts_per_dollar": 3.83,
+        "salary": 2584.0,
+        "stddev": 8.4,
+        "team": "BOS",
+        "value": -3.03
+      },
+      {
+        "boom_pct": 5.1,
+        "boom_threshold": 26.61,
+        "bust_pct": 82.1,
+        "bust_threshold": 16.61,
+        "ceiling": 14.11,
+        "floor": 3.38,
+        "name": "Synthetic PHI OF2",
+        "opponent": "ATL",
+        "player_id": "mlb-of-101",
+        "positions": [
+          "OF"
+        ],
+        "projection": 9.76,
+        "pts_per_dollar": 2.94,
+        "salary": 3323.0,
+        "stddev": 8.7,
+        "team": "PHI",
+        "value": -6.85
+      },
+      {
+        "boom_pct": 0.85,
+        "boom_threshold": 40.05,
+        "bust_pct": 97.25,
+        "bust_threshold": 30.05,
+        "ceiling": 14.23,
+        "floor": 3.23,
+        "name": "Synthetic ATL OF2",
+        "opponent": "PHI",
+        "player_id": "mlb-of-116",
+        "positions": [
+          "OF"
+        ],
+        "projection": 9.62,
+        "pts_per_dollar": 1.6,
+        "salary": 6009.0,
+        "stddev": 8.53,
+        "team": "ATL",
+        "value": -20.42
+      },
+      {
+        "boom_pct": 0.8,
+        "boom_threshold": 38.81,
+        "bust_pct": 95.85,
+        "bust_threshold": 28.81,
+        "ceiling": 14.16,
+        "floor": 2.83,
+        "name": "Synthetic ATL 1B1",
+        "opponent": "PHI",
+        "player_id": "mlb-1b-111",
+        "positions": [
+          "1B"
+        ],
+        "projection": 9.55,
+        "pts_per_dollar": 1.66,
+        "salary": 5762.0,
+        "stddev": 8.9,
+        "team": "ATL",
+        "value": -19.26
+      },
+      {
+        "boom_pct": 1.7,
+        "boom_threshold": 33.95,
+        "bust_pct": 93.3,
+        "bust_threshold": 23.96,
+        "ceiling": 13.62,
+        "floor": 3.36,
+        "name": "Synthetic BOS OF1",
+        "opponent": "NYY",
+        "player_id": "mlb-of-10",
+        "positions": [
+          "OF"
+        ],
+        "projection": 9.53,
+        "pts_per_dollar": 1.99,
+        "salary": 4791.0,
+        "stddev": 8.57,
+        "team": "BOS",
+        "value": -14.43
+      },
+      {
+        "boom_pct": 2.1,
+        "boom_threshold": 30.66,
+        "bust_pct": 90.3,
+        "bust_threshold": 20.66,
+        "ceiling": 13.97,
+        "floor": 3.21,
+        "name": "Synthetic NYY 3B1",
+        "opponent": "BOS",
+        "player_id": "mlb-3b-23",
+        "positions": [
+          "3B"
+        ],
+        "projection": 9.51,
+        "pts_per_dollar": 2.3,
+        "salary": 4131.0,
+        "stddev": 8.48,
+        "team": "NYY",
+        "value": -11.14
+      },
+      {
+        "boom_pct": 4.05,
+        "boom_threshold": 28.82,
+        "bust_pct": 87.0,
+        "bust_threshold": 18.82,
+        "ceiling": 13.81,
+        "floor": 2.71,
+        "name": "Synthetic SF SS1",
+        "opponent": "LAD",
+        "player_id": "mlb-ss-39",
+        "positions": [
+          "SS"
+        ],
+        "projection": 9.42,
+        "pts_per_dollar": 2.5,
+        "salary": 3764.0,
+        "stddev": 9.0,
+        "team": "SF",
+        "value": -9.4
+      },
+      {
+        "boom_pct": 1.8,
+        "boom_threshold": 32.1,
+        "bust_pct": 91.5,
+        "bust_threshold": 22.1,
+        "ceiling": 13.6,
+        "floor": 2.97,
+        "name": "Synthetic NYY OF5",
+        "opponent": "BOS",
+        "player_id": "mlb-of-29",
+        "positions": [
+          "OF"
+        ],
+        "projection": 9.32,
+        "pts_per_dollar": 2.11,
+        "salary": 4420.0,
+        "stddev": 8.59,
+        "team": "NYY",
+        "value": -12.78
+      },
+      {
+        "boom_pct": 2.0,
+        "boom_threshold": 32.51,
+        "bust_pct": 91.8,
+        "bust_threshold": 22.51,
+        "ceiling": 13.38,
+        "floor": 2.64,
+        "name": "Synthetic PHI OF1",
+        "opponent": "ATL",
+        "player_id": "mlb-of-100",
+        "positions": [
+          "OF"
+        ],
+        "projection": 9.18,
+        "pts_per_dollar": 2.04,
+        "salary": 4502.0,
+        "stddev": 8.57,
+        "team": "PHI",
+        "value": -13.33
+      },
+      {
+        "boom_pct": 0.45,
+        "boom_threshold": 41.59,
+        "bust_pct": 98.35,
+        "bust_threshold": 31.59,
+        "ceiling": 13.55,
+        "floor": 3.18,
+        "name": "Synthetic LAD OF1",
+        "opponent": "SF",
+        "player_id": "mlb-of-55",
+        "positions": [
+          "OF"
+        ],
+        "projection": 9.13,
+        "pts_per_dollar": 1.45,
+        "salary": 6319.0,
+        "stddev": 8.16,
+        "team": "LAD",
+        "value": -22.46
+      },
+      {
+        "boom_pct": 0.55,
+        "boom_threshold": 40.03,
+        "bust_pct": 97.05,
+        "bust_threshold": 30.03,
+        "ceiling": 13.27,
+        "floor": 2.93,
+        "name": "Synthetic BOS OF2",
+        "opponent": "NYY",
+        "player_id": "mlb-of-11",
+        "positions": [
+          "OF"
+        ],
+        "projection": 9.12,
+        "pts_per_dollar": 1.52,
+        "salary": 6007.0,
+        "stddev": 8.43,
+        "team": "BOS",
+        "value": -20.92
+      },
+      {
+        "boom_pct": 0.6,
+        "boom_threshold": 42.02,
+        "bust_pct": 98.0,
+        "bust_threshold": 32.02,
+        "ceiling": 13.15,
+        "floor": 3.07,
+        "name": "Synthetic LAD OF6",
+        "opponent": "SF",
+        "player_id": "mlb-of-60",
+        "positions": [
+          "OF"
+        ],
+        "projection": 9.12,
+        "pts_per_dollar": 1.42,
+        "salary": 6405.0,
+        "stddev": 8.51,
+        "team": "LAD",
+        "value": -22.9
+      },
+      {
+        "boom_pct": 1.4,
+        "boom_threshold": 32.09,
+        "bust_pct": 92.8,
+        "bust_threshold": 22.09,
+        "ceiling": 12.95,
+        "floor": 3.08,
+        "name": "Synthetic PHI 3B1",
+        "opponent": "ATL",
+        "player_id": "mlb-3b-98",
+        "positions": [
+          "3B"
+        ],
+        "projection": 8.97,
+        "pts_per_dollar": 2.03,
+        "salary": 4418.0,
+        "stddev": 7.92,
+        "team": "PHI",
+        "value": -13.12
+      },
+      {
+        "boom_pct": 1.25,
+        "boom_threshold": 31.36,
+        "bust_pct": 92.35,
+        "bust_threshold": 21.36,
+        "ceiling": 13.16,
+        "floor": 3.19,
+        "name": "Synthetic ATL 3B1",
+        "opponent": "PHI",
+        "player_id": "mlb-3b-113",
+        "positions": [
+          "3B"
+        ],
+        "projection": 8.97,
+        "pts_per_dollar": 2.1,
+        "salary": 4272.0,
+        "stddev": 7.88,
+        "team": "ATL",
+        "value": -12.39
+      },
+      {
+        "boom_pct": 4.3,
+        "boom_threshold": 25.3,
+        "bust_pct": 80.45,
+        "bust_threshold": 15.3,
+        "ceiling": 13.09,
+        "floor": 2.82,
+        "name": "Synthetic LAD 3B1",
+        "opponent": "SF",
+        "player_id": "mlb-3b-53",
+        "positions": [
+          "3B"
+        ],
+        "projection": 8.85,
+        "pts_per_dollar": 2.89,
+        "salary": 3061.0,
+        "stddev": 8.17,
+        "team": "LAD",
+        "value": -6.45
+      },
+      {
+        "boom_pct": 5.9,
+        "boom_threshold": 22.86,
+        "bust_pct": 73.85,
+        "bust_threshold": 12.86,
+        "ceiling": 13.15,
+        "floor": 2.88,
+        "name": "Synthetic HOU OF3",
+        "opponent": "SEA",
+        "player_id": "mlb-of-87",
+        "positions": [
+          "OF"
+        ],
+        "projection": 8.78,
+        "pts_per_dollar": 3.42,
+        "salary": 2571.0,
+        "stddev": 7.98,
+        "team": "HOU",
+        "value": -4.07
+      },
+      {
+        "boom_pct": 0.6,
+        "boom_threshold": 37.23,
+        "bust_pct": 97.05,
+        "bust_threshold": 27.23,
+        "ceiling": 12.63,
+        "floor": 3.15,
+        "name": "Synthetic ATL OF3",
+        "opponent": "PHI",
+        "player_id": "mlb-of-117",
+        "positions": [
+          "OF"
+        ],
+        "projection": 8.76,
+        "pts_per_dollar": 1.61,
+        "salary": 5445.0,
+        "stddev": 7.71,
+        "team": "ATL",
+        "value": -18.46
+      },
+      {
+        "boom_pct": 3.95,
+        "boom_threshold": 25.53,
+        "bust_pct": 82.5,
+        "bust_threshold": 15.53,
+        "ceiling": 13.07,
+        "floor": 2.8,
+        "name": "Synthetic HOU OF4",
+        "opponent": "SEA",
+        "player_id": "mlb-of-88",
+        "positions": [
+          "OF"
+        ],
+        "projection": 8.7,
+        "pts_per_dollar": 2.8,
+        "salary": 3106.0,
+        "stddev": 8.1,
+        "team": "HOU",
+        "value": -6.83
+      },
+      {
+        "boom_pct": 0.35,
+        "boom_threshold": 40.63,
+        "bust_pct": 98.6,
+        "bust_threshold": 30.63,
+        "ceiling": 12.65,
+        "floor": 2.88,
+        "name": "Synthetic HOU SS1",
+        "opponent": "SEA",
+        "player_id": "mlb-ss-84",
+        "positions": [
+          "SS"
+        ],
+        "projection": 8.66,
+        "pts_per_dollar": 1.41,
+        "salary": 6126.0,
+        "stddev": 7.92,
+        "team": "HOU",
+        "value": -21.97
+      },
+      {
+        "boom_pct": 6.35,
+        "boom_threshold": 23.2,
+        "bust_pct": 76.95,
+        "bust_threshold": 13.19,
+        "ceiling": 12.58,
+        "floor": 2.5,
+        "name": "Synthetic SEA SS1",
+        "opponent": "HOU",
+        "player_id": "mlb-ss-69",
+        "positions": [
+          "SS"
+        ],
+        "projection": 8.53,
+        "pts_per_dollar": 3.23,
+        "salary": 2639.0,
+        "stddev": 8.2,
+        "team": "SEA",
+        "value": -4.67
+      },
+      {
+        "boom_pct": 3.9,
+        "boom_threshold": 24.59,
+        "bust_pct": 81.3,
+        "bust_threshold": 14.6,
+        "ceiling": 12.81,
+        "floor": 2.52,
+        "name": "Synthetic SEA OF3",
+        "opponent": "HOU",
+        "player_id": "mlb-of-72",
+        "positions": [
+          "OF"
+        ],
+        "projection": 8.47,
+        "pts_per_dollar": 2.9,
+        "salary": 2919.0,
+        "stddev": 7.85,
+        "team": "SEA",
+        "value": -6.12
+      },
+      {
+        "boom_pct": 2.55,
+        "boom_threshold": 28.7,
+        "bust_pct": 88.55,
+        "bust_threshold": 18.7,
+        "ceiling": 12.59,
+        "floor": 2.48,
+        "name": "Synthetic NYY SS1",
+        "opponent": "BOS",
+        "player_id": "mlb-ss-24",
+        "positions": [
+          "SS"
+        ],
+        "projection": 8.46,
+        "pts_per_dollar": 2.26,
+        "salary": 3740.0,
+        "stddev": 8.24,
+        "team": "NYY",
+        "value": -10.24
+      },
+      {
+        "boom_pct": 5.0,
+        "boom_threshold": 24.07,
+        "bust_pct": 80.15,
+        "bust_threshold": 14.07,
+        "ceiling": 12.26,
+        "floor": 2.68,
+        "name": "Synthetic LAD OF3",
+        "opponent": "SF",
+        "player_id": "mlb-of-57",
+        "positions": [
+          "OF"
+        ],
+        "projection": 8.43,
+        "pts_per_dollar": 3.0,
+        "salary": 2813.0,
+        "stddev": 8.03,
+        "team": "LAD",
+        "value": -5.64
+      },
+      {
+        "boom_pct": 1.1,
+        "boom_threshold": 32.8,
+        "bust_pct": 93.9,
+        "bust_threshold": 22.8,
+        "ceiling": 12.59,
+        "floor": 2.38,
+        "name": "Synthetic LAD 1B1",
+        "opponent": "SF",
+        "player_id": "mlb-1b-51",
+        "positions": [
+          "1B"
+        ],
+        "projection": 8.42,
+        "pts_per_dollar": 1.85,
+        "salary": 4560.0,
+        "stddev": 7.92,
+        "team": "LAD",
+        "value": -14.38
+      },
+      {
+        "boom_pct": 0.7,
+        "boom_threshold": 34.62,
+        "bust_pct": 96.3,
+        "bust_threshold": 24.62,
+        "ceiling": 12.46,
+        "floor": 2.65,
+        "name": "Synthetic SEA OF6",
+        "opponent": "HOU",
+        "player_id": "mlb-of-75",
+        "positions": [
+          "OF"
+        ],
+        "projection": 8.28,
+        "pts_per_dollar": 1.68,
+        "salary": 4923.0,
+        "stddev": 7.54,
+        "team": "SEA",
+        "value": -16.34
+      },
+      {
+        "boom_pct": 1.45,
+        "boom_threshold": 31.62,
+        "bust_pct": 93.0,
+        "bust_threshold": 21.62,
+        "ceiling": 11.92,
+        "floor": 2.42,
+        "name": "Synthetic PHI C1",
+        "opponent": "ATL",
+        "player_id": "mlb-c-95",
+        "positions": [
+          "C"
+        ],
+        "projection": 8.26,
+        "pts_per_dollar": 1.91,
+        "salary": 4325.0,
+        "stddev": 7.99,
+        "team": "PHI",
+        "value": -13.36
+      },
+      {
+        "boom_pct": 5.05,
+        "boom_threshold": 23.95,
+        "bust_pct": 80.55,
+        "bust_threshold": 13.95,
+        "ceiling": 11.97,
+        "floor": 2.29,
+        "name": "Synthetic SF OF5",
+        "opponent": "LAD",
+        "player_id": "mlb-of-44",
+        "positions": [
+          "OF"
+        ],
+        "projection": 8.09,
+        "pts_per_dollar": 2.9,
+        "salary": 2789.0,
+        "stddev": 8.02,
+        "team": "SF",
+        "value": -5.86
+      },
+      {
+        "boom_pct": 0.25,
+        "boom_threshold": 38.95,
+        "bust_pct": 98.55,
+        "bust_threshold": 28.95,
+        "ceiling": 11.63,
+        "floor": 2.45,
+        "name": "Synthetic NYY OF6",
+        "opponent": "BOS",
+        "player_id": "mlb-of-30",
+        "positions": [
+          "OF"
+        ],
+        "projection": 8.06,
+        "pts_per_dollar": 1.39,
+        "salary": 5789.0,
+        "stddev": 7.55,
+        "team": "NYY",
+        "value": -20.89
+      },
+      {
+        "boom_pct": 0.4,
+        "boom_threshold": 37.77,
+        "bust_pct": 97.65,
+        "bust_threshold": 27.77,
+        "ceiling": 12.25,
+        "floor": 2.05,
+        "name": "Synthetic SEA 1B1",
+        "opponent": "HOU",
+        "player_id": "mlb-1b-66",
+        "positions": [
+          "1B"
+        ],
+        "projection": 8.02,
+        "pts_per_dollar": 1.44,
+        "salary": 5554.0,
+        "stddev": 7.78,
+        "team": "SEA",
+        "value": -19.76
+      },
+      {
+        "boom_pct": 0.2,
+        "boom_threshold": 40.79,
+        "bust_pct": 98.5,
+        "bust_threshold": 30.79,
+        "ceiling": 11.77,
+        "floor": 2.3,
+        "name": "Synthetic PHI SS1",
+        "opponent": "ATL",
+        "player_id": "mlb-ss-99",
+        "positions": [
+          "SS"
+        ],
+        "projection": 7.92,
+        "pts_per_dollar": 1.29,
+        "salary": 6158.0,
+        "stddev": 7.7,
+        "team": "PHI",
+        "value": -22.87
+      },
+      {
+        "boom_pct": 0.3,
+        "boom_threshold": 40.97,
+        "bust_pct": 98.95,
+        "bust_threshold": 30.97,
+        "ceiling": 11.69,
+        "floor": 2.5,
+        "name": "Synthetic ATL SS1",
+        "opponent": "PHI",
+        "player_id": "mlb-ss-114",
+        "positions": [
+          "SS"
+        ],
+        "projection": 7.89,
+        "pts_per_dollar": 1.27,
+        "salary": 6194.0,
+        "stddev": 7.38,
+        "team": "ATL",
+        "value": -23.08
+      },
+      {
+        "boom_pct": 2.2,
+        "boom_threshold": 26.7,
+        "bust_pct": 89.15,
+        "bust_threshold": 16.7,
+        "ceiling": 11.73,
+        "floor": 2.4,
+        "name": "Synthetic BOS 1B1",
+        "opponent": "NYY",
+        "player_id": "mlb-1b-6",
+        "positions": [
+          "1B"
+        ],
+        "projection": 7.86,
+        "pts_per_dollar": 2.35,
+        "salary": 3340.0,
+        "stddev": 7.28,
+        "team": "BOS",
+        "value": -8.84
+      },
+      {
+        "boom_pct": 0.1,
+        "boom_threshold": 41.34,
+        "bust_pct": 98.85,
+        "bust_threshold": 31.34,
+        "ceiling": 11.95,
+        "floor": 2.05,
+        "name": "Synthetic SEA OF5",
+        "opponent": "HOU",
+        "player_id": "mlb-of-74",
+        "positions": [
+          "OF"
+        ],
+        "projection": 7.83,
+        "pts_per_dollar": 1.25,
+        "salary": 6267.0,
+        "stddev": 7.59,
+        "team": "SEA",
+        "value": -23.51
+      },
+      {
+        "boom_pct": 1.35,
+        "boom_threshold": 31.75,
+        "bust_pct": 94.15,
+        "bust_threshold": 21.75,
+        "ceiling": 11.83,
+        "floor": 1.77,
+        "name": "Synthetic LAD 2B1",
+        "opponent": "SF",
+        "player_id": "mlb-2b-52",
+        "positions": [
+          "2B"
+        ],
+        "projection": 7.82,
+        "pts_per_dollar": 1.8,
+        "salary": 4350.0,
+        "stddev": 7.99,
+        "team": "LAD",
+        "value": -13.93
+      },
+      {
+        "boom_pct": 0.4,
+        "boom_threshold": 37.47,
+        "bust_pct": 98.2,
+        "bust_threshold": 27.47,
+        "ceiling": 11.64,
+        "floor": 2.22,
+        "name": "Synthetic BOS SS1",
+        "opponent": "NYY",
+        "player_id": "mlb-ss-9",
+        "positions": [
+          "SS"
+        ],
+        "projection": 7.81,
+        "pts_per_dollar": 1.42,
+        "salary": 5494.0,
+        "stddev": 7.52,
+        "team": "BOS",
+        "value": -19.66
+      },
+      {
+        "boom_pct": 0.65,
+        "boom_threshold": 36.98,
+        "bust_pct": 97.35,
+        "bust_threshold": 26.98,
+        "ceiling": 11.37,
+        "floor": 2.17,
+        "name": "Synthetic BOS 2B1",
+        "opponent": "NYY",
+        "player_id": "mlb-2b-7",
+        "positions": [
+          "2B"
+        ],
+        "projection": 7.8,
+        "pts_per_dollar": 1.45,
+        "salary": 5396.0,
+        "stddev": 7.8,
+        "team": "BOS",
+        "value": -19.18
+      },
+      {
+        "boom_pct": 1.15,
+        "boom_threshold": 29.99,
+        "bust_pct": 95.0,
+        "bust_threshold": 19.99,
+        "ceiling": 11.76,
+        "floor": 2.4,
+        "name": "Synthetic LAD OF4",
+        "opponent": "SF",
+        "player_id": "mlb-of-58",
+        "positions": [
+          "OF"
+        ],
+        "projection": 7.77,
+        "pts_per_dollar": 1.94,
+        "salary": 3998.0,
+        "stddev": 7.03,
+        "team": "LAD",
+        "value": -12.22
+      },
+      {
+        "boom_pct": 0.55,
+        "boom_threshold": 37.82,
+        "bust_pct": 98.05,
+        "bust_threshold": 27.82,
+        "ceiling": 11.79,
+        "floor": 1.89,
+        "name": "Synthetic HOU OF1",
+        "opponent": "SEA",
+        "player_id": "mlb-of-85",
+        "positions": [
+          "OF"
+        ],
+        "projection": 7.77,
+        "pts_per_dollar": 1.4,
+        "salary": 5564.0,
+        "stddev": 7.81,
+        "team": "HOU",
+        "value": -20.05
+      },
+      {
+        "boom_pct": 0.75,
+        "boom_threshold": 32.27,
+        "bust_pct": 95.85,
+        "bust_threshold": 22.27,
+        "ceiling": 11.12,
+        "floor": 2.6,
+        "name": "Synthetic ATL OF5",
+        "opponent": "PHI",
+        "player_id": "mlb-of-119",
+        "positions": [
+          "OF"
+        ],
+        "projection": 7.76,
+        "pts_per_dollar": 1.74,
+        "salary": 4453.0,
+        "stddev": 7.08,
+        "team": "ATL",
+        "value": -14.51
+      },
+      {
+        "boom_pct": 2.7,
+        "boom_threshold": 27.01,
+        "bust_pct": 88.2,
+        "bust_threshold": 17.01,
+        "ceiling": 11.67,
+        "floor": 1.8,
+        "name": "Synthetic BOS OF6",
+        "opponent": "NYY",
+        "player_id": "mlb-of-15",
+        "positions": [
+          "OF"
+        ],
+        "projection": 7.66,
+        "pts_per_dollar": 2.25,
+        "salary": 3402.0,
+        "stddev": 7.82,
+        "team": "BOS",
+        "value": -9.35
+      },
+      {
+        "boom_pct": 1.1,
+        "boom_threshold": 32.19,
+        "bust_pct": 94.95,
+        "bust_threshold": 22.19,
+        "ceiling": 11.22,
+        "floor": 2.08,
+        "name": "Synthetic SF C1",
+        "opponent": "LAD",
+        "player_id": "mlb-c-35",
+        "positions": [
+          "C"
+        ],
+        "projection": 7.64,
+        "pts_per_dollar": 1.72,
+        "salary": 4438.0,
+        "stddev": 7.62,
+        "team": "SF",
+        "value": -14.55
+      },
+      {
+        "boom_pct": 2.85,
+        "boom_threshold": 24.6,
+        "bust_pct": 85.05,
+        "bust_threshold": 14.6,
+        "ceiling": 11.27,
+        "floor": 2.28,
+        "name": "Synthetic PHI OF5",
+        "opponent": "ATL",
+        "player_id": "mlb-of-104",
+        "positions": [
+          "OF"
+        ],
+        "projection": 7.63,
+        "pts_per_dollar": 2.61,
+        "salary": 2921.0,
+        "stddev": 7.27,
+        "team": "PHI",
+        "value": -6.97
+      },
+      {
+        "boom_pct": 0.7,
+        "boom_threshold": 36.14,
+        "bust_pct": 97.05,
+        "bust_threshold": 26.14,
+        "ceiling": 11.61,
+        "floor": 1.9,
+        "name": "Synthetic SF OF4",
+        "opponent": "LAD",
+        "player_id": "mlb-of-43",
+        "positions": [
+          "OF"
+        ],
+        "projection": 7.6,
+        "pts_per_dollar": 1.45,
+        "salary": 5229.0,
+        "stddev": 7.61,
+        "team": "SF",
+        "value": -18.54
+      },
+      {
+        "boom_pct": 1.3,
+        "boom_threshold": 30.39,
+        "bust_pct": 94.55,
+        "bust_threshold": 20.39,
+        "ceiling": 11.52,
+        "floor": 2.11,
+        "name": "Synthetic SF 1B1",
+        "opponent": "LAD",
+        "player_id": "mlb-1b-36",
+        "positions": [
+          "1B"
+        ],
+        "projection": 7.59,
+        "pts_per_dollar": 1.86,
+        "salary": 4078.0,
+        "stddev": 7.46,
+        "team": "SF",
+        "value": -12.8
+      },
+      {
+        "boom_pct": 4.55,
+        "boom_threshold": 22.61,
+        "bust_pct": 79.15,
+        "bust_threshold": 12.61,
+        "ceiling": 11.31,
+        "floor": 2.02,
+        "name": "Synthetic SF 2B1",
+        "opponent": "LAD",
+        "player_id": "mlb-2b-37",
+        "positions": [
+          "2B"
+        ],
+        "projection": 7.59,
+        "pts_per_dollar": 3.01,
+        "salary": 2522.0,
+        "stddev": 7.45,
+        "team": "SF",
+        "value": -5.01
+      },
+      {
+        "boom_pct": 0.5,
+        "boom_threshold": 36.47,
+        "bust_pct": 98.05,
+        "bust_threshold": 26.47,
+        "ceiling": 11.02,
+        "floor": 2.3,
+        "name": "Synthetic SF OF3",
+        "opponent": "LAD",
+        "player_id": "mlb-of-42",
+        "positions": [
+          "OF"
+        ],
+        "projection": 7.58,
+        "pts_per_dollar": 1.43,
+        "salary": 5294.0,
+        "stddev": 7.38,
+        "team": "SF",
+        "value": -18.89
+      },
+      {
+        "boom_pct": 1.95,
+        "boom_threshold": 27.38,
+        "bust_pct": 89.9,
+        "bust_threshold": 17.38,
+        "ceiling": 11.1,
+        "floor": 2.19,
+        "name": "Synthetic SEA C1",
+        "opponent": "HOU",
+        "player_id": "mlb-c-65",
+        "positions": [
+          "C"
+        ],
+        "projection": 7.58,
+        "pts_per_dollar": 2.18,
+        "salary": 3477.0,
+        "stddev": 7.34,
+        "team": "SEA",
+        "value": -9.8
+      },
+      {
+        "boom_pct": 0.8,
+        "boom_threshold": 33.3,
+        "bust_pct": 95.85,
+        "bust_threshold": 23.29,
+        "ceiling": 11.34,
+        "floor": 1.77,
+        "name": "Synthetic ATL OF4",
+        "opponent": "PHI",
+        "player_id": "mlb-of-118",
+        "positions": [
+          "OF"
+        ],
+        "projection": 7.54,
+        "pts_per_dollar": 1.62,
+        "salary": 4659.0,
+        "stddev": 7.67,
+        "team": "ATL",
+        "value": -15.76
+      },
+      {
+        "boom_pct": 0.6,
+        "boom_threshold": 31.63,
+        "bust_pct": 95.0,
+        "bust_threshold": 21.63,
+        "ceiling": 11.25,
+        "floor": 2.1,
+        "name": "Synthetic SF OF2",
+        "opponent": "LAD",
+        "player_id": "mlb-of-41",
+        "positions": [
+          "OF"
+        ],
+        "projection": 7.48,
+        "pts_per_dollar": 1.73,
+        "salary": 4326.0,
+        "stddev": 7.23,
+        "team": "SF",
+        "value": -14.15
+      },
+      {
+        "boom_pct": 0.75,
+        "boom_threshold": 34.16,
+        "bust_pct": 96.5,
+        "bust_threshold": 24.16,
+        "ceiling": 11.23,
+        "floor": 1.73,
+        "name": "Synthetic NYY OF4",
+        "opponent": "BOS",
+        "player_id": "mlb-of-28",
+        "positions": [
+          "OF"
+        ],
+        "projection": 7.45,
+        "pts_per_dollar": 1.54,
+        "salary": 4832.0,
+        "stddev": 7.5,
+        "team": "NYY",
+        "value": -16.71
+      },
+      {
+        "boom_pct": 2.35,
+        "boom_threshold": 25.62,
+        "bust_pct": 87.3,
+        "bust_threshold": 15.62,
+        "ceiling": 10.48,
+        "floor": 2.2,
+        "name": "Synthetic PHI 2B1",
+        "opponent": "ATL",
+        "player_id": "mlb-2b-97",
+        "positions": [
+          "2B"
+        ],
+        "projection": 7.45,
+        "pts_per_dollar": 2.38,
+        "salary": 3125.0,
+        "stddev": 7.28,
+        "team": "PHI",
+        "value": -8.18
+      },
+      {
+        "boom_pct": 1.75,
+        "boom_threshold": 28.05,
+        "bust_pct": 91.65,
+        "bust_threshold": 18.05,
+        "ceiling": 10.98,
+        "floor": 1.97,
+        "name": "Synthetic SF OF1",
+        "opponent": "LAD",
+        "player_id": "mlb-of-40",
+        "positions": [
+          "OF"
+        ],
+        "projection": 7.37,
+        "pts_per_dollar": 2.04,
+        "salary": 3610.0,
+        "stddev": 7.29,
+        "team": "SF",
+        "value": -10.68
+      },
+      {
+        "boom_pct": 0.35,
+        "boom_threshold": 33.99,
+        "bust_pct": 97.35,
+        "bust_threshold": 23.99,
+        "ceiling": 10.79,
+        "floor": 2.19,
+        "name": "Synthetic ATL 2B1",
+        "opponent": "PHI",
+        "player_id": "mlb-2b-112",
+        "positions": [
+          "2B"
+        ],
+        "projection": 7.33,
+        "pts_per_dollar": 1.53,
+        "salary": 4798.0,
+        "stddev": 6.87,
+        "team": "ATL",
+        "value": -16.67
+      },
+      {
+        "boom_pct": 2.4,
+        "boom_threshold": 25.4,
+        "bust_pct": 88.5,
+        "bust_threshold": 15.4,
+        "ceiling": 11.08,
+        "floor": 1.97,
+        "name": "Synthetic HOU 1B1",
+        "opponent": "SEA",
+        "player_id": "mlb-1b-81",
+        "positions": [
+          "1B"
+        ],
+        "projection": 7.3,
+        "pts_per_dollar": 2.37,
+        "salary": 3080.0,
+        "stddev": 7.12,
+        "team": "HOU",
+        "value": -8.1
+      },
+      {
+        "boom_pct": 1.5,
+        "boom_threshold": 26.02,
+        "bust_pct": 89.45,
+        "bust_threshold": 16.02,
+        "ceiling": 10.83,
+        "floor": 2.15,
+        "name": "Synthetic HOU C1",
+        "opponent": "SEA",
+        "player_id": "mlb-c-80",
+        "positions": [
+          "C"
+        ],
+        "projection": 7.27,
+        "pts_per_dollar": 2.27,
+        "salary": 3205.0,
+        "stddev": 6.98,
+        "team": "HOU",
+        "value": -8.75
+      },
+      {
+        "boom_pct": 0.05,
+        "boom_threshold": 40.57,
+        "bust_pct": 99.2,
+        "bust_threshold": 30.57,
+        "ceiling": 11.03,
+        "floor": 1.79,
+        "name": "Synthetic HOU 3B1",
+        "opponent": "SEA",
+        "player_id": "mlb-3b-83",
+        "positions": [
+          "3B"
+        ],
+        "projection": 7.23,
+        "pts_per_dollar": 1.18,
+        "salary": 6114.0,
+        "stddev": 7.13,
+        "team": "HOU",
+        "value": -23.34
+      },
+      {
+        "boom_pct": 0.65,
+        "boom_threshold": 32.59,
+        "bust_pct": 96.5,
+        "bust_threshold": 22.59,
+        "ceiling": 10.99,
+        "floor": 1.85,
+        "name": "Synthetic LAD OF5",
+        "opponent": "SF",
+        "player_id": "mlb-of-59",
+        "positions": [
+          "OF"
+        ],
+        "projection": 7.22,
+        "pts_per_dollar": 1.6,
+        "salary": 4518.0,
+        "stddev": 7.19,
+        "team": "LAD",
+        "value": -15.37
+      },
+      {
+        "boom_pct": 0.1,
+        "boom_threshold": 39.5,
+        "bust_pct": 98.4,
+        "bust_threshold": 29.5,
+        "ceiling": 10.45,
+        "floor": 1.94,
+        "name": "Synthetic SEA 3B1",
+        "opponent": "HOU",
+        "player_id": "mlb-3b-68",
+        "positions": [
+          "3B"
+        ],
+        "projection": 7.18,
+        "pts_per_dollar": 1.22,
+        "salary": 5901.0,
+        "stddev": 7.12,
+        "team": "SEA",
+        "value": -22.32
+      },
+      {
+        "boom_pct": 0.1,
+        "boom_threshold": 37.21,
+        "bust_pct": 98.2,
+        "bust_threshold": 27.21,
+        "ceiling": 10.75,
+        "floor": 1.87,
+        "name": "Synthetic HOU OF2",
+        "opponent": "SEA",
+        "player_id": "mlb-of-86",
+        "positions": [
+          "OF"
+        ],
+        "projection": 7.12,
+        "pts_per_dollar": 1.31,
+        "salary": 5442.0,
+        "stddev": 7.08,
+        "team": "HOU",
+        "value": -20.09
+      },
+      {
+        "boom_pct": 0.1,
+        "boom_threshold": 40.05,
+        "bust_pct": 98.85,
+        "bust_threshold": 30.05,
+        "ceiling": 10.53,
+        "floor": 2.0,
+        "name": "Synthetic HOU OF5",
+        "opponent": "SEA",
+        "player_id": "mlb-of-89",
+        "positions": [
+          "OF"
+        ],
+        "projection": 7.1,
+        "pts_per_dollar": 1.18,
+        "salary": 6011.0,
+        "stddev": 7.04,
+        "team": "HOU",
+        "value": -22.96
+      },
+      {
+        "boom_pct": 2.2,
+        "boom_threshold": 27.29,
+        "bust_pct": 90.75,
+        "bust_threshold": 17.29,
+        "ceiling": 10.76,
+        "floor": 1.49,
+        "name": "Synthetic BOS OF4",
+        "opponent": "NYY",
+        "player_id": "mlb-of-13",
+        "positions": [
+          "OF"
+        ],
+        "projection": 7.08,
+        "pts_per_dollar": 2.05,
+        "salary": 3458.0,
+        "stddev": 7.34,
+        "team": "BOS",
+        "value": -10.21
+      },
+      {
+        "boom_pct": 0.3,
+        "boom_threshold": 33.72,
+        "bust_pct": 97.45,
+        "bust_threshold": 23.72,
+        "ceiling": 10.64,
+        "floor": 2.02,
+        "name": "Synthetic ATL C1",
+        "opponent": "PHI",
+        "player_id": "mlb-c-110",
+        "positions": [
+          "C"
+        ],
+        "projection": 7.08,
+        "pts_per_dollar": 1.49,
+        "salary": 4744.0,
+        "stddev": 6.84,
+        "team": "ATL",
+        "value": -16.64
+      },
+      {
+        "boom_pct": 0.35,
+        "boom_threshold": 33.4,
+        "bust_pct": 96.75,
+        "bust_threshold": 23.4,
+        "ceiling": 10.29,
+        "floor": 1.94,
+        "name": "Synthetic SEA OF2",
+        "opponent": "HOU",
+        "player_id": "mlb-of-71",
+        "positions": [
+          "OF"
+        ],
+        "projection": 7.0,
+        "pts_per_dollar": 1.5,
+        "salary": 4680.0,
+        "stddev": 6.93,
+        "team": "SEA",
+        "value": -16.4
+      },
+      {
+        "boom_pct": 0.1,
+        "boom_threshold": 39.95,
+        "bust_pct": 99.25,
+        "bust_threshold": 29.95,
+        "ceiling": 10.67,
+        "floor": 1.67,
+        "name": "Synthetic ATL OF1",
+        "opponent": "PHI",
+        "player_id": "mlb-of-115",
+        "positions": [
+          "OF"
+        ],
+        "projection": 7.0,
+        "pts_per_dollar": 1.17,
+        "salary": 5989.0,
+        "stddev": 7.16,
+        "team": "ATL",
+        "value": -22.95
+      },
+      {
+        "boom_pct": 2.55,
+        "boom_threshold": 24.66,
+        "bust_pct": 86.35,
+        "bust_threshold": 14.66,
+        "ceiling": 10.64,
+        "floor": 1.58,
+        "name": "Synthetic BOS OF3",
+        "opponent": "NYY",
+        "player_id": "mlb-of-12",
+        "positions": [
+          "OF"
+        ],
+        "projection": 6.98,
+        "pts_per_dollar": 2.38,
+        "salary": 2931.0,
+        "stddev": 7.13,
+        "team": "BOS",
+        "value": -7.68
+      },
+      {
+        "boom_pct": 2.15,
+        "boom_threshold": 25.43,
+        "bust_pct": 89.0,
+        "bust_threshold": 15.43,
+        "ceiling": 10.33,
+        "floor": 1.99,
+        "name": "Synthetic NYY 2B1",
+        "opponent": "BOS",
+        "player_id": "mlb-2b-22",
+        "positions": [
+          "2B"
+        ],
+        "projection": 6.97,
+        "pts_per_dollar": 2.26,
+        "salary": 3085.0,
+        "stddev": 6.79,
+        "team": "NYY",
+        "value": -8.46
+      },
+      {
+        "boom_pct": 2.45,
+        "boom_threshold": 26.08,
+        "bust_pct": 88.2,
+        "bust_threshold": 16.08,
+        "ceiling": 10.6,
+        "floor": 1.34,
+        "name": "Synthetic LAD C1",
+        "opponent": "SF",
+        "player_id": "mlb-c-50",
+        "positions": [
+          "C"
+        ],
+        "projection": 6.97,
+        "pts_per_dollar": 2.17,
+        "salary": 3216.0,
+        "stddev": 7.47,
+        "team": "LAD",
+        "value": -9.11
+      },
+      {
+        "boom_pct": 0.15,
+        "boom_threshold": 41.27,
+        "bust_pct": 99.2,
+        "bust_threshold": 31.27,
+        "ceiling": 10.66,
+        "floor": 1.54,
+        "name": "Synthetic PHI 1B1",
+        "opponent": "ATL",
+        "player_id": "mlb-1b-96",
+        "positions": [
+          "1B"
+        ],
+        "projection": 6.91,
+        "pts_per_dollar": 1.1,
+        "salary": 6254.0,
+        "stddev": 7.07,
+        "team": "PHI",
+        "value": -24.36
+      },
+      {
+        "boom_pct": 0.95,
+        "boom_threshold": 28.28,
+        "bust_pct": 93.1,
+        "bust_threshold": 18.28,
+        "ceiling": 10.43,
+        "floor": 1.62,
+        "name": "Synthetic ATL OF6",
+        "opponent": "PHI",
+        "player_id": "mlb-of-120",
+        "positions": [
+          "OF"
+        ],
+        "projection": 6.9,
+        "pts_per_dollar": 1.89,
+        "salary": 3656.0,
+        "stddev": 6.94,
+        "team": "ATL",
+        "value": -11.38
+      },
+      {
+        "boom_pct": 1.1,
+        "boom_threshold": 29.14,
+        "bust_pct": 93.45,
+        "bust_threshold": 19.14,
+        "ceiling": 10.37,
+        "floor": 1.5,
+        "name": "Synthetic SF 3B1",
+        "opponent": "LAD",
+        "player_id": "mlb-3b-38",
+        "positions": [
+          "3B"
+        ],
+        "projection": 6.8,
+        "pts_per_dollar": 1.78,
+        "salary": 3829.0,
+        "stddev": 7.01,
+        "team": "SF",
+        "value": -12.34
+      },
+      {
+        "boom_pct": 0.1,
+        "boom_threshold": 41.05,
+        "bust_pct": 99.5,
+        "bust_threshold": 31.05,
+        "ceiling": 10.42,
+        "floor": 1.75,
+        "name": "Synthetic HOU 2B1",
+        "opponent": "SEA",
+        "player_id": "mlb-2b-82",
+        "positions": [
+          "2B"
+        ],
+        "projection": 6.77,
+        "pts_per_dollar": 1.09,
+        "salary": 6210.0,
+        "stddev": 6.64,
+        "team": "HOU",
+        "value": -24.28
+      },
+      {
+        "boom_pct": 1.45,
+        "boom_threshold": 28.36,
+        "bust_pct": 93.6,
+        "bust_threshold": 18.36,
+        "ceiling": 9.96,
+        "floor": 1.54,
+        "name": "Synthetic LAD OF2",
+        "opponent": "SF",
+        "player_id": "mlb-of-56",
+        "positions": [
+          "OF"
+        ],
+        "projection": 6.68,
+        "pts_per_dollar": 1.82,
+        "salary": 3672.0,
+        "stddev": 7.02,
+        "team": "LAD",
+        "value": -11.68
+      },
+      {
+        "boom_pct": 0.3,
+        "boom_threshold": 38.93,
+        "bust_pct": 98.9,
+        "bust_threshold": 28.93,
+        "ceiling": 9.81,
+        "floor": 1.64,
+        "name": "Synthetic PHI OF6",
+        "opponent": "ATL",
+        "player_id": "mlb-of-105",
+        "positions": [
+          "OF"
+        ],
+        "projection": 6.68,
+        "pts_per_dollar": 1.15,
+        "salary": 5786.0,
+        "stddev": 6.77,
+        "team": "PHI",
+        "value": -22.25
+      },
+      {
+        "boom_pct": 0.65,
+        "boom_threshold": 33.42,
+        "bust_pct": 96.75,
+        "bust_threshold": 23.42,
+        "ceiling": 9.91,
+        "floor": 1.32,
+        "name": "Synthetic NYY OF2",
+        "opponent": "BOS",
+        "player_id": "mlb-of-26",
+        "positions": [
+          "OF"
+        ],
+        "projection": 6.61,
+        "pts_per_dollar": 1.41,
+        "salary": 4685.0,
+        "stddev": 7.14,
+        "team": "NYY",
+        "value": -16.81
+      },
+      {
+        "boom_pct": 0.45,
+        "boom_threshold": 35.78,
+        "bust_pct": 97.85,
+        "bust_threshold": 25.79,
+        "ceiling": 9.81,
+        "floor": 1.56,
+        "name": "Synthetic BOS 3B1",
+        "opponent": "NYY",
+        "player_id": "mlb-3b-8",
+        "positions": [
+          "3B"
+        ],
+        "projection": 6.59,
+        "pts_per_dollar": 1.28,
+        "salary": 5157.0,
+        "stddev": 6.93,
+        "team": "BOS",
+        "value": -19.19
+      },
+      {
+        "boom_pct": 0.25,
+        "boom_threshold": 35.98,
+        "bust_pct": 98.3,
+        "bust_threshold": 25.98,
+        "ceiling": 9.91,
+        "floor": 1.66,
+        "name": "Synthetic SEA OF1",
+        "opponent": "HOU",
+        "player_id": "mlb-of-70",
+        "positions": [
+          "OF"
+        ],
+        "projection": 6.53,
+        "pts_per_dollar": 1.26,
+        "salary": 5195.0,
+        "stddev": 6.67,
+        "team": "SEA",
+        "value": -19.44
+      },
+      {
+        "boom_pct": 2.05,
+        "boom_threshold": 24.85,
+        "bust_pct": 88.65,
+        "bust_threshold": 14.85,
+        "ceiling": 9.94,
+        "floor": 1.51,
+        "name": "Synthetic SF OF6",
+        "opponent": "LAD",
+        "player_id": "mlb-of-45",
+        "positions": [
+          "OF"
+        ],
+        "projection": 6.52,
+        "pts_per_dollar": 2.2,
+        "salary": 2970.0,
+        "stddev": 6.66,
+        "team": "SF",
+        "value": -8.33
+      },
+      {
+        "boom_pct": 2.0,
+        "boom_threshold": 25.07,
+        "bust_pct": 88.15,
+        "bust_threshold": 15.07,
+        "ceiling": 10.17,
+        "floor": 1.21,
+        "name": "Synthetic NYY OF3",
+        "opponent": "BOS",
+        "player_id": "mlb-of-27",
+        "positions": [
+          "OF"
+        ],
+        "projection": 6.51,
+        "pts_per_dollar": 2.16,
+        "salary": 3014.0,
+        "stddev": 6.98,
+        "team": "NYY",
+        "value": -8.56
+      },
+      {
+        "boom_pct": 0.05,
+        "boom_threshold": 42.48,
+        "bust_pct": 99.6,
+        "bust_threshold": 32.48,
+        "ceiling": 9.89,
+        "floor": 1.34,
+        "name": "Synthetic SEA 2B1",
+        "opponent": "HOU",
+        "player_id": "mlb-2b-67",
+        "positions": [
+          "2B"
+        ],
+        "projection": 6.4,
+        "pts_per_dollar": 0.98,
+        "salary": 6497.0,
+        "stddev": 6.65,
+        "team": "SEA",
+        "value": -26.09
+      },
+      {
+        "boom_pct": 0.05,
+        "boom_threshold": 39.8,
+        "bust_pct": 99.35,
+        "bust_threshold": 29.8,
+        "ceiling": 9.71,
+        "floor": 1.35,
+        "name": "Synthetic HOU OF6",
+        "opponent": "SEA",
+        "player_id": "mlb-of-90",
+        "positions": [
+          "OF"
+        ],
+        "projection": 6.31,
+        "pts_per_dollar": 1.06,
+        "salary": 5961.0,
+        "stddev": 6.51,
+        "team": "HOU",
+        "value": -23.5
+      },
+      {
+        "boom_pct": 2.0,
+        "boom_threshold": 23.55,
+        "bust_pct": 88.9,
+        "bust_threshold": 13.54,
+        "ceiling": 9.26,
+        "floor": 1.25,
+        "name": "Synthetic BOS OF5",
+        "opponent": "NYY",
+        "player_id": "mlb-of-14",
+        "positions": [
+          "OF"
+        ],
+        "projection": 5.96,
+        "pts_per_dollar": 2.2,
+        "salary": 2709.0,
+        "stddev": 6.24,
+        "team": "BOS",
+        "value": -7.59
+      },
+      {
+        "boom_pct": 0.15,
+        "boom_threshold": 36.02,
+        "bust_pct": 98.85,
+        "bust_threshold": 26.02,
+        "ceiling": 8.99,
+        "floor": 1.04,
+        "name": "Synthetic NYY OF1",
+        "opponent": "BOS",
+        "player_id": "mlb-of-25",
+        "positions": [
+          "OF"
+        ],
+        "projection": 5.96,
+        "pts_per_dollar": 1.15,
+        "salary": 5203.0,
+        "stddev": 6.57,
+        "team": "NYY",
+        "value": -20.06
+      },
+      {
+        "boom_pct": 0.1,
+        "boom_threshold": 42.28,
+        "bust_pct": 99.7,
+        "bust_threshold": 32.28,
+        "ceiling": 9.12,
+        "floor": 1.21,
+        "name": "Synthetic SEA OF4",
+        "opponent": "HOU",
+        "player_id": "mlb-of-73",
+        "positions": [
+          "OF"
+        ],
+        "projection": 5.92,
+        "pts_per_dollar": 0.92,
+        "salary": 6457.0,
+        "stddev": 6.25,
+        "team": "SEA",
+        "value": -26.37
+      },
+      {
+        "boom_pct": 0.1,
+        "boom_threshold": 37.64,
+        "bust_pct": 98.95,
+        "bust_threshold": 27.64,
+        "ceiling": 9.09,
+        "floor": 1.09,
+        "name": "Synthetic PHI OF3",
+        "opponent": "ATL",
+        "player_id": "mlb-of-102",
+        "positions": [
+          "OF"
+        ],
+        "projection": 5.86,
+        "pts_per_dollar": 1.06,
+        "salary": 5528.0,
+        "stddev": 6.37,
+        "team": "PHI",
+        "value": -21.78
+      }
+    ],
+    "site": "draftkings",
+    "sport": "mlb"
+  }
+}

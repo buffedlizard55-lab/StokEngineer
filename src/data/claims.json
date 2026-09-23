@@ -1,0 +1,219 @@
+{
+  "_meta": {
+    "purpose": "Claim-by-claim ledger. Every factual statement the site and docs make about Stokastic, DraftKings or FanDuel must appear here with a quote and a source id that exists in sources_verified.json. tests/test_claims.py enforces that mechanically, and docs/index.html renders this file, so the site cannot drift from the ledger.",
+    "verified_on": "2026-09-22",
+    "status_legend": {
+      "verified": "Read directly off the cited source in this session (or the source is official and quoted verbatim).",
+      "flagged": "True but with a documented caveat (dynamic pricing, third-party-only basis, undocumented endpoint).",
+      "not_verified": "Explicitly listed as NOT verified. Kept here so nobody assumes it is."
+    }
+  },
+  "claims": [
+    {
+      "id": "c01",
+      "claim": "Stokastic sells DFS projections, ownership projections and contest-level simulations for DraftKings and FanDuel.",
+      "quote": "A DFS Sim is an advanced simulation tool that tests lineups in realistic tournament models to find how lineups perform against the field.",
+      "source_id": "sk_pricing",
+      "status": "verified",
+      "relevance": "Product scope we are rebuilding."
+    },
+    {
+      "id": "c02",
+      "claim": "Contest-level simulation is Stokastic's stated differentiator versus ordinary game-level simulators and optimizers.",
+      "quote": "Game level simulation tools exist on the market currently to help users with projecting player performance. However, nowhere else do users have the ability to perform simulations on the contest level, helping you find the edge in real tournaments.",
+      "source_id": "sk_pricing",
+      "status": "verified",
+      "relevance": "Defines the core feature of src/stokengineer/simulate.py."
+    },
+    {
+      "id": "c03",
+      "claim": "Their simulation runs the contest tens of thousands of times, varies every player's outcome, holds correlations, and uses projected ownership to decide how many entrants you share a player with.",
+      "quote": "the Sims simulate the contest itself tens of thousands of times: every player's outcome varies sim to sim, correlations hold (a QB's big game drags his receivers up with him), and projected ownership determines how many entrants you are sharing each player with",
+      "source_id": "sk_nfl_review",
+      "status": "verified",
+      "relevance": "Exact specification implemented by the contest simulator."
+    },
+    {
+      "id": "c04",
+      "claim": "Lineups are ranked by simulated ROI against the real payout structure of the contest the user says they are entering, including a percent-to-first style setting.",
+      "quote": "Every lineup that comes out is then ranked by simulated ROI against the real payout structure of the contest you tell it you are entering ... the \"percent to first\" setting changes how the Sims value ceiling",
+      "source_id": "sk_nfl_review",
+      "status": "verified",
+      "relevance": "Drives simulate.py payout handling: payout structures are inputs, not hard-coded guesses."
+    },
+    {
+      "id": "c05",
+      "claim": "Users can override projections and ownership (CSV upload or manual edit) and re-run the sims.",
+      "quote": "Upload a CSV with player name, projection and ownership, or edit single players by hand, and the Sims re-run on your numbers",
+      "source_id": "sk_nfl_review",
+      "status": "verified",
+      "relevance": "Our ingest layer accepts the same kind of user CSV, which is free and avoids paid feeds."
+    },
+    {
+      "id": "c06",
+      "claim": "Late Swap re-ranks live lineups after the early games lock.",
+      "quote": "Re-rank your live lineups after the early games lock, which is where a lot of the real money gets made",
+      "source_id": "sk_nfl_review",
+      "status": "verified",
+      "relevance": "Implemented as optimizer locks + re-simulation in late-swap mode."
+    },
+    {
+      "id": "c07",
+      "claim": "Boom% and Bust% are salary-relative: boom is about 5 x (salary/1000) + 10 fantasy points, bust is falling short of 5 x (salary/1000).",
+      "quote": "Success (\"boom\") is reaching about 5 x (salary/1000) + 10 fantasy points ... failure (\"bust\") is falling short of 5 x (salary/1000) ... a $9,000 player needs ~45 to clear value and ~55 to \"boom,\" while a $4,000 punt only needs ~20 and ~30.",
+      "source_id": "sk_nba_boom_bust",
+      "status": "verified",
+      "relevance": "rules.boom_threshold / rules.bust_threshold and the boom/bust table."
+    },
+    {
+      "id": "c08",
+      "claim": "Ceiling is the 75th-percentile outcome; floor is the 25th-percentile outcome; the projection is the median of a distribution.",
+      "quote": "Ceiling projection - the 75th-percentile outcome ... Floor projection - the 25th-percentile outcome",
+      "source_id": "sk_nba_boom_bust",
+      "status": "verified",
+      "relevance": "Distribution percentiles reported by the models."
+    },
+    {
+      "id": "c09",
+      "claim": "Value = FP - (salary/1000 * 5) and Pts/$ = FP / salary * 1000.",
+      "quote": "Value = Fantasy Projection - (Salary / 1,000 x 5) ... Points per dollar (Pts/$) ... Fantasy Points / Salary x 1,000",
+      "source_id": "sk_nba_projections",
+      "status": "verified",
+      "relevance": "rules.value() and rules.pts_per_dollar(); both are unit-tested against the article's worked numbers."
+    },
+    {
+      "id": "c10",
+      "claim": "Minutes come first in NBA projection ('no minutes, no production') and usage is the share of a team's possessions a player finishes with a shot, a trip to the line, or a turnover.",
+      "quote": "Minutes come first. No minutes, no production. ... Usage rate is the share of a team's possessions a player finishes with a shot, a trip to the line, or a turnover.",
+      "source_id": "sk_nba_projections",
+      "status": "verified",
+      "relevance": "NBA model is minutes-first with usage scaling."
+    },
+    {
+      "id": "c11",
+      "claim": "In basketball, player-to-player correlation barely matters, which is why NBA plays are graded individually.",
+      "quote": "in basketball, player-to-player correlation barely matters, so you can judge almost every play on its own merits",
+      "source_id": "sk_nba_boom_bust",
+      "status": "verified",
+      "relevance": "Justifies a low cross-player correlation for NBA in the simulator while NFL/MLB get structural team factors."
+    },
+    {
+      "id": "c12",
+      "claim": "Stokastic does not use Contest Sims for cash games; it uses the highest-floor lineup for cash and the sims for GPPs.",
+      "quote": "I do not run the Contest Sims for cash. The Sims and the simulated-tournament pool are a GPP tool.",
+      "source_id": "sk_nba_boom_bust",
+      "status": "verified",
+      "relevance": "Our evaluator offers cash-mode (floor maximisation) and GPP-mode (sim ROI) separately."
+    },
+    {
+      "id": "c13",
+      "claim": "All-Access pricing displayed with the avatar toggle on is Core $229.95, Max $349.95, MVP $599.95 per month; sport-specific NFL pricing published 2026-09-22 is Core $149.95/mo, Max $229.95/mo, MVP $349.95/mo.",
+      "quote": "Core All Access $229.95/mo ... Max All Access $349.95/mo ... MVP All Access $599.95/mo ... NFL Core $149.95 a month ... Max is $229.95 a month",
+      "source_id": "sk_pricing",
+      "status": "flagged",
+      "relevance": "Snapshot only. The pricing page defaults to the avatar-discounted toggle and prices change; re-read the live page before quoting.",
+      "flag": "dynamic pricing + toggle default; two pricing pages disagree on the headline number"
+    },
+    {
+      "id": "c14",
+      "claim": "Tier lineup ceilings: Core 2K; Max 5K (NBA/MLB/CFB), 10K (NFL/NASCAR/PGA/NHL classic), 50K (NFL showdown); MVP 25K classic, 50K showdown.",
+      "quote": "2K lineups ... 5K lineups for NBA, MLB, CFB, 10K lineups for NFL, Nascar, PGA, NHL classic, 50K lineups for NFL showdown, MMA ... 25K lineups for most classic slates, 50K lineups for Nascar, MMA, and all showdown slates",
+      "source_id": "sk_pricing",
+      "status": "flagged",
+      "relevance": "Scale target for our portfolio/sim engine; snapshot as of 2026-09-22.",
+      "flag": "product limits change each season"
+    },
+    {
+      "id": "c15",
+      "claim": "DraftKings NFL Classic pays 4 points per passing TD, 1 point per reception, +3 bonuses at 300 passing / 100 rushing / 100 receiving yards, and uses a $50,000 cap with 9 players from at least 2 games.",
+      "quote": "Passing TD +4 Pts ... Reception +1 Pt ... 300+ Yard Passing Game +3 Pts ... Lineups will consist of 9 players and must include players from at least 2 different NFL games ... must not exceed the salary cap of $50,000",
+      "source_id": "dk_rules_nfl",
+      "status": "verified",
+      "relevance": "Feeds src/data/scoring_rules.json and roster_rules.json."
+    },
+    {
+      "id": "c16",
+      "claim": "DraftKings NBA Classic scores 1.25 per rebound, 1.5 per assist, +1.5 for a double-double and +3 for a triple-double, with an 8-player roster from at least 2 games and a $50,000 cap.",
+      "quote": "Rebound +1.25 Pts ... Assist +1.5 Pts ... Double-Double +1.5 Pts ... Triple-Double +3 Pts ... Lineups will consist of 8 players and must include players from at least 2 different NBA games",
+      "source_id": "dk_rules_nba",
+      "status": "verified",
+      "relevance": "Non-linear bonuses are why the NBA model samples full stat lines rather than scoring a mean."
+    },
+    {
+      "id": "c17",
+      "claim": "DraftKings MLB Classic caps lineups at 5 hitters from any one team and pays 2.25 per inning pitched with 0.75 per out.",
+      "quote": "Lineups must have no more than 5 hitters from any one team ... Inning Pitched +2.25 Pts (+0.75 Pts / Out)",
+      "source_id": "dk_rules_mlb",
+      "status": "verified",
+      "relevance": "Implemented as max_hitters_per_team in the optimizer."
+    },
+    {
+      "id": "c18",
+      "claim": "FanDuel publishes per-sport scoring officially but not classic roster shapes or salary caps: its rules page documents scoring, and fanduel.com/nfl-guide redirects away.",
+      "quote": "3-pt FG=3pts, 2-pt FG=2pts, FT=1pt, Rebound=1.2pts, Assist=1.5pts, Block=3pts, Steal=3pts, Turnover=-1pt",
+      "source_id": "fd_rules_gap",
+      "status": "flagged",
+      "relevance": "FanDuel scoring in the engine is official; FanDuel roster/cap values are marked verified:third-party and must be confirmed in-client.",
+      "flag": "no public official FanDuel roster/cap page found on 2026-09-22"
+    },
+    {
+      "id": "c19",
+      "claim": "The MLB Stats API is keyless and returns official game data, including final scores.",
+      "quote": "{\"copyright\":\"Copyright 2026 MLB Advanced Media, L.P. ...\",\"dates\":[{\"date\":\"2026-09-21\" ... \"gamePk\":824787 ... \"status\":{\"abstractGameState\":\"Final\"",
+      "source_id": "mlb_statsapi",
+      "status": "verified",
+      "relevance": "Primary free source for MLB schedules, box scores and player stats."
+    },
+    {
+      "id": "c20",
+      "claim": "nflverse publishes free NFL data releases (play-by-play, player stats, schedules, snap counts, injuries, depth charts) under CC-BY-4.0.",
+      "quote": "nflverse/nflverse-data - Automated nflverse data repository - license CC-BY-4.0; release tags include pbp, player_stats, schedules, snap_counts, injuries, depth_charts",
+      "source_id": "nflverse_data",
+      "status": "verified",
+      "relevance": "Primary free source for NFL modelling and for empirical variance/correlation calibration."
+    },
+    {
+      "id": "c21",
+      "claim": "The DraftKings lobby endpoint is keyless and exposes live contests with entry fee, max entries, prize pool and draft group id.",
+      "quote": "{\"SelectedSport\":\"NFL\", ... \"n\":\"NFL $2.75M Fantasy Football Millionaire [$1M to 1st]\", ... \"a\":555, ... \"po\":2750000.0000000000, ... \"dg\":153769",
+      "source_id": "dk_lobby_api",
+      "status": "flagged",
+      "relevance": "Free path to real contest config and salary pools, but undocumented: treated as best-effort with a CSV fallback.",
+      "flag": "undocumented public endpoint; site terms may restrict automated access"
+    },
+    {
+      "id": "c22",
+      "claim": "ESPN's keyless scoreboard feed carries game-level odds (spread and total) that can produce implied team totals.",
+      "quote": "site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard returned the real 2026 week 2 games with venue and odds payloads",
+      "source_id": "espn_scoreboard",
+      "status": "flagged",
+      "relevance": "Default keyless odds path; the paid odds API is optional-only.",
+      "flag": "undocumented endpoint; odds availability varies by game and time"
+    },
+    {
+      "id": "c23",
+      "claim": "Implied team total = total/2 +/- spread/2.",
+      "quote": "worked example: 44 total with a -7 spread gives the favourite 25.5 and the underdog 18.5",
+      "source_id": "sk_nfl_defense",
+      "status": "verified",
+      "relevance": "rules.implied_team_total() with the article's numbers as a unit test."
+    },
+    {
+      "id": "c24",
+      "claim": "Stokastic's exact projection weights, sigma model and ownership coefficients are NOT public.",
+      "quote": "No public page states the weights, the sigma model or the ownership coefficients. This project therefore ships documented priors and a calibration harness instead of pretending to have copied them.",
+      "source_id": "sk_pricing",
+      "status": "not_verified",
+      "relevance": "The central honesty constraint of the rebuild: we reproduce published mechanics, not undisclosed internals.",
+      "flag": "undisclosed internals"
+    },
+    {
+      "id": "c25",
+      "claim": "FanDuel NBA has no double-double or triple-double bonus, unlike DraftKings.",
+      "quote": "FanDuel NBA table: 3-pt FG=3pts, 2-pt FG=2pts, FT=1pt, Rebound=1.2pts, Assist=1.5pts, Block=3pts, Steal=3pts, Turnover=-1pt (no DD/TD rows)",
+      "source_id": "fd_rules",
+      "status": "verified",
+      "relevance": "Site-specific stat projection: DK NBA needs DD/TD modelling, FanDuel does not."
+    }
+  ]
+}
