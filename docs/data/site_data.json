@@ -1,8 +1,8 @@
 {
  "meta": {
   "version": "0.4.0",
-  "generated_at": "2026-09-23T00:52:36+00:00",
-  "git_revision": "0a3ff69",
+  "generated_at": "2026-09-23T01:23:17+00:00",
+  "git_revision": "8806323",
   "synthetic_reference": "Sample slates in src/data/samples are synthetic and labelled as such. They exist so the engine can be tested deterministically offline; they are not real salaries or real projections, and no report generated from them describes real players."
  },
  "status": {
@@ -1286,18 +1286,18 @@
    "payout_source": "ILLUSTRATIVE curve generated in-engine (not a real contest)",
    "field_baseline": {
     "lineups_sampled": 60,
-    "best_decile_roi_pct": -10.1,
+    "best_decile_roi_pct": -9.9,
     "best_decile_note": "the top 10% of the simulated field, by mean simulated score, scored as if it were the user. Large ROI here too means the payout curve's tail, not the lineup, is doing the work.",
     "own_draw_rois_pct": [
-     43.0,
-     182.4,
+     43.5,
+     182.6,
      128.6,
-     447.9,
+     449.9,
      369.9,
-     175.2
+     175.0
     ],
     "own_draws_note": "the same optimiser, six independent noisy views (sd 25%), one lineup each. The spread across draws is larger than the difference between the builds, which is why no single ROI number should be read as an edge.",
-    "mean_roi_pct": -18.2,
+    "mean_roi_pct": -17.9,
     "mean_cash_rate_pct": 20.1,
     "mean_percentile": 53.1,
     "note": "the same simulation run with a random sample of the field as the user. A cash rate near the paid fraction pins the ROI to the payout curve; anything far from the rake means the field model, not the strategy, is driving the number."
@@ -2029,8 +2029,8 @@
        "salary": 6009.0
       }
      ],
-     "roi_pct": 205.5,
-     "cash_rate_pct": 28.1,
+     "roi_pct": 205.8,
+     "cash_rate_pct": 28.2,
      "win_rate_pct": 1.3,
      "median_rank": 274.0,
      "mean_percentile": 53.3
@@ -2122,8 +2122,8 @@
        "salary": 6009.0
       }
      ],
-     "roi_pct": 210.4,
-     "cash_rate_pct": 28.5,
+     "roi_pct": 210.9,
+     "cash_rate_pct": 28.6,
      "win_rate_pct": 1.0,
      "median_rank": 290.0,
      "mean_percentile": 52.6
@@ -2215,9 +2215,9 @@
        "salary": 5762.0
       }
      ],
-     "roi_pct": 398.4,
+     "roi_pct": 403.2,
      "cash_rate_pct": 40.2,
-     "win_rate_pct": 1.9,
+     "win_rate_pct": 2.0,
      "median_rank": 184.0,
      "mean_percentile": 61.8
     }
@@ -2228,7 +2228,7 @@
     "ownership is a simulated-field estimate, not observed contest ownership",
     "the payout structure is ILLUSTRATIVE; ROI is only meaningful with the real contest payout table imported from a CSV",
     "compare each lineup's ROI with the field baseline in this same run: if a random field entry also earns far more than the rake, the number is about the field model, not the lineups",
-    "lineup_1: simulated ROI 205% with a 28% cash rate. A cash rate near the paid fraction cannot justify that ROI unless the lineup is winning top prizes far more often than the field. Check (1) the field model, (2) whether the lineups were built on info the field lacked, (3) the payout structure.",
+    "lineup_1: simulated ROI 206% with a 28% cash rate. A cash rate near the paid fraction cannot justify that ROI unless the lineup is winning top prizes far more often than the field. Check (1) the field model, (2) whether the lineups were built on info the field lacked, (3) the payout structure.",
     "payout structure is illustrative, so ROI is a ranking aid only"
    ]
   },
@@ -3500,27 +3500,6 @@
     ]
    },
    "kind": "python -m src.stokengineer.cli simulate --sample sample_nfl_dk.json"
-  },
-  {
-   "file": "links.json",
-   "keys": [
-    "checked",
-    "dead",
-    "exempt",
-    "url_bases"
-   ],
-   "provenance": null,
-   "kind": "links"
-  },
-  {
-   "file": "tests_summary.json",
-   "keys": [
-    "failed",
-    "passed",
-    "skipped"
-   ],
-   "provenance": null,
-   "kind": "tests_summary"
   }
  ],
  "limitations": [

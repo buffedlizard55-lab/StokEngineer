@@ -323,22 +323,33 @@ def build_timestamp() -> str:
 
 
 def cli_reports() -> List[Dict[str, Any]]:
-    """Latest provenance-wrapped reports the CLI wrote, if any are committed."""
+    """Latest provenance-wrapped reports the CLI wrote, if any are committed.
+
+    Only files carrying a provenance envelope count. Tool verdicts (`links.json`,
+    `site_data_check.json`, `tests_summary.json`) live in the same directory but are written by the
+    checks themselves - listing them here would make this payload depend on the order the tools ran
+    in, which is exactly the kind of coupling that makes a "reproducible" data file a lie.
+    """
     reports: List[Dict[str, Any]] = []
     for path in sorted((ROOT / "reports").glob("*.json")):
+        if path.name in {"links.json", "tests_summary.json", "site_data_check.json"}:
+            continue
         try:
             payload = json.loads(path.read_text())
         except Exception:
             continue
         wrapped = payload.get("provenance") or payload.get("_provenance")
+        if not wrapped:
+            continue
         reports.append(
             {
                 "file": path.name,
                 "keys": sorted(payload.keys())[:12],
                 "provenance": wrapped,
-                "kind": (wrapped or {}).get("command") or payload.get("test") or path.stem,
+                "kind": wrapped.get("command") or path.stem,
             }
         )
+    reports.sort(key=lambda item: (item["provenance"].get("generated_at_utc") or "", item["file"]))
     return reports[-8:]
 
 
